@@ -6,7 +6,7 @@
 
 Switch to the repo folder
 
-    cd OFGC/fronted/
+    cd OrquestaFilarmonicaGC/fronted/
 
 Install all the dependencies using npm
 

@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
+#navbar {
+    border-width: 1px;
+    border-color: rgb(110, 102, 102);
+    border-style: solid;
+    height: 76px;
+    text-align: center;
+}
+
+#header-icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 45px;
+    color: #464040;
+    margin-bottom: 2px;
+}
+
+#header-text {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 30px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--ion-color-dark);
+    font-weight: 700;
+}
+
+#go-back-button {
+    vertical-align: middle;
+    font-size: 40px;
+    color: #464040;
+    position: absolute;
+    left: 0;
+}
+
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+ion-input,
+ion-label {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ion-label {
+    font-weight: bold !important;
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 2em;
+}
+
+ion-input {
+    width: 80%;
+    // font-weight: bold;
+    // // background-color: #7fd3fa;
+    // color: white;
+    // padding: 14px 20px;
+    margin-top: 30px;
+    // border: 1px solid black;
+    // border-radius: 4px;
+    cursor: pointer;
+    // box-shadow: 0 0 1px #fa7f98;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+input:hover {
+    background-color: #aa7ca0;
+}
+
+#register-button {
+    width: 80%;
+    height: 60px;
+    font-size: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    display: block;
+    border-width: 1.5px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    background-color: #ffffff;
+    box-shadow: 0 0 1px black;
+}
+
+#square {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    background-color: white;
+    padding: 10px;
+    padding-bottom: 40px;
+}

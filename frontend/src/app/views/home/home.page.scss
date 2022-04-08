@@ -1,0 +1,123 @@
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,700&display=swap');
+    ion-content {
+        --offset-bottom: auto!important;
+        --overflow: hidden;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    
+    ion-header {
+        border: none;
+    }
+    
+    #navbar {
+        border-width: 1px;
+        border-color: rgb(110, 102, 102);
+        border-style: solid;
+        height: 76px;
+    }
+    
+    #navbar-icon {
+        font-size: 50px;
+        position: absolute;
+        right: 0;
+    }
+    
+    #navbar-text {
+        font-size: 30px;
+        color: #464040;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+    }
+    
+    #menu-icon {
+        vertical-align: middle;
+        font-size: 50px;
+        color: #464040;
+        position: absolute;
+        left: 0;
+    }
+    
+    #home-menu-container {
+        height: 60px;
+    }
+    
+    // #square {
+    //     margin: 15px;
+    //     // background-color: #FEFAFE;
+    //     // box-shadow: 0 0 1px rgb(177, 2, 148);
+    //     // padding: 20px;
+    // }
+    // .performance-card {
+    //     border-width: 1px;
+    //     border-color: rgb(110, 102, 102);
+    //     border-style: solid;
+    //     background-color: #ffb0f469;
+    //     // border-radius: 0;
+    //     width: 700px;
+    // }
+    // .essay-card {
+    //     border-width: 1px;
+    //     border-color: rgb(110, 102, 102);
+    //     border-style: solid;
+    //     // // box-shadow: 0 0 1px rgb(248, 161, 0);
+    //     background-color: #fcf0878a;
+    //     // border-radius: 0;
+    //     width: 700px;
+    // }
+    // .perfomance-icon {
+    //     vertical-align: middle;
+    //     font-size: 3em;
+    // }
+    // .essay-icon {
+    //     vertical-align: middle;
+    //     font-size: 3em;
+    // }
+    // .event-type-text {
+    //     vertical-align: bottom;
+    //     display: inline-block;
+    //     color: #1b1818;
+    //     font-size: 30px;
+    //     margin-left: 15px;
+    //     margin-top: 25px;
+    //     font-family: 'Outfit', sans-serif;
+    //     font-weight: 200;
+    // }
+    // #essays-row {
+    //     margin-top: 20px;
+    // }
+    // #date-text {
+    //     text-align: right;
+    // }
+    // #separation-in-card {
+    //     background-color: #000000;
+    // }
+    // #separation-title {
+    //     background-color: #000000;
+    // }
+    // Calendar
+    // .monthview-eventdetail-timecolumn {
+    //     display: none !important;
+    //     font-size: 5em;
+    // }
+    // .event-detail {
+    //     font-size: 5em;
+    // }
+     :host ::ng-deep {
+        .monthview-eventdetail-timecolumn {
+            // color: #1b1818;
+            // // font-size: 30px;
+            // font-family: 'Outfit', sans-serif;
+            // font-weight: 200;
+            display: none;
+        }
+        .event-detail {
+            color: #1b1818;
+            font-size: 30px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 200;
+        }
+    }

@@ -1,0 +1,65 @@
+#navbar {
+    border-width: 1px;
+    border-color: rgb(110, 102, 102);
+    border-style: solid;
+    height: 76px;
+}
+
+#go-back-button {
+    vertical-align: middle;
+    font-size: 40px;
+    color: #464040;
+    position: absolute;
+    left: 0;
+}
+
+#header-icon {
+    font-size: 40px;
+    position: absolute;
+    // float: left !important;
+    right: 0px
+}
+
+#header-text {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 30px;
+    color: #464040;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+}
+
+.my-message {
+    background: var(--ion-color-tertiary);
+    color: #fff;
+}
+
+.other-message {
+    background: var(--ion-color-secondary);
+    color: #fff;
+}
+
+.time {
+    color: #dfdfdf;
+    float: right;
+    font-size: small;
+}
+
+.message-input {
+    margin-top: 0px;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.msg-btn {
+    --padding-start: 0.5em;
+    --padding-end: 0.5em;
+}

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
+
+
+
+
+
+
+ion-label {
+    font-weight: bold !important;
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 2em;
+ 
+}
+
+
+ion-input {
+
+    // font-weight: bold;
+    // // background-color: #7fd3fa;
+    // color: white;
+    // padding: 14px 20px;
+    margin-top: 30px;
+    // border: 1px solid black;
+    // border-radius: 4px;
+    cursor: pointer;
+    // box-shadow: 0 0 1px #fa7f98;
+    text-align: center;
+}
+
+
+// .item-interactive{width: 20%;
+// text-align: center;}
+
+
+#register-button {
+    width: 20%;
+    height: 60px;
+    font-size: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    display: block;
+    border-width: 1.5px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    background-color: #ffffff;
+    box-shadow: 0 0 1px black;
+}
+
+#square {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    background-color: white;
+    padding: 10px;
+    padding-bottom: 40px;
+    text-align: center;
+}

@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Roboto&display=swap');
+// #navbar {
+//     border-width: 1px;
+//     border-color: rgb(110, 102, 102);
+//     border-style: solid;
+// }
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+ion-item {
+    float: left;
+    // border: 1px solid rgb(0, 0, 0);
+    width: 100%;
+    // height: 55px;
+    vertical-align: top;
+    // margin-bottom: 100px;
+    h2 {
+        margin-left: 10px;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 500;
+        font-size: 1.8em;
+        // margin-bottom: 20px;
+    }
+}
+
+#home-icon {
+    font-size: 3em;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#projects-icon {
+    font-size: 3em;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#login-item {
+    // border-top: 1px solid black;
+}
+
+#login-icon {
+    font-size: 2.6em;
+    margin-left: 9px;
+    margin-top: 5px;
+}
+
+#support-icon {
+    font-size: 2.6em;
+    margin-left: 9px;
+    margin-top: 5px;
+}
+
+#configuration-icon {
+    font-size: 2.6em;
+    margin-left: 9px;
+    margin-top: 5px;
+}

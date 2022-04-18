@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DirectorProjects } from '../../../../models/director-projects';
-import { DirectorProjectsService } from 'src/app/services/director-projects/director-projects.service';
-import { SoloistProjects } from '../../../../models/soloist-projects';
-import { SoloistProjectsService } from 'src/app/services/soloist/soloist-projects.service';
+import { Address } from 'src/app/models/address';
+import { AddressService } from 'src/app/services/address/address.service'
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Echo } from 'laravel-echo-ionic';
@@ -14,16 +12,16 @@ import { Echo } from 'laravel-echo-ionic';
   styleUrls: ['./members.page.scss'],
 })
 export class MembersPage implements OnInit {
-  public directorProjectArray: Array<DirectorProjects> = [];
+  public addressArray: Array<Address> = [];
   project_id = this.activatedRoute.snapshot.paramMap.get('id');
 
 
-  public soloistProjectArray: Array<SoloistProjects> = [];
+
 
   constructor(
-    private directorProjectService: DirectorProjectsService,
+    private addressService: AddressService,
     private activatedRoute: ActivatedRoute,
-    private soloistProjectService: SoloistProjectsService,
+
     private alertController: AlertController,
     public storage: Storage
 
@@ -35,25 +33,17 @@ export class MembersPage implements OnInit {
   }
 
   loadInfo() {
-    this.storage.get("directorProject").then(data => {
+    this.storage.get("address").then(data => {
       if (data) {
-        this.directorProjectArray = JSON.parse(data);
+        this.addressArray = JSON.parse(data);
       } else {
         this.updateData();
 
-        
+
       }
     })
 
-    this.storage.get("soloistProject").then(data => {
-      if (data) {
-        this.soloistProjectArray = JSON.parse(data);
-      }else {
-        this.updateData();
- 
-        
-      }
-    })
+
   }
 
   doConnection() {
@@ -75,16 +65,11 @@ export class MembersPage implements OnInit {
   }
 
   updateData() {
-    this.directorProjectService.getDirectorProjectsByProjectId(this.project_id).subscribe((s: Array<DirectorProjects>) => {
-      this.storage.set("directorProject", JSON.stringify(s));
-      this.directorProjectArray = s;
+    this.addressService.getAdressByProjectId(this.project_id).subscribe((s: Array<Address>) => {
+      this.storage.set("address", JSON.stringify(s));
+      this.addressArray = s;
     })
 
-    this.soloistProjectService.getSoloistProjectsByProjectId(this.project_id).subscribe((s: Array<SoloistProjects>) => {
-      this.storage.set("soloistProject", JSON.stringify(s));
-      this.soloistProjectArray = s;
-      
-    })
 
   }
 

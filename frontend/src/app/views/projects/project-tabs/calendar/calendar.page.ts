@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Schedule } from '../../../../models/schedule';
-import { SchedulesService } from '../../../../services/schedule/schedule.service';
+import { Shedule } from 'src/app/models/shedule';
+import { SheduleService } from 'src/app/services/shedule/shedule.service';
 import { Storage } from '@ionic/storage';
 import { Echo } from 'laravel-echo-ionic';
 
@@ -13,12 +13,12 @@ import { Echo } from 'laravel-echo-ionic';
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
-  public scheduleArray: Array<Schedule> = [];
-  public schedule: Schedule;
+  public SheduleArray: Array<Shedule> = [];
+  public Shedule: Shedule;
   project_id = this.activatedRoute.snapshot.paramMap.get('id');
 
   constructor(
-    private scheduleService: SchedulesService,
+    private SheduleService: SheduleService,
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
     public storage: Storage
@@ -31,9 +31,9 @@ export class CalendarPage implements OnInit {
   }
 
   loadInfo() {
-    this.storage.get("scheduleProject").then(data => {
+    this.storage.get("shedule").then(data => {
       if (data) {
-        this.scheduleArray = JSON.parse(data);
+        this.SheduleArray = JSON.parse(data);
 
       } else {
 
@@ -43,11 +43,6 @@ export class CalendarPage implements OnInit {
     })
   }
 
-  deleteSchedule(idSchedule: number) {
-    this.scheduleService.deleteSchedule(idSchedule).subscribe(() => {
-      this.loadInfo();
-    });
-  }
 
 
   doConnection() {
@@ -69,9 +64,9 @@ export class CalendarPage implements OnInit {
   }
 
   updateData() {
-    this.scheduleService.getSchedulesByProjectId(this.project_id).subscribe((s: Array<Schedule>) => {
-      this.storage.set("scheduleProject", JSON.stringify(s));
-      this.scheduleArray = s;
+    this.SheduleService.getSheduleByProjectId(this.project_id).subscribe((s: Array<Shedule>) => {
+      this.storage.set("shedule", JSON.stringify(s));
+      this.SheduleArray = s;
 
     })
   }

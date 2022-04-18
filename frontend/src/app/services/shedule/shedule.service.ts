@@ -3,23 +3,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { catchError, tap } from 'rxjs/operators';
-import { Playlist } from 'src/app/models/playlist';
+import { Shedule } from 'src/app/models/shedule';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlaylistsService {
-  endpoint: string = "http://localhost:8000/api/mobile/getPlaylist";
+export class SheduleService {
+  endpoint: string = "http://localhost:8000/api/mobile/getShedule";
 
   constructor(private httpClient: HttpClient,
   ) {
 
   }
 
-  getPlaylistByProjectId(projectId) {
-    return this.httpClient.get<Playlist[]>(this.endpoint + "/projects/" + projectId).pipe(
-      tap(_ => console.log("PlaylistProject retrieved")),
-      catchError(this.handleError<Playlist[]>("Get playlist project", []))
+  getSheduleByProjectId(projectId) {
+    return this.httpClient.get<Shedule[]>(this.endpoint + "/projects/" + projectId).pipe(
+      tap(_ => console.log("SheduleProject retrieved")),
+      catchError(this.handleError<Shedule[]>("Get Shedule project", []))
     );
   }
   private handleError<T>(operation = 'operation', result?: T) {
@@ -30,5 +30,3 @@ export class PlaylistsService {
     };
   }
 }
-
-

@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Playlists } from '../../../../models/playlists/playlists';
+import { Playlist } from 'src/app/models/playlist';
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { Storage } from '@ionic/storage';
 import { Echo } from 'laravel-echo-ionic';
@@ -14,8 +14,8 @@ import { Echo } from 'laravel-echo-ionic';
 })
 
 export class WorksPage implements OnInit {
-  public playlistArray: Array<Playlists> = [];
-  public playlist: Playlists;
+  public playlistArray: Array<Playlist> = [];
+  public playlist: Playlist;
   project_id = this.activatedRoute.snapshot.paramMap.get('id');;
 
   constructor(
@@ -31,7 +31,7 @@ export class WorksPage implements OnInit {
 
   loadInfo() {
 
-    this.storage.get("playlistProject").then(data => {
+    this.storage.get("playlist").then(data => {
       if (data) {
 
         this.playlistArray = JSON.parse(data);
@@ -45,42 +45,42 @@ export class WorksPage implements OnInit {
   }
 
   doConnection() {
-      const echo = new Echo({
-        broadcaster: 'pusher',
-        key: 'local',
-        wsHost: 'localhost',
-        wsPort: 6001,
-        forceTLS: false,
-        disableStats: true
-      });
+    const echo = new Echo({
+      broadcaster: 'pusher',
+      key: 'local',
+      wsHost: 'localhost',
+      wsPort: 6001,
+      forceTLS: false,
+      disableStats: true
+    });
 
-      const channel = echo.channel('channel');
-      channel.listen('Alert', (data) => {
-        console.log(JSON.stringify(data));
-        this.notification(data);
-        this.updateData();
-      });
-    }
+    const channel = echo.channel('channel');
+    channel.listen('Alert', (data) => {
+      console.log(JSON.stringify(data));
+      this.notification(data);
+      this.updateData();
+    });
+  }
 
   updateData() {
-      this.playlistService.getPlaylistProjectsByProjectId(this.project_id).then(o => {
-        o.subscribe((s: Array<Playlists>) => {
-          this.storage.set("playlistProject", JSON.stringify(s));
-          this.playlistArray = s;
-        }
-        )
-      })
+    this.playlistService.getPlaylistByProjectId(this.project_id).subscribe((s: Array<Playlist>) => {
+      this.storage.set("playlist", JSON.stringify(s));
+      this.playlistArray = s;
     }
+    )
+
+  }
+
 
   async notification(message: string) {
-      const alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: 'Se han realizado cambios',
-        message: message,
-        buttons: ['OK']
-      });
-      await alert.present();
-    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Se han realizado cambios',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 }
 
 

@@ -1,17 +1,15 @@
 import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
-import { Schedule } from '../../models/schedule';
-import { SchedulesService } from '../../services/schedule/schedule.service';
-import { Projects } from '../../models/projects';
+import { Shedule } from '../../models/shedule';
+import { SheduleService } from '../../services/shedule/shedule.service';
+import { Project } from '../../models/project';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Echo } from 'laravel-echo-ionic';
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
-import { DirectorProjectsService } from 'src/app/services/director-projects/director-projects.service';
-import { SoloistProjects } from 'src/app/models/soloist-projects';
-import { SoloistProjectsService } from 'src/app/services/soloist/soloist-projects.service';
-import { Playlists } from 'src/app/models/playlists/playlists';
-import { DirectorProjects } from 'src/app/models/director-projects';
+import { Playlist } from 'src/app/models/playlist';
+import { Address } from 'src/app/models/address';
+import { AddressService } from 'src/app/services/address/address.service';
 import { CalendarComponent } from 'ionic2-calendar';
 import { Router } from '@angular/router';
 
@@ -21,14 +19,14 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  public schedule: Schedule;
+  public shedule: Shedule;
   public projects_id: number[] = [];
-  public projects: Projects;
-  public scheduleArray: Schedule[] = [];
-  public projectsArray: Projects[] = [];
-  public playlistArray: Array<Playlists> = [];
-  public directorProjectArray: Array<DirectorProjects> = [];
-  public soloistProjectArray: Array<SoloistProjects> = [];
+  public project: Project;
+  public sheduleArray: Shedule[] = [];
+  public projectsArray: Project[] = [];
+  public playlistArray: Array<Playlist> = [];
+  public addressArray: Array<Address> = [];
+
   eventSource = [];
   viewTitle: string;
 
@@ -46,14 +44,10 @@ export class HomePage {
 
   constructor(
     private projectsService: ProjectsService,
-    private scheduleService: SchedulesService,
+    private sheduleService: SheduleService,
     private playlistService: PlaylistsService,
-    private directorProjectService: DirectorProjectsService,
-    private soloistProjectService: SoloistProjectsService,
-
+  private addressSerivce: AddressService,
     private router: Router,
-
-
     private alertController: AlertController,
     public storage: Storage,
     @Inject(LOCALE_ID) private locale: string,
@@ -64,13 +58,13 @@ export class HomePage {
     
    
 
-    this.projectsService.getProjects().subscribe((p: Array<Projects>) => {
+    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
 
       this.projectsArray = p.filter((project) => {
-        if (project.published == true) {
+      
           this.projects_id.push(project.id);
-        }
+        
 
       })
       this.loadInfo();
@@ -96,14 +90,14 @@ export class HomePage {
     for (let p of this.projectsArray) {
       // console.log(p);
 
-      var startDate = new Date(p.startDateProject);
-      var endDate = new Date(p.endDateProject);
+      var startDate = new Date(p.projectDateIni);
+      var endDate = new Date(p.projectDateEnd);
 
-      var title = p.nameProject;
+      // var title = p.event.eventName;
       var projectId = p.id;
 
       events.push({
-        title: title,
+        title: "XD",
         startTime: startDate,
         endTime: endDate,
         projectId: projectId,
@@ -176,43 +170,33 @@ export class HomePage {
 
   updateData() {
     for (let i of this.projects_id) {
-      // this.scheduleService.getSchedulesByProjectId(i).subscribe((s: Array<Schedule>) => {
+      // this.sheduleService.getShedulesByProjectId(i).subscribe((s: Array<Shedule>) => {
       //   for (let j of s) {
-      //     this.storage.set("schedulesHome", JSON.stringify(s));
-      //     this.scheduleArray.push(j);
+      //     this.storage.set("shedulesHome", JSON.stringify(s));
+      //     this.sheduleArray.push(j);
       //   }
       // });
 
-      this.playlistService.getPlaylistProjectsByProjectId(i).then(o => {
-        o.subscribe((s: Array<Playlists>) => {
+      this.playlistService.getPlaylistByProjectId(i).subscribe((s: Array<Playlist>) => {
           for (let j of s) {
-            this.storage.set("playlistProject", JSON.stringify(s));
+            this.storage.set("playlist", JSON.stringify(s));
             this.playlistArray.push(j);
 
           }
-        }
-        )
+       
       })
 
-      this.directorProjectService.getDirectorProjectsByProjectId(i).subscribe((s: Array<DirectorProjects>) => {
+      this.addressSerivce.getAdressByProjectId(i).subscribe((s: Array<Address>) => {
         for (let j of s) {
-          this.storage.set("directorProject", JSON.stringify(s));
-          this.directorProjectArray.push(j);
-        }
-      })
-
-      this.soloistProjectService.getSoloistProjectsByProjectId(i).subscribe((s: Array<SoloistProjects>) => {
-        for (let j of s) {
-          this.storage.set("soloistProject", JSON.stringify(s));
-          this.soloistProjectArray.push(j);
-
+          this.storage.set("address", JSON.stringify(s));
+          this.addressArray.push(j);
         }
       })
 
-      this.scheduleService.getSchedulesByProjectId(i).subscribe((s: Array<Schedule>) => {
+      this.sheduleService.getSheduleByProjectId(i).subscribe((s: Array<Shedule>) => {
         for (let j of s) {
-          this.storage.set("scheduleProject", JSON.stringify(s));
-          this.scheduleArray.push(j);
+          this.storage.set("shedule", JSON.stringify(s));
+          this.sheduleArray.push(j);
 
 
         }
@@ -220,12 +204,9 @@ export class HomePage {
       })
     }
 
-    this.projectsService.getProjects().subscribe((p: Array<Projects>) => {
+    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
       this.storage.set("projects", JSON.stringify(p));
-      this.projectsArray = p.filter((project) => {
-        return project.published == true;
-      })
-
+      this.projectsArray = p;
     })
 
   }

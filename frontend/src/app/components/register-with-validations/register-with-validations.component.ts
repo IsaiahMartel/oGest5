@@ -1,6 +1,8 @@
 
 import { Component, OnInit, HostListener, Directive } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { User } from 'src/app/models/user/user';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { Validators, FormControl, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -61,7 +63,38 @@ export class RegisterWithValidationsComponent implements OnInit {
     }
   }
 
+  register() {
+    console.log(this.registerForm.value.email);
+    let user: User = {
+      id: null,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+      name: this.registerForm.value.name,
+      isAdmin: false
+    };
 
+
+
+    this.authService.register(user).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.user) {
+
+          //  this.storage.set("token", res.access_token);
+        }
+        this.router.navigateByUrl('home');
+        this.registerForm.reset();
+      },
+      (error) => {
+        let errorJSON = JSON.parse(error.error)
+        let errorMessage = ""
+        Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
+        console.log(errorMessage);
+
+        this.presentAlert(errorMessage);
+      });
+
+  }
 
   async presentAlert(message: string) {
     const alert = await this.alertController.create({

@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { catchError, tap } from 'rxjs/operators';
-import { Playlist } from 'src/app/models/playlist';
+import { Address } from 'src/app/models/address';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlaylistsService {
-  endpoint: string = "http://localhost:8000/api/mobile/getPlaylist";
+export class AddressService {
+  endpoint: string = "http://localhost:8000/api/mobile/getAdress";
 
   constructor(private httpClient: HttpClient,
   ) {
 
   }
 
-  getPlaylistByProjectId(projectId) {
-    return this.httpClient.get<Playlist[]>(this.endpoint + "/projects/" + projectId).pipe(
-      tap(_ => console.log("PlaylistProject retrieved")),
-      catchError(this.handleError<Playlist[]>("Get playlist project", []))
+  getAdressByProjectId(projectId) {
+    return this.httpClient.get<Address[]>(this.endpoint + "/projects/" + projectId).pipe(
+      tap(_ => console.log("AdressProject retrieved")),
+      catchError(this.handleError<Address[]>("Get Adress project", []))
     );
   }
   private handleError<T>(operation = 'operation', result?: T) {
@@ -30,5 +31,3 @@ export class PlaylistsService {
     };
   }
 }
-
-

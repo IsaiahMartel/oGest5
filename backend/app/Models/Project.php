@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    use \Bkwld\Cloner\Cloneable; // https://github.com/BKWLD/cloner
+    // use \Bkwld\Cloner\Cloneable; // https://github.com/BKWLD/cloner
     use HasFactory;
 
     protected $fillable = [

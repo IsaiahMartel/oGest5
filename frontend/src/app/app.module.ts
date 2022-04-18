@@ -5,20 +5,20 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthModule } from './services/auth/auth.module';
+
 
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
 import { InterceptorService } from './interceptors/interceptor.service';
 
-
+import {IonicStorageModule} from '@ionic/storage';
 
 
 @NgModule({
   declarations: [AppComponent,],
   entryComponents: [],
   imports: [HammerModule, BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule, HttpClientModule, AuthModule,
+    IonicModule.forRoot(),  IonicStorageModule.forRoot(),
+    AppRoutingModule, HttpClientModule,
      SocialLoginModule],
   providers: [{
     provide: HTTP_INTERCEPTORS,

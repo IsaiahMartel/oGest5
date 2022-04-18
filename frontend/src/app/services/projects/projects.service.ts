@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { Projects } from '../../models/projects'
+import { Project } from 'src/app/models/project';
 import { Storage } from '@ionic/storage';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
@@ -13,7 +13,7 @@ import { LocalStorageService } from '../local-storage/local-storage.service';
 
 export class ProjectsService {
 
-  endpoint: string = "http://localhost:8000/api/projects";
+  endpoint: string = "http://localhost:8000/api/mobile/getProjects";
 
   constructor(
     private httpClient: HttpClient,
@@ -24,8 +24,7 @@ export class ProjectsService {
   }
 
   getProjects() {
-
-    return this.httpClient.get<Projects[]>(this.endpoint);
+    return this.httpClient.get<Project[]>(this.endpoint);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

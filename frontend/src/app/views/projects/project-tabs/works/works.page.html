@@ -1,20 +1,20 @@
 <ion-content>
 
-    <div id="container" *ngFor="let w of playlistArray">
+    <div id="container" *ngFor="let playlist of playlistArray">
         <ion-card>
             <ion-card-header>
-                <ion-card-subtitle> {{w.composers.nameComposer}} {{w.composers.surnameComposer}}</ion-card-subtitle>
-                <ion-card-title>{{w.works.nameWork}}</ion-card-title>
+                <ion-card-subtitle> {{playlist.composer_id}}</ion-card-subtitle>
+                <ion-card-title>{{playlist.workName}}</ion-card-title>
                 <hr id="separation-title">
 
             </ion-card-header>
 
             <ion-card-content>
 
-                <h1>{{w.works.stringWork}}</h1>
+                <!-- <h1>{{w.works.stringWork}}</h1> -->
                 <div>
-                    <h1 id="orchestration-text">{{w.orchestrationTotal}}</h1>
-                    <h1 id="duration-text">{{w.works.duration}}</h1>
+                    <h1 id="orchestration-text">{{playlist.playlistString}}</h1>
+                    <h1 id="duration-text">{{playlist.workDuration}}</h1>
                 </div>
 
             </ion-card-content>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Playlist extends Model
 {
     use HasFactory;
-    use \Bkwld\Cloner\Cloneable;
+    // use \Bkwld\Cloner\Cloneable;
     protected $fillable = [
 
         'composer_id'

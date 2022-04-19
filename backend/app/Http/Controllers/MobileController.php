@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Project;
 use App\Models\Addressgroup;
-
+use App\Models\Address;
 use App\Models\Playlist;
 use App\Models\Shedule;
 use App\Models\Composer;
@@ -25,24 +25,48 @@ public function getProjects()
     }
 
 
-
-    public function getPlaylistByProjectId(Request $request)
+    public function getPlaylists()
     {
-    $playlist = Playlist::where('project_id', '=' ,$request->id)->with('works')->get();
+     
+            $playlist = Playlist::with('works')->get();
+    
+            return $playlist;
+    }
+
+    public function getShedules()
+    {
+     
+            $shedule = Shedule::with('rooms', 'tipeshedules')->get();
+    
+            return $shedule;
+    }
+
+    public function getAddresses()
+    {
+     
+            $address = Addressgroup::first()->project()->with('addressgroups')->get();
+    
+            return $address;
+    }
+
+
+    // public function getPlaylistByProjectId(Request $request)
+    // {
+    // $playlist = Playlist::where('project_id', '=' ,$request->id)->with('works')->get();
   
 
-    return  $playlist;
-    }
+    // return  $playlist;
+    // }
 
-    public function getSheduleByProjectId(Request $request)
-    {
-    $shedule = Shedule::where('project_id', '=' ,$request->id)->with('rooms', 'tipeshedules')->get();
-    return $shedule;
-    }
+    // public function getSheduleByProjectId(Request $request)
+    // {
+    // $shedule = Shedule::where('project_id', '=' ,$request->id)->with('rooms', 'tipeshedules')->get();
+    // return $shedule;
+    // }
 
-    public function getAddressProjectByProjectId(Request $request)
-    {
-    $address = Addressgroup::first()->project()->where('project_id', '=' ,$request->id)->with('addressgroups')->get();
-    return $address;
-    }
+    // public function getAddressProjectByProjectId(Request $request)
+    // {
+    // $address = Addressgroup::first()->project()->where('project_id', '=' ,$request->id)->with('addressgroups')->get();
+    // return $address;
+    // }
 }

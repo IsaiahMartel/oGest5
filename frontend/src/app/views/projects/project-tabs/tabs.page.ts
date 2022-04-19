@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tabs',
@@ -8,14 +9,41 @@ import { Router} from '@angular/router';
 })
 export class TabsPage implements OnInit {
 
-  public urlSplitArray : string[] = [];
-  public id : string;
-  
-  constructor(private router: Router) { this.urlSplitArray = this.router.url.split("/");
-  this.id= this.urlSplitArray.slice(-1)[0];}
+  public urlSplitArray: string[] = [];
+  public id: string;
+  public project = [];
+
+  constructor(private router: Router, public storage: Storage,) {
+    this.urlSplitArray = this.router.url.split("/");
+    this.id = this.urlSplitArray.slice(-1)[0];
+    console.log(this.id);
+  }
+
 
   ngOnInit() {
-   
+    this.storage.get("projects").then(data => {
+
+      if (data) {
+        var array = JSON.parse(data);
+
+
+        array.filter((project) => {
+
+
+          if (project.id == this.id) {
+
+
+
+        this.project = project;
+        console.log(this.project);
+
+        
+        
+          };
+        })
+      }
+
+    })
+
   }
-  
 }

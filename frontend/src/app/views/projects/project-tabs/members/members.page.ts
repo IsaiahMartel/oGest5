@@ -35,7 +35,20 @@ export class MembersPage implements OnInit {
   loadInfo() {
     this.storage.get("address").then(data => {
       if (data) {
-        this.addressArray = JSON.parse(data);
+        var array = JSON.parse(data);
+
+
+        array.filter((address) => {
+
+         
+
+          if (address.pivot.project_id == this.project_id) {
+            console.log(address.pivot.project_id);
+
+
+            return this.addressArray.push(address);
+          };
+        })
       } else {
         this.updateData();
 
@@ -65,9 +78,10 @@ export class MembersPage implements OnInit {
   }
 
   updateData() {
-    this.addressService.getAdressByProjectId(this.project_id).subscribe((s: Array<Address>) => {
-      this.storage.set("address", JSON.stringify(s));
-      this.addressArray = s;
+    this.addressService.getAddresses().subscribe((p: Array<Address>) => {
+
+      this.storage.set("address", JSON.stringify(p));
+      this.addressArray = p;
     })
 
 

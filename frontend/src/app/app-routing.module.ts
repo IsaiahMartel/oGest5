@@ -6,6 +6,10 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./views/home/home.module').then( m => m.HomePageModule)
   },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./views/projects/project-tabs/tabs.module').then( m => m.TabsPageModule)
+  },
  
   {
     path: '',

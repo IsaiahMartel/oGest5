@@ -13,12 +13,12 @@ import { Echo } from 'laravel-echo-ionic';
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
-  public SheduleArray: Array<Shedule> = [];
-  public Shedule: Shedule;
+  public sheduleArray: Array<Shedule> = [];
+  public shedule: Shedule;
   project_id = this.activatedRoute.snapshot.paramMap.get('id');
 
   constructor(
-    private SheduleService: SheduleService,
+    private sheduleService: SheduleService,
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
     public storage: Storage
@@ -33,8 +33,20 @@ export class CalendarPage implements OnInit {
   loadInfo() {
     this.storage.get("shedule").then(data => {
       if (data) {
-        this.SheduleArray = JSON.parse(data);
+        var array = JSON.parse(data);
 
+
+        array.filter((shedule) => {
+     
+
+
+          if (shedule.project_id == this.project_id) {
+         
+            console.log(shedule.project_id);
+
+            return this.sheduleArray.push(shedule);
+          };
+        })
       } else {
 
 
@@ -64,10 +76,10 @@ export class CalendarPage implements OnInit {
   }
 
   updateData() {
-    this.SheduleService.getSheduleByProjectId(this.project_id).subscribe((s: Array<Shedule>) => {
-      this.storage.set("shedule", JSON.stringify(s));
-      this.SheduleArray = s;
+    this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
 
+      this.storage.set("shedule", JSON.stringify(p));
+      this.sheduleArray = p;
     })
   }
 

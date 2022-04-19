@@ -38,9 +38,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 route::group(['prefix' => 'mobile'], function () { // esta ruta es /mobile/xxx
 
   Route::get('getProjects', [MobileController::class, 'getProjects']) ;
-  Route::get('getPlaylist/{id}', [MobileController::class, 'getPlaylistByProjectId']) ;
-  Route::get('getShedule/{id}', [MobileController::class, 'getSheduleByProjectId']) ;
-  Route::get('getAddress/{id}', [MobileController::class, 'getAddressProjectByProjectId']) ;
+  // Route::get('getPlaylist/{id}', [MobileController::class, 'getPlaylistByProjectId']) ;
+  // Route::get('getShedule/{id}', [MobileController::class, 'getSheduleByProjectId']) ;
+  // Route::get('getAddress/{id}', [MobileController::class, 'getAddressProjectByProjectId']) ;
+
+  Route::get('getPlaylist', [MobileController::class, 'getPlaylists']) ;
+  Route::get('getShedule', [MobileController::class, 'getShedules']) ;
+  Route::get('getAddress', [MobileController::class, 'getAddresses']) ;
 
 });
 

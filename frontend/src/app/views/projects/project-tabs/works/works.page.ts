@@ -33,11 +33,23 @@ export class WorksPage implements OnInit {
 
     this.storage.get("playlist").then(data => {
       if (data) {
+        var array = JSON.parse(data);
 
-        this.playlistArray = JSON.parse(data);
+
+        array.filter((playlist) => {
+     
+
+          if (playlist.project_id == this.project_id) {
+            console.log(playlist.project_id);
+
+
+            return this.playlistArray.push(playlist);
+          };
+        })
 
 
       } else {
+
 
         this.updateData();
       }
@@ -63,11 +75,11 @@ export class WorksPage implements OnInit {
   }
 
   updateData() {
-    this.playlistService.getPlaylistByProjectId(this.project_id).subscribe((s: Array<Playlist>) => {
-      this.storage.set("playlist", JSON.stringify(s));
-      this.playlistArray = s;
-    }
-    )
+    this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
+
+      this.storage.set("playlist", JSON.stringify(p));
+      this.playlistArray = p;
+    })
 
   }
 

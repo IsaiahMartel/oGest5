@@ -4,5 +4,5 @@ export class Project {
     id: number;
     projectDateIni: Date;
     projectDateEnd: Date;
-    event: Event;
+    events: Event;
 }

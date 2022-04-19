@@ -40,13 +40,13 @@ export class HomePage {
   selectedDate: Date;
 
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
- 
+
 
   constructor(
     private projectsService: ProjectsService,
     private sheduleService: SheduleService,
     private playlistService: PlaylistsService,
-  private addressSerivce: AddressService,
+    private addressServivce: AddressService,
     private router: Router,
     private alertController: AlertController,
     public storage: Storage,
@@ -55,16 +55,16 @@ export class HomePage {
 
   ngOnInit(): void {
 
-    
-   
+
+
 
     this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
 
       this.projectsArray = p.filter((project) => {
-      
-          this.projects_id.push(project.id);
-        
+
+        this.projects_id.push(project.id);
+
 
       })
       this.loadInfo();
@@ -85,19 +85,19 @@ export class HomePage {
 
   createEvents() {
     var events = [];
-    // console.log(this.projectsArray);
+
 
     for (let p of this.projectsArray) {
-      // console.log(p);
 
       var startDate = new Date(p.projectDateIni);
       var endDate = new Date(p.projectDateEnd);
 
-      // var title = p.event.eventName;
+
+      var title = p.events.eventName;
       var projectId = p.id;
 
       events.push({
-        title: "XD",
+        title: title,
         startTime: startDate,
         endTime: endDate,
         projectId: projectId,
@@ -107,10 +107,11 @@ export class HomePage {
 
 
 
+  
 
     this.eventSource = events;
-    console.log(this.eventSource);
-    
+
+
 
 
 
@@ -169,44 +170,30 @@ export class HomePage {
   }
 
   updateData() {
-    for (let i of this.projects_id) {
-      // this.sheduleService.getShedulesByProjectId(i).subscribe((s: Array<Shedule>) => {
-      //   for (let j of s) {
-      //     this.storage.set("shedulesHome", JSON.stringify(s));
-      //     this.sheduleArray.push(j);
-      //   }
-      // });
-
-      this.playlistService.getPlaylistByProjectId(i).subscribe((s: Array<Playlist>) => {
-          for (let j of s) {
-            this.storage.set("playlist", JSON.stringify(s));
-            this.playlistArray.push(j);
-
-          }
-       
-      })
-
-      this.addressSerivce.getAdressByProjectId(i).subscribe((s: Array<Address>) => {
-        for (let j of s) {
-          this.storage.set("address", JSON.stringify(s));
-          this.addressArray.push(j);
-        }
-      })
-
-      this.sheduleService.getSheduleByProjectId(i).subscribe((s: Array<Shedule>) => {
-        for (let j of s) {
-          this.storage.set("shedule", JSON.stringify(s));
-          this.sheduleArray.push(j);
-
-
-        }
-        // this.createEvents();
-      })
-    }
+    console.log(this.projects_id);
 
     this.projectsService.getProjects().subscribe((p: Array<Project>) => {
+
       this.storage.set("projects", JSON.stringify(p));
       this.projectsArray = p;
+    })
+
+    this.addressServivce.getAddresses().subscribe((p: Array<Address>) => {
+
+      this.storage.set("address", JSON.stringify(p));
+      this.addressArray = p;
+    })
+
+    this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
+
+      this.storage.set("playlist", JSON.stringify(p));
+      this.playlistArray = p;
+    })
+
+    this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
+
+      this.storage.set("shedule", JSON.stringify(p));
+      this.sheduleArray = p;
     })
 
   }
@@ -262,12 +249,12 @@ export class HomePage {
   // }
 
   onEventSelected = (event) => {
-   this.router.navigateByUrl("/tabs/calendar/" + event.projectId);
-   
+    this.router.navigateByUrl("/tabs/calendar/" + event.projectId);
+
   };
 
 
-  
+
 }
 
 

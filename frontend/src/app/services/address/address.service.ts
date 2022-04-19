@@ -10,24 +10,26 @@ import { Address } from 'src/app/models/address';
   providedIn: 'root'
 })
 export class AddressService {
-  endpoint: string = "http://localhost:8000/api/mobile/getAdress";
+  endpoint: string = "http://localhost:8000/api/mobile/getAddress";
 
   constructor(private httpClient: HttpClient,
   ) {
 
   }
-
-  getAdressByProjectId(projectId) {
-    return this.httpClient.get<Address[]>(this.endpoint + "/projects/" + projectId).pipe(
-      tap(_ => console.log("AdressProject retrieved")),
-      catchError(this.handleError<Address[]>("Get Adress project", []))
-    );
+  getAddresses() {
+    return this.httpClient.get<Address[]>(this.endpoint);
   }
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
+  // getAdressByProjectId(projectId) {
+  //   return this.httpClient.get<Address[]>(this.endpoint + "/" + projectId).pipe(
+  //     tap(_ => console.log("AdressProject retrieved")),
+  //     catchError(this.handleError<Address[]>("Get Address project", []))
+  //   );
+  // }
+  // private handleError<T>(operation = 'operation', result?: T) {
+  //   return (error: any): Observable<T> => {
+  //     console.error(error);
+  //     console.log(`${operation} failed: ${error.message}`);
+  //     return of(result as T);
+  //   };
+  // }
 }

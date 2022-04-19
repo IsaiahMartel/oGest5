@@ -5,5 +5,5 @@ export class Shedule {
     sheduleTipe: String;
     sheduleDate: Date;
     shedulehourRange: String;
-    room: Room;
+    rooms: Room;
 }

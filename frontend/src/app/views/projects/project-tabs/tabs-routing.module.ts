@@ -24,6 +24,12 @@ const routes: Routes = [
           
       },
       {
+        path: 'instruments/:id',
+ 
+            loadChildren: () => import('./instruments/instruments.module').then(m => m.InstrumentsPageModule)
+          
+      },
+      {
         path: '',
         redirectTo: 'schedule',
         pathMatch: 'full'
@@ -32,7 +38,8 @@ const routes: Routes = [
 
     ]
 
-  },  {
+  },
+  {
     path: 'instruments',
     loadChildren: () => import('./instruments/instruments.module').then( m => m.InstrumentsPageModule)
   }

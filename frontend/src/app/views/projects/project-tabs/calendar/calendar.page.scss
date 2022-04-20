@@ -1,6 +1,17 @@
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 ion-card {
     border-radius: 0px;
-    background-color: #ffffff;
+    // background-color: #d4afaf4b;
+    // box-shadow: 0 0 5px rgb(68, 70, 67);
+    // border: 1px solid black;
 }
 
 ion-card-title {

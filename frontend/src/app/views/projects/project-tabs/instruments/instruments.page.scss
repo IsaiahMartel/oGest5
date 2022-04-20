@@ -1,0 +1,32 @@
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+ion-card {
+    border-radius: 0px;
+    background-color: #ffffff;
+}
+
+ion-card-title {
+    font-size: 24px;
+}
+
+#separation-title {
+    background-color: #006aab;
+}
+
+#dropdown-button {
+    border-top: 1px solid rgb(201, 200, 200);
+    text-align: center;
+    font-size: 2em;
+    background-color: rgb(236, 236, 236);
+}
+
+.border {
+    border: 1px solid black;
+}

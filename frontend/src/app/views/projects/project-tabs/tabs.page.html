@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
     <ion-toolbar id="navbar">
         <ion-buttons slot="start" routerLink="/home">
 
@@ -6,15 +6,17 @@
 
         </ion-buttons>
         <ion-menu-button id="home-menu-container">
-            <h2 id="navbar-text">Titulo</h2>
+            <h2 id="navbar-text">{{projectName}}</h2>
         </ion-menu-button>
+
     </ion-toolbar>
+    <hr id="separation-title">
 </ion-header>
 
 <ion-content>
     <ion-tabs>
         <ion-tab-bar slot="bottom">
-            
+
             <ion-tab-button tab="calendar/{{id}}">
                 <ion-icon class="tabs-icons" name="calendar"></ion-icon>
             </ion-tab-button>
@@ -27,7 +29,7 @@
                 <ion-icon class="tabs-icons" name="musical-notes-outline"></ion-icon>
             </ion-tab-button>
 
-            <ion-tab-button tab="instruments">
+            <ion-tab-button tab="instruments/{{id}}">
                 <ion-icon class="tabs-icons" name="triangle-outline"></ion-icon>
             </ion-tab-button>
 

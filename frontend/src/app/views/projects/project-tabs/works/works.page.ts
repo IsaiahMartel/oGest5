@@ -16,7 +16,7 @@ import { Echo } from 'laravel-echo-ionic';
 export class WorksPage implements OnInit {
   public playlistArray: Array<Playlist> = [];
   public playlist: Playlist;
-  project_id = this.activatedRoute.snapshot.paramMap.get('id');;
+  project_id = this.activatedRoute.snapshot.paramMap.get('id');
 
   constructor(
     private playlistService: PlaylistsService,
@@ -39,9 +39,10 @@ export class WorksPage implements OnInit {
         array.filter((playlist) => {
      
 
-          if (playlist.project_id == this.project_id) {
-            console.log(playlist.project_id);
 
+          if (playlist.project_id == this.project_id) {
+       
+            console.log(playlist);
 
             return this.playlistArray.push(playlist);
           };

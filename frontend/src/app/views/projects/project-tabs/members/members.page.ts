@@ -16,12 +16,9 @@ export class MembersPage implements OnInit {
   project_id = this.activatedRoute.snapshot.paramMap.get('id');
 
 
-
-
   constructor(
     private addressService: AddressService,
     private activatedRoute: ActivatedRoute,
-
     private alertController: AlertController,
     public storage: Storage
 
@@ -40,7 +37,6 @@ export class MembersPage implements OnInit {
 
         array.filter((address) => {
 
-         
 
           if (address.pivot.project_id == this.project_id) {
             console.log(address.pivot.project_id);

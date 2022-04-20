@@ -33,7 +33,6 @@ export class HomePage {
   calendar = {
     mode: 'month',
     currentDate: new Date(),
-    // noEventsLabel: "No hay eventos"
     noEventsLabel: "No hay eventos"
   };
 

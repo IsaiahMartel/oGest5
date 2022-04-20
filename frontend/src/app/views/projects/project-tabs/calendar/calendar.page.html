@@ -3,7 +3,8 @@
     <div id="container" *ngFor="let shedule of sheduleArray">
         <ion-card>
             <ion-card-header>
-                <ion-card-title *ngIf="shedule.rooms!=null">{{shedule.sheduleTipe}} - {{shedule.rooms.roomAcronym}}</ion-card-title>
+                <h3 class="ion-float-right" *ngIf="shedule.rooms"> {{shedule.rooms.roomAcronym}}</h3>
+                <ion-card-title *ngIf="shedule.rooms!=null">{{shedule.sheduleTipe}} </ion-card-title>
                 <ion-card-title *ngIf="shedule.rooms==null">{{shedule.sheduleTipe}}</ion-card-title>
                 <!-- <hr id="separation-title"> -->
             </ion-card-header>
@@ -11,12 +12,11 @@
             <ion-card-content>
 
 
-                <h1> {{shedule.sheduleDate | date: 'EEEE, dd/MM/yyyy'}} </h1>
-                <h1 *ngIf="shedule.sheduleNote!=''"><b>>Notas: </b>{{shedule.sheduleNote}} </h1>
+                <h3> {{shedule.sheduleDate | date: 'EEEE, dd/MM/yyyy'}} </h3>
+                <h3 *ngIf="shedule.sheduleNote!=''"><b>Notas: </b>{{shedule.sheduleNote}} </h3>
                 <hr id="separation-title">
-                <h1 class="ion-float-right" *ngIf="shedule.shedulehourRange!=''"> {{shedule.shedulehourRange}}</h1>
-
-
+                <h3 class="ion-float-right" *ngIf="shedule.shedulehourRange!=''"> {{shedule.shedulehourRange}} </h3>
+                
 
 
             </ion-card-content>

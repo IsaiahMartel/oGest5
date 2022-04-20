@@ -1,11 +1,19 @@
-ion-thumbnail{
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+ion-thumbnail {
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 25px;
     width: 200px;
     height: 191px;
-
 }
 
 #email-icon {

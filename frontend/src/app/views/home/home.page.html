@@ -1,10 +1,10 @@
-<ion-header>
+<ion-header class="ion-no-border">
     <ion-toolbar id="navbar">
-        <ion-menu-button >
-            <ion-icon id="menu-icon" name="menu-outline"></ion-icon>
+        <ion-menu-button>
             <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
             <h2 id="navbar-text">Calendario</h2>
         </ion-menu-button>
+        <hr id="separation-title">
     </ion-toolbar>
 </ion-header>
 
@@ -31,10 +31,8 @@
     </ion-row>
 
 
-    <calendar [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode"
-        [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)"
-        (onTitleChanged)="onViewTitleChanged($event)" startHour="6" endHour="20" step="30" startingDayWeek="1"
-        (onTitleChanged)="onViewTitleChanged($event)" (onEventSelected)="onEventSelected($event)">
+    <calendar [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" startHour="6"
+        endHour="20" step="30" startingDayWeek="1" (onTitleChanged)="onViewTitleChanged($event)" (onEventSelected)="onEventSelected($event)">
     </calendar>
 
 </ion-content>

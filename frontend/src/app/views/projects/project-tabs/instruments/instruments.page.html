@@ -1,9 +1,90 @@
 <ion-content has-header>
-    
-  <div id="container">
-      <ion-card>
-      </ion-card>
-      <hr class="card-separation">
-  </div>
+
+    <div id="container" *ngFor="let playlist of playlistArray">
+
+        <ng-container *ngIf="playlist.perplaylists.length!=0">
+            <div class="ion-text-center border">
+                <h2>PERCUSION</h2>
+
+                <div id="dropdown-button">
+                    <ion-icon *ngIf="showPercussion==false" name="caret-down-outline" (click)="showPercussion = true"></ion-icon>
+                </div>
+            </div>
+            <ng-container *ngFor="let perplaylist of playlist.perplaylists">
+                <ion-card *ngIf="showPercussion==true">
+                    <ion-card-header>
+                        <ion-card-title>{{perplaylist.instrumentName}}</ion-card-title>
+                        <ion-card-title>{{perplaylist.instrumentName2}}</ion-card-title>
+                        <hr id="separation-title ">
+
+                    </ion-card-header>
+
+
+                </ion-card>
+
+            </ng-container>
+            <div id="dropdown-button">
+                <ion-icon *ngIf="showPercussion==true" name="caret-up-outline" (click)="showPercussion = false"></ion-icon>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="playlist.keyplaylists.length!=0">
+            <div class="ion-text-center border">
+                <h2>PIANO</h2>
+
+                <div id="dropdown-button">
+                    <ion-icon *ngIf="showKeyboard==false" name="caret-down-outline" (click)="showKeyboard = true"></ion-icon>
+                </div>
+            </div>
+            <ng-container *ngFor="let keyplaylist of playlist.keyplaylists">
+                <ion-card *ngIf="showKeyboard==true">
+                    <ion-card-header>
+                        <ion-card-title>{{keyplaylist.instrumentName}}</ion-card-title>
+                        <ion-card-title>{{keyplaylist.instrumentName2}}</ion-card-title>
+                        <hr id="separation-title ">
+
+                    </ion-card-header>
+
+
+                </ion-card>
+
+            </ng-container>
+            <div id="dropdown-button">
+                <ion-icon *ngIf="showKeyboard==true" name="caret-up-outline" (click)="showKeyboard = false"></ion-icon>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="playlist.voiplaylists.length!=0">
+            <div class="ion-text-center border">
+                <h2>VIOLIN</h2>
+
+                <div id="dropdown-button">
+                    <ion-icon *ngIf="showViolin==false" name="caret-down-outline" (click)="showViolin = true"></ion-icon>
+                </div>
+            </div>
+            <ng-container *ngFor="let voiplaylist of playlist.voiplaylists">
+                <ion-card *ngIf="showViolin==true">
+                    <ion-card-header>
+                        <ion-card-title>{{voiplaylist.instrumentName}}</ion-card-title>
+                        <ion-card-title>{{voiplaylist.instrumentName2}}</ion-card-title>
+                        <hr id="separation-title ">
+
+                    </ion-card-header>
+
+
+                </ion-card>
+
+            </ng-container>
+            <div id="dropdown-button">
+                <ion-icon *ngIf="showViolin==true" name="caret-up-outline" (click)="showViolin = false"></ion-icon>
+            </div>
+        </ng-container>
+
+
+    </div>
+    <h1 class="ion-text-center" *ngIf="playlistArray.length==0">
+        No hay instrumentos extras
+    </h1>
+
 
 </ion-content>

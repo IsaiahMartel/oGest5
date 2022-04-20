@@ -1,5 +1,5 @@
 <ion-content has-header>
-    
+
     <div id="container" *ngFor="let address of addressArray">
         <ion-card>
             <ion-card-header>
@@ -8,7 +8,11 @@
                 <h6 class="title-text">{{address.addressgroups[0].addressgroupName}}</h6>
             </ion-card-header>
         </ion-card>
-        <hr class="card-separation">
+        <!-- <hr class="card-separation"> -->
+
     </div>
 
+    <h1 class="ion-text-center" *ngIf="addressArray.length==0">
+        No hay miembros
+    </h1>
 </ion-content>

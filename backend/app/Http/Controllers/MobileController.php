@@ -28,7 +28,7 @@ public function getProjects()
     public function getPlaylists()
     {
      
-            $playlist = Playlist::with('works')->get();
+            $playlist = Playlist::with('works', 'perplaylists', 'keyplaylists', 'voiplaylists')->get();
     
             return $playlist;
     }

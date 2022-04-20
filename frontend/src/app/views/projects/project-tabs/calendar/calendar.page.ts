@@ -42,7 +42,7 @@ export class CalendarPage implements OnInit {
 
           if (shedule.project_id == this.project_id) {
          
-            console.log(shedule.project_id);
+         
 
             return this.sheduleArray.push(shedule);
           };

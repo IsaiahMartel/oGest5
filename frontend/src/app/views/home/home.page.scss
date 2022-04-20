@@ -1,12 +1,19 @@
-ion-header {
-    border: none;
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 #navbar {
-    border-width: 1px;
-    border-color: rgb(110, 102, 102);
-    border-style: solid;
     height: 76px;
+}
+
+#separation-title {
+    background-color: #006aab;
+    width: 350px;
 }
 
 #navbar-icon {
@@ -38,10 +45,12 @@ ion-header {
     .monthview-eventdetail-timecolumn {
         display: none;
     }
-
     .event-detail {
         color: #1b1818;
         font-size: 20px;
         font-weight: 200;
+    }
+    .border {
+        border: 1px solid black;
     }
 }

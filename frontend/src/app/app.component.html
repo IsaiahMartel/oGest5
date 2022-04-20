@@ -5,24 +5,19 @@
 
             <ion-footer class="bar-stable">
 
-                <ion-item lines="none" class="ion-no-padding" id="login-item" routerLink="/configuration">
-                    <ion-icon id="configuration-icon" src="assets/ajustes.svg"></ion-icon>
-                    <h2 id="configuration-text">Configuración</h2>
-                </ion-item>
-
-                <ion-item lines="none" class="ion-no-padding" routerLink="/chat-with-laravel">
-                    <ion-icon id="support-icon" src="assets/ayudar.svg"></ion-icon>
-                    <h2 id="configuration-text">Soporte</h2>
+                <ion-item lines="none" class="ion-no-padding" routerLink="/login">
+                    <ion-icon id="login-icon" src="assets/cerrar-sesion.svg"></ion-icon>
+                    <h2 id="configuration-text">Home</h2>
                 </ion-item>
 
                 <ion-item lines="none" class="ion-no-padding" routerLink="/login">
                     <ion-icon id="login-icon" src="assets/cerrar-sesion.svg"></ion-icon>
-                    <h2 id="configuration-text">Cerrar sesión</h2>
+                    <h2 id="configuration-text">Login</h2>
                 </ion-item>
 
             </ion-footer>
         </ion-menu>
     </ion-menu-toggle>
-    
+
     <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

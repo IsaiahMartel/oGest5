@@ -43,7 +43,7 @@ export class MembersPage implements OnInit {
          
 
           if (address.pivot.project_id == this.project_id) {
-            console.log(address.pivot.project_id);
+            console.log(address.addressgroups[0].addressgroupName);
 
 
             return this.addressArray.push(address);

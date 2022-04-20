@@ -92,15 +92,16 @@ export class HomePage {
       var startDate = new Date(p.projectDateIni);
       var endDate = new Date(p.projectDateEnd);
 
-
       var title = p.events.eventName;
       var projectId = p.id;
+
 
       events.push({
         title: title,
         startTime: startDate,
         endTime: endDate,
         projectId: projectId,
+ 
       });
     }
 

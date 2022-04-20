@@ -32,7 +32,11 @@ const routes: Routes = [
 
     ]
 
+  },  {
+    path: 'instruments',
+    loadChildren: () => import('./instruments/instruments.module').then( m => m.InstrumentsPageModule)
   }
+
 ];
 
 @NgModule({

@@ -3,7 +3,6 @@
     <div id="container" *ngFor="let playlist of playlistArray">
         <ion-card>
             <ion-card-header>
-                <ion-card-subtitle> {{playlist.composer_id}}</ion-card-subtitle>
                 <ion-card-title>{{playlist.workName}}</ion-card-title>
                 <hr id="separation-title">
 
@@ -11,10 +10,9 @@
 
             <ion-card-content>
 
-                <!-- <h1>{{w.works.stringWork}}</h1> -->
                 <div>
-                    <h1 id="orchestration-text">{{playlist.playlistString}}</h1>
-                    <h1 id="duration-text">{{playlist.workDuration}}</h1>
+                    <h3 id="orchestration-text">{{playlist.playlistString}}</h3>
+                    <h3 id="duration-text">{{playlist.workDuration}}</h3>
                 </div>
 
             </ion-card-content>

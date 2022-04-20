@@ -1,25 +1,14 @@
-<ion-header class="ion-no-border">
-
+<ion-header>
     <ion-toolbar id="navbar">
-        <ion-menu-button id="home-menu-container">
+        <ion-menu-button >
             <ion-icon id="menu-icon" name="menu-outline"></ion-icon>
-            <ion-icon id="navbar-icon" src="assets/home18.svg"></ion-icon>
-            <h2 id="navbar-text">Resumen</h2>
+            <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
+            <h2 id="navbar-text">Calendario</h2>
         </ion-menu-button>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class='has-header has-subheader'>
-
-    <!-- <ion-segment [(ngModel)]="calendar.mode">
-        <ion-segment-button value="month">
-            <ion-label>Month</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="week">
-            <ion-label>Semana</ion-label>
-        </ion-segment-button>
-
-    </ion-segment> -->
 
     <ion-row>
         <!-- Move back one screen of the slides -->
@@ -42,8 +31,10 @@
     </ion-row>
 
 
-
-    <calendar [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" startHour="6"
-        endHour="20" step="30" startingDayWeek="1" (onTitleChanged)="onViewTitleChanged($event)" (onEventSelected)="onEventSelected($event)">
+    <calendar [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode"
+        [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)" startHour="6" endHour="20" step="30" startingDayWeek="1"
+        (onTitleChanged)="onViewTitleChanged($event)" (onEventSelected)="onEventSelected($event)">
     </calendar>
+
 </ion-content>

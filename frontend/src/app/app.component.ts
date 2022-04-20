@@ -1,17 +1,15 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { GestureController, MenuController } from '@ionic/angular';
 import { PdfService } from 'src/app/services/pdf/pdf.service';
 import { ModalController } from '@ionic/angular';
 import { DownloadOrSendModal } from './views/projects/reports/download-or-send-modal/download-or-send-modal.page';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
+
 export class AppComponent implements AfterViewInit {
   @ViewChild('holdBtn', { read: ElementRef }) holdBtn: ElementRef;
   hold = 0;
@@ -20,8 +18,9 @@ export class AppComponent implements AfterViewInit {
 
   private modalOpen: boolean = false;
 
-  constructor(private router: Router, private gestureCtrl: GestureController,
-    private localStorageService: LocalStorageService, private pdfService: PdfService,
+  constructor(
+    private gestureCtrl: GestureController,
+    private pdfService: PdfService,
     private modalController: ModalController) { }
 
   ngOnInit() {

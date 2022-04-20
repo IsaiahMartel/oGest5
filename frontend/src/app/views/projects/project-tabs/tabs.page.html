@@ -6,9 +6,7 @@
 
         </ion-buttons>
         <ion-menu-button id="home-menu-container">
-
-            <ion-icon id="header-icon" src="assets/projects-color-icon.svg"></ion-icon>
-            <!-- <h2 id="header-text">{{project.events.id}}</h2> -->
+            <h2 id="navbar-text">Titulo</h2>
         </ion-menu-button>
     </ion-toolbar>
 </ion-header>
@@ -16,6 +14,7 @@
 <ion-content>
     <ion-tabs>
         <ion-tab-bar slot="bottom">
+            
             <ion-tab-button tab="calendar/{{id}}">
                 <ion-icon class="tabs-icons" name="calendar"></ion-icon>
             </ion-tab-button>
@@ -25,9 +24,13 @@
             </ion-tab-button>
 
             <ion-tab-button tab="works/{{id}}">
-                <ion-icon class="tabs-icons" name="document"></ion-icon>
-
+                <ion-icon class="tabs-icons" name="musical-notes-outline"></ion-icon>
             </ion-tab-button>
+
+            <ion-tab-button tab="instruments">
+                <ion-icon class="tabs-icons" name="triangle-outline"></ion-icon>
+            </ion-tab-button>
+
         </ion-tab-bar>
     </ion-tabs>
 </ion-content>

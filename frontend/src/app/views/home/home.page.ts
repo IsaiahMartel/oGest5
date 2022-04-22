@@ -12,6 +12,8 @@ import { Address } from 'src/app/models/address';
 import { AddressService } from 'src/app/services/address/address.service';
 import { CalendarComponent } from 'ionic2-calendar';
 import { Router } from '@angular/router';
+import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
+import { AddressGroup } from 'src/app/models/address-group';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +28,8 @@ export class HomePage {
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
+  
+  colorPick = 0
 
   eventSource = [];
   viewTitle: string;
@@ -33,7 +37,7 @@ export class HomePage {
   calendar = {
     mode: 'month',
     currentDate: new Date(),
-    noEventsLabel: "No hay eventos"
+    noEventsLabel: "No hay eventos",
   };
 
   selectedDate: Date;
@@ -49,6 +53,7 @@ export class HomePage {
     private router: Router,
     private alertController: AlertController,
     public storage: Storage,
+    public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
   ) { }
 
@@ -93,21 +98,45 @@ export class HomePage {
 
       var title = p.events.eventName;
       var projectId = p.id;
+      var blue;
+      var green;
+      var yellow;
+      var red;
+     this.sheduleArray.filter((shedule) => {
+       shedule.sheduleTipe
+      })
+      // var eventType = 
+      if (this.colorPick == 0) {
+        
+        var colorEvent = "blue";
+        this.colorPick++;
 
+      } else if (this.colorPick == 1) {
+        var colorEvent = "red";
+        this.colorPick++;
+      }
+      else if (this.colorPick == 2) {
+        var colorEvent = "green";
+        this.colorPick++;
+      }
+      else if (this.colorPick == 3) {
+        var colorEvent = "yellow";
+        this.colorPick=0;
+      }
 
       events.push({
         title: title,
         startTime: startDate,
         endTime: endDate,
         projectId: projectId,
- 
+        colorEvent: colorEvent
       });
     }
 
 
 
 
-  
+
 
     this.eventSource = events;
 
@@ -178,10 +207,9 @@ export class HomePage {
       this.projectsArray = p;
     })
 
-    this.addressServivce.getAddresses().subscribe((p: Array<Address>) => {
+    this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
 
       this.storage.set("address", JSON.stringify(p));
-      this.addressArray = p;
     })
 
     this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
@@ -207,51 +235,20 @@ export class HomePage {
     });
     await alert.present();
   }
-  // updateCalendar() {
-  //   const cells = document.getElementsByClassName("swiper-container-initialized");
-  //   const slider = document.getElementsByClassName('event-detail-container');
-  //   const slides = slider[0].getElementsByClassName('item')
-  //   // console.log(slider[0])
-  //   // console.log(cells);
-
-
-
-  //   // for (let i = 0; i < cells.length; i++) {
-  //   const cell = cells[0] as HTMLElement;
-
-  //   // console.log(cell);
-
-
-  //   cell.addEventListener('click', function handleClick() {
-  //     console.log("ha hecho click");
-
-
-  //     for (let i = 0; i < slides.length; i++) {
-  //       // console.log(slides);
-
-  //       // setTimeout(function () {
-  //       const slide = slides[i] as HTMLElement;
-
-
-  //       slide.setAttribute("href", "/tabs/calendar/")
-  //       // }, 2000);
-
-
-
-
-  //     };
-  //   });
-
-  //   // };
-
-  //   // console.log(slides[0].getElementsByClassName('item'));
-
-  // }
 
   onEventSelected = (event) => {
+    this.projectIdService.changeProjectId(event.projectId);
+
     this.router.navigateByUrl("/tabs/calendar/" + event.projectId);
 
   };
+
+getCustomClass(events) {
+    if(events.length > 0) {
+      return events[0].colorEvent;
+    }
+    return '';
+  }
 
 
 

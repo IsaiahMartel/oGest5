@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { catchError, tap } from 'rxjs/operators';
-import { Address } from 'src/app/models/address';
+
+import { AddressGroup } from 'src/app/models/address-group';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AddressService {
 
   }
   getAddresses() {
-    return this.httpClient.get<Address[]>(this.endpoint);
+    return this.httpClient.get<AddressGroup[]>(this.endpoint);
   }
   // getAdressByProjectId(projectId) {
   //   return this.httpClient.get<Address[]>(this.endpoint + "/" + projectId).pipe(

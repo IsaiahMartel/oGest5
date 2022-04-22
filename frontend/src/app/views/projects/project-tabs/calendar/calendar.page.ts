@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Shedule } from 'src/app/models/shedule';
@@ -21,7 +21,8 @@ export class CalendarPage implements OnInit {
     private sheduleService: SheduleService,
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
-    public storage: Storage
+    public storage: Storage,
+    @Inject(LOCALE_ID) private locale: string,
 
   ) { }
 
@@ -44,7 +45,8 @@ export class CalendarPage implements OnInit {
          
          
 
-            return this.sheduleArray.push(shedule);
+            this.sheduleArray.push(shedule);
+            this.sheduleArray.sort((a,b)=>new Date(a.sheduleDate).getTime()-new Date(b.sheduleDate).getTime());
           };
         })
       } else {

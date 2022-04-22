@@ -17,27 +17,9 @@ ion-card {
     background-color: #ffffff;
 }
 
-ion-card-header {
-    padding-top: 10px;
-    padding-left: 0px;
-}
-
-ion-card-title {
-    font-size: 24px;
-    margin-left: 20px;
-}
-
-ion-card-subtitle {
-    margin-left: 20px;
-}
-
 #separation-title {
     width: 300px;
     background-color: #006aab;
-}
-
-h2 {
-    margin-left: 20px;
 }
 
 #duration-text {
@@ -48,6 +30,7 @@ h2 {
 #orchestration-text {
     text-align: left;
     float: left;
+    font-size: 17px;
 }
 
 #madera {

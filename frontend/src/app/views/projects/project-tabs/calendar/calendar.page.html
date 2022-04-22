@@ -11,10 +11,10 @@
             <ion-card-content>
 
 
-                <h3> {{shedule.sheduleDate | date: 'EEEE, dd/MM/yyyy'}} </h3>
-                <h3 *ngIf="shedule.sheduleNote!=''"><b>Notas: </b>{{shedule.sheduleNote}} </h3>
+                <h2> {{shedule.sheduleDate | date: 'EEEE, dd/MM/yyyy'}} </h2>
+                <h2 *ngIf="shedule.sheduleNote!=''"><b>Notas: </b>{{shedule.sheduleNote}} </h2>
                 <hr id="separation-title">
-                <h3 class="ion-float-right" *ngIf="shedule.shedulehourRange!=''"> {{shedule.shedulehourRange}} </h3>
+                <h2 class="ion-float-right" *ngIf="shedule.shedulehourRange!=''"> {{shedule.shedulehourRange}} </h2>
 
 
 

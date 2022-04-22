@@ -53,4 +53,31 @@ ion-content {
     .border {
         border: 1px solid black;
     }
+    .monthview-datetable td.monthview-primary-with-event {
+        background-color: transparent !important;
+        color: black !important;
+    }
+    .monthview-datetable .text-muted {
+        background-color: transparent !important;
+    }
+    .monthview-datetable {
+        padding: 0 !important;
+    }
+    .yellow {
+        background-color: rgba(255, 218, 6, 0.726) !important;
+    }
+    .red {
+        background-color: rgba(214, 120, 148, 0.61)!important;
+    }
+    .green {
+        background-color: rgba(9, 243, 20, 0.815)!important;
+    }
+    .blue {
+        background-color: rgba(0, 132, 255, 0.699);
+    }
+}
+
+#div {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }

@@ -5,6 +5,7 @@ import { AddressService } from 'src/app/services/address/address.service'
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Echo } from 'laravel-echo-ionic';
+import { AddressGroup } from 'src/app/models/address-group';
 
 @Component({
   selector: 'app-members',
@@ -12,7 +13,7 @@ import { Echo } from 'laravel-echo-ionic';
   styleUrls: ['./members.page.scss'],
 })
 export class MembersPage implements OnInit {
-  public addressArray: Array<Address> = [];
+  public addressArray: Array<AddressGroup> = [];
   project_id = this.activatedRoute.snapshot.paramMap.get('id');
 
 
@@ -36,9 +37,14 @@ export class MembersPage implements OnInit {
 
 
         array.filter((address) => {
+          console.log(address.project);
+          console.log(address.project.id);
 
-
-          if (address.pivot.project_id == this.project_id) {
+          if (address.project.id == this.project_id) {
+            console.log(address);
+            console.log(address.address);
+            
+            
             console.log(address.addressgroups[0].addressgroupName);
 
 
@@ -74,7 +80,7 @@ export class MembersPage implements OnInit {
   }
 
   updateData() {
-    this.addressService.getAddresses().subscribe((p: Array<Address>) => {
+    this.addressService.getAddresses().subscribe((p: Array<AddressGroup>) => {
 
       this.storage.set("address", JSON.stringify(p));
       this.addressArray = p;

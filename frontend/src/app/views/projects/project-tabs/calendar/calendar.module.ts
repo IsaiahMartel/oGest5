@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CalendarPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [CalendarPage]
+  declarations: [CalendarPage],
+  providers: [ { provide: LOCALE_ID, useValue: 'es-Py' } ],
 })
 export class CalendarPageModule {}

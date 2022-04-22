@@ -9,4 +9,5 @@ export class Playlist {
     perplaylists : Perplaylists;
     keyplaylists : Instrument;
     voiplaylists : Instrument;
+  playlistOrder: number;
 }

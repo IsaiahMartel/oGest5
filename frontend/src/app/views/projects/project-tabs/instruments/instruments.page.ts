@@ -18,9 +18,12 @@ export class InstrumentsPage implements OnInit {
   public playlist: Playlist;
   project_id = this.activatedRoute.snapshot.paramMap.get('id');
 
-  public showPercussion=false;
-  public showViolin=false;
-  public showKeyboard=false;
+  public showPercussion = false;
+  public showVoice = false;
+  public showKeyboard = false;
+  public noPercussion = true;
+  public noVoice = true;
+  public noKeyboard = true;
 
   constructor(
     private playlistService: PlaylistsService,
@@ -51,6 +54,7 @@ export class InstrumentsPage implements OnInit {
             if (playlist.perplaylists != null || playlist.voiplaylists != null || playlist.keyplaylists != null) {
               this.playlistArray.push(playlist);
 
+
             }
 
 
@@ -58,6 +62,27 @@ export class InstrumentsPage implements OnInit {
 
         })
 
+        for (let playlist of this.playlistArray) {
+
+          for (let perplaylist in playlist.perplaylists) {
+            if (playlist.perplaylists[perplaylist].instrumentName != null || playlist.perplaylists[perplaylist].instrumentName2 != null) {
+              this.noPercussion = false;
+            }
+          }
+          for (let keyplaylist in playlist.keyplaylists) {
+            if (playlist.keyplaylists[keyplaylist].instrumentName != null || playlist.keyplaylists[keyplaylist].instrumentName2 != null) {
+              this.noKeyboard = false;
+            }
+          }
+          for (let voiplaylist in playlist.voiplaylists) {
+            if (playlist.voiplaylists[voiplaylist].instrumentName != null || playlist.voiplaylists[voiplaylist].instrumentName2 != null) {
+              this.noVoice = false;
+            }
+          }
+
+
+          
+        }
 
       } else {
 
@@ -89,7 +114,7 @@ export class InstrumentsPage implements OnInit {
     this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
 
       this.storage.set("playlist", JSON.stringify(p));
-      this.playlistArray = p;
+
     })
 
   }

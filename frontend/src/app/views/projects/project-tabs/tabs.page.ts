@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { ProjectsService } from 'src/app/services/projects/projects.service';
+
 
 @Component({
   selector: 'app-tabs',
@@ -11,13 +13,14 @@ import { ProjectsService } from 'src/app/services/projects/projects.service';
 export class TabsPage implements OnInit {
 
   public urlSplitArray: string[] = [];
-  public id: string;
+  public id: number;
   public projectName: String;
 
   constructor(
     private router: Router,
     public storage: Storage,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private projectIdService: ProjectIdService
   ) {
 
 
@@ -26,9 +29,11 @@ export class TabsPage implements OnInit {
 
   ngOnInit() {
 
-    this.urlSplitArray = this.router.url.split("/");
-    this.id = this.urlSplitArray.slice(-1)[0];
-    console.log(this.id);
+    if (this.projectIdService.projectId == null) {
+      this.urlSplitArray = this.router.url.split("/");
+      this.id = parseInt(this.urlSplitArray.slice(-1)[0]);
+      this.projectIdService.changeProjectId(this.id)
+    }
 
     this.storage.get("projects").then(data => {
       if (data) {
@@ -36,14 +41,14 @@ export class TabsPage implements OnInit {
 
 
         array.filter((project) => {
-        
+
 
           if (project.id == this.id) {
-    
-        
+
+
 
             this.projectName = project.events.eventName;
-          
+
 
 
 

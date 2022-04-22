@@ -31,8 +31,25 @@
     </ion-row>
 
 
-    <calendar [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" startHour="6"
-        endHour="20" step="30" startingDayWeek="1" (onTitleChanged)="onViewTitleChanged($event)" (onEventSelected)="onEventSelected($event)">
+    <ng-template #template let-view="view" let-row="row" let-col="col">
+
+        <div id="div" [ngClass]="getCustomClass(view.dates[row*7+col].events)">
+
+            {{view.dates[row*7+col].label}}
+
+
+        </div>
+
+
+
+    </ng-template>
+
+    <ng-template #template let-view="view" let-row="row" let-col="col">
+        {{view.dates[row*7+col].label}}
+    </ng-template>
+
+    <calendar [monthviewDisplayEventTemplate]="template" [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" [startingDayMonth]="1" (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)" startHour="6" endHour="20" step="30" startingDayWeek="1" (onTitleChanged)="onViewTitleChanged($event)" (onEventSelected)="onEventSelected($event)">
     </calendar>
 
 </ion-content>

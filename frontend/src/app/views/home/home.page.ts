@@ -14,13 +14,16 @@ import { CalendarComponent } from 'ionic2-calendar';
 import { Router } from '@angular/router';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { AddressGroup } from 'src/app/models/address-group';
+import { LoginPage } from '../login/login.page';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
+
   public shedule: Shedule;
   public projects_id: number[] = [];
   public project: Project;
@@ -28,8 +31,8 @@ export class HomePage {
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
-  
-  colorPick = 0
+
+  colorPick: number = 0;
 
   eventSource = [];
   viewTitle: string;
@@ -55,6 +58,7 @@ export class HomePage {
     public storage: Storage,
     public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
+
   ) { }
 
   ngOnInit(): void {
@@ -90,55 +94,159 @@ export class HomePage {
   createEvents() {
     var events = [];
 
+    this.colorPick = 0;
 
-    for (let p of this.projectsArray) {
+    this.projectsArray.sort((a, b) => new Date(a.projectDateIni).getTime() - new Date(b.projectDateEnd).getTime());
+    this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
+    for (let project of this.projectsArray) {
+      var startDateProject = new Date(project.projectDateIni);
 
-      var startDate = new Date(p.projectDateIni);
-      var endDate = new Date(p.projectDateEnd);
+      var endDateProject = new Date(project.projectDateEnd);
+      var diffTime = this.dateDiffInDays(startDateProject, endDateProject);
+      var day = 60 * 60 * 24 * 1000;
+      var colorEvent = "";
+      var titleShedule = "";
+      var startDateShedule;
+      var endDateShedule;
+      var sheduleHour: "";
+      var roomAcronym = "";
+      var sheduleNote = "";
 
-      var title = p.events.eventName;
-      var projectId = p.id;
-      var blue;
-      var green;
-      var yellow;
-      var red;
-     this.sheduleArray.filter((shedule) => {
-       shedule.sheduleTipe
+
+      for (let i = 0; i < diffTime; i++) {
+
+        var dayByDay = new Date(startDateProject.getTime() + day * i);
+
+
+        events.push({
+          title: project.events.eventName,
+          startTime: dayByDay,
+          endTime: dayByDay,
+          projectId: project.id,
+
+        });
+
+
+
+
+      }
+
+      this.sheduleArray.filter((shedule) => {
+
+        if (shedule.project_id == project.id) {
+
+
+
+
+          startDateShedule = new Date(shedule.sheduleDate);
+          endDateShedule = new Date(shedule.sheduleDate);
+          titleShedule = shedule.sheduleTipe;
+
+
+
+
+
+
+          // i++;
+
+          // if (i < 0 ) {
+          // console.log(startDate);
+          if (this.colorPick == 0) {
+            // console.log(this.colorPick);
+
+            if (shedule.sheduleTipe == "CONCIERTO") {
+              colorEvent = "blueConcert";
+              // console.log(i + " concierto " + project.events.eventName + " " + shedule.sheduleDate) 
+            }
+            else if (shedule.sheduleTipe == "DIA LIBRE") {
+              colorEvent = "freeDay";
+              // console.log(i + " dia libre " + project.events.eventName + " " + shedule.sheduleDate); 
+            }
+            else {
+              colorEvent = "blue";
+              // console.log(i + " evento normal " + project.events.eventName + " " + shedule.sheduleDate);
+
+
+            }
+
+          } else if (this.colorPick == 1) {
+            if (shedule.sheduleTipe == "CONCIERTO") { var colorEvent = "redConcert"; }
+            else if (shedule.sheduleTipe == "DIA LIBRE") { var colorEvent = "freeDay"; }
+            else {
+              colorEvent = "red";
+            }
+
+          }
+          else if (this.colorPick == 2) {
+            if (shedule.sheduleTipe == "CONCIERTO") { var colorEvent = "greenConcert"; }
+            else if (shedule.sheduleTipe == "DIA LIBRE") { var colorEvent = "freeDay"; }
+            else {
+              colorEvent = "green";
+
+            }
+
+          }
+          else if (this.colorPick == 3) {
+            if (shedule.sheduleTipe == "CONCIERTO") { var colorEvent = "yellowConcert"; }
+            else if (shedule.sheduleTipe == "DIA LIBRE") { var colorEvent = "freeDay"; }
+            else {
+              colorEvent = "yellow";
+
+            }
+
+          }
+          // i++;
+          // console.log(project.events.eventName);
+
+          if (shedule.rooms) {
+            roomAcronym = shedule.rooms.roomAcronym;
+          }
+          if (shedule.sheduleNote) {
+            sheduleNote = shedule.sheduleNote;
+          }
+
+
+
+
+          events.push({
+            titleShedule: titleShedule,
+            startTime: startDateShedule,
+            endTime: endDateShedule,
+            sheduleHour: sheduleHour,
+            sheduleNote: sheduleNote,
+            roomAcronym: roomAcronym,
+            colorEvent: colorEvent
+          });
+
+
+        }
+        // else {
+
+        if (this.colorPick == 3) {
+          this.colorPick = 0;
+        }
+        // i = 0;
+        // }
+
+
+
+        // }
+
       })
-      // var eventType = 
-      if (this.colorPick == 0) {
-        
-        var colorEvent = "blue";
-        this.colorPick++;
+      this.colorPick++;
 
-      } else if (this.colorPick == 1) {
-        var colorEvent = "red";
-        this.colorPick++;
-      }
-      else if (this.colorPick == 2) {
-        var colorEvent = "green";
-        this.colorPick++;
-      }
-      else if (this.colorPick == 3) {
-        var colorEvent = "yellow";
-        this.colorPick=0;
-      }
 
-      events.push({
-        title: title,
-        startTime: startDate,
-        endTime: endDate,
-        projectId: projectId,
-        colorEvent: colorEvent
-      });
+
+
     }
 
 
 
-
-
-
     this.eventSource = events;
+    // console.log(this.eventSource);
+    // console.log(this.projectsArray);
+
+
 
 
 
@@ -154,17 +262,31 @@ export class HomePage {
 
   loadInfo() {
 
-    this.storage.get("projects").then(data => {
+    this.storage.get("shedule").then(data => {
 
       if (data) {
-        this.projectsArray = JSON.parse(data);
-        this.createEvents();
+        this.sheduleArray = JSON.parse(data);
+
+        this.storage.get("projects").then(data => {
+
+          if (data) {
+            this.projectsArray = JSON.parse(data);
+            this.createEvents();
+          }
+
+          else {
+            this.updateData();
+          }
+        })
+
       }
 
       else {
         this.updateData();
       }
     })
+
+
   }
 
   async presentAlert(message: string) {
@@ -199,7 +321,6 @@ export class HomePage {
   }
 
   updateData() {
-    console.log(this.projects_id);
 
     this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
@@ -236,21 +357,65 @@ export class HomePage {
     await alert.present();
   }
 
-  onEventSelected = (event) => {
+  eventSelected = (event) => {
+
+    console.log(event);
+
+
     this.projectIdService.changeProjectId(event.projectId);
 
     this.router.navigateByUrl("/tabs/calendar/" + event.projectId);
 
   };
 
-getCustomClass(events) {
-    if(events.length > 0) {
+  onCurrentDateChanged = (event) => {
+ 
+    if (event.length > 0) {
+      if (event.length >= 1) {
+        event[1].colorEvent = "onEventSelected";
+      } else {
+        event[0].colorEvent = "onEventSelected";
+      }
+      this.getCustomClass(event);
+    }
+
+    this.getCustomClass(event);
+    console.log("ahiu va" + event);
+  };
+
+  getCustomClass(events) {
+    
+
+    if (events.length > 0) {
+
+      for (let event of events) {
+        if (event.titleShedule) {
+          if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE") {
+            console.log(event.startTime);
+            return event.colorEvent;
+         
+          }
+        }
+      }
+      if (events.length >= 1) {
+
+        return events[1].colorEvent;
+      }
+ 
       return events[0].colorEvent;
+
     }
     return '';
   }
 
+  dateDiffInDays(a, b) {
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
+
+    return (Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24)) + 1);
+  }
 
 }
 

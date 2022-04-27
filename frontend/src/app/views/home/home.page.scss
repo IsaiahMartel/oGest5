@@ -41,14 +41,20 @@ ion-content {
     height: 60px;
 }
 
-:host ::ng-deep {
+ :host ::ng-deep {
+    .monthview-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
     .monthview-eventdetail-timecolumn {
         display: none;
     }
     .event-detail {
         color: #1b1818;
         font-size: 20px;
-        font-weight: 200;
+        font-weight: 600;
     }
     .border {
         border: 1px solid black;
@@ -63,6 +69,9 @@ ion-content {
     .monthview-datetable {
         padding: 0 !important;
     }
+    .monthview-selected {
+        background-color: red !important;
+    }
     .yellow {
         background-color: rgba(255, 218, 6, 0.726) !important;
     }
@@ -73,11 +82,34 @@ ion-content {
         background-color: rgba(9, 243, 20, 0.815)!important;
     }
     .blue {
-        background-color: rgba(0, 132, 255, 0.699);
+        background-color: rgba(0, 132, 255, 0.699) !important;
+    }
+    .yellowConcert {
+        background-color: rgb(255, 218, 6) !important;
+    }
+    .redConcert {
+        background-color: rgb(214, 120, 148)!important;
+    }
+    .greenConcert {
+        background-color: rgb(4, 139, 11)!important;
+    }
+    .blueConcert {
+        background-color: rgb(0, 132, 255) !important;
+    }
+    .freeDay {
+        background-color: rgba(179, 179, 179, 0.699) !important;
+    }
+    .onEventSelected {
+        background-color: green !important;
     }
 }
 
 #div {
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+.event-detail-container {
+    flex-grow: 1;
+    overflow-y: scroll;
 }

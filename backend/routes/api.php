@@ -15,6 +15,7 @@ use App\Http\Controllers\MobileController;
 use App\Http\Controllers\PrintController ;
 use App\Http\Controllers\AlertController ;
 use App\Http\Controllers\ZoneController ;
+use App\Http\Controllers\NewPasswordController;
 use Illuminate\Http\Request;
 
 /*
@@ -49,6 +50,21 @@ route::group(['prefix' => 'mobile'], function () { // esta ruta es /mobile/xxx
 });
 
 
+Route::group([  
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+  Route::post('login', [App\Http\Controllers\AuthController::class, 'login']);
+    Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
+    Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
+    Route::post('me', [App\Http\Controllers\AuthController::class, 'me']);
+    Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
+    Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
+    Route::post('reset-password', [NewPasswordController::class, 'reset']);
+});
 
 
 

@@ -31,7 +31,7 @@
     </ion-row>
 
 
-    <ng-template #template let-view="view" let-row="row" let-col="col">
+    <ng-template #colors let-view="view" let-row="row" let-col="col">
 
         <div id="div" [ngClass]="getCustomClass(view.dates[row*7+col].events)">
 
@@ -44,12 +44,42 @@
 
     </ng-template>
 
-    <ng-template #template let-view="view" let-row="row" let-col="col">
-        {{view.dates[row*7+col].label}}
+    <ng-template #sheduleAndProject let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+        <ion-list class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail">
+            <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
+
+
+                <span *ngIf="event.projectId" class="event-detail">{{event.title}}</span>
+                <ng-container *ngIf="event.titleShedule">
+                    <ion-card>
+                        <ion-card-header>
+                            <h3 class="ion-float-right" *ngIf="event.roomAcronym!=''">{{event.roomAcronym}}</h3>
+                            <ion-card-title>{{event.titleShedule}} </ion-card-title>
+
+                        </ion-card-header>
+
+                        <ion-card-content>
+
+
+
+                            <h2 *ngIf="event.sheduleNote!=''"><b>Notas: </b>{{event.sheduleNote}} </h2>
+                            <hr id="separation-title">
+                            <h2 class="ion-float-right" *ngIf="event.sheduleHour!=''"> {{event.sheduleHour}} </h2>
+
+
+
+                        </ion-card-content>
+                    </ion-card>
+                </ng-container>
+            </ion-item>
+            <ion-item *ngIf="selectedDate?.events.length==0">
+                <div class="no-events-label">{{noEventsLabel}}</div>
+            </ion-item>
+        </ion-list>
     </ng-template>
 
-    <calendar [monthviewDisplayEventTemplate]="template" [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" [startingDayMonth]="1" (onEventSelected)="onEventSelected($event)"
-        (onTitleChanged)="onViewTitleChanged($event)" startHour="6" endHour="20" step="30" startingDayWeek="1" (onTitleChanged)="onViewTitleChanged($event)" (onEventSelected)="onEventSelected($event)">
+    <calendar [monthviewDisplayEventTemplate]="colors" [monthviewEventDetailTemplate]="sheduleAndProject" [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" [startingDayMonth]="1"
+        (onTitleChanged)="onViewTitleChanged($event)" startHour="6" endHour="20" step="30" startingDayWeek="1" (onTitleChanged)="onViewTitleChanged($event)" (onCurrentDateChanged)="onCurrentDateChanged($event)">
     </calendar>
 
 </ion-content>

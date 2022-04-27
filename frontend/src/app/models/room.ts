@@ -1,3 +1,3 @@
 export class Room {
-    roomAcronym: String;
+    roomAcronym: string;
 }

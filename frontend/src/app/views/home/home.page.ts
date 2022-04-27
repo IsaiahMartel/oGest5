@@ -215,7 +215,8 @@ export class HomePage {
             sheduleHour: sheduleHour,
             sheduleNote: sheduleNote,
             roomAcronym: roomAcronym,
-            colorEvent: colorEvent
+            colorEvent: colorEvent,
+            projectId: project.id,
           });
 
 
@@ -359,7 +360,7 @@ export class HomePage {
 
   eventSelected = (event) => {
 
-    console.log(event);
+ 
 
 
     this.projectIdService.changeProjectId(event.projectId);
@@ -368,20 +369,20 @@ export class HomePage {
 
   };
 
-  onCurrentDateChanged = (event) => {
+  // onCurrentDateChanged = (event) => {
  
-    if (event.length > 0) {
-      if (event.length >= 1) {
-        event[1].colorEvent = "onEventSelected";
-      } else {
-        event[0].colorEvent = "onEventSelected";
-      }
-      this.getCustomClass(event);
-    }
+  //   if (event.length > 0) {
+  //     if (event.length >= 1) {
+  //       event[1].colorEvent = "onEventSelected";
+  //     } else {
+  //       event[0].colorEvent = "onEventSelected";
+  //     }
+  //     this.getCustomClass(event);
+  //   }
 
-    this.getCustomClass(event);
-    console.log("ahiu va" + event);
-  };
+  //   this.getCustomClass(event);
+  //   console.log("ahiu va" + event);
+  // };
 
   getCustomClass(events) {
     
@@ -391,7 +392,7 @@ export class HomePage {
       for (let event of events) {
         if (event.titleShedule) {
           if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE") {
-            console.log(event.startTime);
+  
             return event.colorEvent;
          
           }

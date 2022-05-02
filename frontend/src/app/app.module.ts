@@ -16,10 +16,15 @@ import {IonicStorageModule} from '@ionic/storage';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [HammerModule, BrowserModule,
-    IonicModule.forRoot(),  IonicStorageModule.forRoot(),
-    AppRoutingModule, HttpClientModule,
-     SocialLoginModule],
+  imports: [
+    HammerModule, 
+    BrowserModule,
+    IonicModule.forRoot(),  
+    IonicStorageModule.forRoot(),
+    AppRoutingModule, 
+    HttpClientModule,
+    SocialLoginModule
+  ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,

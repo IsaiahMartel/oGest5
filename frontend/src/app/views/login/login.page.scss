@@ -1,7 +1,8 @@
 ion-content {
-    --offset-bottom: auto!important;
+    --offset-bottom: auto !important;
     --overflow: hidden;
     overflow: auto;
+
     &::-webkit-scrollbar {
         display: none;
     }
@@ -16,23 +17,16 @@ ion-thumbnail {
     height: 191px;
 }
 
-#email-icon {
-    font-size: 2em;
-}
-
-#password-icon {
-    font-size: 2em;
-}
-
-.label {
-    text-align: center;
-    font-size: 1.8em;
-    font-family: 'Outfit', sans-serif;
+#icon {
+    font-size: 40px;
+    margin-top: 10px;
+    padding-top: 30px;
 }
 
 ion-input {
-    font-size: 1.5em;
-    text-align: center;
+    font-size: 25px;
+    margin-left: 50px;
+    margin-top: 40px;
 }
 
 #forgot-password-text {
@@ -43,18 +37,15 @@ ion-input {
 }
 
 #login-button {
-    margin-top: 4%;
     width: 90%;
     height: 70px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 1.8em;
+    font-size: 40px;
     display: block;
-    border-width: 1px;
-    border-style: solid;
     font-family: 'Outfit', sans-serif;
     background-color: #006aab;
     color: white;
-    margin-top: 25px;
+    margin-top: 60px;
     border-radius: 10px;
 }

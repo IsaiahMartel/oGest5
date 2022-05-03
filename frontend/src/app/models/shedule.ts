@@ -6,7 +6,7 @@ export class Shedule {
   id: number;
     sheduleTipe: string;
     sheduleDate: Date;
-    shedulehourRange: String;
+    shedulehourRange: string;
     rooms: Room;
   project_id: number;
   sheduleNote: string;

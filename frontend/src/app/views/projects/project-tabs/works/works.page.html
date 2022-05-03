@@ -50,8 +50,8 @@
                         </span>
                     </ion-row>
                     <h2 id="orchestration-text">{{playlist.playlistString}}</h2>
-                    <h1 *ngIf="playlist.workDuration.length>5" id="duration-text">{{playlist.workDuration.substring(0, 5)}}</h1>
-                    <h1 *ngIf="playlist.workDuration.length==5" id="duration-text">{{playlist.workDuration}}</h1>
+                    <h1 *ngIf="playlist.workDuration.length>5& && playlist.workDuration" id="duration-text">{{playlist.workDuration.substring(0, 5)}}</h1>
+                    <h1 *ngIf="playlist.workDuration.length==5 && playlist.workDuration" id="duration-text">{{playlist.workDuration}}</h1>
                 </div>
 
             </ion-card-content>

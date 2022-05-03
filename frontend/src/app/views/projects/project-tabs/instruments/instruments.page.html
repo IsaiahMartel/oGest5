@@ -42,8 +42,8 @@
         <ng-container *ngFor="let keyplaylist of playlist.keyplaylists ">
             <ion-card *ngIf="showKeyboard==true ">
                 <ion-card-header>
-                    <ion-card-title>{{keyplaylist.instrumentName}}</ion-card-title>
-                    <ion-card-title>{{keyplaylist.instrumentName2}}</ion-card-title>
+                    <h2>{{keyplaylist.instrumentName}}</h2>
+                    <h2>>{{keyplaylist.instrumentName2}}</h2>
                     <hr id="separation-title ">
 
                 </ion-card-header>
@@ -70,8 +70,10 @@
         <ng-container *ngFor="let voiplaylist of playlist.voiplaylists ">
             <ion-card *ngIf="showVoice==true ">
                 <ion-card-header>
-                    <ion-card-title>{{voiplaylist.instrumentName}}</ion-card-title>
-                    <ion-card-title>{{voiplaylist.instrumentName2}}</ion-card-title>
+                    <h2>{{voiplaylist.instrumentName}}
+                    </h2>
+                    <h2>{{voiplaylist.instrumentName2}}
+                    </h2>
                     <hr id="separation-title ">
 
                 </ion-card-header>

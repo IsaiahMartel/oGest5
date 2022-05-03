@@ -52,6 +52,7 @@ export class InstrumentsPage implements OnInit {
 
 
             if (playlist.perplaylists != null || playlist.voiplaylists != null || playlist.keyplaylists != null) {
+             
               this.playlistArray.push(playlist);
 
 
@@ -68,6 +69,7 @@ export class InstrumentsPage implements OnInit {
             if (playlist.perplaylists[perplaylist].instrumentName != null || playlist.perplaylists[perplaylist].instrumentName2 != null) {
               this.noPercussion = false;
             }
+     
           }
           for (let keyplaylist in playlist.keyplaylists) {
             if (playlist.keyplaylists[keyplaylist].instrumentName != null || playlist.keyplaylists[keyplaylist].instrumentName2 != null) {

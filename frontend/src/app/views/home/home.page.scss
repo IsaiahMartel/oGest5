@@ -9,6 +9,7 @@ ion-content {
 
 #navbar {
     height: 76px;
+    text-align: center;
 }
 
 #separation-title {
@@ -19,7 +20,9 @@ ion-content {
 #navbar-icon {
     font-size: 50px;
     position: absolute;
-    right: 0;
+    vertical-align: middle;
+    margin-top: 7px;
+    right: 25px;
 }
 
 #navbar-text {
@@ -52,22 +55,36 @@ ion-content {
         display: none;
     }
     .event-detail {
-        color: #1b1818;
         font-size: 20px;
-        font-weight: 600;
+        font-weight: bold;
     }
-    .border {
-        border: 1px solid black;
+    .no-events-label {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .monthview-datetable td {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+        border-right: none !important;
+        border-left: none !important;
+        background-color: transparent !important;
+    }
+    .monthview-datetable {
+        font-size: 20px;
+        font-weight: 250;
+        color: black !important;
     }
     .monthview-datetable td.monthview-primary-with-event {
-        background-color: transparent !important;
+        font-weight: 300;
         color: black !important;
     }
     .monthview-datetable .text-muted {
         background-color: transparent !important;
     }
     .monthview-datetable {
-        padding: 0 !important;
+        // padding: 0 !important;
     }
     .yellow {
         background-color: rgba(255, 218, 6, 0.726) !important;
@@ -96,17 +113,21 @@ ion-content {
     .freeDay {
         background-color: rgba(179, 179, 179, 0.699) !important;
     }
-    .onEventSelected {
-        background-color: green !important;
+    .monthview-selected #div {
+        background-color: rgb(255, 7, 7) !important;
     }
 }
 
 #div {
-    margin-top: 8px;
-    margin-bottom: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .event-detail-container {
     flex-grow: 1;
     overflow-y: scroll;
 }
+
+// .border {
+//     border: 1px solid black;
+// }

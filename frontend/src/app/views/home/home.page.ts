@@ -40,7 +40,7 @@ export class HomePage {
   calendar = {
     mode: 'month',
     currentDate: new Date(),
-    noEventsLabel: "No hay eventos",
+    noEventsLabel: "No hay proyectos",
   };
 
   selectedDate: Date;
@@ -108,7 +108,7 @@ export class HomePage {
       var titleShedule = "";
       var startDateShedule;
       var endDateShedule;
-      var sheduleHour: "";
+      var sheduleHour= "";
       var roomAcronym = "";
       var sheduleNote = "";
 
@@ -141,7 +141,7 @@ export class HomePage {
           startDateShedule = new Date(shedule.sheduleDate);
           endDateShedule = new Date(shedule.sheduleDate);
           titleShedule = shedule.sheduleTipe;
-
+          sheduleHour = shedule.shedulehourRange;
 
 
 
@@ -240,7 +240,6 @@ export class HomePage {
 
 
     }
-
 
 
     this.eventSource = events;

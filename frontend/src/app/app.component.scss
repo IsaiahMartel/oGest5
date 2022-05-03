@@ -5,7 +5,6 @@ ion-content {
 ion-item {
     float: left;
     width: 100%;
-
     h2 {
         margin-left: 10px;
         font-family: 'Outfit', sans-serif;
@@ -26,7 +25,6 @@ ion-item {
     margin-top: 5px;
 }
 
-
 #login-icon {
     font-size: 2.6em;
     margin-left: 9px;
@@ -43,4 +41,15 @@ ion-item {
     font-size: 2.6em;
     margin-left: 9px;
     margin-top: 5px;
+}
+
+#connection-alert {
+    position: fixed;
+    bottom: 0;
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+    color: white;
+    height: 70px;
+    vertical-align: middle;
 }

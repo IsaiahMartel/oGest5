@@ -3,18 +3,24 @@
     <div id="container" *ngFor="let shedule of sheduleArray">
         <ion-card>
             <ion-card-header>
-                <h3 class="ion-float-right" *ngIf="shedule.rooms"> {{shedule.rooms.roomAcronym}}</h3>
-                <ion-card-title>{{shedule.sheduleTipe}} </ion-card-title>
+                <ion-card-title> {{shedule.sheduleDate | date: 'EEEE, dd/MM/yyyy'}} </ion-card-title>
+
+
 
             </ion-card-header>
 
             <ion-card-content>
 
 
-                <h2> {{shedule.sheduleDate | date: 'EEEE, dd/MM/yyyy'}} </h2>
+                <ion-row>
+                    <h2 class="ion-padding-end">{{shedule.sheduleTipe}} </h2>
+                    <h2 *ngIf="shedule.shedulehourRange!=''"> {{shedule.shedulehourRange}} </h2>
+
+                </ion-row>
+                <h2 *ngIf="shedule.rooms"> {{shedule.rooms.roomAcronym}}</h2>
                 <h2 *ngIf="shedule.sheduleNote!=''"><b>Notas: </b>{{shedule.sheduleNote}} </h2>
-                <hr id="separation-title">
-                <h2 class="ion-float-right" *ngIf="shedule.shedulehourRange!=''"> {{shedule.shedulehourRange}} </h2>
+                <!-- <hr id="separation-title"> -->
+
 
 
 

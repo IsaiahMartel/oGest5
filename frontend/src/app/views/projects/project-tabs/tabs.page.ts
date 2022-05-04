@@ -19,15 +19,22 @@ export class TabsPage implements OnInit {
   constructor(
     private router: Router,
     public storage: Storage,
-    private projectsService: ProjectsService,
+
     private projectIdService: ProjectIdService
   ) {
-
+    this.projectIdService;
 
   }
 
 
   ngOnInit() {
+
+
+    if (this.projectIdService.projectId == null) {
+      this.urlSplitArray = this.router.url.split("/");
+      this.projectIdService.changeProjectId(parseInt(this.urlSplitArray.slice(-1)[0]));
+    }
+
 
 
 

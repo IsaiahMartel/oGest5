@@ -1,13 +1,12 @@
 <ion-header class="ion-no-border">
-    <ion-toolbar>
+    <ion-toolbar id="navbar">
         <ion-buttons slot="start" routerLink="/home">
 
             <ion-icon id="go-back-button" name="chevron-back-outline"></ion-icon>
 
         </ion-buttons>
-        <ion-menu-button id="home-menu-container">
-            <h2 id="navbar-text">{{projectIdService.projectName}}</h2>
-        </ion-menu-button>
+
+        <h2 id="navbar-text">{{projectIdService.projectName}}</h2>
 
     </ion-toolbar>
     <hr id="separation-title">

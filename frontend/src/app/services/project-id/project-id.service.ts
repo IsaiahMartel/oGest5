@@ -6,40 +6,41 @@ import { Storage } from '@ionic/storage';
 })
 
 export class ProjectIdService {
- projectId :number;
- projectName: "";
+  projectId: number;
+  projectName: "";
 
-  constructor(   public storage: Storage,) { }
-changeProjectId(projectId){
-  
-  
-  this.projectId=projectId;
-  this.storage.get("projects").then(data => {
-    if (data) {
-      var array = JSON.parse(data);
-
-      array.filter((project) => {
+  constructor(public storage: Storage,) { }
+  changeProjectId(projectId) {
 
 
-        if (project.id == this.projectId) {
+    this.projectId = projectId;
+    this.storage.get("projects").then(data => {
+      if (data) {
+        var array = JSON.parse(data);
+
+        array.filter((project) => {
 
 
-
-          this.projectName = project.events.eventName;
+          if (project.id == this.projectId) {
 
 
 
+            this.projectName = project.events.eventName;
+
+            console.log(this.projectName);
 
 
 
-        };
-      })
-    }
-
-  })
-}
 
 
- 
-  
+          };
+        })
+      }
+
+    })
+  }
+
+
+
+
 }

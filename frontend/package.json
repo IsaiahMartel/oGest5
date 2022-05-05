@@ -1,5 +1,5 @@
 {
-    "name": "frontend",
+    "name": "OFGC",
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "https://ionicframework.com/",
@@ -19,6 +19,7 @@
         "@angular/platform-browser": "~12.1.1",
         "@angular/platform-browser-dynamic": "~12.1.1",
         "@angular/router": "~12.1.1",
+        "@angular/service-worker": "~12.1.1",
         "@awesome-cordova-plugins/document-viewer": "^5.40.0",
         "@awesome-cordova-plugins/file": "^5.40.0",
         "@awesome-cordova-plugins/file-transfer": "^5.40.0",

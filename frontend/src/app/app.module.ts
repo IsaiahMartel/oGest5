@@ -11,6 +11,8 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialAuthService, Social
 import { InterceptorService } from './interceptors/interceptor.service';
 
 import {IonicStorageModule} from '@ionic/storage';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -19,7 +21,13 @@ import {IonicStorageModule} from '@ionic/storage';
   imports: [HammerModule, BrowserModule,
     IonicModule.forRoot(),  IonicStorageModule.forRoot(),
     AppRoutingModule, HttpClientModule,
-     SocialLoginModule],
+     SocialLoginModule,
+     ServiceWorkerModule.register('ngsw-worker.js', {
+       enabled: environment.production,
+       // Register the ServiceWorker as soon as the application is stable
+       // or after 30 seconds (whichever comes first).
+       registrationStrategy: 'registerWhenStable:30000'
+     })],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,

@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
+    "name": "OFGC",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "angular"
 }

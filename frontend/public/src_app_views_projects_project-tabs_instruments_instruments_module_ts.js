@@ -124,6 +124,9 @@ let InstrumentsPage = class InstrumentsPage {
         this.noPercussion = true;
         this.noVoice = true;
         this.noKeyboard = true;
+        this.perArray = [];
+        this.keyArray = [];
+        this.voiArray = [];
     }
     ngOnInit() {
         this.loadInfo();
@@ -144,16 +147,26 @@ let InstrumentsPage = class InstrumentsPage {
                     for (let perplaylist in playlist.perplaylists) {
                         if (playlist.perplaylists[perplaylist].instrumentName != null || playlist.perplaylists[perplaylist].instrumentName2 != null) {
                             this.noPercussion = false;
+                            if (!this.perArray.includes(playlist.perplaylists[perplaylist].instrumentName) || !this.perArray.includes(playlist.perplaylists[perplaylist].instrumentName2)) {
+                                this.perArray.push(playlist.perplaylists[perplaylist]);
+                            }
                         }
                     }
                     for (let keyplaylist in playlist.keyplaylists) {
                         if (playlist.keyplaylists[keyplaylist].instrumentName != null || playlist.keyplaylists[keyplaylist].instrumentName2 != null) {
                             this.noKeyboard = false;
+                            if (!this.perArray.includes(playlist.keyplaylists[keyplaylist].instrumentName) || !this.perArray.includes(playlist.keyplaylists[keyplaylist].instrumentName2)) {
+                                this.keyArray.push(playlist.keyplaylists[keyplaylist]);
+                                console.log(playlist.keyplaylists[keyplaylist]);
+                            }
                         }
                     }
                     for (let voiplaylist in playlist.voiplaylists) {
                         if (playlist.voiplaylists[voiplaylist].instrumentName != null || playlist.voiplaylists[voiplaylist].instrumentName2 != null) {
                             this.noVoice = false;
+                            if (!this.voiArray.includes(playlist.voiplaylists[voiplaylist].instrumentName) || !this.voiArray.includes(playlist.voiplaylists[voiplaylist].instrumentName2)) {
+                                this.voiArray.push(playlist.voiplaylists[voiplaylist]);
+                            }
                         }
                     }
                 }
@@ -240,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content has-header>\r\n\r\n\r\n\r\n\r\n    <div *ngIf=\"noPercussion==false\" class=\"ion-text-center border ion-margin-top\">\r\n        <h2 (click)=\"showPercussion = false\">PERCUSIÓN</h2>\r\n\r\n        <div id=\"dropdown-button\" (click)=\"showPercussion=true\">\r\n            <ion-icon *ngIf=\" showPercussion==false \" name=\"caret-down-outline\"></ion-icon>\r\n        </div>\r\n    </div>\r\n    <div id=\"container\" *ngFor=\"let playlist of playlistArray\">\r\n        <ng-container *ngFor=\"let perplaylist of playlist.perplaylists \">\r\n            <ion-card *ngIf=\"showPercussion==true \">\r\n                <ion-card-header>\r\n                    <h2>{{perplaylist.instrumentName}}</h2>\r\n                    <h2>{{perplaylist.instrumentName2}}</h2>\r\n                    <h3></h3>\r\n                </ion-card-header>\r\n\r\n\r\n            </ion-card>\r\n\r\n        </ng-container>\r\n\r\n\r\n\r\n    </div>\r\n    <div id=\"dropdown-button\" (click)=\"showPercussion=false\">\r\n        <ion-icon *ngIf=\"showPercussion==true \" name=\"caret-up-outline\"></ion-icon>\r\n    </div>\r\n\r\n    <div *ngIf=\"noKeyboard==false\" class=\"ion-text-center border ion-margin-top\">\r\n        <h2 (click)=\"showKeyboard=false\">PIANO</h2>\r\n\r\n        <div id=\"dropdown-button\" (click)=\"showKeyboard=true\">\r\n            <ion-icon *ngIf=\"showKeyboard==false \" name=\"caret-down-outline\"></ion-icon>\r\n        </div>\r\n    </div>\r\n    <div id=\"container\" *ngFor=\"let playlist of playlistArray\">\r\n        <ng-container *ngFor=\"let keyplaylist of playlist.keyplaylists \">\r\n            <ion-card *ngIf=\"showKeyboard==true \">\r\n                <ion-card-header>\r\n                    <h2>{{keyplaylist.instrumentName}}</h2>\r\n                    <h2>>{{keyplaylist.instrumentName2}}</h2>\r\n                    <hr id=\"separation-title \">\r\n\r\n                </ion-card-header>\r\n\r\n\r\n            </ion-card>\r\n\r\n        </ng-container>\r\n    </div>\r\n    <div id=\"dropdown-button\" (click)=\"showKeyboard=false\">\r\n        <ion-icon *ngIf=\"showKeyboard==true \" name=\"caret-up-outline\"></ion-icon>\r\n    </div>\r\n\r\n\r\n\r\n    <div *ngIf=\"noVoice==false\" class=\"ion-text-center border ion-margin-top\">\r\n        <h2 (click)=\"showVoice=false\">VOCES</h2>\r\n\r\n        <div id=\"dropdown-button\" (click)=\"showVoice=true\">\r\n            <ion-icon *ngIf=\"showVoice==false \" name=\"caret-down-outline\"></ion-icon>\r\n        </div>\r\n    </div>\r\n    <div id=\"container\" *ngFor=\"let playlist of playlistArray\">\r\n        <ng-container *ngFor=\"let voiplaylist of playlist.voiplaylists \">\r\n            <ion-card *ngIf=\"showVoice==true \">\r\n                <ion-card-header>\r\n                    <h2>{{voiplaylist.instrumentName}}\r\n                    </h2>\r\n                    <h2>{{voiplaylist.instrumentName2}}\r\n                    </h2>\r\n                    <hr id=\"separation-title \">\r\n\r\n                </ion-card-header>\r\n\r\n\r\n            </ion-card>\r\n\r\n        </ng-container>\r\n    </div>\r\n    <div id=\"dropdown-button\" (click)=\"showVoice=false\">\r\n        <ion-icon *ngIf=\"showVoice==true \" name=\"caret-up-outline\"></ion-icon>\r\n    </div>\r\n\r\n\r\n\r\n\r\n    <h1 class=\"ion-text-center \" *ngIf=\"playlistArray.length==0 \">\r\n        No hay instrumentos extras\r\n    </h1>\r\n\r\n\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content has-header>\r\n\r\n\r\n\r\n\r\n    <div *ngIf=\"noPercussion==false\" class=\"ion-text-center border ion-margin-top\">\r\n        <h2 (click)=\"showPercussion = false\">PERCUSIÓN</h2>\r\n\r\n        <div id=\"dropdown-button\" (click)=\"showPercussion=true\">\r\n            <ion-icon *ngIf=\" showPercussion==false \" name=\"caret-down-outline\"></ion-icon>\r\n        </div>\r\n    </div>\r\n    <div id=\"container\" *ngFor=\"let perplaylist of perArray\">\r\n\r\n        <ion-card *ngIf=\"showPercussion==true \">\r\n            <ion-card-header>\r\n                <h2>{{perplaylist.instrumentName}}</h2>\r\n                <h2>{{perplaylist.instrumentName2}}</h2>\r\n\r\n            </ion-card-header>\r\n\r\n\r\n        </ion-card>\r\n\r\n\r\n\r\n    </div>\r\n    <div id=\"dropdown-button\" (click)=\"showPercussion=false\">\r\n        <ion-icon *ngIf=\"showPercussion==true \" name=\"caret-up-outline\"></ion-icon>\r\n    </div>\r\n\r\n    <div *ngIf=\"noKeyboard==false\" class=\"ion-text-center border ion-margin-top\">\r\n        <h2 (click)=\"showKeyboard=false\">TECLADO</h2>\r\n\r\n        <div id=\"dropdown-button\" (click)=\"showKeyboard=true\">\r\n            <ion-icon *ngIf=\"showKeyboard==false \" name=\"caret-down-outline\"></ion-icon>\r\n        </div>\r\n    </div>\r\n    <div id=\"container\" *ngFor=\"let keyplaylist of keyArray\">\r\n\r\n        <ion-card *ngIf=\"showKeyboard==true\">\r\n            <ion-card-header>\r\n                <h2>{{keyplaylist.instrumentName}}</h2>\r\n                <h2>{{keyplaylist.instrumentName2}}</h2>\r\n\r\n\r\n            </ion-card-header>\r\n\r\n\r\n        </ion-card>\r\n\r\n\r\n    </div>\r\n    <div id=\"dropdown-button\" (click)=\"showKeyboard=false\">\r\n        <ion-icon *ngIf=\"showKeyboard==true \" name=\"caret-up-outline\"></ion-icon>\r\n    </div>\r\n\r\n\r\n\r\n    <div *ngIf=\"noVoice==false\" class=\"ion-text-center border ion-margin-top\">\r\n        <h2 (click)=\"showVoice=false\">VOCES</h2>\r\n\r\n        <div id=\"dropdown-button\" (click)=\"showVoice=true\">\r\n            <ion-icon *ngIf=\"showVoice==false \" name=\"caret-down-outline\"></ion-icon>\r\n        </div>\r\n    </div>\r\n    <div id=\"container\" *ngFor=\"let voiplaylist of voiArray\">\r\n\r\n        <ion-card *ngIf=\"showVoice==true \">\r\n            <ion-card-header>\r\n                <h2>{{voiplaylist.instrumentName}}\r\n                </h2>\r\n                <h2>{{voiplaylist.instrumentName2}}\r\n                </h2>\r\n\r\n\r\n            </ion-card-header>\r\n\r\n\r\n        </ion-card>\r\n\r\n\r\n    </div>\r\n    <div id=\"dropdown-button\" (click)=\"showVoice=false\">\r\n        <ion-icon *ngIf=\"showVoice==true \" name=\"caret-up-outline\"></ion-icon>\r\n    </div>\r\n\r\n\r\n\r\n\r\n    <h1 class=\"ion-text-center \" *ngIf=\"playlistArray.length==0 \">\r\n        No hay instrumentos extras\r\n    </h1>\r\n\r\n\r\n</ion-content>");
 
 /***/ })
 

@@ -31,6 +31,11 @@ export class AppComponent {
     private modalConnectionService: ModalConnectionService) { }
 
   ngOnInit() {
+    window.onerror = function(error, url, line) {
+      console.log(  error, +url+  line);
+      
+   
+  };
     this.modalConnectionService.appIsOnline$.subscribe(online => {
 
 
@@ -62,12 +67,6 @@ var  divConnectionAlert = document.getElementById("connection-alert");
       }
 
     })
-  }
-
-  connectedAgain(){
-    console.log("pasa");
-    
-   
   }
 
 

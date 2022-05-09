@@ -2,7 +2,9 @@
 
     <div id="container" *ngFor="let playlist of playlistArray">
         <ion-card>
+
             <ion-card-header>
+                <ion-card-subtitle *ngIf="playlist.works">{{playlist.works.composers.composerLastname}} {{playlist.works.composers.composerFirstname}}</ion-card-subtitle>
                 <ion-card-title>{{playlist.workName}}</ion-card-title>
                 <hr id="separation-title">
 

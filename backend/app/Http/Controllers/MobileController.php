@@ -28,7 +28,7 @@ public function getProjects()
     public function getPlaylists()
     {
      
-            $playlist = Playlist::with('works', 'perplaylists', 'keyplaylists', 'voiplaylists')->get();
+            $playlist = Playlist::with('works', 'perplaylists', 'keyplaylists', 'voiplaylists', 'works.composers')->get();
     
             return $playlist;
     }
@@ -44,7 +44,7 @@ public function getProjects()
     public function getAddresses()
     {
      
-            $address = Addressgroup::first()->project()->with('addressgroups')->get();
+            $address = Project::with('addresses', 'addressgroups')->get();
     
             return $address;
     }

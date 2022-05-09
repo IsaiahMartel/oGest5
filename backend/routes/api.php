@@ -16,6 +16,7 @@ use App\Http\Controllers\PrintController ;
 use App\Http\Controllers\AlertController ;
 use App\Http\Controllers\ZoneController ;
 use Illuminate\Http\Request;
+use App\Events\Message ;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,12 @@ route::group(['prefix' => 'mobile'], function () { // esta ruta es /mobile/xxx
   Route::get('getPlaylist', [MobileController::class, 'getPlaylists']) ;
   Route::get('getShedule', [MobileController::class, 'getShedules']) ;
   Route::get('getAddress', [MobileController::class, 'getAddresses']) ;
+
+  Route::post('/broadcast', function(Request $request){
+    broadcast(new Message($request));
+  }) ;
+
+  
 
 });
 

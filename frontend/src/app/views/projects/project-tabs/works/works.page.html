@@ -2,7 +2,9 @@
 
     <div id="container" *ngFor="let playlist of playlistArray">
         <ion-card>
+
             <ion-card-header>
+                <ion-card-subtitle *ngIf="playlist.works">{{playlist.works.composers.composerLastname}} {{playlist.works.composers.composerFirstname}}</ion-card-subtitle>
                 <ion-card-title>{{playlist.workName}}</ion-card-title>
                 <hr id="separation-title">
 
@@ -14,7 +16,7 @@
                     <ion-row>
                         <span id="madera">
                             <h3 *ngIf='playlist.flute!=null' id="orchestration-text"><b>{{playlist.flute}}</b></h3>
-                            <h3 *ngIf='playlist.fluteExp!=null' id="orchestration-text">[{{playlist.flute}}]</h3>
+                            <h3 *ngIf='playlist.fluteExp!=null &&  playlist.fluteExp!=""' id="orchestration-text">[{{playlist.flute}}]</h3>
                             <h3 *ngIf='playlist.oboe!=null' id="orchestration-text"><b>{{playlist.oboe}}</b></h3>
                             <h3 *ngIf='playlist.oboeExp!=null && playlist.oboeExp!=""' id="orchestration-text">[{{playlist.oboeExp}}]</h3>
                             <h3 *ngIf='playlist.clarinet!=null' id="orchestration-text"><b>{{playlist.clarinet}}</b></h3>
@@ -50,8 +52,10 @@
                         </span>
                     </ion-row>
                     <h2 id="orchestration-text">{{playlist.playlistString}}</h2>
-                    <h1 *ngIf="playlist.workDuration.length>5& && playlist.workDuration" id="duration-text">{{playlist.workDuration.substring(0, 5)}}</h1>
-                    <h1 *ngIf="playlist.workDuration.length==5 && playlist.workDuration" id="duration-text">{{playlist.workDuration}}</h1>
+                    <div *ngIf="playlist.workDuration">
+                        <h1 *ngIf="playlist.workDuration.length>5" id="duration-text">{{playlist.workDuration.substring(0, 5)}}</h1>
+                        <h1 *ngIf="playlist.workDuration.length==5" id="duration-text">{{playlist.workDuration}}</h1>
+                    </div>
                 </div>
 
             </ion-card-content>

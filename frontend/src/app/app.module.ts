@@ -11,6 +11,8 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialAuthService, Social
 import { InterceptorService } from './interceptors/interceptor.service';
 
 import {IonicStorageModule} from '@ionic/storage';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({

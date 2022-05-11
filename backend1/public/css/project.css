@@ -1,0 +1,49 @@
+ .dropable-tipe{
+    color:rgb(0, 0, 0);
+}
+
+.external-tipe {
+    font-weight: normal;
+    color:aliceblue;
+    display:table-cell;
+    vertical-align:middle;
+    text-align : center;
+    cursor:move;
+}
+.external-rooms {
+    font-weight: normal;
+    color:aliceblue;
+    display:table-cell;
+    vertical-align:middle;
+    text-align : center
+}
+
+.cell-tipe {
+    font-weight: bold;
+    color:aliceblue;
+    vertical-align:middle !important;
+    text-align : center
+
+}
+
+.ui-state-hover{
+
+    background-color: rgb(177, 253, 247) !important;
+}
+
+.ENSAYO-AM{
+
+    background-color : #F6D89B ;
+}
+
+table#table-shedule.dataTable tbody tr.Highlight_inUse > .sorting_1 {
+    background-color: #ffa;
+}
+
+table#table-shedule.dataTable tbody tr.Highlight_inUse {
+    background-color: #ffa;
+}
+
+.Highlight_inUse {
+    background-color: #ffa;
+}

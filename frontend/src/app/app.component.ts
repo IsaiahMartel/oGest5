@@ -3,9 +3,19 @@ import { GestureController, MenuController } from '@ionic/angular';
 import { PdfService } from 'src/app/services/pdf/pdf.service';
 import { ModalController } from '@ionic/angular';
 import { DownloadOrSendModal } from './views/projects/reports/download-or-send-modal/download-or-send-modal.page';
-
+import { Echo } from 'laravel-echo-ionic';
 import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
-
+import { AlertController } from '@ionic/angular';
+import { ProjectsService } from './services/projects/projects.service';
+import { PlaylistsService } from './services/playlists/playlists.service';
+import { SheduleService } from './services/shedule/shedule.service';
+import { AddressService } from './services/address/address.service';
+import { Shedule } from './models/shedule';
+import { Project } from './models/project';
+import { Playlist } from 'src/app/models/playlist';
+import { Address } from 'src/app/models/address';
+import { AddressGroup } from 'src/app/models/address-group';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -21,108 +31,241 @@ export class AppComponent {
   isOnlineText: string;
   isOnline: boolean;
   htmlToAdd;
- 
+
   private modalOpen: boolean = false;
+  public sheduleArray: Shedule[] = [];
+  public projectsArray: Project[] = [];
+  public playlistArray: Array<Playlist> = [];
+  public addressArray: Array<Address> = [];
 
   constructor(
     private gestureCtrl: GestureController,
     private pdfService: PdfService,
     private modalController: ModalController,
-    private modalConnectionService: ModalConnectionService) { }
+    private modalConnectionService: ModalConnectionService,
+    private alertController: AlertController,
+    private projectsService: ProjectsService,
+    private sheduleService: SheduleService,
+    private playlistService: PlaylistsService,
+    private addressServivce: AddressService,
+    public storage: Storage,) { }
+
 
   ngOnInit() {
+
+
+    window.onerror = function (error, url, line) {
+      console.log(error, +url + line);
+
+
+    };
     this.modalConnectionService.appIsOnline$.subscribe(online => {
 
+      var divConnectionAlert = document.getElementById("connection-alert");
 
-var  divConnectionAlert = document.getElementById("connection-alert");
       if (!online) {
+
+
         this.htmlToAdd = '<h1 id="connection-text">No tienes conexion</h1>';
-     
-        console.log(divConnectionAlert);
-        
-       divConnectionAlert.style.backgroundColor= "red";
-    
-        
+
+
+        divConnectionAlert.style.backgroundColor = "red";
+
+
         this.isOnline = false;
 
 
       } else {
         if (this.isOnline == false) {
           this.htmlToAdd = '<h1 id="connection-text">Vuelves a tener conexion</h1>';
-          divConnectionAlert.style.backgroundColor= "green";
-          setTimeout(() => 
-          {
+          divConnectionAlert.style.backgroundColor = "green";
+          setTimeout(() => {
             this.htmlToAdd = '';
-            divConnectionAlert.style.backgroundColor= "transparent";
+            divConnectionAlert.style.backgroundColor = "transparent";
+            this.isOnline = true;
           },
-          5000);
+            5000);
         }
-
 
       }
 
     })
+
+    this.doConnection();
   }
 
-  connectedAgain(){
-    console.log("pasa");
-    
-   
+  doConnection() {
+    new Echo({
+      broadcaster: 'pusher',
+      key: 'local',
+      wsHost: 'localhost',
+      wsPort: 6001,
+      forceTLS: false,
+      disableStats: true
+    });
+
+    const echo = new Echo({
+      broadcaster: 'pusher',
+      key: 'local',
+      wsHost: 'localhost',
+      wsPort: 6001,
+      forceTLS: false,
+      disableStats: true
+    });
+
+
+    echo.connector.pusher.connection.bind('unavailable', function () {
+      var divConnectionAlert = document.getElementById("connection-alert");
+
+
+
+
+
+      divConnectionAlert.innerHTML = '<h1 id="connection-text">No se puede establecer conexion con el servidor</h1>';
+
+
+      divConnectionAlert.style.backgroundColor = "red";
+
+    })
+
+    echo.connector.pusher.connection.bind('failed', function () {
+      var divConnectionAlert = document.getElementById("connection-alert");
+
+
+
+
+
+      divConnectionAlert.innerHTML = '<h1 id="connection-text">La conexioni con el servidor fallo</h1>';
+
+
+      divConnectionAlert.style.backgroundColor = "red";
+
+    })
+
+    echo.connector.pusher.connection.bind('disconnected', function () {
+      var divConnectionAlert = document.getElementById("connection-alert");
+
+
+
+
+
+      divConnectionAlert.innerHTML = '<h1 id="connection-text">Server caido</h1>';
+
+
+      divConnectionAlert.style.backgroundColor = "red";
+
+
+
+      this.isOnline = false;
+
+    });
+
+    // echo.connector.pusher.connection.bind('error', this.state("serverDown"))
+
+    echo.connector.pusher.connection.bind("error", function (error) {
+      var divConnectionAlert = document.getElementById("connection-alert");
+
+
+
+      console.error("connection error", error);
+
+      divConnectionAlert.innerHTML = '<h1 id="connection-text">Server con errores</h1>';
+
+
+      divConnectionAlert.style.backgroundColor = "red";
+
+
+
+      this.isOnline = false;
+
+    });
+
+    echo.connector.pusher.connection.bind('connected', function () {
+      var divConnectionAlert = document.getElementById("connection-alert");
+
+
+
+        divConnectionAlert.innerHTML = '<h1 id="connection-text">Servidor levantado</h1>';
+        divConnectionAlert.style.backgroundColor = "green";
+        setTimeout(() => {
+          this.htmlToAdd = '';
+          divConnectionAlert.style.backgroundColor = "transparent";
+          this.isOnline = true;
+        },
+          5000);
+      
+    });
+
+
+
+
+
+    const channel = echo.channel('channel');
+    channel.listen('Message', (data) => {
+      console.log(JSON.stringify(data));
+      this.notification(data);
+      this.updateData();
+
+    });
+
+  }
+
+  async notification(message: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Se han realizado cambios',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 
-  // ngAfterViewInit() {
-  //   const longPress = this.gestureCtrl.create({
-  //     el: this.holdBtn.nativeElement,
-  //     threshold: 0,
-  //     gestureName: 'long-press',
-  //     onStart: ev => {
-  //       this.longPressActive = true;
-  //       this.increase();
-
-  //     },
-  //     onEnd: ev => {
-  //       this.longPressActive = false;
-
-  //     }
-  //   }, true);
-
-  //   longPress.enable(true);
-
-  // }
-
-  // increase(timeout = 200) {
-  //   setTimeout(() => {
-  //     if (this.longPressActive) {
-  //       this.hold++;
-
-  //       this.increase(timeout);
-
-  //     }
-  //   }, timeout);
-  //   if (this.hold == 4) {
-  //     this.openModal();
-  //     this.pdfService.category = 0;
-  //     this.hold = 0;
-  //   }
+  updateData() {
 
 
-  // async openModal() {
-  //   const modal = await this.modalController.create({
-  //     component: DownloadOrSendModal,
-  //     handle: false,
-  //     initialBreakpoint: 0.16,
-  //     breakpoints: [0, 0.16],
-  //   });
+    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
-  //   modal.onDidDismiss().then((o) => { this.modalOpen = false })
+      this.storage.set("projects", JSON.stringify(p));
+      this.projectsArray = p;
 
-  //   if (!this.modalOpen) {
-  //     this.modalOpen = true;
 
-  //     return await modal.present();
-  //   }
-  // }
+
+
+
+
+    })
+
+    this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
+
+      this.storage.set("address", JSON.stringify(p));
+
+
+
+
+
+    })
+
+    this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
+
+      this.storage.set("playlist", JSON.stringify(p));
+      this.playlistArray = p;
+
+
+
+    })
+
+    this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
+
+      this.storage.set("shedule", JSON.stringify(p));
+      this.sheduleArray = p;
+
+
+
+    })
+
+  }
+
 
 
 

@@ -25,6 +25,6 @@ registerLocaleData(localeEsAr, 'es-Ar');
     NgCalendarModule,
   ],
   declarations: [HomePage],
-  providers: [ { provide: LOCALE_ID, useValue: 'es-Py' } ],
+  providers: [ { provide: LOCALE_ID, useValue: 'es' } ],
 })
 export class HomePageModule {}

@@ -1,0 +1,49 @@
+
+.negrita
+{
+  font-weight: bold;
+}
+.descripcion-instrumento
+{
+    font-weight: normal;
+    color:rgb(22, 150, 255);
+}
+ /*utilizado para cambiar el icono de abierto cerrado en la row child */
+td.dt-control {
+    background: url('/img/details_open.png') no-repeat center center !important ;
+    cursor: pointer !important;
+}
+tr.shown td.dt-control {
+    background: url('/img/details_close.png') no-repeat center center !important;
+}
+
+
+ /*utilizado para que no se salga de los margenes aunque el texto sea muy grande */
+table {
+    table-layout:fixed;
+}
+table td {
+    word-wrap: break-word;
+    max-width: 400px;
+}
+#table-works td {
+    white-space:inherit;
+}
+/* colores para los grupos de */
+.madera
+{
+  color: rgb(255, 145, 1);
+}
+.metales
+{
+  color: rgb(0, 158, 163);
+}
+.otrosinst
+{
+  color: rgb(5, 163, 0);
+}
+.cuerda
+{
+    color: rgb(126, 92, 19);
+}
+

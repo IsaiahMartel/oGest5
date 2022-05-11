@@ -37,17 +37,11 @@ export class MembersPage implements OnInit {
 
 
         array.filter((address) => {
-          console.log(address.project);
-          console.log(address.project.id);
+        
 
-          if (address.project.id == this.project_id) {
-            console.log(address);
-            console.log(address.address);
-            
-            
-            console.log(address.addressgroups[0].addressgroupName);
-
-
+          if (address.id == this.project_id) {
+ 
+        
             return this.addressArray.push(address);
           };
         })

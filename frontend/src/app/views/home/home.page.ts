@@ -31,6 +31,7 @@ export class HomePage {
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
+  private isEverythingSaved = 0;
 
   colorPick: number = 0;
 
@@ -59,7 +60,7 @@ export class HomePage {
     public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
 
-  ) { }
+  ) {  }
 
   ngOnInit(): void {
 
@@ -92,6 +93,8 @@ export class HomePage {
 
 
   createEvents() {
+
+    
     var events = [];
 
     this.colorPick = 0;
@@ -108,7 +111,7 @@ export class HomePage {
       var titleShedule = "";
       var startDateShedule;
       var endDateShedule;
-      var sheduleHour= "";
+      var sheduleHour = "";
       var roomAcronym = "";
       var sheduleNote = "";
 
@@ -147,25 +150,20 @@ export class HomePage {
 
 
 
-          // i++;
 
-          // if (i < 0 ) {
-          // console.log(startDate);
           if (this.colorPick == 0) {
-            // console.log(this.colorPick);
+
 
             if (shedule.sheduleTipe == "CONCIERTO") {
               colorEvent = "blueConcert";
-              // console.log(i + " concierto " + project.events.eventName + " " + shedule.sheduleDate) 
+
             }
             else if (shedule.sheduleTipe == "DIA LIBRE") {
               colorEvent = "freeDay";
-              // console.log(i + " dia libre " + project.events.eventName + " " + shedule.sheduleDate); 
+
             }
             else {
               colorEvent = "blue";
-              // console.log(i + " evento normal " + project.events.eventName + " " + shedule.sheduleDate);
-
 
             }
 
@@ -195,8 +193,7 @@ export class HomePage {
             }
 
           }
-          // i++;
-          // console.log(project.events.eventName);
+
 
           if (shedule.rooms) {
             roomAcronym = shedule.rooms.roomAcronym;
@@ -221,17 +218,11 @@ export class HomePage {
 
 
         }
-        // else {
 
         if (this.colorPick == 3) {
           this.colorPick = 0;
         }
-        // i = 0;
-        // }
 
-
-
-        // }
 
       })
       this.colorPick++;
@@ -243,14 +234,6 @@ export class HomePage {
 
 
     this.eventSource = events;
-    // console.log(this.eventSource);
-    // console.log(this.projectsArray);
-
-
-
-
-
-
 
 
   }
@@ -302,50 +285,55 @@ export class HomePage {
   }
 
 
-  doConnection() {
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      key: 'local',
-      wsHost: 'localhost',
-      wsPort: 6001,
-      forceTLS: false,
-      disableStats: true
-    });
 
-    const channel = echo.channel('channel');
-    channel.listen('Alert', (data) => {
-      console.log(JSON.stringify(data));
-      this.notification(data);
-      this.updateData();
-    });
-  }
 
   updateData() {
+ 
 
-    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
+      this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
-      this.storage.set("projects", JSON.stringify(p));
-      this.projectsArray = p;
-    })
+        this.storage.set("projects", JSON.stringify(p));
+        this.projectsArray = p;
+       
+     
+     
+          
+          this.createEvents;
+    
+      })
 
-    this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
+      this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
 
-      this.storage.set("address", JSON.stringify(p));
-    })
+        this.storage.set("address", JSON.stringify(p));
+    
+       
 
-    this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
+          this.createEvents;
+    
+      })
 
-      this.storage.set("playlist", JSON.stringify(p));
-      this.playlistArray = p;
-    })
+      this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
 
-    this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
+        this.storage.set("playlist", JSON.stringify(p));
+        this.playlistArray = p;
+       
+          this.createEvents;
+    
+      })
 
-      this.storage.set("shedule", JSON.stringify(p));
-      this.sheduleArray = p;
-    })
+      this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
 
+        this.storage.set("shedule", JSON.stringify(p));
+        this.sheduleArray = p;
+  
+  this.createEvents();
+
+      })
+
+    
   }
+
+  
 
   async notification(message: string) {
     const alert = await this.alertController.create({
@@ -359,7 +347,7 @@ export class HomePage {
 
   eventSelected = (event) => {
 
- 
+
 
 
     this.projectIdService.changeProjectId(event.projectId);
@@ -368,32 +356,16 @@ export class HomePage {
 
   };
 
-  // onCurrentDateChanged = (event) => {
- 
-  //   if (event.length > 0) {
-  //     if (event.length >= 1) {
-  //       event[1].colorEvent = "onEventSelected";
-  //     } else {
-  //       event[0].colorEvent = "onEventSelected";
-  //     }
-  //     this.getCustomClass(event);
-  //   }
-
-  //   this.getCustomClass(event);
-  //   console.log("ahiu va" + event);
-  // };
 
   getCustomClass(events) {
-    
-
     if (events.length > 0) {
 
       for (let event of events) {
         if (event.titleShedule) {
           if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE") {
-  
+
             return event.colorEvent;
-         
+
           }
         }
       }
@@ -401,7 +373,7 @@ export class HomePage {
 
         return events[1].colorEvent;
       }
- 
+
       return events[0].colorEvent;
 
     }

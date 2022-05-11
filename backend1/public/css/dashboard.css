@@ -1,0 +1,36 @@
+
+/* colores para los grupos de */
+.madera
+{
+color: rgb(255, 145, 1);
+}
+.metales
+{
+color: rgb(0, 158, 163);
+}
+.otrosinst
+{
+color: rgb(5, 163, 0);
+}
+.cuerda
+{
+    color: rgb(126, 92, 19);
+}
+/* para los LI y Card de las obras e integrantes*/
+.todo-list>li {margin-bottom: 15px !important;  }
+.bg-obras {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.calendaryLevel1{
+    background-color: #9dd7e0 ;
+}
+
+.calendaryLevel0{
+    background-color: #89b792;
+}
+.alertsCard {
+
+    height: 600px !important;
+    overflow: auto !important;
+}

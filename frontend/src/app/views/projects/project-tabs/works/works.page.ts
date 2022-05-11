@@ -37,16 +37,16 @@ export class WorksPage implements OnInit {
 
 
         array.filter((playlist) => {
-     
+
 
 
           if (playlist.project_id == this.project_id) {
 
-console.log(playlist);
-
+     
             this.playlistArray.push(playlist);
+         
             this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
- 
+
           };
         })
 

@@ -24,6 +24,9 @@ export class InstrumentsPage implements OnInit {
   public noPercussion = true;
   public noVoice = true;
   public noKeyboard = true;
+  perArray = [];
+  keyArray = [];
+  voiArray = [];
 
   constructor(
     private playlistService: PlaylistsService,
@@ -68,21 +71,34 @@ export class InstrumentsPage implements OnInit {
           for (let perplaylist in playlist.perplaylists) {
             if (playlist.perplaylists[perplaylist].instrumentName != null || playlist.perplaylists[perplaylist].instrumentName2 != null) {
               this.noPercussion = false;
+              if(!this.perArray.includes(playlist.perplaylists[perplaylist].instrumentName) || !this.perArray.includes(playlist.perplaylists[perplaylist].instrumentName2)){
+              this.perArray.push(playlist.perplaylists[perplaylist]);
+              }
             }
      
           }
           for (let keyplaylist in playlist.keyplaylists) {
             if (playlist.keyplaylists[keyplaylist].instrumentName != null || playlist.keyplaylists[keyplaylist].instrumentName2 != null) {
               this.noKeyboard = false;
+              if(!this.perArray.includes(playlist.keyplaylists[keyplaylist].instrumentName) || !this.perArray.includes(playlist.keyplaylists[keyplaylist].instrumentName2)){
+                this.keyArray.push(playlist.keyplaylists[keyplaylist]);
+                console.log(playlist.keyplaylists[keyplaylist]);
+                
+                }
             }
           }
           for (let voiplaylist in playlist.voiplaylists) {
             if (playlist.voiplaylists[voiplaylist].instrumentName != null || playlist.voiplaylists[voiplaylist].instrumentName2 != null) {
               this.noVoice = false;
+              if(!this.voiArray.includes(playlist.voiplaylists[voiplaylist].instrumentName) || !this.voiArray.includes(playlist.voiplaylists[voiplaylist].instrumentName2)){
+                this.voiArray.push(playlist.voiplaylists[voiplaylist]);
+                }
             }
           }
 
 
+
+       
           
         }
 

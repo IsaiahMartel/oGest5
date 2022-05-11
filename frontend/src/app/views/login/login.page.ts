@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -20,13 +21,19 @@ export class LoginPage {
   ) {}
 
   login(form) {
-    this.authService.login(form.value).subscribe((res) => {
-      if(!res){
-        return this.presentAlert("Error");
-      }
-       localStorage.setItem("token", res.access_token);
-       this.storage.set("token", res.access_token);
-      this.router.navigateByUrl('home');
+
+
+    let user: User = {
+      id: null,
+     mobileEmail: form.value.email,
+      password: form.value.password,
+   
+    };
+    this.authService.login(user).subscribe(() => {
+    
+      
+    
+      this.router.navigateByUrl('');
     });
   }
 

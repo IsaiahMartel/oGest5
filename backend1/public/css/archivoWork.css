@@ -1,0 +1,68 @@
+
+.negrita
+{
+  font-weight: bold;
+}
+.descripcion-instrumento
+{
+    font-weight: normal;
+    color:rgb(22, 150, 255);
+}
+td.dt-control {
+    background: url('/img/details_open.png') no-repeat center center !important ;
+    cursor: pointer !important;
+}
+tr.shown td.dt-control {
+    background: url('/img/details_close.png') no-repeat center center !important;
+}
+.fa-trash-alt:hover {
+    color: red !important;
+}
+.fa-edit:hover {
+    color: blue !important;
+}
+/* Quita los botones de los input NUMBERS */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+input[type=number] { -moz-appearance:textfield; }
+
+/* para impedir que las columnas de l datatable se salgan de madre */
+ /*utilizado para que no se salga de los margenes aunque el texto sea muy grande */
+table {
+    table-layout:fixed;
+  }
+  table td {
+    word-wrap: break-word;
+    max-width: 400px;
+  }
+  #table-works td {
+    white-space:inherit;
+  }
+/* colores para los grupos de */
+.madera
+{
+  color: rgb(255, 145, 1);
+}
+.metales
+{
+  color: rgb(0, 158, 163);
+}
+.otrosinst
+{
+  color: rgb(5, 163, 0);
+}
+.cuerda
+{
+    color: rgb(126, 92, 19);
+}
+/* para los LI y Card de las obras e integrantes*/
+.todo-list>li {margin-bottom: 15px !important;  }
+.bg-obras {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+

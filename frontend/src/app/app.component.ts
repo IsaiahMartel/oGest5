@@ -16,6 +16,8 @@ import { Playlist } from 'src/app/models/playlist';
 import { Address } from 'src/app/models/address';
 import { AddressGroup } from 'src/app/models/address-group';
 import { Storage } from '@ionic/storage';
+import { WebsocketService } from './services/websocket/websocket.service';
+import { InterceptorService } from './interceptors/interceptor.service';
 
 @Component({
   selector: 'app-root',
@@ -48,7 +50,9 @@ export class AppComponent {
     private sheduleService: SheduleService,
     private playlistService: PlaylistsService,
     private addressServivce: AddressService,
-    public storage: Storage,) { }
+    public storage: Storage,
+    private websocketService : WebsocketService,
+    private interceptor : InterceptorService) { }
 
 
   ngOnInit() {
@@ -59,13 +63,20 @@ export class AppComponent {
 
 
     };
+
+   this.modalConnectionService.backendDownObs.subscribe((value) => { 
+console.log("value");
+
+    });
     this.modalConnectionService.appIsOnline$.subscribe(online => {
+
+
 
       var divConnectionAlert = document.getElementById("connection-alert");
 
       if (!online) {
 
-
+        console.log(online);
         this.htmlToAdd = '<h1 id="connection-text">No tienes conexion</h1>';
 
 
@@ -76,6 +87,7 @@ export class AppComponent {
 
 
       } else {
+        console.log(online);
         if (this.isOnline == false) {
           this.htmlToAdd = '<h1 id="connection-text">Vuelves a tener conexion</h1>';
           divConnectionAlert.style.backgroundColor = "green";
@@ -95,14 +107,7 @@ export class AppComponent {
   }
 
   doConnection() {
-    new Echo({
-      broadcaster: 'pusher',
-      key: 'local',
-      wsHost: 'localhost',
-      wsPort: 6001,
-      forceTLS: false,
-      disableStats: true
-    });
+ 
 
     const echo = new Echo({
       broadcaster: 'pusher',
@@ -112,7 +117,11 @@ export class AppComponent {
       forceTLS: false,
       disableStats: true
     });
-
+    // echo.connector.pusher.connection.bind('state_change', function(states) {
+    //   if(states.current === 'disconnected') {
+    //       echo.connector.pusher.connect();
+    //   }
+    // });
 
     echo.connector.pusher.connection.bind('unavailable', function () {
       var divConnectionAlert = document.getElementById("connection-alert");
@@ -154,7 +163,7 @@ export class AppComponent {
 
       divConnectionAlert.style.backgroundColor = "red";
 
-
+      echo.connector.pusher.connect();
 
       this.isOnline = false;
 
@@ -163,6 +172,7 @@ export class AppComponent {
     // echo.connector.pusher.connection.bind('error', this.state("serverDown"))
 
     echo.connector.pusher.connection.bind("error", function (error) {
+  
       var divConnectionAlert = document.getElementById("connection-alert");
 
 
@@ -181,6 +191,10 @@ export class AppComponent {
     });
 
     echo.connector.pusher.connection.bind('connected', function () {
+      console.log("eyy");
+      
+  
+
       var divConnectionAlert = document.getElementById("connection-alert");
 
 

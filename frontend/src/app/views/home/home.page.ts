@@ -67,17 +67,17 @@ export class HomePage {
 
 
 
-    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
+    // this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
 
-      this.projectsArray = p.filter((project) => {
+    //   this.projectsArray = p.filter((project) => {
 
-        this.projects_id.push(project.id);
+    //     this.projects_id.push(project.id);
 
 
-      })
+    //   })
       this.loadInfo();
-    })
+    // })
 
 
 

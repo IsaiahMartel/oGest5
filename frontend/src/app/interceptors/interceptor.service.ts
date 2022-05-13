@@ -1,10 +1,11 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, throwError } from 'rxjs';
+import { from, Observable, Subject, throwError } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { catchError, map } from 'rxjs/operators';
+import { ModalConnectionService } from '../services/modal-connection/modal-connection.service';
 
 const TOKEN_KEY = 'access_token';
 
@@ -14,10 +15,12 @@ const TOKEN_KEY = 'access_token';
 export class InterceptorService implements HttpInterceptor {
 
 
+
+    backendStatusChange: Subject<boolean> = new Subject<boolean>();
   constructor(
     private alertController: AlertController,
-    private storage: Storage,
-  ) { }
+    private storage: Storage, private modalConnectionService: ModalConnectionService
+  ) {  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -35,6 +38,8 @@ export class InterceptorService implements HttpInterceptor {
         switchMap(token => {
           if (token) {
             req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
+         
+            
           }
 
           if (!req.headers.has('Content-Type')) {
@@ -63,7 +68,16 @@ export class InterceptorService implements HttpInterceptor {
     let errorJSON = error.error
     let errorMessage = ""
     Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
-    console.log(errorMessage, errorJSON);
+    // console.log(errorMessage, errorJSON);
+    console.log(errorMessage + "x");
+    
+    if(errorMessage=="true\n"){
+      console.log(errorMessage);
+      this.modalConnectionService.backendDown=true;
+this.modalConnectionService.backendDownObs.next(this.modalConnectionService.backendDown);
+
+
+    }
 
 
 

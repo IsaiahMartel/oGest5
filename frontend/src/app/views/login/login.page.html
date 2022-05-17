@@ -4,20 +4,33 @@
             <img src="assets\favicon-Blanco.png">
         </ion-thumbnail>
 
-        <form #form="ngForm" (ngSubmit)="login(form)">
+        <form [formGroup]="loginForm" (ngSubmit)="login(form)">
 
             <ion-item id="email-fields">
                 <ion-row>
                     <ion-icon id="icon" name="person-outline"></ion-icon>
-                    <ion-input name="email" type="email" placeholder="your@email.com" ngModel  required></ion-input>
+                    <ion-input name="email" type="email" placeholder="your@email.com" formControlName="email" required></ion-input>
                 </ion-row>
+                <span slot="error" *ngIf="loginForm.controls['email'].errors?.required && loginForm.controls['email']?.touched">Rellene
+                    el email</span>
+                <span slot="error" *ngIf="loginForm.controls['email'].errors?.pattern && loginForm.controls['email']?.touched">El
+                    email no es válido.</span>
+
             </ion-item>
 
             <ion-item id="password-fields">
                 <ion-row>
                     <ion-icon id="icon" name="bag-outline"></ion-icon>
-                    <ion-input name="password" type="password" placeholder="Contraseña" ngModel required></ion-input>
+                    <ion-input name="password" type="password" placeholder="Contraseña" formControlName="password" required></ion-input>
                 </ion-row>
+                <span slot="error" *ngIf="loginForm.controls['password'].errors?.required && loginForm.controls['password']?.touched">Rellene
+                    la contraseña</span>
+                <span slot="error" *ngIf="loginForm.controls['password'].errors?.minlength && loginForm.controls['password'].touched">La
+                    contraseña debe de tener más de 6 caracteres.</span>
+                <span slot="error" *ngIf="loginForm.controls['password'].errors?.maxlength">La contraseña no puede
+                    tener más de 12 caracteres.</span>
+
+
             </ion-item>
 
             <button type="submit" id="login-button" class="button" type="submit">ENTRAR</button>

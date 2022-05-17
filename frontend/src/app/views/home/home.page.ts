@@ -33,6 +33,7 @@ export class HomePage {
   public addressArray: Array<Address> = [];
   private isEverythingSaved = 0;
 
+private weekDaysQuerySelector = document.querySelector("small")
   colorPick: number = 0;
 
   eventSource = [];
@@ -63,9 +64,59 @@ export class HomePage {
   ) {  }
 
   ngOnInit(): void {
+//     const weekDays = document.getElementsByTagName("small");
+// console.log(weekDays);
 
 
 
+
+
+
+// for(let element of this.weekDays){
+//   console.log(element);
+// }
+// console.log(this.weekDays);
+// console.log(this.weekDaysQuerySelector);
+
+
+
+const elements: Element[] = Array.from( document.getElementsByTagName("small"));
+console.log(elements);
+elements.forEach((el: Element) => {
+console.log("xd");
+
+})
+
+const inputs = document.getElementsByTagName("small");
+for (let index = 0; index < inputs.length; index++) {
+  const input = inputs.item(index);
+  console.log("xd");
+  
+}
+// for (const tag of Array.from(this.weekDays)) {
+//   console.log("Xd");
+  
+// }
+
+// for (const element in this.weekDays) {
+//   // for(var i =0; i<5;i++)
+//   // console.log(element[i]);
+//   // console.log(this.weekDays[i]);
+  
+//   // console.log("Xd");
+  
+// }
+
+// Array.from(this.weekDays).forEach((el) =>
+// console.log(el)
+
+// );
+
+// for(var i=0; i<35;i++){
+//   console.log(this.weekDays.item(i));
+  
+  
+// }
 
     // this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
@@ -78,7 +129,7 @@ export class HomePage {
     //   })
       this.loadInfo();
     // })
-
+    console.log( document.querySelectorAll("small"));
 
 
   }
@@ -231,10 +282,13 @@ export class HomePage {
 
 
     }
-
+var   weekDays = document.getElementsByTagName("small");
 
     this.eventSource = events;
-
+  for (const tag of Array.from(weekDays)) {
+var withoutDot =tag.innerHTML.substring(0,1).toUpperCase();
+  tag.innerHTML= withoutDot;
+}
 
   }
 

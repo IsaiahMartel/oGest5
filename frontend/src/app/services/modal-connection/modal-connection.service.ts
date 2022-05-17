@@ -1,5 +1,6 @@
 import { HttpClient, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BrowserOpenOptions } from '@capacitor/browser';
 import { Observable, fromEvent, merge, of, interval, Subject} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -9,19 +10,22 @@ import { ProjectsService } from '../projects/projects.service';
   providedIn: 'root'
 })
 export class ModalConnectionService {
-
+public string = "xd";
   public appIsOnline$: Observable<boolean>;
-backendDown =false;
-backendDownObs: Subject<boolean> = new Subject<boolean>();
+  private requestInterceptedSource: Subject<boolean> = new Subject<boolean>();
+  requestIntercepted: Observable<boolean> = this.requestInterceptedSource.asObservable();
+// backendDownObs: Subject<boolean> = new Subject<boolean>();
   endpoint: string = "http://localhost:8000/api/mobile/checkBackendStatus";
 
   constructor(private httpClient: HttpClient, private projectsService: ProjectsService,) { 
+
     this.initConnectivityMonitoring();
     this.backendStatus();
 
   }
 
   private initConnectivityMonitoring() {
+
 
     if (!window || !navigator || !('onLine' in navigator)) return;
 
@@ -34,16 +38,19 @@ backendDownObs: Subject<boolean> = new Subject<boolean>();
   }
 
   backendStatus(){
+
     var that=this;
     // return this.httpClient.get(this.endpoint);
   setInterval(function(){
-    console.log(that.backendDown);
-    
+
     that.httpClient.get(that.endpoint).subscribe();
-  }, 1000)
+  }, 30000)
   
   }
 
+  public getInterceptedSource(): Subject<boolean> {
+    return this.requestInterceptedSource;
+}
 
 
 }

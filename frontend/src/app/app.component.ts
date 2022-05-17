@@ -51,12 +51,12 @@ export class AppComponent {
     private playlistService: PlaylistsService,
     private addressServivce: AddressService,
     public storage: Storage,
-    private websocketService : WebsocketService,
-    private interceptor : InterceptorService) { }
+    private websocketService: WebsocketService,
+    private interceptor: InterceptorService) { }
 
 
   ngOnInit() {
-
+    var divConnectionAlert = document.getElementById("connection-alert");
 
     window.onerror = function (error, url, line) {
       console.log(error, +url + line);
@@ -64,15 +64,34 @@ export class AppComponent {
 
     };
 
-   this.modalConnectionService.backendDownObs.subscribe((value) => { 
-console.log("value");
+    this.modalConnectionService.requestIntercepted.subscribe(backendDown => {
+      if (backendDown) {
+        this.htmlToAdd = '<h1 id="connection-text">Server caido</h1>';
+
+
+        divConnectionAlert.style.backgroundColor = "red";
+
+
+        this.isOnline = false;
+      }
+      else {
+        
+        if(this.isOnline==false){this.htmlToAdd = '<h1 id="connection-text">Conexion resuelta</h1>';
+        divConnectionAlert.style.backgroundColor = "green";
+        setTimeout(() => {
+          this.htmlToAdd = '';
+          divConnectionAlert.style.backgroundColor = "transparent";
+          this.isOnline = true;
+        },
+          5000);
+      }}
 
     });
     this.modalConnectionService.appIsOnline$.subscribe(online => {
 
 
 
-      var divConnectionAlert = document.getElementById("connection-alert");
+
 
       if (!online) {
 
@@ -87,7 +106,7 @@ console.log("value");
 
 
       } else {
-        console.log(online);
+
         if (this.isOnline == false) {
           this.htmlToAdd = '<h1 id="connection-text">Vuelves a tener conexion</h1>';
           divConnectionAlert.style.backgroundColor = "green";
@@ -107,7 +126,7 @@ console.log("value");
   }
 
   doConnection() {
- 
+
 
     const echo = new Echo({
       broadcaster: 'pusher',
@@ -172,7 +191,7 @@ console.log("value");
     // echo.connector.pusher.connection.bind('error', this.state("serverDown"))
 
     echo.connector.pusher.connection.bind("error", function (error) {
-  
+
       var divConnectionAlert = document.getElementById("connection-alert");
 
 
@@ -191,23 +210,23 @@ console.log("value");
     });
 
     echo.connector.pusher.connection.bind('connected', function () {
-      console.log("eyy");
-      
-  
+
+
+
 
       var divConnectionAlert = document.getElementById("connection-alert");
 
 
 
-        divConnectionAlert.innerHTML = '<h1 id="connection-text">Servidor levantado</h1>';
-        divConnectionAlert.style.backgroundColor = "green";
-        setTimeout(() => {
-          this.htmlToAdd = '';
-          divConnectionAlert.style.backgroundColor = "transparent";
-          this.isOnline = true;
-        },
-          5000);
-      
+      divConnectionAlert.innerHTML = '<h1 id="connection-text">Servidor levantado</h1>';
+      divConnectionAlert.style.backgroundColor = "green";
+      setTimeout(() => {
+        this.htmlToAdd = '';
+        divConnectionAlert.style.backgroundColor = "transparent";
+        this.isOnline = true;
+      },
+        5000);
+
     });
 
 

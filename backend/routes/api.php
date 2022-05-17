@@ -45,7 +45,7 @@ route::group(['prefix' => 'mobile'], function () { // esta ruta es /mobile/xxx
   Route::get('getPlaylist', [MobileController::class, 'getPlaylists']) ;
   Route::get('getShedule', [MobileController::class, 'getShedules']) ;
   Route::get('getAddress', [MobileController::class, 'getAddresses']) ;
-  Route::get('checkBackendStatus');
+  Route::get('checkBackendStatus', [MobileController::class, 'checkBackendIsUp']);
   Route::post('/broadcast', function(Request $request){
     broadcast(new Message($request));
   }) ;

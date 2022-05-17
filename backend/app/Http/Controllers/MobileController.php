@@ -49,5 +49,13 @@ public function getProjects()
             return $address;
     }
 
+    public function checkBackendIsUp()
+    {
+     
+            echo("Is up");
+    
+        //     return $address;
+    }
+
 
 }

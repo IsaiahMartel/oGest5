@@ -10,9 +10,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
 import { InterceptorService } from './interceptors/interceptor.service';
 
-import {IonicStorageModule} from '@ionic/storage';
+import {IonicStorageModule, Storage} from '@ionic/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
+import { BackendStatusService } from './services/backend-status/backend-status.service';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { environment } from '../environments/environment';
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
-    multi: true
+    multi: true,
+    deps: [Storage,ModalConnectionService, ]
   }, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   {
     provide: 'SocialAuthServiceConfig',

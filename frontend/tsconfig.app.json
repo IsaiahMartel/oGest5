@@ -3,7 +3,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "target": "ES6",
+    "downlevelIteration": true,
+    "lib": [
+        "DOM",
+        "DOM.Iterable",
+        "ES6",
+        "es2017"
+    ]
   },
   "files": [
     "src/main.ts",

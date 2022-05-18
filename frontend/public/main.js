@@ -41,17 +41,12 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: 'home',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_laravel-echo-ionic_dist_echo_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_views_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./views/home/home.module */ 842)).then(m => m.HomePageModule)
+        path: '',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_views_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./views/home/home.module */ 842)).then(m => m.HomePageModule)
     },
     {
         path: 'tabs',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_views_projects_project-tabs_tabs_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./views/projects/project-tabs/tabs.module */ 6602)).then(m => m.TabsPageModule)
-    },
-    {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
     },
     {
         path: 'login',
@@ -88,13 +83,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./app.component.html */ 1106);
 /* harmony import */ var _app_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss */ 3069);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 9122);
-/* harmony import */ var src_app_services_pdf_pdf_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/pdf/pdf.service */ 4263);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo-ionic */ 2012);
 /* harmony import */ var _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/modal-connection/modal-connection.service */ 1367);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var _services_projects_projects_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/projects/projects.service */ 1048);
+/* harmony import */ var _services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/playlists/playlists.service */ 8871);
+/* harmony import */ var _services_shedule_shedule_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/shedule/shedule.service */ 5068);
+/* harmony import */ var _services_address_address_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/address/address.service */ 7172);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/storage */ 8605);
+
+
+
+
 
 
 
@@ -104,49 +108,147 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(gestureCtrl, pdfService, modalController, modalConnectionService) {
-        this.gestureCtrl = gestureCtrl;
-        this.pdfService = pdfService;
-        this.modalController = modalController;
+    constructor(modalConnectionService, alertController, projectsService, sheduleService, playlistService, addressServivce, storage) {
         this.modalConnectionService = modalConnectionService;
-        // @ViewChild('holdBtn', { read: ElementRef }) holdBtn: ElementRef;
-        this.hold = 0;
-        this.longPressActive = false;
-        this.modalOpen = false;
+        this.alertController = alertController;
+        this.projectsService = projectsService;
+        this.sheduleService = sheduleService;
+        this.playlistService = playlistService;
+        this.addressServivce = addressServivce;
+        this.storage = storage;
+        this.sheduleArray = [];
+        this.projectsArray = [];
+        this.playlistArray = [];
+        this.addressArray = [];
     }
-    ngOnInit() {
+    ngAfterViewInit() {
+        this.divConnectionAlert = document.getElementById("connection-alert");
+        // 
+        this.modalConnectionService.requestIntercepted.subscribe(backendDown => {
+            if (backendDown) {
+                this.htmlToAdd = '<h1 id="connection-text">Server caido</h1>';
+                this.divConnectionAlert.style.backgroundColor = "red";
+                this.isOnline = false;
+            }
+            else {
+                if (this.isOnline == false) {
+                    this.htmlToAdd = '<h1 id="connection-text">Conexion resuelta</h1>';
+                    this.divConnectionAlert.style.backgroundColor = "green";
+                    setTimeout(() => {
+                        this.htmlToAdd = '';
+                        this.divConnectionAlert.style.backgroundColor = "transparent";
+                        this.isOnline = true;
+                    }, 5000);
+                }
+            }
+        });
         this.modalConnectionService.appIsOnline$.subscribe(online => {
-            var divConnectionAlert = document.getElementById("connection-alert");
             if (!online) {
                 this.htmlToAdd = '<h1 id="connection-text">No tienes conexion</h1>';
-                console.log(divConnectionAlert);
-                divConnectionAlert.style.backgroundColor = "red";
+                this.divConnectionAlert.style.backgroundColor = "red";
                 this.isOnline = false;
             }
             else {
                 if (this.isOnline == false) {
                     this.htmlToAdd = '<h1 id="connection-text">Vuelves a tener conexion</h1>';
-                    divConnectionAlert.style.backgroundColor = "green";
+                    this.divConnectionAlert.style.backgroundColor = "green";
                     setTimeout(() => {
                         this.htmlToAdd = '';
-                        divConnectionAlert.style.backgroundColor = "transparent";
+                        this.divConnectionAlert.style.backgroundColor = "transparent";
+                        this.isOnline = true;
                     }, 5000);
                 }
             }
         });
+        this.doConnection();
     }
-    connectedAgain() {
-        console.log("pasa");
+    doConnection() {
+        const echo = new laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_2__.Echo({
+            broadcaster: 'pusher',
+            key: 'local',
+            wsHost: 'localhost',
+            wsPort: 6001,
+            forceTLS: false,
+            disableStats: true
+        });
+        echo.connector.pusher.connection.bind('unavailable', function () {
+            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (no disponible)</h3>';
+            this.divConnectionAlert.style.backgroundColor = "red";
+        });
+        echo.connector.pusher.connection.bind('failed', function () {
+            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (fallo)</h3>';
+            this.divConnectionAlert.style.backgroundColor = "red";
+        });
+        echo.connector.pusher.connection.bind('disconnected', function () {
+            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (desconexión)</h3>';
+            this.divConnectionAlert.style.backgroundColor = "red";
+            echo.connector.pusher.connect();
+            this.isOnline = false;
+        });
+        echo.connector.pusher.connection.bind("error", function (error) {
+            console.error("connection error", error);
+            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (errores)</h3>';
+            this.divConnectionAlert.style.backgroundColor = "red";
+            this.isOnline = false;
+        });
+        echo.connector.pusher.connection.bind('connected', function () {
+            if (this.isOnline == false) {
+                this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones habilitadas de nuevo</h3>';
+                this.divConnectionAlert.style.backgroundColor = "green";
+                setTimeout(() => {
+                    this.htmlToAdd = '';
+                    this.divConnectionAlert.style.backgroundColor = "transparent";
+                    this.isOnline = true;
+                }, 5000);
+            }
+        });
+        const channel = echo.channel('channel');
+        channel.listen('Message', (data) => {
+            console.log(JSON.stringify(data));
+            this.notification(data);
+            this.updateData();
+        });
+    }
+    notification(message) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Se han realizado cambios',
+                message: message,
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
+    }
+    updateData() {
+        this.projectsService.getProjects().subscribe((p) => {
+            this.storage.set("projects", JSON.stringify(p));
+            this.projectsArray = p;
+        });
+        this.addressServivce.getAddresses().subscribe((p) => {
+            this.storage.set("address", JSON.stringify(p));
+        });
+        this.playlistService.getPlaylists().subscribe((p) => {
+            this.storage.set("playlist", JSON.stringify(p));
+            this.playlistArray = p;
+        });
+        this.sheduleService.getShedules().subscribe((p) => {
+            this.storage.set("shedule", JSON.stringify(p));
+            this.sheduleArray = p;
+        });
     }
 };
 AppComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.GestureController },
-    { type: src_app_services_pdf_pdf_service__WEBPACK_IMPORTED_MODULE_2__.PdfService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController },
-    { type: _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_3__.ModalConnectionService }
+    { type: _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_3__.ModalConnectionService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController },
+    { type: _services_projects_projects_service__WEBPACK_IMPORTED_MODULE_4__.ProjectsService },
+    { type: _services_shedule_shedule_service__WEBPACK_IMPORTED_MODULE_6__.SheduleService },
+    { type: _services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_5__.PlaylistsService },
+    { type: _services_address_address_service__WEBPACK_IMPORTED_MODULE_7__.AddressService },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_10__.Storage }
 ];
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-root',
         template: _raw_loader_app_component_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_app_component_scss__WEBPACK_IMPORTED_MODULE_1__.default]
@@ -171,7 +273,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ 9075);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ 9895);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 9122);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 5041);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 158);
@@ -179,9 +281,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angularx_social_login__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! angularx-social-login */ 2707);
 /* harmony import */ var _interceptors_interceptor_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interceptors/interceptor.service */ 2309);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/storage */ 8605);
-/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/service-worker */ 2249);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environments/environment */ 2340);
-
+/* harmony import */ var _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/modal-connection/modal-connection.service */ 1367);
 
 
 
@@ -200,21 +300,21 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.NgModule)({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
         entryComponents: [],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__.HammerModule, _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule.forRoot(), _ionic_storage__WEBPACK_IMPORTED_MODULE_8__.IonicStorageModule.forRoot(),
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule,
-            angularx_social_login__WEBPACK_IMPORTED_MODULE_10__.SocialLoginModule,
-            _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__.ServiceWorkerModule.register('ngsw-worker.js', {
-                enabled: _environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.production,
-                // Register the ServiceWorker as soon as the application is stable
-                // or after 30 seconds (whichever comes first).
-                registrationStrategy: 'registerWhenStable:30000'
-            })],
+        imports: [
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__.HammerModule,
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule.forRoot(),
+            _ionic_storage__WEBPACK_IMPORTED_MODULE_8__.IonicStorageModule.forRoot(),
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule,
+            angularx_social_login__WEBPACK_IMPORTED_MODULE_10__.SocialLoginModule
+        ],
         providers: [{
                 provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HTTP_INTERCEPTORS,
                 useClass: _interceptors_interceptor_service__WEBPACK_IMPORTED_MODULE_2__.InterceptorService,
-                multi: true
-            }, { provide: _angular_router__WEBPACK_IMPORTED_MODULE_12__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicRouteStrategy }, {
+                multi: true,
+                deps: [_ionic_storage__WEBPACK_IMPORTED_MODULE_8__.Storage, _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_3__.ModalConnectionService,]
+            }, { provide: _angular_router__WEBPACK_IMPORTED_MODULE_11__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicRouteStrategy }, {
                 provide: 'SocialAuthServiceConfig',
                 useValue: {
                     autoLogin: false,
@@ -246,15 +346,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "InterceptorService": () => (/* binding */ InterceptorService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 9412);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 9122);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ 8605);
-/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/internal/operators/switchMap */ 2479);
-/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 8002);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 9765);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 9412);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 205);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/storage */ 8605);
+/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/internal/operators/switchMap */ 2479);
+/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 8002);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 5304);
+/* harmony import */ var _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/modal-connection/modal-connection.service */ 1367);
+/* harmony import */ var _services_backend_status_backend_status_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/backend-status/backend-status.service */ 9873);
+
 
 
 
@@ -265,58 +370,147 @@ __webpack_require__.r(__webpack_exports__);
 
 const TOKEN_KEY = 'access_token';
 let InterceptorService = class InterceptorService {
-    constructor(alertController, storage) {
-        this.alertController = alertController;
+    constructor(storage, modalConnectionService, backendStatusService) {
         this.storage = storage;
+        this.modalConnectionService = modalConnectionService;
+        this.backendStatusService = backendStatusService;
+        this.backendStatusChange = new rxjs__WEBPACK_IMPORTED_MODULE_2__.Subject();
     }
     intercept(req, next) {
-        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders({
+        // const auth = this.injector.get(ModalConnectionService);
+        // console.log(auth);
+        // this.modalConnectionService.getInterceptedSource().next(true);
+        //   console.log( this.modalConnectionService.string)
+        //   // console.log( this.modalConnectionService.string);
+        //  console.log(this.backendStatusService);
+        //  console.log(this.storage);
+        //     const auth = this.injector.get(ModalConnectionService);
+        // console.log(auth);
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.storage.ready().then(() => this.storage.get('access_token'))}`
         });
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_1__.from)(this.storage.get(TOKEN_KEY))
-            .pipe((0,rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_2__.switchMap)(token => {
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.from)(this.storage.get(TOKEN_KEY))
+            .pipe((0,rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5__.switchMap)(token => {
             if (token) {
                 req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
             }
             if (!req.headers.has('Content-Type')) {
                 req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
             }
-            return next.handle(req).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)((event) => {
-                if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpResponse) {
+            return next.handle(req).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.map)((event) => {
+                if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpResponse) {
                 }
                 return event;
-            }));
+            }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.catchError)(this.manageError.bind(this)));
         }));
     }
-    presentAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                cssClass: 'my-custom-class',
-                header: 'Error',
-                subHeader: message,
-                message: 'Inténtalo de nuevo.',
-                buttons: ['OK']
-            });
-            yield alert.present();
-        });
-    }
+    // lol(){
+    //   console.log(this.backendStatusService);
+    // }
     manageError(error) {
         let errorJSON = error.error;
         let errorMessage = "";
         Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
-        this.presentAlert(errorMessage);
+        // console.log(errorMessage, errorJSON);
+        if (errorMessage == "true\n") {
+            this.modalConnectionService.getInterceptedSource().next(true);
+            // this.modalConnectionService.backendDownObs.subscribe(value => this.m = value) 
+            // this.backendStatusService.changeStatus(true);
+            // this.modalConnectionService.backendDownObs.next(true)
+            //       this.modalConnectionService.backendDown=true;
+            // this.modalConnectionService.backendDownObs.next(this.modalConnectionService.backendDown);
+        }
+        else {
+            this.modalConnectionService.getInterceptedSource().next(false);
+        }
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.throwError)("Error " + errorMessage + "\n" + errorJSON);
     }
 };
 InterceptorService.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__.Storage }
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_9__.Storage },
+    { type: _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__.ModalConnectionService },
+    { type: _services_backend_status_backend_status_service__WEBPACK_IMPORTED_MODULE_1__.BackendStatusService }
 ];
-InterceptorService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Injectable)({
+InterceptorService = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Injectable)({
         providedIn: 'root'
     })
 ], InterceptorService);
+
+
+
+/***/ }),
+
+/***/ 7172:
+/*!*****************************************************!*\
+  !*** ./src/app/services/address/address.service.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AddressService": () => (/* binding */ AddressService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
+
+
+
+let AddressService = class AddressService {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+        this.endpoint = "http://localhost:8000/api/mobile/getAddress";
+    }
+    getAddresses() {
+        return this.httpClient.get(this.endpoint);
+    }
+};
+AddressService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient }
+];
+AddressService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+    })
+], AddressService);
+
+
+
+/***/ }),
+
+/***/ 9873:
+/*!*******************************************************************!*\
+  !*** ./src/app/services/backend-status/backend-status.service.ts ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BackendStatusService": () => (/* binding */ BackendStatusService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modal-connection/modal-connection.service */ 1367);
+
+
+
+let BackendStatusService = class BackendStatusService {
+    constructor(modalConnection) {
+        this.modalConnection = modalConnection;
+    }
+};
+BackendStatusService.ctorParameters = () => [
+    { type: _modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__.ModalConnectionService }
+];
+BackendStatusService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+    })
+], BackendStatusService);
 
 
 
@@ -379,29 +573,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ModalConnectionService": () => (/* binding */ ModalConnectionService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 6682);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 5917);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 2759);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 8002);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 9765);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 6682);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 5917);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 2759);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ 8002);
+/* harmony import */ var _projects_projects_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../projects/projects.service */ 1048);
+
+
 
 
 
 
 let ModalConnectionService = class ModalConnectionService {
-    constructor() {
+    constructor(httpClient, projectsService) {
+        this.httpClient = httpClient;
+        this.projectsService = projectsService;
+        this.string = "xd";
+        this.requestInterceptedSource = new rxjs__WEBPACK_IMPORTED_MODULE_1__.Subject();
+        this.requestIntercepted = this.requestInterceptedSource.asObservable();
+        // backendDownObs: Subject<boolean> = new Subject<boolean>();
+        this.endpoint = "http://localhost:8000/api/mobile/checkBackendStatus";
         this.initConnectivityMonitoring();
+        this.backendStatus();
     }
     initConnectivityMonitoring() {
         if (!window || !navigator || !('onLine' in navigator))
             return;
-        this.appIsOnline$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.merge)((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.of)(null), (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.fromEvent)(window, 'online'), (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.fromEvent)(window, 'offline')).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(() => navigator.onLine));
+        this.appIsOnline$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.merge)((0,rxjs__WEBPACK_IMPORTED_MODULE_3__.of)(null), (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.fromEvent)(window, 'online'), (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.fromEvent)(window, 'offline')).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)(() => navigator.onLine));
+    }
+    backendStatus() {
+        var that = this;
+        // return this.httpClient.get(this.endpoint);
+        setInterval(function () {
+            that.httpClient.get(that.endpoint).subscribe();
+        }, 30000);
+    }
+    getInterceptedSource() {
+        return this.requestInterceptedSource;
     }
 };
-ModalConnectionService.ctorParameters = () => [];
-ModalConnectionService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
+ModalConnectionService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__.HttpClient },
+    { type: _projects_projects_service__WEBPACK_IMPORTED_MODULE_0__.ProjectsService }
+];
+ModalConnectionService = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Injectable)({
         providedIn: 'root'
     })
 ], ModalConnectionService);
@@ -410,20 +630,60 @@ ModalConnectionService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 4263:
-/*!*********************************************!*\
-  !*** ./src/app/services/pdf/pdf.service.ts ***!
-  \*********************************************/
+/***/ 8871:
+/*!*********************************************************!*\
+  !*** ./src/app/services/playlists/playlists.service.ts ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PdfService": () => (/* binding */ PdfService)
+/* harmony export */   "PlaylistsService": () => (/* binding */ PlaylistsService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
+
+
+
+let PlaylistsService = class PlaylistsService {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+        this.endpoint = "http://localhost:8000/api/mobile/getPlaylist";
+    }
+    getPlaylists() {
+        return this.httpClient.get(this.endpoint);
+    }
+};
+PlaylistsService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient }
+];
+PlaylistsService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+    })
+], PlaylistsService);
+
+
+
+/***/ }),
+
+/***/ 1048:
+/*!*******************************************************!*\
+  !*** ./src/app/services/projects/projects.service.ts ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ProjectsService": () => (/* binding */ ProjectsService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 5917);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ 8605);
 /* harmony import */ var _local_storage_local_storage_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../local-storage/local-storage.service */ 7635);
 
@@ -431,121 +691,74 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let PdfService = class PdfService {
+
+let ProjectsService = class ProjectsService {
     constructor(httpClient, storage, localStorageService) {
         this.httpClient = httpClient;
         this.storage = storage;
         this.localStorageService = localStorageService;
-        this.httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${""}`
-            })
+        this.endpoint = "http://localhost:8000/api/mobile/getProjects";
+    }
+    getProjects() {
+        return this.httpClient.get(this.endpoint);
+    }
+    handleError(operation = 'operation', result) {
+        return (error) => {
+            console.error(error);
+            console.log(`${operation} failed: ${error.message}`);
+            return (0,rxjs__WEBPACK_IMPORTED_MODULE_1__.of)(result);
         };
-        // const requestHeaders;
-        this.sendProjects = "http://localhost:8000/api/projects/sendPDF";
-        this.downloadProjects = "http://localhost:8000/api/projects/downloadPDF";
-        this.downloadEventsByIdProject = "http://localhost:8000/api/schedule/downloadPDF/";
-        this.sendEventsByIdProject = "http://localhost:8000/api/schedule/sendPDF";
-        this.endpointSendWorks = "http://localhost:8000/api/playlists/sendPDF";
-    }
-    getHttpOptions() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.localStorageService.getToken().then(o => {
-                this.httpOptions = {
-                    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${o}`
-                    })
-                };
-                ;
-            });
-        });
-    }
-    getOptions() {
-        if (this.downloadOrSend == 0) {
-            this.downloadAndOpenPdf();
-        }
-        else if (this.downloadOrSend == 1) {
-            this.sendPdfToEmail();
-        }
-        ;
-    }
-    downloadAndOpenPdf() {
-        switch (this.category) {
-            case 0:
-                this.getProjectsPDF();
-                break;
-            case 1:
-                break;
-        }
-    }
-    sendPdfToEmail() {
-        switch (this.category) {
-            case 0:
-                this.sendProjectsPDF().then(o => {
-                    o.subscribe();
-                });
-                break;
-            case 1:
-                this.sendEventsPDF(this.projectId).then(o => {
-                    o.subscribe();
-                });
-                break;
-            case 2:
-                this.sendWokrsPDF(this.projectId).then(o => {
-                    o.subscribe();
-                });
-                break;
-        }
-    }
-    sendProjectsPDF() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getHttpOptions();
-            return yield this.httpClient.get(this.sendProjects, this.httpOptions);
-        });
-    }
-    getProjectsPDF() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            // window.open("http://localhost:8000/api/projects/downloadPDF");
-            // await console.log(this.httpClient.get(this.downloadProjects))
-            // return await this.httpClient.get(this.downloadProjects, httpOptions);
-            // Browser.open({ url: this.downloadProjects });
-            // fetch("http://localhost:8000/api/projects/downloadPDF", {
-            //   method: 'GET',
-            //   mode: 'cors',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //     'Authorization': this.httpOptions.headers.get('Authorization')
-            //   }
-            // }).then(response => response.json());
-            // console.log(this.httpOptions.headers.keys())
-            // console.log(this.httpOptions.headers.get('Content-Type'));
-        });
-    }
-    sendEventsPDF(projectId) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getHttpOptions();
-            return yield this.httpClient.get(this.sendEventsByIdProject + "/" + projectId, this.httpOptions);
-        });
-    }
-    sendWokrsPDF(projectId) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getHttpOptions();
-            return yield this.httpClient.get(this.endpointSendWorks + "/" + projectId, this.httpOptions);
-        });
     }
 };
-PdfService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient },
+ProjectsService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient },
     { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_3__.Storage },
     { type: _local_storage_local_storage_service__WEBPACK_IMPORTED_MODULE_0__.LocalStorageService }
 ];
-PdfService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+ProjectsService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
         providedIn: 'root'
     })
-], PdfService);
+], ProjectsService);
+
+
+
+/***/ }),
+
+/***/ 5068:
+/*!*****************************************************!*\
+  !*** ./src/app/services/shedule/shedule.service.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SheduleService": () => (/* binding */ SheduleService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
+
+
+
+let SheduleService = class SheduleService {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+        this.endpoint = "http://localhost:8000/api/mobile/getShedule";
+    }
+    getShedules() {
+        return this.httpClient.get(this.endpoint);
+    }
+};
+SheduleService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient }
+];
+SheduleService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+    })
+], SheduleService);
 
 
 
@@ -646,7 +859,7 @@ var map = {
 		"node_modules_ionic_core_dist_esm_ion-back-button_entry_js"
 	],
 	"./ion-backdrop.entry.js": [
-		3519,
+		7757,
 		"node_modules_ionic_core_dist_esm_ion-backdrop_entry_js"
 	],
 	"./ion-breadcrumb_2.entry.js": [
@@ -888,7 +1101,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n    <!-- <ion-menu-toggle>\r\n        <ion-menu contentId=\"main\">\r\n            <ion-content></ion-content>\r\n\r\n            <ion-footer class=\"bar-stable\">\r\n\r\n                <ion-item lines=\"none\" class=\"ion-no-padding\" routerLink=\"/login\">\r\n                    <ion-icon id=\"login-icon\" src=\"assets/cerrar-sesion.svg\"></ion-icon>\r\n                    <h2 id=\"configuration-text\">Home</h2>\r\n                </ion-item>\r\n\r\n                <ion-item lines=\"none\" class=\"ion-no-padding\" routerLink=\"/login\">\r\n                    <ion-icon id=\"login-icon\" src=\"assets/cerrar-sesion.svg\"></ion-icon>\r\n                    <h2 id=\"configuration-text\">Login</h2>\r\n                </ion-item>\r\n\r\n            </ion-footer>\r\n        </ion-menu>\r\n    </ion-menu-toggle> -->\r\n    <div id=\"connection-alert\" [innerHtml]=\"htmlToAdd\"></div>\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n    <!-- <ion-menu-toggle>\r\n        <ion-menu contentId=\"main\">\r\n            <ion-content></ion-content>\r\n\r\n            <ion-footer class=\"bar-stable\">\r\n\r\n                <ion-item lines=\"none\" class=\"ion-no-padding\" routerLink=\"/login\">\r\n                    <ion-icon id=\"login-icon\" src=\"assets/cerrar-sesion.svg\"></ion-icon>\r\n                    <h2 id=\"configuration-text\">Salir</h2>\r\n                </ion-item>\r\n\r\n            </ion-footer>\r\n        </ion-menu>\r\n    </ion-menu-toggle> -->\r\n    <div id=\"connection-alert\" [innerHtml]=\"htmlToAdd\"></div>\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>");
+
+/***/ }),
+
+/***/ 7020:
+/*!********************!*\
+  !*** ws (ignored) ***!
+  \********************/
+/***/ (() => {
+
+/* (ignored) */
 
 /***/ })
 

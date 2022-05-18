@@ -80,19 +80,19 @@ private weekDaysQuerySelector = document.querySelector("small")
 
 
 
-const elements: Element[] = Array.from( document.getElementsByTagName("small"));
-console.log(elements);
-elements.forEach((el: Element) => {
-console.log("xd");
+// const elements: Element[] = Array.from( document.getElementsByTagName("small"));
+// console.log(elements);
+// elements.forEach((el: Element) => {
+// console.log("xd");
 
-})
+// })
 
-const inputs = document.getElementsByTagName("small");
-for (let index = 0; index < inputs.length; index++) {
-  const input = inputs.item(index);
-  console.log("xd");
+// const inputs = document.getElementsByTagName("small");
+// for (let index = 0; index < inputs.length; index++) {
+//   const input = inputs.item(index);
+//   console.log("xd");
   
-}
+// }
 // for (const tag of Array.from(this.weekDays)) {
 //   console.log("Xd");
   

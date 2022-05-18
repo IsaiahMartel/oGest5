@@ -973,84 +973,6 @@ const openURL = async (url, ev, direction, animation) => {
 
 /***/ }),
 
-/***/ 7172:
-/*!*****************************************************!*\
-  !*** ./src/app/services/address/address.service.ts ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AddressService": () => (/* binding */ AddressService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
-
-
-
-let AddressService = class AddressService {
-    constructor(httpClient) {
-        this.httpClient = httpClient;
-        this.endpoint = "http://localhost:8000/api/mobile/getAddress";
-    }
-    getAddresses() {
-        return this.httpClient.get(this.endpoint);
-    }
-};
-AddressService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient }
-];
-AddressService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: 'root'
-    })
-], AddressService);
-
-
-
-/***/ }),
-
-/***/ 8871:
-/*!*********************************************************!*\
-  !*** ./src/app/services/playlists/playlists.service.ts ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PlaylistsService": () => (/* binding */ PlaylistsService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
-
-
-
-let PlaylistsService = class PlaylistsService {
-    constructor(httpClient) {
-        this.httpClient = httpClient;
-        this.endpoint = "http://localhost:8000/api/mobile/getPlaylist";
-    }
-    getPlaylists() {
-        return this.httpClient.get(this.endpoint);
-    }
-};
-PlaylistsService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient }
-];
-PlaylistsService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: 'root'
-    })
-], PlaylistsService);
-
-
-
-/***/ }),
-
 /***/ 5628:
 /*!***********************************************************!*\
   !*** ./src/app/services/project-id/project-id.service.ts ***!
@@ -1096,45 +1018,6 @@ ProjectIdService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
         providedIn: 'root'
     })
 ], ProjectIdService);
-
-
-
-/***/ }),
-
-/***/ 5068:
-/*!*****************************************************!*\
-  !*** ./src/app/services/shedule/shedule.service.ts ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SheduleService": () => (/* binding */ SheduleService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 1841);
-
-
-
-let SheduleService = class SheduleService {
-    constructor(httpClient) {
-        this.httpClient = httpClient;
-        this.endpoint = "http://localhost:8000/api/mobile/getShedule";
-    }
-    getShedules() {
-        return this.httpClient.get(this.endpoint);
-    }
-};
-SheduleService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient }
-];
-SheduleService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: 'root'
-    })
-], SheduleService);
 
 
 

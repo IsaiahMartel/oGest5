@@ -92,16 +92,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "WorksPage": () => (/* binding */ WorksPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_works_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./works.page.html */ 3357);
 /* harmony import */ var _works_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./works.page.scss */ 2393);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 9122);
 /* harmony import */ var src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/playlists/playlists.service */ 8871);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage */ 8605);
-/* harmony import */ var laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! laravel-echo-ionic */ 2012);
-
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ 8605);
 
 
 
@@ -122,6 +120,7 @@ let WorksPage = class WorksPage {
     ngOnInit() {
         this.loadInfo();
     }
+    // Pasa los datos desde el local storage de playlist a un array
     loadInfo() {
         this.storage.get("playlist").then(data => {
             if (data) {
@@ -129,58 +128,32 @@ let WorksPage = class WorksPage {
                 array.filter((playlist) => {
                     if (playlist.project_id == this.project_id) {
                         this.playlistArray.push(playlist);
+                        // Ordena el array por playlistOrder
                         this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
                     }
                     ;
                 });
             }
             else {
-                this.updateData();
+                this.getData();
             }
         });
     }
-    doConnection() {
-        const echo = new laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_3__.Echo({
-            broadcaster: 'pusher',
-            key: 'local',
-            wsHost: 'localhost',
-            wsPort: 6001,
-            forceTLS: false,
-            disableStats: true
-        });
-        const channel = echo.channel('channel');
-        channel.listen('Alert', (data) => {
-            console.log(JSON.stringify(data));
-            this.notification(data);
-            this.updateData();
-        });
-    }
-    updateData() {
+    getData() {
         this.playlistService.getPlaylists().subscribe((p) => {
             this.storage.set("playlist", JSON.stringify(p));
             this.playlistArray = p;
         });
     }
-    notification(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                cssClass: 'my-custom-class',
-                header: 'Se han realizado cambios',
-                message: message,
-                buttons: ['OK']
-            });
-            yield alert.present();
-        });
-    }
 };
 WorksPage.ctorParameters = () => [
     { type: src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_2__.PlaylistsService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_7__.Storage }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.ActivatedRoute },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.AlertController },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__.Storage }
 ];
-WorksPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+WorksPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-works',
         template: _raw_loader_works_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_works_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]

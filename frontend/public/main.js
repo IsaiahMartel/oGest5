@@ -52,10 +52,6 @@ const routes = [
         path: 'login',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_views_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./views/login/login.module */ 265)).then(m => m.LoginPageModule)
     },
-    {
-        path: 'register',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_views_register_register_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./views/register/register.module */ 3779)).then(m => m.RegisterPageModule)
-    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -107,8 +103,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let AppComponent = class AppComponent {
-    constructor(modalConnectionService, alertController, projectsService, sheduleService, playlistService, addressServivce, storage) {
+    constructor(modalConnectionService, alertController, projectsService, sheduleService, playlistService, addressServivce, storage, toastController) {
         this.modalConnectionService = modalConnectionService;
         this.alertController = alertController;
         this.projectsService = projectsService;
@@ -116,53 +113,46 @@ let AppComponent = class AppComponent {
         this.playlistService = playlistService;
         this.addressServivce = addressServivce;
         this.storage = storage;
-        this.sheduleArray = [];
-        this.projectsArray = [];
-        this.playlistArray = [];
-        this.addressArray = [];
+        this.toastController = toastController;
     }
     ngAfterViewInit() {
-        this.divConnectionAlert = document.getElementById("connection-alert");
-        // 
+        this.updateData();
+        this.backendDownAlert();
+        this.clientOfflineAlert();
+        this.doConnectionWebSocket();
+    }
+    backendDownAlert() {
         this.modalConnectionService.requestIntercepted.subscribe(backendDown => {
             if (backendDown) {
-                this.htmlToAdd = '<h1 id="connection-text">Server caido</h1>';
-                this.divConnectionAlert.style.backgroundColor = "red";
+                this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
                 this.isOnline = false;
+                this.dismissToast = false;
             }
             else {
                 if (this.isOnline == false) {
-                    this.htmlToAdd = '<h1 id="connection-text">Conexion resuelta</h1>';
+                    this.dismissToast = true;
+                    this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
                     this.divConnectionAlert.style.backgroundColor = "green";
-                    setTimeout(() => {
-                        this.htmlToAdd = '';
-                        this.divConnectionAlert.style.backgroundColor = "transparent";
-                        this.isOnline = true;
-                    }, 5000);
                 }
             }
         });
+    }
+    clientOfflineAlert() {
         this.modalConnectionService.appIsOnline$.subscribe(online => {
             if (!online) {
-                this.htmlToAdd = '<h1 id="connection-text">No tienes conexion</h1>';
-                this.divConnectionAlert.style.backgroundColor = "red";
+                this.presentToastWithOptions("Atencion!", "No tienes conexion", "warning", "warning-outline");
                 this.isOnline = false;
+                this.dismissToast = false;
             }
             else {
                 if (this.isOnline == false) {
-                    this.htmlToAdd = '<h1 id="connection-text">Vuelves a tener conexion</h1>';
-                    this.divConnectionAlert.style.backgroundColor = "green";
-                    setTimeout(() => {
-                        this.htmlToAdd = '';
-                        this.divConnectionAlert.style.backgroundColor = "transparent";
-                        this.isOnline = true;
-                    }, 5000);
+                    this.dismissToast = true;
+                    this.presentToastWithOptions("Hurra!", "Vuelves a tener conexion", "success", "warning-outline");
                 }
             }
         });
-        this.doConnection();
     }
-    doConnection() {
+    doConnectionWebSocket() {
         const echo = new laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_2__.Echo({
             broadcaster: 'pusher',
             key: 'local',
@@ -171,40 +161,9 @@ let AppComponent = class AppComponent {
             forceTLS: false,
             disableStats: true
         });
-        echo.connector.pusher.connection.bind('unavailable', function () {
-            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (no disponible)</h3>';
-            this.divConnectionAlert.style.backgroundColor = "red";
-        });
-        echo.connector.pusher.connection.bind('failed', function () {
-            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (fallo)</h3>';
-            this.divConnectionAlert.style.backgroundColor = "red";
-        });
-        echo.connector.pusher.connection.bind('disconnected', function () {
-            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (desconexión)</h3>';
-            this.divConnectionAlert.style.backgroundColor = "red";
-            echo.connector.pusher.connect();
-            this.isOnline = false;
-        });
-        echo.connector.pusher.connection.bind("error", function (error) {
-            console.error("connection error", error);
-            this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones deshabilitadas (errores)</h3>';
-            this.divConnectionAlert.style.backgroundColor = "red";
-            this.isOnline = false;
-        });
-        echo.connector.pusher.connection.bind('connected', function () {
-            if (this.isOnline == false) {
-                this.divConnectionAlert.innerHTML = '<h3 id="connection-text">Notificaciones habilitadas de nuevo</h3>';
-                this.divConnectionAlert.style.backgroundColor = "green";
-                setTimeout(() => {
-                    this.htmlToAdd = '';
-                    this.divConnectionAlert.style.backgroundColor = "transparent";
-                    this.isOnline = true;
-                }, 5000);
-            }
-        });
+        // Muestra una alerta y actualiza los datos
         const channel = echo.channel('channel');
-        channel.listen('Message', (data) => {
-            console.log(JSON.stringify(data));
+        channel.listen('Alert', (data) => {
             this.notification(data);
             this.updateData();
         });
@@ -223,18 +182,40 @@ let AppComponent = class AppComponent {
     updateData() {
         this.projectsService.getProjects().subscribe((p) => {
             this.storage.set("projects", JSON.stringify(p));
-            this.projectsArray = p;
         });
         this.addressServivce.getAddresses().subscribe((p) => {
             this.storage.set("address", JSON.stringify(p));
         });
         this.playlistService.getPlaylists().subscribe((p) => {
             this.storage.set("playlist", JSON.stringify(p));
-            this.playlistArray = p;
         });
         this.sheduleService.getShedules().subscribe((p) => {
             this.storage.set("shedule", JSON.stringify(p));
-            this.sheduleArray = p;
+        });
+    }
+    // Creación de los mensajes cuando backend caído o no hay conexión
+    presentToastWithOptions(header, message, color, icon) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
+            // Elimina el mensaje anterior si lo hubiera
+            try {
+                this.toast.dismiss();
+            }
+            catch (e) { }
+            this.toast = yield this.toastController.create({
+                header: header,
+                message: message,
+                color: color,
+                icon: icon,
+                position: 'bottom',
+            });
+            yield this.toast.present();
+            // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+            if (this.dismissToast == true) {
+                setTimeout(() => {
+                    this.toast.dismiss();
+                    this.isOnline = true;
+                }, 8000);
+            }
         });
     }
 };
@@ -245,7 +226,8 @@ AppComponent.ctorParameters = () => [
     { type: _services_shedule_shedule_service__WEBPACK_IMPORTED_MODULE_6__.SheduleService },
     { type: _services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_5__.PlaylistsService },
     { type: _services_address_address_service__WEBPACK_IMPORTED_MODULE_7__.AddressService },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_10__.Storage }
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_10__.Storage },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.ToastController }
 ];
 AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
@@ -307,7 +289,7 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
             _ionic_storage__WEBPACK_IMPORTED_MODULE_8__.IonicStorageModule.forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
             _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule,
-            angularx_social_login__WEBPACK_IMPORTED_MODULE_10__.SocialLoginModule
+            angularx_social_login__WEBPACK_IMPORTED_MODULE_10__.SocialLoginModule,
         ],
         providers: [{
                 provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HTTP_INTERCEPTORS,
@@ -610,7 +592,7 @@ let ModalConnectionService = class ModalConnectionService {
         // return this.httpClient.get(this.endpoint);
         setInterval(function () {
             that.httpClient.get(that.endpoint).subscribe();
-        }, 30000);
+        }, 10000);
     }
     getInterceptedSource() {
         return this.requestInterceptedSource;
@@ -1101,7 +1083,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n    <!-- <ion-menu-toggle>\r\n        <ion-menu contentId=\"main\">\r\n            <ion-content></ion-content>\r\n\r\n            <ion-footer class=\"bar-stable\">\r\n\r\n                <ion-item lines=\"none\" class=\"ion-no-padding\" routerLink=\"/login\">\r\n                    <ion-icon id=\"login-icon\" src=\"assets/cerrar-sesion.svg\"></ion-icon>\r\n                    <h2 id=\"configuration-text\">Salir</h2>\r\n                </ion-item>\r\n\r\n            </ion-footer>\r\n        </ion-menu>\r\n    </ion-menu-toggle> -->\r\n    <div id=\"connection-alert\" [innerHtml]=\"htmlToAdd\"></div>\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>");
 
 /***/ }),
 

@@ -44,7 +44,7 @@ public string = "xd";
   setInterval(function(){
 
     that.httpClient.get(that.endpoint).subscribe();
-  }, 30000)
+  }, 10000)
   
   }
 

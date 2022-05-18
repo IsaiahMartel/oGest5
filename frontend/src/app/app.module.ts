@@ -17,6 +17,7 @@ import { ModalConnectionService } from './services/modal-connection/modal-connec
 import { BackendStatusService } from './services/backend-status/backend-status.service';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,7 +28,9 @@ import { BackendStatusService } from './services/backend-status/backend-status.s
     IonicStorageModule.forRoot(),
     AppRoutingModule, 
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

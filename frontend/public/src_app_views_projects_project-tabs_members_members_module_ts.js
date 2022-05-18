@@ -127,12 +127,7 @@ let MembersPage = class MembersPage {
             if (data) {
                 var array = JSON.parse(data);
                 array.filter((address) => {
-                    console.log(address.project);
-                    console.log(address.project.id);
-                    if (address.project.id == this.project_id) {
-                        console.log(address);
-                        console.log(address.address);
-                        console.log(address.addressgroups[0].addressgroupName);
+                    if (address.id == this.project_id) {
                         return this.addressArray.push(address);
                     }
                     ;
@@ -221,7 +216,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content has-header>\r\n\r\n    <div id=\"container\" *ngFor=\"let address of addressArray\">\r\n        <ion-card>\r\n            <ion-card-header>\r\n                <ion-icon class=\"member-icon\" src=\"assets/director.svg\"></ion-icon>\r\n                <h5 class=\"name-text\"> {{address.addressfirstName}} {{address.addresslastName}}</h5>\r\n                <h6 class=\"title-text\">{{address.addressgroups[0].addressgroupName}}</h6>\r\n            </ion-card-header>\r\n        </ion-card>\r\n        <!-- <hr class=\"card-separation\"> -->\r\n\r\n    </div>\r\n\r\n    <h1 class=\"ion-text-center\" *ngIf=\"addressArray.length==0\">\r\n        No hay miembros\r\n    </h1>\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content has-header>\r\n\r\n    <div id=\"container\" *ngFor=\"let a of addressArray\">\r\n        <ng-container *ngFor=\"let address of a.addresses; index as i\">\r\n\r\n            <ion-card>\r\n\r\n                <ion-card-header>\r\n\r\n                    <h5 class=\"name-text\"> {{address.addressfirstName}} {{address.addresslastName}}</h5>\r\n                    <h6 class=\"title-text\">{{a.addressgroups[i].addressgroupName}}</h6>\r\n                </ion-card-header>\r\n            </ion-card>\r\n\r\n            <!-- <hr class=\"card-separation\"> -->\r\n\r\n        </ng-container>\r\n    </div>\r\n\r\n    <h1 class=\"ion-text-center\" *ngIf=\"addressArray.length==0\">\r\n        No hay miembros\r\n    </h1>\r\n</ion-content>");
 
 /***/ })
 

@@ -5850,62 +5850,6 @@ NgCalendarModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0_
 
 /***/ }),
 
-/***/ 1048:
-/*!*******************************************************!*\
-  !*** ./src/app/services/projects/projects.service.ts ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ProjectsService": () => (/* binding */ ProjectsService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 1841);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 5917);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ 8605);
-/* harmony import */ var _local_storage_local_storage_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../local-storage/local-storage.service */ 7635);
-
-
-
-
-
-
-let ProjectsService = class ProjectsService {
-    constructor(httpClient, storage, localStorageService) {
-        this.httpClient = httpClient;
-        this.storage = storage;
-        this.localStorageService = localStorageService;
-        this.endpoint = "http://localhost:8000/api/mobile/getProjects";
-    }
-    getProjects() {
-        return this.httpClient.get(this.endpoint);
-    }
-    handleError(operation = 'operation', result) {
-        return (error) => {
-            console.error(error);
-            console.log(`${operation} failed: ${error.message}`);
-            return (0,rxjs__WEBPACK_IMPORTED_MODULE_1__.of)(result);
-        };
-    }
-};
-ProjectsService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_3__.Storage },
-    { type: _local_storage_local_storage_service__WEBPACK_IMPORTED_MODULE_0__.LocalStorageService }
-];
-ProjectsService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
-        providedIn: 'root'
-    })
-], ProjectsService);
-
-
-
-/***/ }),
-
 /***/ 6279:
 /*!***************************************************!*\
   !*** ./src/app/views/home/home-routing.module.ts ***!
@@ -6000,7 +5944,7 @@ HomePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
             ionic2_calendar__WEBPACK_IMPORTED_MODULE_11__.NgCalendarModule,
         ],
         declarations: [_home_page__WEBPACK_IMPORTED_MODULE_0__.HomePage],
-        providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_8__.LOCALE_ID, useValue: 'es-Py' }],
+        providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_8__.LOCALE_ID, useValue: 'es' }],
     })
 ], HomePageModule);
 
@@ -6019,21 +5963,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomePage": () => (/* binding */ HomePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_home_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./home.page.html */ 4007);
 /* harmony import */ var _home_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.page.scss */ 8784);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _services_shedule_shedule_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/shedule/shedule.service */ 5068);
 /* harmony import */ var _services_projects_projects_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/projects/projects.service */ 1048);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 9122);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/storage */ 8605);
-/* harmony import */ var laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! laravel-echo-ionic */ 2012);
-/* harmony import */ var src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/playlists/playlists.service */ 8871);
-/* harmony import */ var src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/address/address.service */ 7172);
-/* harmony import */ var ionic2_calendar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ionic2-calendar */ 7732);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var src_app_services_project_id_project_id_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/project-id/project-id.service */ 5628);
-
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/storage */ 8605);
+/* harmony import */ var src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/playlists/playlists.service */ 8871);
+/* harmony import */ var src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/address/address.service */ 7172);
+/* harmony import */ var ionic2_calendar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ionic2-calendar */ 7732);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var src_app_services_project_id_project_id_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/project-id/project-id.service */ 5628);
 
 
 
@@ -6063,6 +6005,8 @@ let HomePage = class HomePage {
         this.projectsArray = [];
         this.playlistArray = [];
         this.addressArray = [];
+        this.isEverythingSaved = 0;
+        this.weekDaysQuerySelector = document.querySelector("small");
         this.colorPick = 0;
         this.eventSource = [];
         this.calendar = {
@@ -6076,12 +6020,45 @@ let HomePage = class HomePage {
         };
     }
     ngOnInit() {
-        this.projectsService.getProjects().subscribe((p) => {
-            this.projectsArray = p.filter((project) => {
-                this.projects_id.push(project.id);
-            });
-            this.loadInfo();
+        //     const weekDays = document.getElementsByTagName("small");
+        // console.log(weekDays);
+        // for(let element of this.weekDays){
+        //   console.log(element);
+        // }
+        // console.log(this.weekDays);
+        // console.log(this.weekDaysQuerySelector);
+        const elements = Array.from(document.getElementsByTagName("small"));
+        console.log(elements);
+        elements.forEach((el) => {
+            console.log("xd");
         });
+        const inputs = document.getElementsByTagName("small");
+        for (let index = 0; index < inputs.length; index++) {
+            const input = inputs.item(index);
+            console.log("xd");
+        }
+        // for (const tag of Array.from(this.weekDays)) {
+        //   console.log("Xd");
+        // }
+        // for (const element in this.weekDays) {
+        //   // for(var i =0; i<5;i++)
+        //   // console.log(element[i]);
+        //   // console.log(this.weekDays[i]);
+        //   // console.log("Xd");
+        // }
+        // Array.from(this.weekDays).forEach((el) =>
+        // console.log(el)
+        // );
+        // for(var i=0; i<35;i++){
+        //   console.log(this.weekDays.item(i));
+        // }
+        // this.projectsService.getProjects().subscribe((p: Array<Project>) => {
+        //   this.projectsArray = p.filter((project) => {
+        //     this.projects_id.push(project.id);
+        //   })
+        this.loadInfo();
+        // })
+        console.log(document.querySelectorAll("small"));
     }
     next() {
         this.myCal.slideNext();
@@ -6121,22 +6098,15 @@ let HomePage = class HomePage {
                     endDateShedule = new Date(shedule.sheduleDate);
                     titleShedule = shedule.sheduleTipe;
                     sheduleHour = shedule.shedulehourRange;
-                    // i++;
-                    // if (i < 0 ) {
-                    // console.log(startDate);
                     if (this.colorPick == 0) {
-                        // console.log(this.colorPick);
                         if (shedule.sheduleTipe == "CONCIERTO") {
                             colorEvent = "blueConcert";
-                            // console.log(i + " concierto " + project.events.eventName + " " + shedule.sheduleDate) 
                         }
                         else if (shedule.sheduleTipe == "DIA LIBRE") {
                             colorEvent = "freeDay";
-                            // console.log(i + " dia libre " + project.events.eventName + " " + shedule.sheduleDate); 
                         }
                         else {
                             colorEvent = "blue";
-                            // console.log(i + " evento normal " + project.events.eventName + " " + shedule.sheduleDate);
                         }
                     }
                     else if (this.colorPick == 1) {
@@ -6172,8 +6142,6 @@ let HomePage = class HomePage {
                             colorEvent = "yellow";
                         }
                     }
-                    // i++;
-                    // console.log(project.events.eventName);
                     if (shedule.rooms) {
                         roomAcronym = shedule.rooms.roomAcronym;
                     }
@@ -6191,19 +6159,18 @@ let HomePage = class HomePage {
                         projectId: project.id,
                     });
                 }
-                // else {
                 if (this.colorPick == 3) {
                     this.colorPick = 0;
                 }
-                // i = 0;
-                // }
-                // }
             });
             this.colorPick++;
         }
+        var weekDays = document.getElementsByTagName("small");
         this.eventSource = events;
-        // console.log(this.eventSource);
-        // console.log(this.projectsArray);
+        for (const tag of Array.from(weekDays)) {
+            var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
+            tag.innerHTML = withoutDot;
+        }
     }
     // Selected date reange and hence title changed
     onViewTitleChanged(title) {
@@ -6229,7 +6196,7 @@ let HomePage = class HomePage {
         });
     }
     presentAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 cssClass: 'my-custom-class',
                 header: 'Error',
@@ -6240,41 +6207,29 @@ let HomePage = class HomePage {
             yield alert.present();
         });
     }
-    doConnection() {
-        const echo = new laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_4__.Echo({
-            broadcaster: 'pusher',
-            key: 'local',
-            wsHost: 'localhost',
-            wsPort: 6001,
-            forceTLS: false,
-            disableStats: true
-        });
-        const channel = echo.channel('channel');
-        channel.listen('Alert', (data) => {
-            console.log(JSON.stringify(data));
-            this.notification(data);
-            this.updateData();
-        });
-    }
     updateData() {
         this.projectsService.getProjects().subscribe((p) => {
             this.storage.set("projects", JSON.stringify(p));
             this.projectsArray = p;
+            this.createEvents;
         });
         this.addressServivce.getAddresses().subscribe((p) => {
             this.storage.set("address", JSON.stringify(p));
+            this.createEvents;
         });
         this.playlistService.getPlaylists().subscribe((p) => {
             this.storage.set("playlist", JSON.stringify(p));
             this.playlistArray = p;
+            this.createEvents;
         });
         this.sheduleService.getShedules().subscribe((p) => {
             this.storage.set("shedule", JSON.stringify(p));
             this.sheduleArray = p;
+            this.createEvents();
         });
     }
     notification(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 cssClass: 'my-custom-class',
                 header: 'Se han realizado cambios',
@@ -6284,18 +6239,6 @@ let HomePage = class HomePage {
             yield alert.present();
         });
     }
-    // onCurrentDateChanged = (event) => {
-    //   if (event.length > 0) {
-    //     if (event.length >= 1) {
-    //       event[1].colorEvent = "onEventSelected";
-    //     } else {
-    //       event[0].colorEvent = "onEventSelected";
-    //     }
-    //     this.getCustomClass(event);
-    //   }
-    //   this.getCustomClass(event);
-    //   console.log("ahiu va" + event);
-    // };
     getCustomClass(events) {
         if (events.length > 0) {
             for (let event of events) {
@@ -6322,19 +6265,19 @@ let HomePage = class HomePage {
 HomePage.ctorParameters = () => [
     { type: _services_projects_projects_service__WEBPACK_IMPORTED_MODULE_3__.ProjectsService },
     { type: _services_shedule_shedule_service__WEBPACK_IMPORTED_MODULE_2__.SheduleService },
-    { type: src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_5__.PlaylistsService },
-    { type: src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_6__.AddressService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.AlertController },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_11__.Storage },
-    { type: src_app_services_project_id_project_id_service__WEBPACK_IMPORTED_MODULE_7__.ProjectIdService },
-    { type: String, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_12__.Inject, args: [_angular_core__WEBPACK_IMPORTED_MODULE_12__.LOCALE_ID,] }] }
+    { type: src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_4__.PlaylistsService },
+    { type: src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_5__.AddressService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_10__.Storage },
+    { type: src_app_services_project_id_project_id_service__WEBPACK_IMPORTED_MODULE_6__.ProjectIdService },
+    { type: String, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_11__.Inject, args: [_angular_core__WEBPACK_IMPORTED_MODULE_11__.LOCALE_ID,] }] }
 ];
 HomePage.propDecorators = {
-    myCal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_12__.ViewChild, args: [ionic2_calendar__WEBPACK_IMPORTED_MODULE_13__.CalendarComponent,] }]
+    myCal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_11__.ViewChild, args: [ionic2_calendar__WEBPACK_IMPORTED_MODULE_12__.CalendarComponent,] }]
 };
-HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
+HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-home',
         template: _raw_loader_home_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_home_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]

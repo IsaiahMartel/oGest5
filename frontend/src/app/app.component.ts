@@ -1,8 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { GestureController, MenuController } from '@ionic/angular';
-import { PdfService } from 'src/app/services/pdf/pdf.service';
-import { ModalController } from '@ionic/angular';
-import { DownloadOrSendModal } from './views/projects/reports/download-or-send-modal/download-or-send-modal.page';
+import { AfterViewInit, Component } from '@angular/core';
 import { Echo } from 'laravel-echo-ionic';
 import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
 import { AlertController } from '@ionic/angular';
@@ -16,8 +12,7 @@ import { Playlist } from 'src/app/models/playlist';
 import { Address } from 'src/app/models/address';
 import { AddressGroup } from 'src/app/models/address-group';
 import { Storage } from '@ionic/storage';
-import { WebsocketService } from './services/websocket/websocket.service';
-import { InterceptorService } from './interceptors/interceptor.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -25,66 +20,63 @@ import { InterceptorService } from './interceptors/interceptor.service';
   styleUrls: ['app.component.scss'],
 })
 
-export class AppComponent {
-  // @ViewChild('holdBtn', { read: ElementRef }) holdBtn: ElementRef;
-  hold = 0;
-  longPressActive = false;
-  menuController: MenuController;
+export class AppComponent implements AfterViewInit {
   isOnlineText: string;
   isOnline: boolean;
   htmlToAdd;
+  divConnectionAlert;
 
-  private modalOpen: boolean = false;
   public sheduleArray: Shedule[] = [];
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
+private dismissToast : boolean;
+private toast;
 
   constructor(
-    private gestureCtrl: GestureController,
-    private pdfService: PdfService,
-    private modalController: ModalController,
+
     private modalConnectionService: ModalConnectionService,
     private alertController: AlertController,
     private projectsService: ProjectsService,
     private sheduleService: SheduleService,
     private playlistService: PlaylistsService,
     private addressServivce: AddressService,
-    public storage: Storage,
-    private websocketService: WebsocketService,
-    private interceptor: InterceptorService) { }
+    private storage: Storage,
+    private toastController: ToastController,
+
+  ) { }
 
 
-  ngOnInit() {
-    var divConnectionAlert = document.getElementById("connection-alert");
+  ngAfterViewInit(): void {
 
-    window.onerror = function (error, url, line) {
-      console.log(error, +url + line);
+    this.divConnectionAlert = document.getElementById("connection-alert");
 
+ 
+    
+    // 
 
-    };
 
     this.modalConnectionService.requestIntercepted.subscribe(backendDown => {
       if (backendDown) {
         this.htmlToAdd = '<h1 id="connection-text">Server caido</h1>';
+        this.presentToastWithOptions("Oops!", "Server caido", "danger", "information-circle");
 
-
-        divConnectionAlert.style.backgroundColor = "red";
+        this.divConnectionAlert.style.backgroundColor = "red";
 
 
         this.isOnline = false;
+        this.dismissToast = false;
       }
       else {
-        
-        if(this.isOnline==false){this.htmlToAdd = '<h1 id="connection-text">Conexion resuelta</h1>';
-        divConnectionAlert.style.backgroundColor = "green";
-        setTimeout(() => {
-          this.htmlToAdd = '';
-          divConnectionAlert.style.backgroundColor = "transparent";
-          this.isOnline = true;
-        },
-          5000);
-      }}
+
+        if (this.isOnline == false) {
+          this.dismissToast = true;
+          this.presentToastWithOptions("Solucionado!", "Conexion resuelta", "success", "checkmark-outline");
+          this.htmlToAdd = '<h1 id="connection-text">Conexion resuelta</h1>';
+          this.divConnectionAlert.style.backgroundColor = "green";
+       
+        }
+      }
 
     });
     this.modalConnectionService.appIsOnline$.subscribe(online => {
@@ -94,28 +86,25 @@ export class AppComponent {
 
 
       if (!online) {
+        this.presentToastWithOptions("Atencion!", "No tienes conexion", "warning", "warning-outline");
 
-        console.log(online);
         this.htmlToAdd = '<h1 id="connection-text">No tienes conexion</h1>';
 
 
-        divConnectionAlert.style.backgroundColor = "red";
+        this.divConnectionAlert.style.backgroundColor = "red";
 
 
         this.isOnline = false;
-
+        this.dismissToast = false;
 
       } else {
 
         if (this.isOnline == false) {
+          this.dismissToast = true;
+          this.presentToastWithOptions("Hurra!", "Vuelves a tener conexion", "success", "warning-outline");
           this.htmlToAdd = '<h1 id="connection-text">Vuelves a tener conexion</h1>';
-          divConnectionAlert.style.backgroundColor = "green";
-          setTimeout(() => {
-            this.htmlToAdd = '';
-            divConnectionAlert.style.backgroundColor = "transparent";
-            this.isOnline = true;
-          },
-            5000);
+          this.divConnectionAlert.style.backgroundColor = "green";
+       
         }
 
       }
@@ -127,7 +116,7 @@ export class AppComponent {
 
   doConnection() {
 
-
+    var divConnectionAlert = document.getElementById("connection-alert");
     const echo = new Echo({
       broadcaster: 'pusher',
       key: 'local',
@@ -135,110 +124,6 @@ export class AppComponent {
       wsPort: 6001,
       forceTLS: false,
       disableStats: true
-    });
-    // echo.connector.pusher.connection.bind('state_change', function(states) {
-    //   if(states.current === 'disconnected') {
-    //       echo.connector.pusher.connect();
-    //   }
-    // });
-
-    echo.connector.pusher.connection.bind('unavailable', function () {
-      var divConnectionAlert = document.getElementById("connection-alert");
-
-
-
-
-
-      divConnectionAlert.innerHTML = '<h1 id="connection-text">No se puede establecer conexion con el servidor</h1>';
-
-
-      divConnectionAlert.style.backgroundColor = "red";
-
-    })
-
-    echo.connector.pusher.connection.bind('failed', function () {
-      var divConnectionAlert = document.getElementById("connection-alert");
-
-
-
-
-
-      divConnectionAlert.innerHTML = '<h1 id="connection-text">La conexioni con el servidor fallo</h1>';
-
-
-      divConnectionAlert.style.backgroundColor = "red";
-
-    })
-
-    echo.connector.pusher.connection.bind('disconnected', function () {
-      var divConnectionAlert = document.getElementById("connection-alert");
-
-
-
-
-
-      divConnectionAlert.innerHTML = '<h1 id="connection-text">Server caido</h1>';
-
-
-      divConnectionAlert.style.backgroundColor = "red";
-
-      echo.connector.pusher.connect();
-
-      this.isOnline = false;
-
-    });
-
-    // echo.connector.pusher.connection.bind('error', this.state("serverDown"))
-
-    echo.connector.pusher.connection.bind("error", function (error) {
-
-      var divConnectionAlert = document.getElementById("connection-alert");
-
-
-
-      console.error("connection error", error);
-
-      divConnectionAlert.innerHTML = '<h1 id="connection-text">Server con errores</h1>';
-
-
-      divConnectionAlert.style.backgroundColor = "red";
-
-
-
-      this.isOnline = false;
-
-    });
-
-    echo.connector.pusher.connection.bind('connected', function () {
-
-
-
-
-      var divConnectionAlert = document.getElementById("connection-alert");
-
-
-
-      divConnectionAlert.innerHTML = '<h1 id="connection-text">Servidor levantado</h1>';
-      divConnectionAlert.style.backgroundColor = "green";
-      setTimeout(() => {
-        this.htmlToAdd = '';
-        divConnectionAlert.style.backgroundColor = "transparent";
-        this.isOnline = true;
-      },
-        5000);
-
-    });
-
-
-
-
-
-    const channel = echo.channel('channel');
-    channel.listen('Message', (data) => {
-      console.log(JSON.stringify(data));
-      this.notification(data);
-      this.updateData();
-
     });
 
   }
@@ -299,7 +184,39 @@ export class AppComponent {
 
   }
 
+  async presentToastWithOptions(header, message, color, icon) {
+    
+    try {
+      this.toast.dismiss();
+  } catch(e) {}
+    this.toast = await this.toastController.create({
+      header: header,
+      message: message,
+      color: color,
+      icon: icon,
+      position: 'bottom',
 
+    });
+    await this.toast.present()
+if(this.dismissToast==true){
+    setTimeout(() => {
+      this.toast.dismiss();
+      this.htmlToAdd = '';
+      this.divConnectionAlert.style.backgroundColor = "transparent";
+      this.isOnline = true;
+    },
+      8000);
+  }
+}
 
 
 }
+
+
+
+
+
+
+
+
+

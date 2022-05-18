@@ -26,19 +26,19 @@ const routes = [
         children: [
             {
                 path: 'calendar/:id',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_laravel-echo-ionic_dist_echo_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_views_projects_project-tabs_calendar_calendar_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./calendar/calendar.module */ 9655)).then(m => m.CalendarPageModule)
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_views_projects_project-tabs_calendar_calendar_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./calendar/calendar.module */ 9655)).then(m => m.CalendarPageModule)
             },
             {
                 path: 'members/:id',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_laravel-echo-ionic_dist_echo_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_views_projects_project-tabs_members_members_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./members/members.module */ 3100)).then(m => m.MembersPageModule)
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_views_projects_project-tabs_members_members_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./members/members.module */ 3100)).then(m => m.MembersPageModule)
             },
             {
                 path: 'works/:id',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_laravel-echo-ionic_dist_echo_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_views_projects_project-tabs_works_works_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./works/works.module */ 6521)).then(m => m.WorksPageModule)
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_views_projects_project-tabs_works_works_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./works/works.module */ 6521)).then(m => m.WorksPageModule)
             },
             {
                 path: 'instruments/:id',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_laravel-echo-ionic_dist_echo_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_views_projects_project-tabs_instruments_instruments_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./instruments/instruments.module */ 3944)).then(m => m.InstrumentsPageModule)
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_views_projects_project-tabs_instruments_instruments_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./instruments/instruments.module */ 3944)).then(m => m.InstrumentsPageModule)
             },
             {
                 path: '',
@@ -49,7 +49,7 @@ const routes = [
     },
     {
         path: 'instruments',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_laravel-echo-ionic_dist_echo_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_views_projects_project-tabs_instruments_instruments_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./instruments/instruments.module */ 3944)).then(m => m.InstrumentsPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_views_projects_project-tabs_instruments_instruments_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./instruments/instruments.module */ 3944)).then(m => m.InstrumentsPageModule)
     }
 ];
 let TabsPageRoutingModule = class TabsPageRoutingModule {
@@ -191,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n    <ion-toolbar id=\"navbar\">\r\n        <ion-buttons slot=\"start\" routerLink=\"/home\">\r\n\r\n            <ion-icon id=\"go-back-button\" name=\"chevron-back-outline\"></ion-icon>\r\n\r\n        </ion-buttons>\r\n\r\n        <h2 id=\"navbar-text\">{{projectIdService.projectName}}</h2>\r\n\r\n    </ion-toolbar>\r\n    <hr id=\"separation-title\">\r\n</ion-header>\r\n\r\n<ion-content>\r\n    <ion-tabs>\r\n        <ion-tab-bar slot=\"bottom\">\r\n\r\n            <ion-tab-button tab=\"calendar/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"calendar\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n            <ion-tab-button tab=\"members/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"people\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n            <ion-tab-button tab=\"works/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"musical-notes-outline\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n            <ion-tab-button tab=\"instruments/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"triangle-outline\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n        </ion-tab-bar>\r\n    </ion-tabs>\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n    <ion-toolbar id=\"navbar\">\r\n        <ion-buttons slot=\"start\" routerLink=\"/\">\r\n\r\n            <ion-icon id=\"go-back-button\" name=\"chevron-back-outline\"></ion-icon>\r\n\r\n        </ion-buttons>\r\n\r\n        <h2 id=\"navbar-text\">{{projectIdService.projectName}}</h2>\r\n\r\n    </ion-toolbar>\r\n    <hr id=\"separation-title\">\r\n</ion-header>\r\n\r\n<ion-content>\r\n    <ion-tabs>\r\n        <ion-tab-bar slot=\"bottom\">\r\n\r\n            <ion-tab-button tab=\"calendar/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"calendar\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n            <ion-tab-button tab=\"members/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"people\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n            <ion-tab-button tab=\"works/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"musical-notes-outline\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n            <ion-tab-button tab=\"instruments/{{projectIdService.projectId}}\">\r\n                <ion-icon class=\"tabs-icons\" name=\"triangle-outline\"></ion-icon>\r\n            </ion-tab-button>\r\n\r\n        </ion-tab-bar>\r\n    </ion-tabs>\r\n</ion-content>");
 
 /***/ })
 

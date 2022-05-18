@@ -481,11 +481,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_login_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./login.page.html */ 6140);
 /* harmony import */ var _login_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login.page.scss */ 3104);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 9122);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 1228);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 9895);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ 8605);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 9895);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 3679);
 
 
@@ -495,15 +494,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 let LoginPage = class LoginPage {
-    constructor(alertController, authService, storage, formBuilder, router) {
+    constructor(alertController, authService, formBuilder, router) {
         this.alertController = alertController;
         this.authService = authService;
-        this.storage = storage;
         this.formBuilder = formBuilder;
         this.router = router;
     }
+    // Crea las validaciones
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
             email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
@@ -511,6 +509,7 @@ let LoginPage = class LoginPage {
                     _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(12), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,12}$')])],
         });
     }
+    // Lee el formulario y se lo envía al backend
     login(form) {
         let user = {
             id: null,
@@ -519,15 +518,23 @@ let LoginPage = class LoginPage {
         };
         this.authService.login(user).subscribe(() => {
             this.router.navigateByUrl('');
+            this.loginForm.reset();
+        }, (error) => {
+            let errorJSON = JSON.parse(error.error);
+            let errorMessage = "";
+            Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
+            console.log(errorMessage);
+            this.presentAlert(errorMessage);
         });
     }
+    // Alerta por si ocurre un error
     presentAlert(message) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 cssClass: 'my-custom-class',
                 header: 'Error',
                 subHeader: message,
-                message: 'Could not login. Try again.',
+                message: 'No se pudo iniciar sesión',
                 buttons: ['OK']
             });
             yield alert.present();
@@ -537,12 +544,11 @@ let LoginPage = class LoginPage {
 LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__.Storage },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router }
 ];
 LoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-login',
         template: _raw_loader_login_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_login_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]

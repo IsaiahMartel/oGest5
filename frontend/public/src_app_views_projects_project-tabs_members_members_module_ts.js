@@ -92,17 +92,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MembersPage": () => (/* binding */ MembersPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_members_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./members.page.html */ 8401);
 /* harmony import */ var _members_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./members.page.scss */ 4844);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 9895);
 /* harmony import */ var src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/address/address.service */ 7172);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 9122);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage */ 8605);
-/* harmony import */ var laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! laravel-echo-ionic */ 2012);
-
-
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ 8605);
 
 
 
@@ -111,10 +107,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let MembersPage = class MembersPage {
-    constructor(addressService, activatedRoute, alertController, storage) {
+    constructor(addressService, activatedRoute, storage) {
         this.addressService = addressService;
         this.activatedRoute = activatedRoute;
-        this.alertController = alertController;
         this.storage = storage;
         this.addressArray = [];
         this.project_id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -122,64 +117,40 @@ let MembersPage = class MembersPage {
     ngOnInit() {
         this.loadInfo();
     }
+    // Pasa los datos desde el local storage de address a un array
     loadInfo() {
         this.storage.get("address").then(data => {
             if (data) {
                 var array = JSON.parse(data);
                 array.filter((address) => {
                     if (address.id == this.project_id) {
+                        console.log(address);
                         return this.addressArray.push(address);
                     }
                     ;
                 });
             }
             else {
-                this.updateData();
+                // Si no tiene los datos, los va a buscar
+                this.getData();
             }
         });
     }
-    doConnection() {
-        const echo = new laravel_echo_ionic__WEBPACK_IMPORTED_MODULE_3__.Echo({
-            broadcaster: 'pusher',
-            key: 'local',
-            wsHost: 'localhost',
-            wsPort: 6001,
-            forceTLS: false,
-            disableStats: true
-        });
-        const channel = echo.channel('channel');
-        channel.listen('Alert', (data) => {
-            console.log(JSON.stringify(data));
-            this.notification(data);
-            this.updateData();
-        });
-    }
-    updateData() {
+    // Va a buscar los datos al backend
+    getData() {
         this.addressService.getAddresses().subscribe((p) => {
             this.storage.set("address", JSON.stringify(p));
             this.addressArray = p;
         });
     }
-    notification(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                cssClass: 'my-custom-class',
-                header: 'Se han realizado cambios',
-                message: message,
-                buttons: ['OK']
-            });
-            yield alert.present();
-        });
-    }
 };
 MembersPage.ctorParameters = () => [
     { type: src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_2__.AddressService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_7__.Storage }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.ActivatedRoute },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_4__.Storage }
 ];
-MembersPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+MembersPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-members',
         template: _raw_loader_members_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_members_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]
@@ -216,7 +187,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content has-header>\r\n\r\n    <div id=\"container\" *ngFor=\"let a of addressArray\">\r\n        <ng-container *ngFor=\"let address of a.addresses; index as i\">\r\n\r\n            <ion-card>\r\n\r\n                <ion-card-header>\r\n\r\n                    <h5 class=\"name-text\"> {{address.addressfirstName}} {{address.addresslastName}}</h5>\r\n                    <h6 class=\"title-text\">{{a.addressgroups[i].addressgroupName}}</h6>\r\n                </ion-card-header>\r\n            </ion-card>\r\n\r\n            <!-- <hr class=\"card-separation\"> -->\r\n\r\n        </ng-container>\r\n    </div>\r\n\r\n    <h1 class=\"ion-text-center\" *ngIf=\"addressArray.length==0\">\r\n        No hay miembros\r\n    </h1>\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content has-header>\r\n    <div id=\"container\" *ngFor=\"let a of addressArray\">\r\n\r\n        <ng-container *ngFor=\"let address of a.addresses; index as i\">\r\n            <ion-card>\r\n                <ion-card-header>\r\n                    <h5 class=\"name-text\"> {{address.addressfirstName}} {{address.addresslastName}}</h5>\r\n                    <h6 class=\"title-text\">{{a.addressgroups[i].addressgroupName}}</h6>\r\n                </ion-card-header>\r\n            </ion-card>\r\n        </ng-container>\r\n    </div>\r\n\r\n    <h1 class=\"ion-text-center\" *ngIf=\"addressArray.length==0\">\r\n        No hay miembros\r\n    </h1>\r\n</ion-content>");
 
 /***/ })
 

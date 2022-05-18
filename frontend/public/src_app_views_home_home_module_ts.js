@@ -1,80 +1,5 @@
 (self["webpackChunkOFGC"] = self["webpackChunkOFGC"] || []).push([["src_app_views_home_home_module_ts"],{
 
-/***/ 3929:
-/*!****************************************************!*\
-  !*** ./node_modules/@angular/common/locales/en.js ***!
-  \****************************************************/
-/***/ ((module, exports, __webpack_require__) => {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-(function (factory) {
-    if ( true && typeof module.exports === "object") {
-        var v = factory(null, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    // THIS CODE IS GENERATED - DO NOT MODIFY
-    // See angular/tools/gulp-tasks/cldr/extract.js
-    var u = undefined;
-    function plural(n) {
-        var i = Math.floor(Math.abs(n)), v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
-    exports.default = [
-        'en',
-        [['a', 'p'], ['AM', 'PM'], u],
-        [['AM', 'PM'], u, u],
-        [
-            ['S', 'M', 'T', 'W', 'T', 'F', 'S'], ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-        ],
-        u,
-        [
-            ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            [
-                'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-                'October', 'November', 'December'
-            ]
-        ],
-        u,
-        [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']],
-        0,
-        [6, 0],
-        ['M/d/yy', 'MMM d, y', 'MMMM d, y', 'EEEE, MMMM d, y'],
-        ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-        ['{1}, {0}', u, '{1} \'at\' {0}', u],
-        ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-        ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'],
-        'USD',
-        '$',
-        'US Dollar',
-        {},
-        'ltr',
-        plural
-    ];
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy9jb21tb24vbG9jYWxlcy9lbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7O0dBTUc7Ozs7Ozs7Ozs7OztJQUVILHlDQUF5QztJQUN6QywrQ0FBK0M7SUFFL0MsSUFBTSxDQUFDLEdBQUcsU0FBUyxDQUFDO0lBRXBCLFNBQVMsTUFBTSxDQUFDLENBQVM7UUFDdkIsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxPQUFPLENBQUMsV0FBVyxFQUFFLEVBQUUsQ0FBQyxDQUFDLE1BQU0sQ0FBQztRQUNsRixJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUM7WUFBRSxPQUFPLENBQUMsQ0FBQztRQUNqQyxPQUFPLENBQUMsQ0FBQztJQUNYLENBQUM7SUFFRCxrQkFBZTtRQUNiLElBQUk7UUFDSixDQUFDLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQyxFQUFFLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUM3QixDQUFDLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUM7UUFDcEI7WUFDRSxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsQ0FBQyxFQUFFLENBQUMsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxDQUFDO1lBQ3RGLENBQUMsUUFBUSxFQUFFLFFBQVEsRUFBRSxTQUFTLEVBQUUsV0FBVyxFQUFFLFVBQVUsRUFBRSxRQUFRLEVBQUUsVUFBVSxDQUFDO1lBQzlFLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDO1NBQzNDO1FBQ0QsQ0FBQztRQUNEO1lBQ0UsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsQ0FBQztZQUM1RCxDQUFDLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxDQUFDO1lBQ3BGO2dCQUNFLFNBQVMsRUFBRSxVQUFVLEVBQUUsT0FBTyxFQUFFLE9BQU8sRUFBRSxLQUFLLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxRQUFRLEVBQUUsV0FBVztnQkFDckYsU0FBUyxFQUFFLFVBQVUsRUFBRSxVQUFVO2FBQ2xDO1NBQ0Y7UUFDRCxDQUFDO1FBQ0QsQ0FBQyxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUMsRUFBRSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsRUFBRSxDQUFDLGVBQWUsRUFBRSxhQUFhLENBQUMsQ0FBQztRQUM1RCxDQUFDO1FBQ0QsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ04sQ0FBQyxRQUFRLEVBQUUsVUFBVSxFQUFFLFdBQVcsRUFBRSxpQkFBaUIsQ0FBQztRQUN0RCxDQUFDLFFBQVEsRUFBRSxXQUFXLEVBQUUsYUFBYSxFQUFFLGdCQUFnQixDQUFDO1FBQ3hELENBQUMsVUFBVSxFQUFFLENBQUMsRUFBRSxnQkFBZ0IsRUFBRSxDQUFDLENBQUM7UUFDcEMsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsS0FBSyxFQUFFLEdBQUcsQ0FBQztRQUM5RCxDQUFDLFdBQVcsRUFBRSxRQUFRLEVBQUUsV0FBVyxFQUFFLEtBQUssQ0FBQztRQUMzQyxLQUFLO1FBQ0wsR0FBRztRQUNILFdBQVc7UUFDWCxFQUFFO1FBQ0YsS0FBSztRQUNMLE1BQU07S0FDUCxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBMTEMgQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbi8vIFRISVMgQ09ERSBJUyBHRU5FUkFURUQgLSBETyBOT1QgTU9ESUZZXG4vLyBTZWUgYW5ndWxhci90b29scy9ndWxwLXRhc2tzL2NsZHIvZXh0cmFjdC5qc1xuXG5jb25zdCB1ID0gdW5kZWZpbmVkO1xuXG5mdW5jdGlvbiBwbHVyYWwobjogbnVtYmVyKTogbnVtYmVyIHtcbiAgbGV0IGkgPSBNYXRoLmZsb29yKE1hdGguYWJzKG4pKSwgdiA9IG4udG9TdHJpbmcoKS5yZXBsYWNlKC9eW14uXSpcXC4/LywgJycpLmxlbmd0aDtcbiAgaWYgKGkgPT09IDEgJiYgdiA9PT0gMCkgcmV0dXJuIDE7XG4gIHJldHVybiA1O1xufVxuXG5leHBvcnQgZGVmYXVsdCBbXG4gICdlbicsXG4gIFtbJ2EnLCAncCddLCBbJ0FNJywgJ1BNJ10sIHVdLFxuICBbWydBTScsICdQTSddLCB1LCB1XSxcbiAgW1xuICAgIFsnUycsICdNJywgJ1QnLCAnVycsICdUJywgJ0YnLCAnUyddLCBbJ1N1bicsICdNb24nLCAnVHVlJywgJ1dlZCcsICdUaHUnLCAnRnJpJywgJ1NhdCddLFxuICAgIFsnU3VuZGF5JywgJ01vbmRheScsICdUdWVzZGF5JywgJ1dlZG5lc2RheScsICdUaHVyc2RheScsICdGcmlkYXknLCAnU2F0dXJkYXknXSxcbiAgICBbJ1N1JywgJ01vJywgJ1R1JywgJ1dlJywgJ1RoJywgJ0ZyJywgJ1NhJ11cbiAgXSxcbiAgdSxcbiAgW1xuICAgIFsnSicsICdGJywgJ00nLCAnQScsICdNJywgJ0onLCAnSicsICdBJywgJ1MnLCAnTycsICdOJywgJ0QnXSxcbiAgICBbJ0phbicsICdGZWInLCAnTWFyJywgJ0FwcicsICdNYXknLCAnSnVuJywgJ0p1bCcsICdBdWcnLCAnU2VwJywgJ09jdCcsICdOb3YnLCAnRGVjJ10sXG4gICAgW1xuICAgICAgJ0phbnVhcnknLCAnRmVicnVhcnknLCAnTWFyY2gnLCAnQXByaWwnLCAnTWF5JywgJ0p1bmUnLCAnSnVseScsICdBdWd1c3QnLCAnU2VwdGVtYmVyJyxcbiAgICAgICdPY3RvYmVyJywgJ05vdmVtYmVyJywgJ0RlY2VtYmVyJ1xuICAgIF1cbiAgXSxcbiAgdSxcbiAgW1snQicsICdBJ10sIFsnQkMnLCAnQUQnXSwgWydCZWZvcmUgQ2hyaXN0JywgJ0Fubm8gRG9taW5pJ11dLFxuICAwLFxuICBbNiwgMF0sXG4gIFsnTS9kL3l5JywgJ01NTSBkLCB5JywgJ01NTU0gZCwgeScsICdFRUVFLCBNTU1NIGQsIHknXSxcbiAgWydoOm1tIGEnLCAnaDptbTpzcyBhJywgJ2g6bW06c3MgYSB6JywgJ2g6bW06c3MgYSB6enp6J10sXG4gIFsnezF9LCB7MH0nLCB1LCAnezF9IFxcJ2F0XFwnIHswfScsIHVdLFxuICBbJy4nLCAnLCcsICc7JywgJyUnLCAnKycsICctJywgJ0UnLCAnw5cnLCAn4oCwJywgJ+KInicsICdOYU4nLCAnOiddLFxuICBbJyMsIyMwLiMjIycsICcjLCMjMCUnLCAnwqQjLCMjMC4wMCcsICcjRTAnXSxcbiAgJ1VTRCcsXG4gICckJyxcbiAgJ1VTIERvbGxhcicsXG4gIHt9LFxuICAnbHRyJyxcbiAgcGx1cmFsXG5dO1xuIl19
-
-/***/ }),
-
 /***/ 248:
 /*!*******************************************************!*\
   !*** ./node_modules/@angular/common/locales/es-AR.js ***!
@@ -283,95 +208,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     ];
 });
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXMtUFkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy9jb21tb24vbG9jYWxlcy9lcy1QWS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7O0dBTUc7Ozs7Ozs7Ozs7OztJQUVILHlDQUF5QztJQUN6QywrQ0FBK0M7SUFFL0MsSUFBTSxDQUFDLEdBQUcsU0FBUyxDQUFDO0lBRXBCLFNBQVMsTUFBTSxDQUFDLENBQVM7UUFDdkIsSUFBSSxDQUFDLEtBQUssQ0FBQztZQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3RCLE9BQU8sQ0FBQyxDQUFDO0lBQ1gsQ0FBQztJQUVELGtCQUFlO1FBQ2IsT0FBTztRQUNQLENBQUMsQ0FBQyxPQUFPLEVBQUUsT0FBTyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUMxQixDQUFDO1FBQ0Q7WUFDRSxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsQ0FBQyxFQUFFLENBQUMsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxDQUFDO1lBQzdGLENBQUMsU0FBUyxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsV0FBVyxFQUFFLFFBQVEsRUFBRSxTQUFTLEVBQUUsUUFBUSxDQUFDO1lBQzFFLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDO1NBQzNDO1FBQ0Q7WUFDRSxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsQ0FBQyxFQUFFLENBQUMsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxDQUFDO1lBQzdGLENBQUMsU0FBUyxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsV0FBVyxFQUFFLFFBQVEsRUFBRSxTQUFTLEVBQUUsUUFBUSxDQUFDO1lBQzFFLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDO1NBQzNDO1FBQ0Q7WUFDRSxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxDQUFDO1lBQzVEO2dCQUNFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxNQUFNO2dCQUN2RixNQUFNO2FBQ1A7WUFDRDtnQkFDRSxPQUFPLEVBQUUsU0FBUyxFQUFFLE9BQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLE9BQU8sRUFBRSxPQUFPLEVBQUUsUUFBUSxFQUFFLFlBQVk7Z0JBQ3RGLFNBQVMsRUFBRSxXQUFXLEVBQUUsV0FBVzthQUNwQztTQUNGO1FBQ0QsQ0FBQztRQUNELENBQUMsQ0FBQyxPQUFPLEVBQUUsT0FBTyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsaUJBQWlCLEVBQUUsbUJBQW1CLENBQUMsQ0FBQztRQUNqRSxDQUFDO1FBQ0QsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ04sQ0FBQyxRQUFRLEVBQUUsU0FBUyxFQUFFLHdCQUF3QixFQUFFLDhCQUE4QixDQUFDO1FBQy9FLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxZQUFZLEVBQUUsZUFBZSxDQUFDO1FBQ3BELENBQUMsU0FBUyxFQUFFLENBQUMsRUFBRSx1QkFBdUIsRUFBRSxDQUFDLENBQUM7UUFDMUMsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsS0FBSyxFQUFFLEdBQUcsQ0FBQztRQUM5RCxDQUFDLFdBQVcsRUFBRSxTQUFTLEVBQUUsd0JBQXdCLEVBQUUsS0FBSyxDQUFDO1FBQ3pELEtBQUs7UUFDTCxLQUFLO1FBQ0wsbUJBQW1CO1FBQ25CO1lBQ0UsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNmLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUM7WUFDaEIsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNmLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUM7WUFDZixLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUM7WUFDWixLQUFLLEVBQUUsQ0FBQyxDQUFDLEVBQUUsR0FBRyxDQUFDO1lBQ2YsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEtBQUssQ0FBQztZQUNqQixLQUFLLEVBQUUsQ0FBQyxDQUFDLEVBQUUsR0FBRyxDQUFDO1lBQ2YsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNmLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUM7WUFDZixLQUFLLEVBQUUsQ0FBQyxDQUFDLEVBQUUsR0FBRyxDQUFDO1lBQ2YsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNmLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUM7WUFDZixLQUFLLEVBQUUsQ0FBQyxDQUFDLEVBQUUsR0FBRyxDQUFDO1lBQ2YsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNmLEtBQUssRUFBRSxDQUFDLEtBQUssRUFBRSxHQUFHLENBQUM7WUFDbkIsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNmLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxLQUFLLENBQUM7WUFDakIsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQztZQUNoQixLQUFLLEVBQUUsQ0FBQyxDQUFDLEVBQUUsS0FBSyxDQUFDO1lBQ2pCLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUM7WUFDZixLQUFLLEVBQUUsQ0FBQyxDQUFDLEVBQUUsS0FBSyxDQUFDO1lBQ2pCLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUM7WUFDZixLQUFLLEVBQUUsRUFBRTtZQUNULEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxHQUFHLENBQUM7WUFDZixLQUFLLEVBQUUsRUFBRTtTQUNWO1FBQ0QsS0FBSztRQUNMLE1BQU07S0FDUCxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBMTEMgQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbi8vIFRISVMgQ09ERSBJUyBHRU5FUkFURUQgLSBETyBOT1QgTU9ESUZZXG4vLyBTZWUgYW5ndWxhci90b29scy9ndWxwLXRhc2tzL2NsZHIvZXh0cmFjdC5qc1xuXG5jb25zdCB1ID0gdW5kZWZpbmVkO1xuXG5mdW5jdGlvbiBwbHVyYWwobjogbnVtYmVyKTogbnVtYmVyIHtcbiAgaWYgKG4gPT09IDEpIHJldHVybiAxO1xuICByZXR1cm4gNTtcbn1cblxuZXhwb3J0IGRlZmF1bHQgW1xuICAnZXMtUFknLFxuICBbWydhLsKgbS4nLCAncC7CoG0uJ10sIHUsIHVdLFxuICB1LFxuICBbXG4gICAgWydkJywgJ2wnLCAnbScsICdtJywgJ2onLCAndicsICdzJ10sIFsnZG9tLicsICdsdW4uJywgJ21hci4nLCAnbWnDqS4nLCAnanVlLicsICd2aWUuJywgJ3PDoWIuJ10sXG4gICAgWydkb21pbmdvJywgJ2x1bmVzJywgJ21hcnRlcycsICdtacOpcmNvbGVzJywgJ2p1ZXZlcycsICd2aWVybmVzJywgJ3PDoWJhZG8nXSxcbiAgICBbJ2RvJywgJ2x1JywgJ21hJywgJ21pJywgJ2p1JywgJ3ZpJywgJ3NhJ11cbiAgXSxcbiAgW1xuICAgIFsnRCcsICdMJywgJ00nLCAnTScsICdKJywgJ1YnLCAnUyddLCBbJ2RvbS4nLCAnbHVuLicsICdtYXIuJywgJ21pw6kuJywgJ2p1ZS4nLCAndmllLicsICdzw6FiLiddLFxuICAgIFsnZG9taW5nbycsICdsdW5lcycsICdtYXJ0ZXMnLCAnbWnDqXJjb2xlcycsICdqdWV2ZXMnLCAndmllcm5lcycsICdzw6FiYWRvJ10sXG4gICAgWydEbycsICdMdScsICdNYScsICdNaScsICdKdScsICdWaScsICdTYSddXG4gIF0sXG4gIFtcbiAgICBbJ0UnLCAnRicsICdNJywgJ0EnLCAnTScsICdKJywgJ0onLCAnQScsICdTJywgJ08nLCAnTicsICdEJ10sXG4gICAgW1xuICAgICAgJ2VuZS4nLCAnZmViLicsICdtYXIuJywgJ2Fici4nLCAnbWF5LicsICdqdW4uJywgJ2p1bC4nLCAnYWdvLicsICdzZXB0LicsICdvY3QuJywgJ25vdi4nLFxuICAgICAgJ2RpYy4nXG4gICAgXSxcbiAgICBbXG4gICAgICAnZW5lcm8nLCAnZmVicmVybycsICdtYXJ6bycsICdhYnJpbCcsICdtYXlvJywgJ2p1bmlvJywgJ2p1bGlvJywgJ2Fnb3N0bycsICdzZXB0aWVtYnJlJyxcbiAgICAgICdvY3R1YnJlJywgJ25vdmllbWJyZScsICdkaWNpZW1icmUnXG4gICAgXVxuICBdLFxuICB1LFxuICBbWydhLiBDLicsICdkLiBDLiddLCB1LCBbJ2FudGVzIGRlIENyaXN0bycsICdkZXNwdcOpcyBkZSBDcmlzdG8nXV0sXG4gIDAsXG4gIFs2LCAwXSxcbiAgWydkL00veXknLCAnZCBNTU0geScsICdkIFxcJ2RlXFwnIE1NTU0gXFwnZGVcXCcgeScsICdFRUVFLCBkIFxcJ2RlXFwnIE1NTU0gXFwnZGVcXCcgeSddLFxuICBbJ0hIOm1tJywgJ0hIOm1tOnNzJywgJ0hIOm1tOnNzIHonLCAnSEg6bW06c3Mgenp6eiddLFxuICBbJ3sxfSB7MH0nLCB1LCAnezF9IFxcJ2FcXCcgXFwnbGFzXFwnIHswfScsIHVdLFxuICBbJywnLCAnLicsICc7JywgJyUnLCAnKycsICctJywgJ0UnLCAnw5cnLCAn4oCwJywgJ+KInicsICdOYU4nLCAnOiddLFxuICBbJyMsIyMwLiMjIycsICcjLCMjMMKgJScsICfCpMKgIywjIzAuMDA7wqTCoC0jLCMjMC4wMCcsICcjRTAnXSxcbiAgJ1BZRycsXG4gICdHcy4nLFxuICAnZ3VhcmFuw60gcGFyYWd1YXlvJyxcbiAge1xuICAgICdBVUQnOiBbdSwgJyQnXSxcbiAgICAnQlJMJzogW3UsICdSJCddLFxuICAgICdDQUQnOiBbdSwgJyQnXSxcbiAgICAnQ05ZJzogW3UsICfCpSddLFxuICAgICdFU1AnOiBbJ+KCpyddLFxuICAgICdFVVInOiBbdSwgJ+KCrCddLFxuICAgICdGS1AnOiBbdSwgJ0ZLwqMnXSxcbiAgICAnR0JQJzogW3UsICfCoyddLFxuICAgICdIS0QnOiBbdSwgJyQnXSxcbiAgICAnSUxTJzogW3UsICfigqonXSxcbiAgICAnSU5SJzogW3UsICfigrknXSxcbiAgICAnSlBZJzogW3UsICfCpSddLFxuICAgICdLUlcnOiBbdSwgJ+KCqSddLFxuICAgICdNWE4nOiBbdSwgJyQnXSxcbiAgICAnTlpEJzogW3UsICckJ10sXG4gICAgJ1BZRyc6IFsnR3MuJywgJ+KCsiddLFxuICAgICdST04nOiBbdSwgJ0wnXSxcbiAgICAnU1NQJzogW3UsICdTRMKjJ10sXG4gICAgJ1NZUCc6IFt1LCAnU8KjJ10sXG4gICAgJ1RXRCc6IFt1LCAnTlQkJ10sXG4gICAgJ1VTRCc6IFt1LCAnJCddLFxuICAgICdWRUYnOiBbdSwgJ0JzRiddLFxuICAgICdWTkQnOiBbdSwgJ+KCqyddLFxuICAgICdYQUYnOiBbXSxcbiAgICAnWENEJzogW3UsICckJ10sXG4gICAgJ1hPRic6IFtdXG4gIH0sXG4gICdsdHInLFxuICBwbHVyYWxcbl07XG4iXX0=
-
-/***/ }),
-
-/***/ 2482:
-/*!****************************************************!*\
-  !*** ./node_modules/@angular/common/locales/pt.js ***!
-  \****************************************************/
-/***/ ((module, exports, __webpack_require__) => {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-(function (factory) {
-    if ( true && typeof module.exports === "object") {
-        var v = factory(null, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    // THIS CODE IS GENERATED - DO NOT MODIFY
-    // See angular/tools/gulp-tasks/cldr/extract.js
-    var u = undefined;
-    function plural(n) {
-        var i = Math.floor(Math.abs(n));
-        if (i === Math.floor(i) && i >= 0 && i <= 1)
-            return 1;
-        return 5;
-    }
-    exports.default = [
-        'pt',
-        [['AM', 'PM'], u, u],
-        u,
-        [
-            ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'], ['dom.', 'seg.', 'ter.', 'qua.', 'qui.', 'sex.', 'sáb.'],
-            [
-                'domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira',
-                'sábado'
-            ],
-            ['dom.', 'seg.', 'ter.', 'qua.', 'qui.', 'sex.', 'sáb.']
-        ],
-        u,
-        [
-            ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-            [
-                'jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'
-            ],
-            [
-                'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro',
-                'outubro', 'novembro', 'dezembro'
-            ]
-        ],
-        u,
-        [['a.C.', 'd.C.'], u, ['antes de Cristo', 'depois de Cristo']],
-        0,
-        [6, 0],
-        ['dd/MM/y', 'd \'de\' MMM \'de\' y', 'd \'de\' MMMM \'de\' y', 'EEEE, d \'de\' MMMM \'de\' y'],
-        ['HH:mm', 'HH:mm:ss', 'HH:mm:ss z', 'HH:mm:ss zzzz'],
-        ['{1} {0}', u, u, u],
-        [',', '.', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-        ['#,##0.###', '#,##0%', '¤ #,##0.00', '#E0'],
-        'BRL',
-        'R$',
-        'Real brasileiro',
-        {
-            'AUD': ['AU$', '$'],
-            'JPY': ['JP¥', '¥'],
-            'PTE': ['Esc.'],
-            'RON': [u, 'L'],
-            'SYP': [u, 'S£'],
-            'THB': ['฿'],
-            'TWD': ['NT$'],
-            'USD': ['US$', '$']
-        },
-        'ltr',
-        plural
-    ];
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy9jb21tb24vbG9jYWxlcy9wdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7O0dBTUc7Ozs7Ozs7Ozs7OztJQUVILHlDQUF5QztJQUN6QywrQ0FBK0M7SUFFL0MsSUFBTSxDQUFDLEdBQUcsU0FBUyxDQUFDO0lBRXBCLFNBQVMsTUFBTSxDQUFDLENBQVM7UUFDdkIsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDaEMsSUFBSSxDQUFDLEtBQUssSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDO1lBQUUsT0FBTyxDQUFDLENBQUM7UUFDdEQsT0FBTyxDQUFDLENBQUM7SUFDWCxDQUFDO0lBRUQsa0JBQWU7UUFDYixJQUFJO1FBQ0osQ0FBQyxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ3BCLENBQUM7UUFDRDtZQUNFLENBQUMsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxDQUFDLEVBQUUsQ0FBQyxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLENBQUM7WUFDN0Y7Z0JBQ0UsU0FBUyxFQUFFLGVBQWUsRUFBRSxhQUFhLEVBQUUsY0FBYyxFQUFFLGNBQWMsRUFBRSxhQUFhO2dCQUN4RixRQUFRO2FBQ1Q7WUFDRCxDQUFDLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sQ0FBQztTQUN6RDtRQUNELENBQUM7UUFDRDtZQUNFLENBQUMsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLENBQUM7WUFDNUQ7Z0JBQ0UsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNO2FBQy9GO1lBQ0Q7Z0JBQ0UsU0FBUyxFQUFFLFdBQVcsRUFBRSxPQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxPQUFPLEVBQUUsT0FBTyxFQUFFLFFBQVEsRUFBRSxVQUFVO2dCQUN4RixTQUFTLEVBQUUsVUFBVSxFQUFFLFVBQVU7YUFDbEM7U0FDRjtRQUNELENBQUM7UUFDRCxDQUFDLENBQUMsTUFBTSxFQUFFLE1BQU0sQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLGlCQUFpQixFQUFFLGtCQUFrQixDQUFDLENBQUM7UUFDOUQsQ0FBQztRQUNELENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUNOLENBQUMsU0FBUyxFQUFFLHVCQUF1QixFQUFFLHdCQUF3QixFQUFFLDhCQUE4QixDQUFDO1FBQzlGLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxZQUFZLEVBQUUsZUFBZSxDQUFDO1FBQ3BELENBQUMsU0FBUyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ3BCLENBQUMsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEtBQUssRUFBRSxHQUFHLENBQUM7UUFDOUQsQ0FBQyxXQUFXLEVBQUUsUUFBUSxFQUFFLFlBQVksRUFBRSxLQUFLLENBQUM7UUFDNUMsS0FBSztRQUNMLElBQUk7UUFDSixpQkFBaUI7UUFDakI7WUFDRSxLQUFLLEVBQUUsQ0FBQyxLQUFLLEVBQUUsR0FBRyxDQUFDO1lBQ25CLEtBQUssRUFBRSxDQUFDLEtBQUssRUFBRSxHQUFHLENBQUM7WUFDbkIsS0FBSyxFQUFFLENBQUMsTUFBTSxDQUFDO1lBQ2YsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQztZQUNmLEtBQUssRUFBRSxDQUFDLENBQUMsRUFBRSxJQUFJLENBQUM7WUFDaEIsS0FBSyxFQUFFLENBQUMsR0FBRyxDQUFDO1lBQ1osS0FBSyxFQUFFLENBQUMsS0FBSyxDQUFDO1lBQ2QsS0FBSyxFQUFFLENBQUMsS0FBSyxFQUFFLEdBQUcsQ0FBQztTQUNwQjtRQUNELEtBQUs7UUFDTCxNQUFNO0tBQ1AsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQGxpY2Vuc2VcbiAqIENvcHlyaWdodCBHb29nbGUgTExDIEFsbCBSaWdodHMgUmVzZXJ2ZWQuXG4gKlxuICogVXNlIG9mIHRoaXMgc291cmNlIGNvZGUgaXMgZ292ZXJuZWQgYnkgYW4gTUlULXN0eWxlIGxpY2Vuc2UgdGhhdCBjYW4gYmVcbiAqIGZvdW5kIGluIHRoZSBMSUNFTlNFIGZpbGUgYXQgaHR0cHM6Ly9hbmd1bGFyLmlvL2xpY2Vuc2VcbiAqL1xuXG4vLyBUSElTIENPREUgSVMgR0VORVJBVEVEIC0gRE8gTk9UIE1PRElGWVxuLy8gU2VlIGFuZ3VsYXIvdG9vbHMvZ3VscC10YXNrcy9jbGRyL2V4dHJhY3QuanNcblxuY29uc3QgdSA9IHVuZGVmaW5lZDtcblxuZnVuY3Rpb24gcGx1cmFsKG46IG51bWJlcik6IG51bWJlciB7XG4gIGxldCBpID0gTWF0aC5mbG9vcihNYXRoLmFicyhuKSk7XG4gIGlmIChpID09PSBNYXRoLmZsb29yKGkpICYmIGkgPj0gMCAmJiBpIDw9IDEpIHJldHVybiAxO1xuICByZXR1cm4gNTtcbn1cblxuZXhwb3J0IGRlZmF1bHQgW1xuICAncHQnLFxuICBbWydBTScsICdQTSddLCB1LCB1XSxcbiAgdSxcbiAgW1xuICAgIFsnRCcsICdTJywgJ1QnLCAnUScsICdRJywgJ1MnLCAnUyddLCBbJ2RvbS4nLCAnc2VnLicsICd0ZXIuJywgJ3F1YS4nLCAncXVpLicsICdzZXguJywgJ3PDoWIuJ10sXG4gICAgW1xuICAgICAgJ2RvbWluZ28nLCAnc2VndW5kYS1mZWlyYScsICd0ZXLDp2EtZmVpcmEnLCAncXVhcnRhLWZlaXJhJywgJ3F1aW50YS1mZWlyYScsICdzZXh0YS1mZWlyYScsXG4gICAgICAnc8OhYmFkbydcbiAgICBdLFxuICAgIFsnZG9tLicsICdzZWcuJywgJ3Rlci4nLCAncXVhLicsICdxdWkuJywgJ3NleC4nLCAnc8OhYi4nXVxuICBdLFxuICB1LFxuICBbXG4gICAgWydKJywgJ0YnLCAnTScsICdBJywgJ00nLCAnSicsICdKJywgJ0EnLCAnUycsICdPJywgJ04nLCAnRCddLFxuICAgIFtcbiAgICAgICdqYW4uJywgJ2Zldi4nLCAnbWFyLicsICdhYnIuJywgJ21haS4nLCAnanVuLicsICdqdWwuJywgJ2Fnby4nLCAnc2V0LicsICdvdXQuJywgJ25vdi4nLCAnZGV6LidcbiAgICBdLFxuICAgIFtcbiAgICAgICdqYW5laXJvJywgJ2ZldmVyZWlybycsICdtYXLDp28nLCAnYWJyaWwnLCAnbWFpbycsICdqdW5obycsICdqdWxobycsICdhZ29zdG8nLCAnc2V0ZW1icm8nLFxuICAgICAgJ291dHVicm8nLCAnbm92ZW1icm8nLCAnZGV6ZW1icm8nXG4gICAgXVxuICBdLFxuICB1LFxuICBbWydhLkMuJywgJ2QuQy4nXSwgdSwgWydhbnRlcyBkZSBDcmlzdG8nLCAnZGVwb2lzIGRlIENyaXN0byddXSxcbiAgMCxcbiAgWzYsIDBdLFxuICBbJ2RkL01NL3knLCAnZCBcXCdkZVxcJyBNTU0gXFwnZGVcXCcgeScsICdkIFxcJ2RlXFwnIE1NTU0gXFwnZGVcXCcgeScsICdFRUVFLCBkIFxcJ2RlXFwnIE1NTU0gXFwnZGVcXCcgeSddLFxuICBbJ0hIOm1tJywgJ0hIOm1tOnNzJywgJ0hIOm1tOnNzIHonLCAnSEg6bW06c3Mgenp6eiddLFxuICBbJ3sxfSB7MH0nLCB1LCB1LCB1XSxcbiAgWycsJywgJy4nLCAnOycsICclJywgJysnLCAnLScsICdFJywgJ8OXJywgJ+KAsCcsICfiiJ4nLCAnTmFOJywgJzonXSxcbiAgWycjLCMjMC4jIyMnLCAnIywjIzAlJywgJ8KkwqAjLCMjMC4wMCcsICcjRTAnXSxcbiAgJ0JSTCcsXG4gICdSJCcsXG4gICdSZWFsIGJyYXNpbGVpcm8nLFxuICB7XG4gICAgJ0FVRCc6IFsnQVUkJywgJyQnXSxcbiAgICAnSlBZJzogWydKUMKlJywgJ8KlJ10sXG4gICAgJ1BURSc6IFsnRXNjLiddLFxuICAgICdST04nOiBbdSwgJ0wnXSxcbiAgICAnU1lQJzogW3UsICdTwqMnXSxcbiAgICAnVEhCJzogWyfguL8nXSxcbiAgICAnVFdEJzogWydOVCQnXSxcbiAgICAnVVNEJzogWydVUyQnLCAnJCddXG4gIH0sXG4gICdsdHInLFxuICBwbHVyYWxcbl07XG4iXX0=
 
 /***/ }),
 
@@ -5899,22 +5735,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomePageModule": () => (/* binding */ HomePageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 8583);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 9122);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 3679);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 8583);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 3679);
 /* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home.page */ 6503);
-/* harmony import */ var ionic2_calendar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ionic2-calendar */ 7732);
+/* harmony import */ var ionic2_calendar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ionic2-calendar */ 7732);
 /* harmony import */ var _home_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home-routing.module */ 6279);
 /* harmony import */ var _angular_common_locales_es_PY__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/locales/es-PY */ 1428);
 /* harmony import */ var _angular_common_locales_es_PY__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es_PY__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _angular_common_locales_pt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/locales/pt */ 2482);
-/* harmony import */ var _angular_common_locales_pt__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_pt__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/locales/en */ 3929);
-/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/locales/es-AR */ 248);
-/* harmony import */ var _angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/locales/es-AR */ 248);
+/* harmony import */ var _angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -5926,25 +5758,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-(0,_angular_common__WEBPACK_IMPORTED_MODULE_6__.registerLocaleData)((_angular_common_locales_es_PY__WEBPACK_IMPORTED_MODULE_2___default()), 'es');
-(0,_angular_common__WEBPACK_IMPORTED_MODULE_6__.registerLocaleData)((_angular_common_locales_pt__WEBPACK_IMPORTED_MODULE_3___default()), 'pt');
-(0,_angular_common__WEBPACK_IMPORTED_MODULE_6__.registerLocaleData)((_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_4___default()), 'en');
-(0,_angular_common__WEBPACK_IMPORTED_MODULE_6__.registerLocaleData)((_angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_5___default()), 'es-Ar');
+(0,_angular_common__WEBPACK_IMPORTED_MODULE_4__.registerLocaleData)((_angular_common_locales_es_PY__WEBPACK_IMPORTED_MODULE_2___default()), 'es');
+(0,_angular_common__WEBPACK_IMPORTED_MODULE_4__.registerLocaleData)((_angular_common_locales_es_AR__WEBPACK_IMPORTED_MODULE_3___default()), 'es-Ar');
 let HomePageModule = class HomePageModule {
 };
-HomePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.NgModule)({
+HomePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_6__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule,
             _home_routing_module__WEBPACK_IMPORTED_MODULE_1__.HomePageRoutingModule,
-            ionic2_calendar__WEBPACK_IMPORTED_MODULE_11__.NgCalendarModule,
+            ionic2_calendar__WEBPACK_IMPORTED_MODULE_9__.NgCalendarModule,
         ],
         declarations: [_home_page__WEBPACK_IMPORTED_MODULE_0__.HomePage],
-        providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_8__.LOCALE_ID, useValue: 'es' }],
+        providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_6__.LOCALE_ID, useValue: 'es' }],
     })
 ], HomePageModule);
 
@@ -5963,18 +5791,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomePage": () => (/* binding */ HomePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! tslib */ 4762);
 /* harmony import */ var _raw_loader_home_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./home.page.html */ 4007);
 /* harmony import */ var _home_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.page.scss */ 8784);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _services_shedule_shedule_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/shedule/shedule.service */ 5068);
 /* harmony import */ var _services_projects_projects_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/projects/projects.service */ 1048);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 9122);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/storage */ 8605);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 9122);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/storage */ 8605);
 /* harmony import */ var src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/playlists/playlists.service */ 8871);
 /* harmony import */ var src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/address/address.service */ 7172);
-/* harmony import */ var ionic2_calendar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ionic2-calendar */ 7732);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 9895);
+/* harmony import */ var ionic2_calendar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ionic2-calendar */ 7732);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 9895);
 /* harmony import */ var src_app_services_project_id_project_id_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/project-id/project-id.service */ 5628);
 
 
@@ -6014,58 +5842,28 @@ let HomePage = class HomePage {
             currentDate: new Date(),
             noEventsLabel: "No hay proyectos",
         };
+        // Navegación al proyecto seleccionado
         this.eventSelected = (event) => {
             this.projectIdService.changeProjectId(event.projectId);
             this.router.navigateByUrl("/tabs/calendar/" + event.projectId);
         };
     }
     ngOnInit() {
-        //     const weekDays = document.getElementsByTagName("small");
-        // console.log(weekDays);
-        // for(let element of this.weekDays){
-        //   console.log(element);
-        // }
-        // console.log(this.weekDays);
-        // console.log(this.weekDaysQuerySelector);
-        const elements = Array.from(document.getElementsByTagName("small"));
-        console.log(elements);
-        elements.forEach((el) => {
-            console.log("xd");
-        });
-        const inputs = document.getElementsByTagName("small");
-        for (let index = 0; index < inputs.length; index++) {
-            const input = inputs.item(index);
-            console.log("xd");
-        }
-        // for (const tag of Array.from(this.weekDays)) {
-        //   console.log("Xd");
-        // }
-        // for (const element in this.weekDays) {
-        //   // for(var i =0; i<5;i++)
-        //   // console.log(element[i]);
-        //   // console.log(this.weekDays[i]);
-        //   // console.log("Xd");
-        // }
-        // Array.from(this.weekDays).forEach((el) =>
-        // console.log(el)
-        // );
-        // for(var i=0; i<35;i++){
-        //   console.log(this.weekDays.item(i));
-        // }
-        // this.projectsService.getProjects().subscribe((p: Array<Project>) => {
-        //   this.projectsArray = p.filter((project) => {
-        //     this.projects_id.push(project.id);
-        //   })
         this.loadInfo();
-        // })
-        console.log(document.querySelectorAll("small"));
     }
+    // Para ir atrás en el calendario
     next() {
         this.myCal.slideNext();
     }
+    // Para ir adelante en el calendario
     back() {
         this.myCal.slidePrev();
     }
+    // Cambia el nombre del mes al cambiarlo
+    onViewTitleChanged(title) {
+        this.viewTitle = title;
+    }
+    // Creación de eventos y aignación de todos los atributos a cada proyecto y shedule
     createEvents() {
         var events = [];
         this.colorPick = 0;
@@ -6165,17 +5963,18 @@ let HomePage = class HomePage {
             });
             this.colorPick++;
         }
-        var weekDays = document.getElementsByTagName("small");
         this.eventSource = events;
+        // Una vez se ha cargado el calendario se puede
+        this.weekDaysToUpperCaseAndRemoveDots();
+    }
+    weekDaysToUpperCaseAndRemoveDots() {
+        var weekDays = document.getElementsByTagName("small");
         for (const tag of Array.from(weekDays)) {
             var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
             tag.innerHTML = withoutDot;
         }
     }
-    // Selected date reange and hence title changed
-    onViewTitleChanged(title) {
-        this.viewTitle = title;
-    }
+    // Pasa los datos desde el local storage de shedule y projects a un array
     loadInfo() {
         this.storage.get("shedule").then(data => {
             if (data) {
@@ -6186,28 +5985,19 @@ let HomePage = class HomePage {
                         this.createEvents();
                     }
                     else {
-                        this.updateData();
+                        // Si no tiene los datos, los va a buscar
+                        this.getData();
                     }
                 });
             }
             else {
-                this.updateData();
+                // Si no tiene los datos, los va a buscar
+                this.getData();
             }
         });
     }
-    presentAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                cssClass: 'my-custom-class',
-                header: 'Error',
-                subHeader: message,
-                message: 'Inténtalo de nuevo.',
-                buttons: ['OK']
-            });
-            yield alert.present();
-        });
-    }
-    updateData() {
+    // Va a buscar los datos al backend
+    getData() {
         this.projectsService.getProjects().subscribe((p) => {
             this.storage.set("projects", JSON.stringify(p));
             this.projectsArray = p;
@@ -6228,17 +6018,7 @@ let HomePage = class HomePage {
             this.createEvents();
         });
     }
-    notification(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                cssClass: 'my-custom-class',
-                header: 'Se han realizado cambios',
-                message: message,
-                buttons: ['OK']
-            });
-            yield alert.present();
-        });
-    }
+    // Pinta los colores en el calendario
     getCustomClass(events) {
         if (events.length > 0) {
             for (let event of events) {
@@ -6255,8 +6035,8 @@ let HomePage = class HomePage {
         }
         return '';
     }
+    // Calcula la diiferencia entre días
     dateDiffInDays(a, b) {
-        // Discard the time and time-zone information.
         const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
         const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
         return (Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24)) + 1);
@@ -6267,17 +6047,17 @@ HomePage.ctorParameters = () => [
     { type: _services_shedule_shedule_service__WEBPACK_IMPORTED_MODULE_2__.SheduleService },
     { type: src_app_services_playlists_playlists_service__WEBPACK_IMPORTED_MODULE_4__.PlaylistsService },
     { type: src_app_services_address_address_service__WEBPACK_IMPORTED_MODULE_5__.AddressService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_10__.Storage },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_9__.Storage },
     { type: src_app_services_project_id_project_id_service__WEBPACK_IMPORTED_MODULE_6__.ProjectIdService },
-    { type: String, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_11__.Inject, args: [_angular_core__WEBPACK_IMPORTED_MODULE_11__.LOCALE_ID,] }] }
+    { type: String, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__.Inject, args: [_angular_core__WEBPACK_IMPORTED_MODULE_10__.LOCALE_ID,] }] }
 ];
 HomePage.propDecorators = {
-    myCal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_11__.ViewChild, args: [ionic2_calendar__WEBPACK_IMPORTED_MODULE_12__.CalendarComponent,] }]
+    myCal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__.ViewChild, args: [ionic2_calendar__WEBPACK_IMPORTED_MODULE_11__.CalendarComponent,] }]
 };
-HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_12__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-home',
         template: _raw_loader_home_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_home_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]
@@ -6299,7 +6079,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-content {\n  --offset-bottom: auto!important;\n  --overflow: hidden;\n  overflow: auto;\n}\nion-content::-webkit-scrollbar {\n  display: none;\n}\n#navbar {\n  height: 76px;\n  text-align: center;\n}\n#separation-title {\n  background-color: #006aab;\n  width: 350px;\n}\n#navbar-icon {\n  font-size: 50px;\n  position: absolute;\n  vertical-align: middle;\n  margin-top: 7px;\n  right: 25px;\n}\n#navbar-text {\n  font-size: 30px;\n  color: #464040;\n  font-family: \"Outfit\", sans-serif;\n  font-weight: 700;\n}\n#menu-icon {\n  vertical-align: middle;\n  font-size: 50px;\n  color: #464040;\n  position: absolute;\n  left: 0;\n}\n#home-menu-container {\n  height: 60px;\n}\n:host ::ng-deep .monthview-container {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n}\n:host ::ng-deep .monthview-eventdetail-timecolumn {\n  display: none;\n}\n:host ::ng-deep .event-detail {\n  font-size: 20px;\n  font-weight: bold;\n}\n:host ::ng-deep .no-events-label {\n  font-size: 20px;\n  font-weight: bold;\n}\n:host ::ng-deep .monthview-datetable td {\n  padding-left: 0 !important;\n  padding-right: 0 !important;\n  padding-top: 2px !important;\n  padding-bottom: 2px !important;\n  border-right: none !important;\n  border-left: none !important;\n  background-color: transparent !important;\n}\n:host ::ng-deep .monthview-datetable {\n  font-size: 20px;\n  font-weight: 250;\n  color: black !important;\n}\n:host ::ng-deep .monthview-datetable td.monthview-primary-with-event {\n  font-weight: 300;\n  color: black !important;\n}\n:host ::ng-deep .monthview-datetable .text-muted {\n  background-color: transparent !important;\n}\n:host ::ng-deep .yellow {\n  background-color: rgba(255, 218, 6, 0.726) !important;\n}\n:host ::ng-deep .red {\n  background-color: rgba(214, 120, 148, 0.61) !important;\n}\n:host ::ng-deep .green {\n  background-color: rgba(9, 243, 20, 0.815) !important;\n}\n:host ::ng-deep .blue {\n  background-color: rgba(0, 132, 255, 0.699) !important;\n}\n:host ::ng-deep .yellowConcert {\n  background-color: #ffda06 !important;\n}\n:host ::ng-deep .redConcert {\n  background-color: #d67894 !important;\n}\n:host ::ng-deep .greenConcert {\n  background-color: #048b0b !important;\n}\n:host ::ng-deep .blueConcert {\n  background-color: #0084ff !important;\n}\n:host ::ng-deep .freeDay {\n  background-color: rgba(179, 179, 179, 0.699) !important;\n}\n:host ::ng-deep .monthview-selected #div {\n  background-color: #ff0707 !important;\n}\n#div {\n  padding-top: 8px;\n  padding-bottom: 8px;\n}\n.event-detail-container {\n  flex-grow: 1;\n  overflow-y: scroll;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksK0JBQUE7RUFDQSxrQkFBQTtFQUNBLGNBQUE7QUFDSjtBQUFJO0VBQ0ksYUFBQTtBQUVSO0FBRUE7RUFDSSxZQUFBO0VBQ0Esa0JBQUE7QUFDSjtBQUVBO0VBQ0kseUJBQUE7RUFDQSxZQUFBO0FBQ0o7QUFFQTtFQUNJLGVBQUE7RUFDQSxrQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLFdBQUE7QUFDSjtBQUVBO0VBQ0ksZUFBQTtFQUNBLGNBQUE7RUFDQSxpQ0FBQTtFQUNBLGdCQUFBO0FBQ0o7QUFFQTtFQUNJLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7RUFDQSxrQkFBQTtFQUNBLE9BQUE7QUFDSjtBQUVBO0VBQ0ksWUFBQTtBQUNKO0FBR0k7RUFDSSxZQUFBO0VBQ0EsYUFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7QUFBUjtBQUVJO0VBQ0ksYUFBQTtBQUFSO0FBRUk7RUFDSSxlQUFBO0VBQ0EsaUJBQUE7QUFBUjtBQUVJO0VBQ0ksZUFBQTtFQUNBLGlCQUFBO0FBQVI7QUFFSTtFQUNJLDBCQUFBO0VBQ0EsMkJBQUE7RUFDQSwyQkFBQTtFQUNBLDhCQUFBO0VBQ0EsNkJBQUE7RUFDQSw0QkFBQTtFQUNBLHdDQUFBO0FBQVI7QUFFSTtFQUNJLGVBQUE7RUFDQSxnQkFBQTtFQUNBLHVCQUFBO0FBQVI7QUFFSTtFQUNJLGdCQUFBO0VBQ0EsdUJBQUE7QUFBUjtBQUVJO0VBQ0ksd0NBQUE7QUFBUjtBQUVJO0VBQ0kscURBQUE7QUFBUjtBQUVJO0VBQ0ksc0RBQUE7QUFBUjtBQUVJO0VBQ0ksb0RBQUE7QUFBUjtBQUVJO0VBQ0kscURBQUE7QUFBUjtBQUVJO0VBQ0ksb0NBQUE7QUFBUjtBQUVJO0VBQ0ksb0NBQUE7QUFBUjtBQUVJO0VBQ0ksb0NBQUE7QUFBUjtBQUVJO0VBQ0ksb0NBQUE7QUFBUjtBQUVJO0VBQ0ksdURBQUE7QUFBUjtBQUVJO0VBQ0ksb0NBQUE7QUFBUjtBQUlBO0VBQ0ksZ0JBQUE7RUFDQSxtQkFBQTtBQURKO0FBSUE7RUFDSSxZQUFBO0VBQ0Esa0JBQUE7QUFESiIsImZpbGUiOiJob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IHtcclxuICAgIC0tb2Zmc2V0LWJvdHRvbTogYXV0byFpbXBvcnRhbnQ7XHJcbiAgICAtLW92ZXJmbG93OiBoaWRkZW47XHJcbiAgICBvdmVyZmxvdzogYXV0bztcclxuICAgICY6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcclxuICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG59XHJcblxyXG4jbmF2YmFyIHtcclxuICAgIGhlaWdodDogNzZweDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuI3NlcGFyYXRpb24tdGl0bGUge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwNmFhYjtcclxuICAgIHdpZHRoOiAzNTBweDtcclxufVxyXG5cclxuI25hdmJhci1pY29uIHtcclxuICAgIGZvbnQtc2l6ZTogNTBweDtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICBtYXJnaW4tdG9wOiA3cHg7XHJcbiAgICByaWdodDogMjVweDtcclxufVxyXG5cclxuI25hdmJhci10ZXh0IHtcclxuICAgIGZvbnQtc2l6ZTogMzBweDtcclxuICAgIGNvbG9yOiAjNDY0MDQwO1xyXG4gICAgZm9udC1mYW1pbHk6ICdPdXRmaXQnLCBzYW5zLXNlcmlmO1xyXG4gICAgZm9udC13ZWlnaHQ6IDcwMDtcclxufVxyXG5cclxuI21lbnUtaWNvbiB7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG4gICAgZm9udC1zaXplOiA1MHB4O1xyXG4gICAgY29sb3I6ICM0NjQwNDA7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBsZWZ0OiAwO1xyXG59XHJcblxyXG4jaG9tZS1tZW51LWNvbnRhaW5lciB7XHJcbiAgICBoZWlnaHQ6IDYwcHg7XHJcbn1cclxuXHJcbiA6aG9zdCA6Om5nLWRlZXAge1xyXG4gICAgLm1vbnRodmlldy1jb250YWluZXIge1xyXG4gICAgICAgIGhlaWdodDogMTAwJTtcclxuICAgICAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgIH1cclxuICAgIC5tb250aHZpZXctZXZlbnRkZXRhaWwtdGltZWNvbHVtbiB7XHJcbiAgICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgIH1cclxuICAgIC5ldmVudC1kZXRhaWwge1xyXG4gICAgICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgICAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIH1cclxuICAgIC5uby1ldmVudHMtbGFiZWwge1xyXG4gICAgICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgICAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIH1cclxuICAgIC5tb250aHZpZXctZGF0ZXRhYmxlIHRkIHtcclxuICAgICAgICBwYWRkaW5nLWxlZnQ6IDAgIWltcG9ydGFudDtcclxuICAgICAgICBwYWRkaW5nLXJpZ2h0OiAwICFpbXBvcnRhbnQ7XHJcbiAgICAgICAgcGFkZGluZy10b3A6IDJweCAhaW1wb3J0YW50O1xyXG4gICAgICAgIHBhZGRpbmctYm90dG9tOiAycHggIWltcG9ydGFudDtcclxuICAgICAgICBib3JkZXItcmlnaHQ6IG5vbmUgIWltcG9ydGFudDtcclxuICAgICAgICBib3JkZXItbGVmdDogbm9uZSAhaW1wb3J0YW50O1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAubW9udGh2aWV3LWRhdGV0YWJsZSB7XHJcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OiAyNTA7XHJcbiAgICAgICAgY29sb3I6IGJsYWNrICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAubW9udGh2aWV3LWRhdGV0YWJsZSB0ZC5tb250aHZpZXctcHJpbWFyeS13aXRoLWV2ZW50IHtcclxuICAgICAgICBmb250LXdlaWdodDogMzAwO1xyXG4gICAgICAgIGNvbG9yOiBibGFjayAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG4gICAgLm1vbnRodmlldy1kYXRldGFibGUgLnRleHQtbXV0ZWQge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAueWVsbG93IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjE4LCA2LCAwLjcyNikgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5yZWQge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjE0LCAxMjAsIDE0OCwgMC42MSkhaW1wb3J0YW50O1xyXG4gICAgfVxyXG4gICAgLmdyZWVuIHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDksIDI0MywgMjAsIDAuODE1KSFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuYmx1ZSB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAxMzIsIDI1NSwgMC42OTkpICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAueWVsbG93Q29uY2VydCB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjE4LCA2KSAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG4gICAgLnJlZENvbmNlcnQge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigyMTQsIDEyMCwgMTQ4KSFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuZ3JlZW5Db25jZXJ0IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNCwgMTM5LCAxMSkhaW1wb3J0YW50O1xyXG4gICAgfVxyXG4gICAgLmJsdWVDb25jZXJ0IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMCwgMTMyLCAyNTUpICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuZnJlZURheSB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgxNzksIDE3OSwgMTc5LCAwLjY5OSkgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5tb250aHZpZXctc2VsZWN0ZWQgI2RpdiB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgNywgNykgIWltcG9ydGFudDtcclxuICAgIH1cclxufVxyXG5cclxuI2RpdiB7XHJcbiAgICBwYWRkaW5nLXRvcDogOHB4O1xyXG4gICAgcGFkZGluZy1ib3R0b206IDhweDtcclxufVxyXG5cclxuLmV2ZW50LWRldGFpbC1jb250YWluZXIge1xyXG4gICAgZmxleC1ncm93OiAxO1xyXG4gICAgb3ZlcmZsb3cteTogc2Nyb2xsO1xyXG59XHJcblxyXG4vLyAuYm9yZGVyIHtcclxuLy8gICAgIGJvcmRlcjogMXB4IHNvbGlkIGJsYWNrO1xyXG4vLyB9Il19 */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-content {\n  --offset-bottom: auto!important;\n  --overflow: hidden;\n  overflow: auto;\n}\nion-content::-webkit-scrollbar {\n  display: none;\n}\n#navbar {\n  height: 76px;\n  text-align: center;\n}\n#separation-title {\n  background-color: #006aab;\n  width: 350px;\n}\n#navbar-icon {\n  font-size: 50px;\n  position: absolute;\n  vertical-align: middle;\n  margin-top: 7px;\n  right: 25px;\n}\n#navbar-text {\n  font-size: 30px;\n  color: #464040;\n  font-family: \"Outfit\", sans-serif;\n  font-weight: 700;\n}\n#menu-icon {\n  vertical-align: middle;\n  font-size: 50px;\n  color: #464040;\n  position: absolute;\n  left: 0;\n}\n#home-menu-container {\n  height: 60px;\n}\n:host ::ng-deep .monthview-container {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n}\n:host ::ng-deep .monthview-eventdetail-timecolumn {\n  display: none;\n}\n:host ::ng-deep .event-detail {\n  font-size: 20px;\n  font-weight: bold;\n}\n:host ::ng-deep .no-events-label {\n  font-size: 20px;\n  font-weight: bold;\n}\n:host ::ng-deep .monthview-datetable td {\n  padding-left: 0 !important;\n  padding-right: 0 !important;\n  padding-top: 2px !important;\n  padding-bottom: 2px !important;\n  border-right: none !important;\n  border-left: none !important;\n  background-color: transparent !important;\n}\n:host ::ng-deep .monthview-datetable {\n  font-size: 20px;\n  font-weight: 250;\n  color: black !important;\n}\n:host ::ng-deep .monthview-datetable td.monthview-primary-with-event {\n  font-weight: 300;\n  color: black !important;\n}\n:host ::ng-deep .monthview-datetable .text-muted {\n  background-color: transparent !important;\n}\n:host ::ng-deep .yellow {\n  background-color: rgba(255, 218, 6, 0.726) !important;\n}\n:host ::ng-deep .red {\n  background-color: rgba(214, 120, 148, 0.61) !important;\n}\n:host ::ng-deep .green {\n  background-color: rgba(9, 243, 20, 0.815) !important;\n}\n:host ::ng-deep .blue {\n  background-color: rgba(0, 132, 255, 0.699) !important;\n}\n:host ::ng-deep .yellowConcert {\n  background-color: #ffda06 !important;\n}\n:host ::ng-deep .redConcert {\n  background-color: #d67894 !important;\n}\n:host ::ng-deep .greenConcert {\n  background-color: #048b0b !important;\n}\n:host ::ng-deep .blueConcert {\n  background-color: #0084ff !important;\n}\n:host ::ng-deep .freeDay {\n  background-color: rgba(179, 179, 179, 0.699) !important;\n}\n:host ::ng-deep .monthview-selected #div {\n  background-color: #ff0707 !important;\n}\n#divDays {\n  padding-top: 8px;\n  padding-bottom: 8px;\n}\n.event-detail-container {\n  flex-grow: 1;\n  overflow-y: scroll;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksK0JBQUE7RUFDQSxrQkFBQTtFQUNBLGNBQUE7QUFDSjtBQUFJO0VBQ0ksYUFBQTtBQUVSO0FBRUE7RUFDSSxZQUFBO0VBQ0Esa0JBQUE7QUFDSjtBQUVBO0VBQ0kseUJBQUE7RUFDQSxZQUFBO0FBQ0o7QUFFQTtFQUNJLGVBQUE7RUFDQSxrQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLFdBQUE7QUFDSjtBQUVBO0VBQ0ksZUFBQTtFQUNBLGNBQUE7RUFDQSxpQ0FBQTtFQUNBLGdCQUFBO0FBQ0o7QUFFQTtFQUNJLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7RUFDQSxrQkFBQTtFQUNBLE9BQUE7QUFDSjtBQUVBO0VBQ0ksWUFBQTtBQUNKO0FBSUk7RUFDSSxZQUFBO0VBQ0EsYUFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7QUFEUjtBQUdJO0VBQ0ksYUFBQTtBQURSO0FBR0k7RUFDSSxlQUFBO0VBQ0EsaUJBQUE7QUFEUjtBQUdJO0VBQ0ksZUFBQTtFQUNBLGlCQUFBO0FBRFI7QUFHSTtFQUNJLDBCQUFBO0VBQ0EsMkJBQUE7RUFDQSwyQkFBQTtFQUNBLDhCQUFBO0VBQ0EsNkJBQUE7RUFDQSw0QkFBQTtFQUNBLHdDQUFBO0FBRFI7QUFHSTtFQUNJLGVBQUE7RUFDQSxnQkFBQTtFQUNBLHVCQUFBO0FBRFI7QUFHSTtFQUNJLGdCQUFBO0VBQ0EsdUJBQUE7QUFEUjtBQUdJO0VBQ0ksd0NBQUE7QUFEUjtBQUdJO0VBQ0kscURBQUE7QUFEUjtBQUdJO0VBQ0ksc0RBQUE7QUFEUjtBQUdJO0VBQ0ksb0RBQUE7QUFEUjtBQUdJO0VBQ0kscURBQUE7QUFEUjtBQUdJO0VBQ0ksb0NBQUE7QUFEUjtBQUdJO0VBQ0ksb0NBQUE7QUFEUjtBQUdJO0VBQ0ksb0NBQUE7QUFEUjtBQUdJO0VBQ0ksb0NBQUE7QUFEUjtBQUdJO0VBQ0ksdURBQUE7QUFEUjtBQUdJO0VBQ0ksb0NBQUE7QUFEUjtBQUtBO0VBQ0ksZ0JBQUE7RUFDQSxtQkFBQTtBQUZKO0FBS0E7RUFDSSxZQUFBO0VBQ0Esa0JBQUE7QUFGSiIsImZpbGUiOiJob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IHtcclxuICAgIC0tb2Zmc2V0LWJvdHRvbTogYXV0byFpbXBvcnRhbnQ7XHJcbiAgICAtLW92ZXJmbG93OiBoaWRkZW47XHJcbiAgICBvdmVyZmxvdzogYXV0bztcclxuICAgICY6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcclxuICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG59XHJcblxyXG4jbmF2YmFyIHtcclxuICAgIGhlaWdodDogNzZweDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuI3NlcGFyYXRpb24tdGl0bGUge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwNmFhYjtcclxuICAgIHdpZHRoOiAzNTBweDtcclxufVxyXG5cclxuI25hdmJhci1pY29uIHtcclxuICAgIGZvbnQtc2l6ZTogNTBweDtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICBtYXJnaW4tdG9wOiA3cHg7XHJcbiAgICByaWdodDogMjVweDtcclxufVxyXG5cclxuI25hdmJhci10ZXh0IHtcclxuICAgIGZvbnQtc2l6ZTogMzBweDtcclxuICAgIGNvbG9yOiAjNDY0MDQwO1xyXG4gICAgZm9udC1mYW1pbHk6ICdPdXRmaXQnLCBzYW5zLXNlcmlmO1xyXG4gICAgZm9udC13ZWlnaHQ6IDcwMDtcclxufVxyXG5cclxuI21lbnUtaWNvbiB7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG4gICAgZm9udC1zaXplOiA1MHB4O1xyXG4gICAgY29sb3I6ICM0NjQwNDA7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBsZWZ0OiAwO1xyXG59XHJcblxyXG4jaG9tZS1tZW51LWNvbnRhaW5lciB7XHJcbiAgICBoZWlnaHQ6IDYwcHg7XHJcbn1cclxuXHJcbi8vIFBhcmEgYWNjZWRlciBhIFNoYWRvd1Jvb3QgKGVuY2Fwc3VsYW1pZW50bylcclxuIDpob3N0IDo6bmctZGVlcCB7XHJcbiAgICAubW9udGh2aWV3LWNvbnRhaW5lciB7XHJcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgICAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgfVxyXG4gICAgLm1vbnRodmlldy1ldmVudGRldGFpbC10aW1lY29sdW1uIHtcclxuICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG4gICAgLmV2ZW50LWRldGFpbCB7XHJcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgfVxyXG4gICAgLm5vLWV2ZW50cy1sYWJlbCB7XHJcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgfVxyXG4gICAgLm1vbnRodmlldy1kYXRldGFibGUgdGQge1xyXG4gICAgICAgIHBhZGRpbmctbGVmdDogMCAhaW1wb3J0YW50O1xyXG4gICAgICAgIHBhZGRpbmctcmlnaHQ6IDAgIWltcG9ydGFudDtcclxuICAgICAgICBwYWRkaW5nLXRvcDogMnB4ICFpbXBvcnRhbnQ7XHJcbiAgICAgICAgcGFkZGluZy1ib3R0b206IDJweCAhaW1wb3J0YW50O1xyXG4gICAgICAgIGJvcmRlci1yaWdodDogbm9uZSAhaW1wb3J0YW50O1xyXG4gICAgICAgIGJvcmRlci1sZWZ0OiBub25lICFpbXBvcnRhbnQ7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5tb250aHZpZXctZGF0ZXRhYmxlIHtcclxuICAgICAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICAgICAgZm9udC13ZWlnaHQ6IDI1MDtcclxuICAgICAgICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5tb250aHZpZXctZGF0ZXRhYmxlIHRkLm1vbnRodmlldy1wcmltYXJ5LXdpdGgtZXZlbnQge1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OiAzMDA7XHJcbiAgICAgICAgY29sb3I6IGJsYWNrICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAubW9udGh2aWV3LWRhdGV0YWJsZSAudGV4dC1tdXRlZCB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC55ZWxsb3cge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyMTgsIDYsIDAuNzI2KSAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG4gICAgLnJlZCB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyMTQsIDEyMCwgMTQ4LCAwLjYxKSFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuZ3JlZW4ge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoOSwgMjQzLCAyMCwgMC44MTUpIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5ibHVlIHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDEzMiwgMjU1LCAwLjY5OSkgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC55ZWxsb3dDb25jZXJ0IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyMTgsIDYpICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAucmVkQ29uY2VydCB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIxNCwgMTIwLCAxNDgpIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5ncmVlbkNvbmNlcnQge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYig0LCAxMzksIDExKSFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuYmx1ZUNvbmNlcnQge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigwLCAxMzIsIDI1NSkgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5mcmVlRGF5IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDE3OSwgMTc5LCAxNzksIDAuNjk5KSAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG4gICAgLm1vbnRodmlldy1zZWxlY3RlZCAjZGl2IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCA3LCA3KSAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG59XHJcblxyXG4jZGl2RGF5cyB7XHJcbiAgICBwYWRkaW5nLXRvcDogOHB4O1xyXG4gICAgcGFkZGluZy1ib3R0b206IDhweDtcclxufVxyXG5cclxuLmV2ZW50LWRldGFpbC1jb250YWluZXIge1xyXG4gICAgZmxleC1ncm93OiAxO1xyXG4gICAgb3ZlcmZsb3cteTogc2Nyb2xsO1xyXG59Il19 */");
 
 /***/ }),
 
@@ -6314,7 +6094,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\" id=\"navbar\">\r\n    <!-- <ion-toolbar id=\"navbar\"> -->\r\n    <!-- <ion-menu-button> -->\r\n    <ion-icon id=\"navbar-icon\" src=\"assets\\favicon_Blanco.svg\"></ion-icon>\r\n    <h2 id=\"navbar-text\">Calendario</h2>\r\n    <!-- </ion-menu-button> -->\r\n    <hr id=\"separation-title\">\r\n    <!-- </ion-toolbar> -->\r\n</ion-header>\r\n\r\n<ion-content class='has-header has-subheader'>\r\n\r\n    <ion-row>\r\n        <!-- Move back one screen of the slides -->\r\n        <ion-col size=\"2\">\r\n            <ion-button fill=\"clear\" (click)=\"back()\">\r\n                <ion-icon name=\"arrow-back\" slot=\"icon-only\"></ion-icon>\r\n            </ion-button>\r\n        </ion-col>\r\n\r\n        <ion-col size=\"8\" class=\"ion-text-center\">\r\n            <h2>{{ viewTitle }}</h2>\r\n        </ion-col>\r\n\r\n        <!-- Move forward one screen of the slides -->\r\n        <ion-col size=\"2\">\r\n            <ion-button fill=\"clear\" (click)=\"next()\">\r\n                <ion-icon name=\"arrow-forward\" slot=\"icon-only\"></ion-icon>\r\n            </ion-button>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n\r\n    <ng-template #colors let-view=\"view\" let-row=\"row\" let-col=\"col\">\r\n\r\n        <div id=\"div\" [ngClass]=\"getCustomClass(view.dates[row*7+col].events)\">\r\n\r\n            {{view.dates[row*7+col].label}}\r\n\r\n\r\n        </div>\r\n\r\n\r\n\r\n    </ng-template>\r\n\r\n    <ng-template #sheduleAndProject let-showEventDetail=\"showEventDetail\" let-selectedDate=\"selectedDate\" let-noEventsLabel=\"noEventsLabel\">\r\n        <ion-list class=\"event-detail-container\" has-bouncing=\"false\" *ngIf=\"showEventDetail\">\r\n            <ion-item *ngFor=\"let event of selectedDate?.events\" (click)=\"eventSelected(event)\">\r\n\r\n\r\n                <span *ngIf=\"event.projectId\" class=\"event-detail\">{{event.title}}</span>\r\n                <ng-container *ngIf=\"event.titleShedule\">\r\n                    <ion-card>\r\n                        <ion-card-header>\r\n                            <h3 class=\"ion-float-right\" *ngIf=\"event.roomAcronym!=''\">{{event.roomAcronym}}</h3>\r\n                            <ion-card-title>{{event.titleShedule}} </ion-card-title>\r\n\r\n                        </ion-card-header>\r\n\r\n                        <ion-card-content>\r\n\r\n\r\n\r\n                            <h2 *ngIf=\"event.sheduleNote!=''\"><b>Notas: </b>{{event.sheduleNote}} </h2>\r\n                            <hr id=\"separation-title\">\r\n                            <h2 class=\"ion-float-right\" *ngIf=\"event.sheduleHour!=''\"> {{event.sheduleHour}} </h2>\r\n\r\n\r\n\r\n                        </ion-card-content>\r\n                    </ion-card>\r\n                </ng-container>\r\n            </ion-item>\r\n            <ion-item *ngIf=\"selectedDate?.events.length==0\">\r\n                <div class=\"no-events-label\">{{noEventsLabel}}</div>\r\n            </ion-item>\r\n        </ion-list>\r\n    </ng-template>\r\n\r\n    <calendar [monthviewDisplayEventTemplate]=\"colors\" [monthviewEventDetailTemplate]=\"sheduleAndProject\" [noEventsLabel]=\"calendar.noEventsLabel \" [eventSource]=\"eventSource\" [calendarMode]=\"calendar.mode\" [currentDate]=\"calendar.currentDate\" [startingDayMonth]=\"1\"\r\n        (onTitleChanged)=\"onViewTitleChanged($event)\" startHour=\"6\" endHour=\"20\" step=\"30\" startingDayWeek=\"1\" (onTitleChanged)=\"onViewTitleChanged($event)\">\r\n    </calendar>\r\n\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\" id=\"navbar\">\r\n    <ion-icon id=\"navbar-icon\" src=\"assets\\favicon_Blanco.svg\"></ion-icon>\r\n    <h2 id=\"navbar-text\">Calendario</h2>\r\n    <hr id=\"separation-title\">\r\n</ion-header>\r\n\r\n<ion-content class='has-header has-subheader'>\r\n\r\n    <ion-row>\r\n        <!-- Atrás en el calendario -->\r\n        <ion-col size=\"2\">\r\n            <ion-button fill=\"clear\" (click)=\"back()\">\r\n                <ion-icon name=\"arrow-back\" slot=\"icon-only\"></ion-icon>\r\n            </ion-button>\r\n        </ion-col>\r\n\r\n        <ion-col size=\"8\" class=\"ion-text-center\">\r\n            <h2>{{ viewTitle }}</h2>\r\n        </ion-col>\r\n\r\n        <!-- Adelante en el calendario -->\r\n        <ion-col size=\"2\">\r\n            <ion-button fill=\"clear\" (click)=\"next()\">\r\n                <ion-icon name=\"arrow-forward\" slot=\"icon-only\"></ion-icon>\r\n            </ion-button>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n    <!-- Tabla de días -->\r\n    <ng-template #colors let-view=\"view\" let-row=\"row\" let-col=\"col\">\r\n\r\n        <div id=\"divDays\" [ngClass]=\"getCustomClass(view.dates[row*7+col].events)\">\r\n\r\n            {{view.dates[row*7+col].label}}\r\n        </div>\r\n    </ng-template>\r\n\r\n    <!-- Eventos y proyectos -->\r\n    <ng-template #sheduleAndProject let-showEventDetail=\"showEventDetail\" let-selectedDate=\"selectedDate\" let-noEventsLabel=\"noEventsLabel\">\r\n        <ion-list class=\"event-detail-container\" has-bouncing=\"false\" *ngIf=\"showEventDetail\">\r\n            <ion-item *ngFor=\"let event of selectedDate?.events\" (click)=\"eventSelected(event)\">\r\n\r\n\r\n                <span *ngIf=\"event.projectId\" class=\"event-detail\">{{event.title}}</span>\r\n                <ng-container *ngIf=\"event.titleShedule\">\r\n                    <ion-card>\r\n                        <ion-card-header>\r\n                            <h3 class=\"ion-float-right\" *ngIf=\"event.roomAcronym!=''\">{{event.roomAcronym}}</h3>\r\n                            <ion-card-title>{{event.titleShedule}} </ion-card-title>\r\n\r\n                        </ion-card-header>\r\n\r\n                        <ion-card-content>\r\n                            <h2 *ngIf=\"event.sheduleNote!=''\"><b>Notas: </b>{{event.sheduleNote}} </h2>\r\n                            <hr id=\"separation-title\">\r\n                            <h2 class=\"ion-float-right\" *ngIf=\"event.sheduleHour!=''\"> {{event.sheduleHour}} </h2>\r\n                        </ion-card-content>\r\n                    </ion-card>\r\n                </ng-container>\r\n            </ion-item>\r\n            <ion-item *ngIf=\"selectedDate?.events.length==0\">\r\n                <div class=\"no-events-label\">{{noEventsLabel}}</div>\r\n            </ion-item>\r\n        </ion-list>\r\n    </ng-template>\r\n\r\n    <!-- Implementación del calendario -->\r\n    <calendar [monthviewDisplayEventTemplate]=\"colors\" [monthviewEventDetailTemplate]=\"sheduleAndProject\" [noEventsLabel]=\"calendar.noEventsLabel \" [eventSource]=\"eventSource\" [calendarMode]=\"calendar.mode\" [currentDate]=\"calendar.currentDate\" [startingDayMonth]=\"1\"\r\n        (onTitleChanged)=\"onViewTitleChanged($event)\" startHour=\"6\" endHour=\"20\" step=\"30\" startingDayWeek=\"1\" (onTitleChanged)=\"onViewTitleChanged($event)\">\r\n    </calendar>\r\n\r\n</ion-content>");
 
 /***/ })
 

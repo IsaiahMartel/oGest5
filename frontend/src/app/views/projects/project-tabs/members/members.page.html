@@ -1,19 +1,13 @@
 <ion-content has-header>
-
     <div id="container" *ngFor="let a of addressArray">
+
         <ng-container *ngFor="let address of a.addresses; index as i">
-
             <ion-card>
-
                 <ion-card-header>
-
                     <h5 class="name-text"> {{address.addressfirstName}} {{address.addresslastName}}</h5>
                     <h6 class="title-text">{{a.addressgroups[i].addressgroupName}}</h6>
                 </ion-card-header>
             </ion-card>
-
-            <!-- <hr class="card-separation"> -->
-
         </ng-container>
     </div>
 

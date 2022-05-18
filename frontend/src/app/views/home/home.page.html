@@ -1,17 +1,13 @@
 <ion-header class="ion-no-border" id="navbar">
-    <!-- <ion-toolbar id="navbar"> -->
-    <!-- <ion-menu-button> -->
     <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
     <h2 id="navbar-text">Calendario</h2>
-    <!-- </ion-menu-button> -->
     <hr id="separation-title">
-    <!-- </ion-toolbar> -->
 </ion-header>
 
 <ion-content class='has-header has-subheader'>
 
     <ion-row>
-        <!-- Move back one screen of the slides -->
+        <!-- Atrás en el calendario -->
         <ion-col size="2">
             <ion-button fill="clear" (click)="back()">
                 <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
@@ -22,7 +18,7 @@
             <h2>{{ viewTitle }}</h2>
         </ion-col>
 
-        <!-- Move forward one screen of the slides -->
+        <!-- Adelante en el calendario -->
         <ion-col size="2">
             <ion-button fill="clear" (click)="next()">
                 <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
@@ -30,20 +26,16 @@
         </ion-col>
     </ion-row>
 
-
+    <!-- Tabla de días -->
     <ng-template #colors let-view="view" let-row="row" let-col="col">
 
-        <div id="div" [ngClass]="getCustomClass(view.dates[row*7+col].events)">
+        <div id="divDays" [ngClass]="getCustomClass(view.dates[row*7+col].events)">
 
             {{view.dates[row*7+col].label}}
-
-
         </div>
-
-
-
     </ng-template>
 
+    <!-- Eventos y proyectos -->
     <ng-template #sheduleAndProject let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
         <ion-list class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail">
             <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
@@ -59,15 +51,9 @@
                         </ion-card-header>
 
                         <ion-card-content>
-
-
-
                             <h2 *ngIf="event.sheduleNote!=''"><b>Notas: </b>{{event.sheduleNote}} </h2>
                             <hr id="separation-title">
                             <h2 class="ion-float-right" *ngIf="event.sheduleHour!=''"> {{event.sheduleHour}} </h2>
-
-
-
                         </ion-card-content>
                     </ion-card>
                 </ng-container>
@@ -78,6 +64,7 @@
         </ion-list>
     </ng-template>
 
+    <!-- Implementación del calendario -->
     <calendar [monthviewDisplayEventTemplate]="colors" [monthviewEventDetailTemplate]="sheduleAndProject" [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" [startingDayMonth]="1"
         (onTitleChanged)="onViewTitleChanged($event)" startHour="6" endHour="20" step="30" startingDayWeek="1" (onTitleChanged)="onViewTitleChanged($event)">
     </calendar>

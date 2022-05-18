@@ -16,39 +16,39 @@ use Illuminate\Support\Facades\Auth;
 
 class MobileController extends Controller
 {
-public function getProjects()
-    {
-     
-            $projects = Project::with('events')->where('projectLevel',0)->get();
+        public function getProjects()
+        {
+         
+                $projects = Project::with('events')->where('projectLevel',0)->get();
+        
+                return $projects;
+        }
     
-            return $projects;
-    }
-
-
-    public function getPlaylists()
-    {
-     
-            $playlist = Playlist::with('works', 'perplaylists', 'keyplaylists', 'voiplaylists')->get();
     
-            return $playlist;
-    }
-
-    public function getShedules()
-    {
-     
-            $shedule = Shedule::with('rooms', 'tipeshedules')->get();
+        public function getPlaylists()
+        {
+         
+                $playlist = Playlist::with('works', 'perplaylists', 'keyplaylists', 'voiplaylists', 'works.composers')->get();
+        
+                return $playlist;
+        }
     
-            return $shedule;
-    }
-
-    public function getAddresses()
-    {
-     
-            $address = Addressgroup::first()->project()->with('addressgroups')->get();
+        public function getShedules()
+        {
+         
+                $shedule = Shedule::with('rooms', 'tipeshedules')->get();
+        
+                return $shedule;
+        }
     
-            return $address;
-    }
-
+        public function getAddresses()
+        {
+         
+                $address = Project::with('addresses', 'addressgroups')->get();
+        
+                return $address;
+        }
+    
     public function checkBackendIsUp()
     {
      

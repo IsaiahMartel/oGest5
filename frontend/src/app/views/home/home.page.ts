@@ -5,7 +5,7 @@ import { Project } from '../../models/project';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { Echo } from 'laravel-echo-ionic';
+
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { Playlist } from 'src/app/models/playlist';
 import { Address } from 'src/app/models/address';
@@ -14,7 +14,7 @@ import { CalendarComponent } from 'ionic2-calendar';
 import { Router } from '@angular/router';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { AddressGroup } from 'src/app/models/address-group';
-import { LoginPage } from '../login/login.page';
+
 
 @Component({
   selector: 'app-home',
@@ -33,7 +33,7 @@ export class HomePage {
   public addressArray: Array<Address> = [];
   private isEverythingSaved = 0;
 
-private weekDaysQuerySelector = document.querySelector("small")
+  private weekDaysQuerySelector = document.querySelector("small")
   colorPick: number = 0;
 
   eventSource = [];
@@ -61,91 +61,30 @@ private weekDaysQuerySelector = document.querySelector("small")
     public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
 
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
-//     const weekDays = document.getElementsByTagName("small");
-// console.log(weekDays);
-
-
-
-
-
-
-// for(let element of this.weekDays){
-//   console.log(element);
-// }
-// console.log(this.weekDays);
-// console.log(this.weekDaysQuerySelector);
-
-
-
-// const elements: Element[] = Array.from( document.getElementsByTagName("small"));
-// console.log(elements);
-// elements.forEach((el: Element) => {
-// console.log("xd");
-
-// })
-
-// const inputs = document.getElementsByTagName("small");
-// for (let index = 0; index < inputs.length; index++) {
-//   const input = inputs.item(index);
-//   console.log("xd");
-  
-// }
-// for (const tag of Array.from(this.weekDays)) {
-//   console.log("Xd");
-  
-// }
-
-// for (const element in this.weekDays) {
-//   // for(var i =0; i<5;i++)
-//   // console.log(element[i]);
-//   // console.log(this.weekDays[i]);
-  
-//   // console.log("Xd");
-  
-// }
-
-// Array.from(this.weekDays).forEach((el) =>
-// console.log(el)
-
-// );
-
-// for(var i=0; i<35;i++){
-//   console.log(this.weekDays.item(i));
-  
-  
-// }
-
-    // this.projectsService.getProjects().subscribe((p: Array<Project>) => {
-
-
-    //   this.projectsArray = p.filter((project) => {
-
-    //     this.projects_id.push(project.id);
-
-
-    //   })
-      this.loadInfo();
-    // })
-    console.log( document.querySelectorAll("small"));
-
-
+    this.loadInfo();
   }
 
+  // Para ir atrás en el calendario
   next() {
     this.myCal.slideNext();
   }
 
+  // Para ir adelante en el calendario
   back() {
     this.myCal.slidePrev();
   }
 
+  // Cambia el nombre del mes al cambiarlo
+  onViewTitleChanged(title) {
+    this.viewTitle = title;
 
+  }
+
+  // Creación de eventos y aignación de todos los atributos a cada proyecto y shedule
   createEvents() {
-
-    
     var events = [];
 
     this.colorPick = 0;
@@ -188,19 +127,10 @@ private weekDaysQuerySelector = document.querySelector("small")
       this.sheduleArray.filter((shedule) => {
 
         if (shedule.project_id == project.id) {
-
-
-
-
           startDateShedule = new Date(shedule.sheduleDate);
           endDateShedule = new Date(shedule.sheduleDate);
           titleShedule = shedule.sheduleTipe;
           sheduleHour = shedule.shedulehourRange;
-
-
-
-
-
 
           if (this.colorPick == 0) {
 
@@ -253,9 +183,6 @@ private weekDaysQuerySelector = document.querySelector("small")
             sheduleNote = shedule.sheduleNote;
           }
 
-
-
-
           events.push({
             titleShedule: titleShedule,
             startTime: startDateShedule,
@@ -267,36 +194,35 @@ private weekDaysQuerySelector = document.querySelector("small")
             projectId: project.id,
           });
 
-
         }
 
         if (this.colorPick == 3) {
           this.colorPick = 0;
         }
 
-
       })
       this.colorPick++;
 
 
-
-
     }
-var   weekDays = document.getElementsByTagName("small");
 
     this.eventSource = events;
-  for (const tag of Array.from(weekDays)) {
-var withoutDot =tag.innerHTML.substring(0,1).toUpperCase();
-  tag.innerHTML= withoutDot;
-}
 
+    // Una vez se ha cargado el calendario se puede
+    this.weekDaysToUpperCaseAndRemoveDots();
   }
 
-  // Selected date reange and hence title changed
-  onViewTitleChanged(title) {
-    this.viewTitle = title;
+
+  weekDaysToUpperCaseAndRemoveDots() {
+    var weekDays = document.getElementsByTagName("small");
+    for (const tag of Array.from(weekDays)) {
+      var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
+      tag.innerHTML = withoutDot;
+    }
   }
 
+
+  // Pasa los datos desde el local storage de shedule y projects a un array
   loadInfo() {
 
     this.storage.get("shedule").then(data => {
@@ -312,130 +238,98 @@ var withoutDot =tag.innerHTML.substring(0,1).toUpperCase();
           }
 
           else {
-            this.updateData();
+            // Si no tiene los datos, los va a buscar
+            this.getData();
           }
         })
 
       }
 
       else {
-        this.updateData();
+        // Si no tiene los datos, los va a buscar
+        this.getData();
       }
     })
-
-
-  }
-
-  async presentAlert(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Error',
-      subHeader: message,
-      message: 'Inténtalo de nuevo.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
   }
 
 
+  // Va a buscar los datos al backend
+  getData() {
+    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
+
+      this.storage.set("projects", JSON.stringify(p));
+      this.projectsArray = p;
 
 
-  updateData() {
- 
 
-      this.projectsService.getProjects().subscribe((p: Array<Project>) => {
 
-        this.storage.set("projects", JSON.stringify(p));
-        this.projectsArray = p;
-       
-     
-     
-          
-          this.createEvents;
-    
-      })
+      this.createEvents;
 
-      this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
+    })
 
-        this.storage.set("address", JSON.stringify(p));
-    
-       
+    this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
 
-          this.createEvents;
-    
-      })
+      this.storage.set("address", JSON.stringify(p));
 
-      this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
 
-        this.storage.set("playlist", JSON.stringify(p));
-        this.playlistArray = p;
-       
-          this.createEvents;
-    
-      })
 
-      this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
+      this.createEvents;
 
-        this.storage.set("shedule", JSON.stringify(p));
-        this.sheduleArray = p;
-  
-  this.createEvents();
+    })
 
-      })
+    this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
 
-    
+      this.storage.set("playlist", JSON.stringify(p));
+      this.playlistArray = p;
+
+      this.createEvents;
+
+    })
+
+    this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
+
+      this.storage.set("shedule", JSON.stringify(p));
+      this.sheduleArray = p;
+
+      this.createEvents();
+    })
   }
 
-  
-
-  async notification(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Se han realizado cambios',
-      message: message,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-
+  // Navegación al proyecto seleccionado
   eventSelected = (event) => {
-
-
-
-
     this.projectIdService.changeProjectId(event.projectId);
 
     this.router.navigateByUrl("/tabs/calendar/" + event.projectId);
 
   };
 
+// Pinta los colores en el calendario
+    getCustomClass(events) {
+      if (events.length > 0) {
 
-  getCustomClass(events) {
-    if (events.length > 0) {
+        for (let event of events) {
+          if (event.titleShedule) {
+            if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE") {
 
-      for (let event of events) {
-        if (event.titleShedule) {
-          if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE") {
+              return event.colorEvent;
 
-            return event.colorEvent;
-
+            }
           }
         }
+        if (events.length >= 1) {
+
+          return events[1].colorEvent;
+        }
+
+        return events[0].colorEvent;
+
       }
-      if (events.length >= 1) {
-
-        return events[1].colorEvent;
-      }
-
-      return events[0].colorEvent;
-
+      return '';
     }
-    return '';
-  }
 
+// Calcula la diiferencia entre días
   dateDiffInDays(a, b) {
-    // Discard the time and time-zone information.
+
     const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
     const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 

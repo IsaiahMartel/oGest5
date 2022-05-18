@@ -1,11 +1,9 @@
 
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 import { Shedule } from 'src/app/models/shedule';
 import { SheduleService } from 'src/app/services/shedule/shedule.service';
 import { Storage } from '@ionic/storage';
-import { Echo } from 'laravel-echo-ionic';
 
 @Component({
   selector: 'app-calendar',
@@ -20,7 +18,6 @@ export class CalendarPage implements OnInit {
   constructor(
     private sheduleService: SheduleService,
     private activatedRoute: ActivatedRoute,
-    private alertController: AlertController,
     public storage: Storage,
     @Inject(LOCALE_ID) private locale: string,
 
@@ -32,6 +29,7 @@ export class CalendarPage implements OnInit {
   }
 
   loadInfo() {
+    // Pasa los datos desde el local storage de shedule a un array
     this.storage.get("shedule").then(data => {
       if (data) {
         var array = JSON.parse(data);
@@ -46,38 +44,20 @@ export class CalendarPage implements OnInit {
          
 
             this.sheduleArray.push(shedule);
+            // Ordena el array por fecha
             this.sheduleArray.sort((a,b)=>new Date(a.sheduleDate).getTime()-new Date(b.sheduleDate).getTime());
           };
         })
       } else {
 
-
-        this.updateData();
+// Si no tiene los datos, los va a buscar
+        this.getData();
       }
     })
   }
 
-
-
-  doConnection() {
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      key: 'local',
-      wsHost: 'localhost',
-      wsPort: 6001,
-      forceTLS: false,
-      disableStats: true
-    });
-
-    const channel = echo.channel('channel');
-    channel.listen('Alert', (data) => {
-      console.log(JSON.stringify(data));
-      this.notification(data);
-      this.updateData();
-    });
-  }
-
-  updateData() {
+  // Va a buscar los datos al backend
+  getData() {
     this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
 
       this.storage.set("shedule", JSON.stringify(p));
@@ -85,13 +65,4 @@ export class CalendarPage implements OnInit {
     })
   }
 
-  async notification(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Se han realizado cambios',
-      message: message,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
 }

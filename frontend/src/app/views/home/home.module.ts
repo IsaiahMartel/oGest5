@@ -12,8 +12,6 @@ import localeEn from '@angular/common/locales/en';
 import localeEsAr from '@angular/common/locales/es-AR';
 
 registerLocaleData(localePy, 'es');
-registerLocaleData(localePt, 'pt');
-registerLocaleData(localeEn, 'en')
 registerLocaleData(localeEsAr, 'es-Ar');
 
 @NgModule({

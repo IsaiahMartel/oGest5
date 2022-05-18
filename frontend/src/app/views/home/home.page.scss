@@ -44,6 +44,7 @@ ion-content {
     height: 60px;
 }
 
+// Para acceder a ShadowRoot (encapsulamiento)
  :host ::ng-deep {
     .monthview-container {
         height: 100%;
@@ -115,7 +116,7 @@ ion-content {
     }
 }
 
-#div {
+#divDays {
     padding-top: 8px;
     padding-bottom: 8px;
 }
@@ -124,7 +125,3 @@ ion-content {
     flex-grow: 1;
     overflow-y: scroll;
 }
-
-// .border {
-//     border: 1px solid black;
-// }

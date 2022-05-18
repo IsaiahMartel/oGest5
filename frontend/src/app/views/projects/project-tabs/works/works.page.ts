@@ -5,7 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { Playlist } from 'src/app/models/playlist';
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { Storage } from '@ionic/storage';
-import { Echo } from 'laravel-echo-ionic';
+
 
 @Component({
   selector: 'app-works',
@@ -28,23 +28,19 @@ export class WorksPage implements OnInit {
   ngOnInit(): void {
     this.loadInfo();
   }
-
+  
+   // Pasa los datos desde el local storage de playlist a un array
   loadInfo() {
 
     this.storage.get("playlist").then(data => {
       if (data) {
         var array = JSON.parse(data);
-
-
+        
         array.filter((playlist) => {
-
-
-
           if (playlist.project_id == this.project_id) {
-
-     
             this.playlistArray.push(playlist);
-         
+
+            // Ordena el array por playlistOrder
             this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
 
           };
@@ -52,32 +48,13 @@ export class WorksPage implements OnInit {
 
 
       } else {
-
-
-        this.updateData();
+        this.getData();
       }
     })
   }
 
-  doConnection() {
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      key: 'local',
-      wsHost: 'localhost',
-      wsPort: 6001,
-      forceTLS: false,
-      disableStats: true
-    });
 
-    const channel = echo.channel('channel');
-    channel.listen('Alert', (data) => {
-      console.log(JSON.stringify(data));
-      this.notification(data);
-      this.updateData();
-    });
-  }
-
-  updateData() {
+  getData() {
     this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
 
       this.storage.set("playlist", JSON.stringify(p));
@@ -87,15 +64,6 @@ export class WorksPage implements OnInit {
   }
 
 
-  async notification(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Se han realizado cambios',
-      message: message,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
 }
 
 

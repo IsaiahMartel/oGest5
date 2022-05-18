@@ -9,7 +9,6 @@ import { AddressService } from './services/address/address.service';
 import { Shedule } from './models/shedule';
 import { Project } from './models/project';
 import { Playlist } from 'src/app/models/playlist';
-import { Address } from 'src/app/models/address';
 import { AddressGroup } from 'src/app/models/address-group';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
@@ -26,15 +25,10 @@ export class AppComponent implements AfterViewInit {
   htmlToAdd;
   divConnectionAlert;
 
-  public sheduleArray: Shedule[] = [];
-  public projectsArray: Project[] = [];
-  public playlistArray: Array<Playlist> = [];
-  public addressArray: Array<Address> = [];
-private dismissToast : boolean;
-private toast;
+  private dismissToast: boolean;
+  private toast;
 
   constructor(
-
     private modalConnectionService: ModalConnectionService,
     private alertController: AlertController,
     private projectsService: ProjectsService,
@@ -48,52 +42,38 @@ private toast;
 
 
   ngAfterViewInit(): void {
+this.updateData();
+    this.backendDownAlert();
+    this.clientOfflineAlert();
+    this.doConnectionWebSocket();
+  }
 
-    this.divConnectionAlert = document.getElementById("connection-alert");
 
- 
-    
-    // 
-
-
+  backendDownAlert() {
     this.modalConnectionService.requestIntercepted.subscribe(backendDown => {
       if (backendDown) {
-        this.htmlToAdd = '<h1 id="connection-text">Server caido</h1>';
-        this.presentToastWithOptions("Oops!", "Server caido", "danger", "information-circle");
-
-        this.divConnectionAlert.style.backgroundColor = "red";
-
-
+        this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
         this.isOnline = false;
         this.dismissToast = false;
       }
       else {
-
         if (this.isOnline == false) {
           this.dismissToast = true;
-          this.presentToastWithOptions("Solucionado!", "Conexion resuelta", "success", "checkmark-outline");
-          this.htmlToAdd = '<h1 id="connection-text">Conexion resuelta</h1>';
+          this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
+
           this.divConnectionAlert.style.backgroundColor = "green";
-       
+
         }
       }
 
     });
+  }
+
+  clientOfflineAlert() {
     this.modalConnectionService.appIsOnline$.subscribe(online => {
-
-
-
-
 
       if (!online) {
         this.presentToastWithOptions("Atencion!", "No tienes conexion", "warning", "warning-outline");
-
-        this.htmlToAdd = '<h1 id="connection-text">No tienes conexion</h1>';
-
-
-        this.divConnectionAlert.style.backgroundColor = "red";
-
-
         this.isOnline = false;
         this.dismissToast = false;
 
@@ -102,21 +82,14 @@ private toast;
         if (this.isOnline == false) {
           this.dismissToast = true;
           this.presentToastWithOptions("Hurra!", "Vuelves a tener conexion", "success", "warning-outline");
-          this.htmlToAdd = '<h1 id="connection-text">Vuelves a tener conexion</h1>';
-          this.divConnectionAlert.style.backgroundColor = "green";
-       
+
         }
-
       }
-
     })
 
-    this.doConnection();
   }
 
-  doConnection() {
-
-    var divConnectionAlert = document.getElementById("connection-alert");
+  doConnectionWebSocket() {
     const echo = new Echo({
       broadcaster: 'pusher',
       key: 'local',
@@ -124,6 +97,13 @@ private toast;
       wsPort: 6001,
       forceTLS: false,
       disableStats: true
+    });
+
+    // Muestra una alerta y actualiza los datos
+    const channel = echo.channel('channel');
+    channel.listen('Alert', (data) => {
+      this.notification(data);
+      this.updateData();
     });
 
   }
@@ -140,55 +120,35 @@ private toast;
 
 
   updateData() {
-
-
     this.projectsService.getProjects().subscribe((p: Array<Project>) => {
-
       this.storage.set("projects", JSON.stringify(p));
-      this.projectsArray = p;
-
-
-
-
-
-
+  
     })
 
     this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
-
       this.storage.set("address", JSON.stringify(p));
-
-
-
-
-
     })
 
     this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
-
       this.storage.set("playlist", JSON.stringify(p));
-      this.playlistArray = p;
-
-
 
     })
 
     this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
-
       this.storage.set("shedule", JSON.stringify(p));
-      this.sheduleArray = p;
-
-
-
+  
     })
 
   }
 
+  // Creación de los mensajes cuando backend caído o no hay conexión
   async presentToastWithOptions(header, message, color, icon) {
     
+    // Elimina el mensaje anterior si lo hubiera
     try {
       this.toast.dismiss();
-  } catch(e) {}
+    } catch (e) { }
+
     this.toast = await this.toastController.create({
       header: header,
       message: message,
@@ -198,18 +158,16 @@ private toast;
 
     });
     await this.toast.present()
-if(this.dismissToast==true){
-    setTimeout(() => {
-      this.toast.dismiss();
-      this.htmlToAdd = '';
-      this.divConnectionAlert.style.backgroundColor = "transparent";
-      this.isOnline = true;
-    },
-      8000);
+
+    // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+    if (this.dismissToast == true) {
+      setTimeout(() => {
+        this.toast.dismiss();
+        this.isOnline = true;
+      },
+        8000);
+    }
   }
-}
-
-
 }
 
 

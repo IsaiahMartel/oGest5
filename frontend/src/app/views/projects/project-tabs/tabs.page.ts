@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
-import { ProjectsService } from 'src/app/services/projects/projects.service';
 
 
 @Component({
@@ -29,14 +28,11 @@ export class TabsPage implements OnInit {
 
   ngOnInit() {
 
-
+// Por si se recarga la página desde un proyecto
     if (this.projectIdService.projectId == null) {
       this.urlSplitArray = this.router.url.split("/");
       this.projectIdService.changeProjectId(parseInt(this.urlSplitArray.slice(-1)[0]));
     }
-
-
-
 
   }
 }

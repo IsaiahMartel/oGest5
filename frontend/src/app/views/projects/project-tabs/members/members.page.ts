@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Address } from 'src/app/models/address';
 import { AddressService } from 'src/app/services/address/address.service'
-import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { Echo } from 'laravel-echo-ionic';
 import { AddressGroup } from 'src/app/models/address-group';
 
 @Component({
@@ -20,7 +17,6 @@ export class MembersPage implements OnInit {
   constructor(
     private addressService: AddressService,
     private activatedRoute: ActivatedRoute,
-    private alertController: AlertController,
     public storage: Storage
 
   ) { }
@@ -29,7 +25,7 @@ export class MembersPage implements OnInit {
   ngOnInit(): void {
     this.loadInfo();
   }
-
+   // Pasa los datos desde el local storage de address a un array
   loadInfo() {
     this.storage.get("address").then(data => {
       if (data) {
@@ -41,55 +37,28 @@ export class MembersPage implements OnInit {
 
           if (address.id == this.project_id) {
  
+        console.log(address);
         
             return this.addressArray.push(address);
           };
         })
       } else {
-        this.updateData();
+        // Si no tiene los datos, los va a buscar
+        this.getData();
 
 
       }
     })
 
-
   }
 
-  doConnection() {
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      key: 'local',
-      wsHost: 'localhost',
-      wsPort: 6001,
-      forceTLS: false,
-      disableStats: true
-    });
-
-    const channel = echo.channel('channel');
-    channel.listen('Alert', (data) => {
-      console.log(JSON.stringify(data));
-      this.notification(data);
-      this.updateData();
-    });
-  }
-
-  updateData() {
+  // Va a buscar los datos al backend
+  getData() {
     this.addressService.getAddresses().subscribe((p: Array<AddressGroup>) => {
 
       this.storage.set("address", JSON.stringify(p));
       this.addressArray = p;
     })
-
-
   }
 
-  async notification(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Se han realizado cambios',
-      message: message,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
 }

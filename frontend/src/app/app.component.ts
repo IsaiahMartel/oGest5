@@ -12,6 +12,7 @@ import { Playlist } from 'src/app/models/playlist';
 import { AddressGroup } from 'src/app/models/address-group';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
+import { CheckDataService } from './services/check-data/check-data.service';
 
 @Component({
   selector: 'app-root',
@@ -37,43 +38,26 @@ export class AppComponent implements AfterViewInit {
     private addressServivce: AddressService,
     private storage: Storage,
     private toastController: ToastController,
+    private checkDataService: CheckDataService,
 
   ) { }
 
 
   ngAfterViewInit(): void {
-this.updateData();
-    this.backendDownAlert();
+// this.updateData();
     this.clientOfflineAlert();
     this.doConnectionWebSocket();
+  
   }
 
 
-  backendDownAlert() {
-    this.modalConnectionService.requestIntercepted.subscribe(backendDown => {
-      if (backendDown) {
-        this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
-        this.isOnline = false;
-        this.dismissToast = false;
-      }
-      else {
-        if (this.isOnline == false) {
-          this.dismissToast = true;
-          this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
-
-          this.divConnectionAlert.style.backgroundColor = "green";
-
-        }
-      }
-
-    });
-  }
+ 
 
   clientOfflineAlert() {
     this.modalConnectionService.appIsOnline$.subscribe(online => {
 
       if (!online) {
-        this.presentToastWithOptions("Atencion!", "No tienes conexion", "warning", "warning-outline");
+        this.presentToastWithOptions("¡Atención!", "No tienes conexión", "warning", "warning-outline");
         this.isOnline = false;
         this.dismissToast = false;
 
@@ -81,7 +65,7 @@ this.updateData();
 
         if (this.isOnline == false) {
           this.dismissToast = true;
-          this.presentToastWithOptions("Hurra!", "Vuelves a tener conexion", "success", "warning-outline");
+          this.presentToastWithOptions("¡Hurra!", "Vuelves a tener conexion", "success", "checkmark-outline");
 
         }
       }
@@ -103,7 +87,6 @@ this.updateData();
     const channel = echo.channel('channel');
     channel.listen('Alert', (data) => {
       this.notification(data);
-      this.updateData();
     });
 
   }
@@ -116,29 +99,6 @@ this.updateData();
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-
-  updateData() {
-    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
-      this.storage.set("projects", JSON.stringify(p));
-  
-    })
-
-    this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
-      this.storage.set("address", JSON.stringify(p));
-    })
-
-    this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
-      this.storage.set("playlist", JSON.stringify(p));
-
-    })
-
-    this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
-      this.storage.set("shedule", JSON.stringify(p));
-  
-    })
-
   }
 
   // Creación de los mensajes cuando backend caído o no hay conexión

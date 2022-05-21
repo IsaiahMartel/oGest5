@@ -5,7 +5,7 @@ export class Playlist {
     workName: String;
     workDuration: String;
     playlistString: String;
-    project_id: string;
+    project_id: number;
     perplaylists : Perplaylists;
     keyplaylists : Instrument;
     voiplaylists : Instrument;

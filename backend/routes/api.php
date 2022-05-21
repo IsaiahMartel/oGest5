@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-route::group(['prefix' => 'mobile'], function () { // esta ruta es /mobile/xxx
+route::group(['prefix' => 'mobile', 'middleware' => ['auth:api',]], function () { // esta ruta es /mobile/xxx
 
   Route::get('getProjects', [MobileController::class, 'getProjects']) ;
   // Route::get('getPlaylist/{id}', [MobileController::class, 'getPlaylistByProjectId']) ;

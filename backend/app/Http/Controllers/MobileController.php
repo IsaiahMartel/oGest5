@@ -51,10 +51,7 @@ class MobileController extends Controller
     
     public function checkBackendIsUp()
     {
-     
-            echo("Is up");
-    
-        //     return $address;
+            return;
     }
 
 

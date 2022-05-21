@@ -1,7 +1,7 @@
 import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, ToastController } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -36,7 +36,7 @@ import { BackendStatusService } from './services/backend-status/backend-status.s
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true,
-    deps: [Storage,ModalConnectionService, ]
+    deps: [Storage,ModalConnectionService, ToastController]
   }, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   {
     provide: 'SocialAuthServiceConfig',

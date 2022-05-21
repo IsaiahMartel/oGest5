@@ -48,30 +48,10 @@ export class LoginPage {
 
       this.router.navigateByUrl('');
       this.loginForm.reset();
-    },
-      (error) => {
-        let errorJSON = JSON.parse(error.error)
-        let errorMessage = ""
-        Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
-        console.log(errorMessage);
-
-        this.presentAlert(errorMessage);
-      })
+    }
+    )
   }
 
-
-  // Alerta por si ocurre un error
-  async presentAlert(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Error',
-      subHeader: message,
-      message: 'No se pudo iniciar sesión',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
 }
 
 

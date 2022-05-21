@@ -25,7 +25,7 @@ export class AuthService {
 
         if (res.access_token) {
       
-          this.storage.set("token", res.access_token);
+       
           this.storage.ready().then(() => {
             this.storage.set("access_token", res.access_token);
           })

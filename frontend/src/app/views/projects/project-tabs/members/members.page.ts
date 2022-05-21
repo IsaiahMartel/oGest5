@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AddressService } from 'src/app/services/address/address.service'
 import { Storage } from '@ionic/storage';
 import { AddressGroup } from 'src/app/models/address-group';
+import { CheckDataService } from 'src/app/services/check-data/check-data.service';
+import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 
 @Component({
   selector: 'app-members',
@@ -11,13 +13,12 @@ import { AddressGroup } from 'src/app/models/address-group';
 })
 export class MembersPage implements OnInit {
   public addressArray: Array<AddressGroup> = [];
-  project_id = this.activatedRoute.snapshot.paramMap.get('id');
+  projectId: number;
 
 
   constructor(
-    private addressService: AddressService,
-    private activatedRoute: ActivatedRoute,
-    public storage: Storage
+    public storage: Storage, private checkDataService: CheckDataService,
+    private projectIdService: ProjectIdService
 
   ) { }
 
@@ -25,40 +26,23 @@ export class MembersPage implements OnInit {
   ngOnInit(): void {
     this.loadInfo();
   }
-   // Pasa los datos desde el local storage de address a un array
+  // Pasa los datos desde el local storage de address a un array
   loadInfo() {
-    this.storage.get("address").then(data => {
-      if (data) {
-        var array = JSON.parse(data);
+    this.projectId = this.projectIdService.projectId;
+  
+      this.checkDataService.checkAddressLocal();
+      this.checkDataService.addressObs.subscribe((address) => {
 
+        var array: Array<AddressGroup> = Object.values(address);
 
         array.filter((address) => {
-        
-
-          if (address.id == this.project_id) {
- 
-        console.log(address);
-        
-            return this.addressArray.push(address);
+          if (address.id == this.projectId) {
+            this.addressArray.push(address);
+    
           };
         })
-      } else {
-        // Si no tiene los datos, los va a buscar
-        this.getData();
-
-
-      }
-    })
-
+  
+  
+      })
   }
-
-  // Va a buscar los datos al backend
-  getData() {
-    this.addressService.getAddresses().subscribe((p: Array<AddressGroup>) => {
-
-      this.storage.set("address", JSON.stringify(p));
-      this.addressArray = p;
-    })
-  }
-
 }

@@ -1,9 +1,10 @@
 <ion-content has-header>
 
     <div id="container" *ngFor="let shedule of sheduleArray">
-        <ion-card>
+        <ion-card style="border-bottom:10px solid blue !important" *ngIf='shedule.sheduleTipe=="CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+        || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN" ;else freeDay'>
             <ion-card-header>
-                <ion-card-title> {{shedule.sheduleDate | date: 'EEEE, dd/MM/yyyy'}} </ion-card-title>
+                <ion-card-title> {{shedule.sheduleDate | date: ' EEEE, dd/MM/yyyy '}} </ion-card-title>
 
 
 
@@ -14,14 +15,64 @@
 
                 <ion-row>
                     <h2 class="ion-padding-end">{{shedule.sheduleTipe}} </h2>
-                    <h2 *ngIf="shedule.shedulehourRange!=''"> {{shedule.shedulehourRange}} </h2>
+                    <h2 *ngIf="shedule.shedulehourRange!=' '"> {{shedule.shedulehourRange}} </h2>
 
                 </ion-row>
                 <h2 *ngIf="shedule.rooms"> {{shedule.rooms.roomAcronym}}</h2>
-                <h2 *ngIf="shedule.sheduleNote!=''"><b>Notas: </b>{{shedule.sheduleNote}} </h2>
+                <h2 *ngIf="shedule.sheduleNote!=' '"><b>Notas: </b>{{shedule.sheduleNote}} </h2>
 
 
             </ion-card-content>
         </ion-card>
+
+        <ng-template #freeDay>
+            <ion-card style="border-bottom:10px solid green !important" *ngIf='shedule.sheduleTipe=="DIA LIBRE";else normalDay'>
+                <ion-card-header>
+                    <ion-card-title> {{shedule.sheduleDate | date: ' EEEE, dd/MM/yyyy '}} </ion-card-title>
+
+
+
+                </ion-card-header>
+
+                <ion-card-content>
+
+
+                    <ion-row>
+                        <h2 class="ion-padding-end">{{shedule.sheduleTipe}} </h2>
+                        <h2 *ngIf="shedule.shedulehourRange!=' '"> {{shedule.shedulehourRange}} </h2>
+
+                    </ion-row>
+                    <h2 *ngIf="shedule.rooms"> {{shedule.rooms.roomAcronym}}</h2>
+                    <h2 *ngIf="shedule.sheduleNote!=' '"><b>Notas: </b>{{shedule.sheduleNote}} </h2>
+
+
+                </ion-card-content>
+            </ion-card>
+        </ng-template>
+        <ng-template #normalDay>
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title> {{shedule.sheduleDate | date: ' EEEE, dd/MM/yyyy '}} </ion-card-title>
+
+
+
+                </ion-card-header>
+
+                <ion-card-content>
+
+
+                    <ion-row>
+                        <h2 class="ion-padding-end">{{shedule.sheduleTipe}} </h2>
+                        <h2 *ngIf="shedule.shedulehourRange!=' '"> {{shedule.shedulehourRange}} </h2>
+
+                    </ion-row>
+                    <h2 *ngIf="shedule.rooms"> {{shedule.rooms.roomAcronym}}</h2>
+                    <h2 *ngIf="shedule.sheduleNote!=' '"><b>Notas: </b>{{shedule.sheduleNote}} </h2>
+
+
+                </ion-card-content>
+            </ion-card>
+        </ng-template>
+
     </div>
 </ion-content>

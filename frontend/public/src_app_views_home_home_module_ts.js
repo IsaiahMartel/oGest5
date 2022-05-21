@@ -5908,33 +5908,36 @@ let HomePage = class HomePage {
                         }
                     }
                     else if (this.colorPick == 1) {
-                        if (shedule.sheduleTipe == "CONCIERTO") {
-                            var colorEvent = "redConcert";
+                        if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+                            || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
+                            colorEvent = "redConcert";
                         }
                         else if (shedule.sheduleTipe == "DIA LIBRE") {
-                            var colorEvent = "freeDay";
+                            colorEvent = "freeDay";
                         }
                         else {
                             colorEvent = "red";
                         }
                     }
                     else if (this.colorPick == 2) {
-                        if (shedule.sheduleTipe == "CONCIERTO") {
-                            var colorEvent = "greenConcert";
+                        if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+                            || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
+                            colorEvent = "greenConcert";
                         }
                         else if (shedule.sheduleTipe == "DIA LIBRE") {
-                            var colorEvent = "freeDay";
+                            colorEvent = "freeDay";
                         }
                         else {
                             colorEvent = "green";
                         }
                     }
                     else if (this.colorPick == 3) {
-                        if (shedule.sheduleTipe == "CONCIERTO") {
-                            var colorEvent = "yellowConcert";
+                        if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+                            || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
+                            colorEvent = "yellowConcert";
                         }
                         else if (shedule.sheduleTipe == "DIA LIBRE") {
-                            var colorEvent = "freeDay";
+                            colorEvent = "freeDay";
                         }
                         else {
                             colorEvent = "yellow";
@@ -6023,7 +6026,8 @@ let HomePage = class HomePage {
         if (events.length > 0) {
             for (let event of events) {
                 if (event.titleShedule) {
-                    if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE") {
+                    if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE" || event.titleShedule.substring(0, 7) == "FUNCION"
+                        || event.titleShedule.substring(0, 7) == "FUNCIÓN") {
                         return event.colorEvent;
                     }
                 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,39 +9,34 @@ import { Storage } from '@ionic/storage';
 export class ProjectIdService {
   projectId: number;
   projectName: "";
+  private requestInterceptedSource: Subject<number> = new Subject<number>();
+  requestIntercepted: Observable<number> = this.requestInterceptedSource.asObservable();
 
-  constructor(public storage: Storage,) { }
-  changeProjectId(projectId) {
-
-
-    this.projectId = projectId;
-    this.storage.get("projects").then(data => {
-      if (data) {
-        var array = JSON.parse(data);
-
-        array.filter((project) => {
+  constructor(public storage: Storage,) { this.changeProjectId()}
 
 
-          if (project.id == this.projectId) {
+  changeProjectId() {
 
+    this.requestIntercepted.subscribe((projectId) => {
+      this.projectId = projectId
+      this.storage.get("projects").then(data => {
+        if (data) {
+          var array = JSON.parse(data);
 
+          array.filter((project) => {
+            if (project.id == this.projectId) {
+              this.projectName = project.events.eventName;
+      
+            };
+          })
+        }
 
-            this.projectName = project.events.eventName;
-
-            console.log(this.projectName);
-
-
-
-
-
-          };
-        })
-      }
-
-    })
+      })
+    });
   }
 
-
-
+  public getInterceptedSource(): Subject<number> {
+    return this.requestInterceptedSource;
+  }
 
 }

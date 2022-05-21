@@ -132,7 +132,6 @@ let AppComponent = class AppComponent {
                 if (this.isOnline == false) {
                     this.dismissToast = true;
                     this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
-                    this.divConnectionAlert.style.backgroundColor = "green";
                 }
             }
         });
@@ -295,7 +294,7 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
                 provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HTTP_INTERCEPTORS,
                 useClass: _interceptors_interceptor_service__WEBPACK_IMPORTED_MODULE_2__.InterceptorService,
                 multi: true,
-                deps: [_ionic_storage__WEBPACK_IMPORTED_MODULE_8__.Storage, _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_3__.ModalConnectionService,]
+                deps: [_ionic_storage__WEBPACK_IMPORTED_MODULE_8__.Storage, _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_3__.ModalConnectionService, _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ToastController]
             }, { provide: _angular_router__WEBPACK_IMPORTED_MODULE_11__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicRouteStrategy }, {
                 provide: 'SocialAuthServiceConfig',
                 useValue: {
@@ -328,19 +327,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "InterceptorService": () => (/* binding */ InterceptorService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 1841);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 1841);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 9765);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 9412);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 205);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 9765);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 9412);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 205);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/storage */ 8605);
-/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/internal/operators/switchMap */ 2479);
-/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 8002);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 5304);
+/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/internal/operators/switchMap */ 2479);
+/* harmony import */ var rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ 8002);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 5304);
 /* harmony import */ var _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/modal-connection/modal-connection.service */ 1367);
-/* harmony import */ var _services_backend_status_backend_status_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/backend-status/backend-status.service */ 9873);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 9122);
 
 
 
@@ -352,69 +351,86 @@ __webpack_require__.r(__webpack_exports__);
 
 const TOKEN_KEY = 'access_token';
 let InterceptorService = class InterceptorService {
-    constructor(storage, modalConnectionService, backendStatusService) {
+    constructor(storage, modalConnectionService, toastController) {
         this.storage = storage;
         this.modalConnectionService = modalConnectionService;
-        this.backendStatusService = backendStatusService;
-        this.backendStatusChange = new rxjs__WEBPACK_IMPORTED_MODULE_2__.Subject();
+        this.toastController = toastController;
+        this.backendStatusChange = new rxjs__WEBPACK_IMPORTED_MODULE_1__.Subject();
     }
     intercept(req, next) {
-        // const auth = this.injector.get(ModalConnectionService);
-        // console.log(auth);
-        // this.modalConnectionService.getInterceptedSource().next(true);
-        //   console.log( this.modalConnectionService.string)
-        //   // console.log( this.modalConnectionService.string);
-        //  console.log(this.backendStatusService);
-        //  console.log(this.storage);
-        //     const auth = this.injector.get(ModalConnectionService);
-        // console.log(auth);
-        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpHeaders({
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.storage.ready().then(() => this.storage.get('access_token'))}`
         });
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.from)(this.storage.get(TOKEN_KEY))
-            .pipe((0,rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_5__.switchMap)(token => {
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_3__.from)(this.storage.get(TOKEN_KEY))
+            .pipe((0,rxjs_internal_operators_switchMap__WEBPACK_IMPORTED_MODULE_4__.switchMap)(token => {
             if (token) {
                 req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
             }
             if (!req.headers.has('Content-Type')) {
                 req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
             }
-            return next.handle(req).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.map)((event) => {
-                if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpResponse) {
+            return next.handle(req).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.map)((event) => {
+                if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpResponse) {
+                }
+                if (this.isOnline == false) {
+                    this.dismissToast = true;
+                    this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
+                    // this.modalConnectionService.getInterceptedSource().next(false);
                 }
                 return event;
-            }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.catchError)(this.manageError.bind(this)));
+            }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.catchError)(this.manageError.bind(this)));
         }));
     }
-    // lol(){
-    //   console.log(this.backendStatusService);
-    // }
     manageError(error) {
         let errorJSON = error.error;
         let errorMessage = "";
         Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
         // console.log(errorMessage, errorJSON);
         if (errorMessage == "true\n") {
-            this.modalConnectionService.getInterceptedSource().next(true);
-            // this.modalConnectionService.backendDownObs.subscribe(value => this.m = value) 
-            // this.backendStatusService.changeStatus(true);
-            // this.modalConnectionService.backendDownObs.next(true)
-            //       this.modalConnectionService.backendDown=true;
-            // this.modalConnectionService.backendDownObs.next(this.modalConnectionService.backendDown);
+            // this.modalConnectionService.getInterceptedSource().next(true);
+            this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
+            this.isOnline = false;
+            this.dismissToast = false;
         }
         else {
-            this.modalConnectionService.getInterceptedSource().next(false);
+            this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
         }
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.throwError)("Error " + errorMessage + "\n" + errorJSON);
+        console.log(errorMessage);
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.throwError)("Error " + errorMessage + "\n" + errorJSON);
+    }
+    // Creación de los mensajes cuando backend caído o no hay conexión
+    presentToastWithOptions(header, message, color, icon) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
+            // Elimina el mensaje anterior si lo hubiera
+            try {
+                this.toast.dismiss();
+            }
+            catch (e) { }
+            this.toast = yield this.toastController.create({
+                header: header,
+                message: message,
+                color: color,
+                icon: icon,
+                position: 'bottom',
+            });
+            yield this.toast.present();
+            // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+            if (this.dismissToast == true) {
+                setTimeout(() => {
+                    this.toast.dismiss();
+                    // this.isOnline = true;
+                }, 8000);
+            }
+        });
     }
 };
 InterceptorService.ctorParameters = () => [
     { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_9__.Storage },
     { type: _services_modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__.ModalConnectionService },
-    { type: _services_backend_status_backend_status_service__WEBPACK_IMPORTED_MODULE_1__.BackendStatusService }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.ToastController }
 ];
-InterceptorService = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
+InterceptorService = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Injectable)({
         providedIn: 'root'
     })
@@ -458,41 +474,6 @@ AddressService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
         providedIn: 'root'
     })
 ], AddressService);
-
-
-
-/***/ }),
-
-/***/ 9873:
-/*!*******************************************************************!*\
-  !*** ./src/app/services/backend-status/backend-status.service.ts ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "BackendStatusService": () => (/* binding */ BackendStatusService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4762);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
-/* harmony import */ var _modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modal-connection/modal-connection.service */ 1367);
-
-
-
-let BackendStatusService = class BackendStatusService {
-    constructor(modalConnection) {
-        this.modalConnection = modalConnection;
-    }
-};
-BackendStatusService.ctorParameters = () => [
-    { type: _modal_connection_modal_connection_service__WEBPACK_IMPORTED_MODULE_0__.ModalConnectionService }
-];
-BackendStatusService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: 'root'
-    })
-], BackendStatusService);
 
 
 

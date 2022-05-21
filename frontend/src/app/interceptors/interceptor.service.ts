@@ -8,6 +8,8 @@ import { catchError, map } from 'rxjs/operators';
 import { ModalConnectionService } from '../services/modal-connection/modal-connection.service';
 import { BackendStatusService } from '../services/backend-status/backend-status.service';
 
+import { ToastController } from '@ionic/angular';
+
 const TOKEN_KEY = 'access_token';
 
 @Injectable({
@@ -15,40 +17,38 @@ const TOKEN_KEY = 'access_token';
 })
 export class InterceptorService implements HttpInterceptor {
   public ModalconnectionService: ModalConnectionService;
+  private dismissToast: boolean;
+  private toast;
+  isOnline: boolean;
+
 cf : boolean;
 
     backendStatusChange: Subject<boolean> = new Subject<boolean>();
   constructor(
     private storage: Storage,   private modalConnectionService: ModalConnectionService,
-    private backendStatusService:BackendStatusService
+    private toastController : ToastController
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const auth = this.injector.get(ModalConnectionService);
-    // console.log(auth);
-    // this.modalConnectionService.getInterceptedSource().next(true);
-  //   console.log( this.modalConnectionService.string)
-  //   // console.log( this.modalConnectionService.string);
-    
-  //  console.log(this.backendStatusService);
-  //  console.log(this.storage);
-//     const auth = this.injector.get(ModalConnectionService);
-// console.log(auth);
 
 
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.storage.ready().then(() => this.storage.get('access_token'))}`
+
+      
     });
 
 
     return from(this.storage.get(TOKEN_KEY))
       .pipe(
         switchMap(token => {
+      
+
           if (token) {
             req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
-         
+
             
           }
 
@@ -60,8 +60,16 @@ cf : boolean;
           return next.handle(req).pipe(
             map((event: HttpEvent<any>) => {
               if (event instanceof HttpResponse) {
-
+            
+                if (this.isOnline == false) {
+                  this.dismissToast = true;
+                  this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
+        
+                }
               }
+          
+
+        
               return event;
             }),
            
@@ -73,10 +81,7 @@ cf : boolean;
   }
 
  
-  // lol(){
-  //   console.log(this.backendStatusService);
-    
-  // }
+ 
 
   manageError(error: HttpErrorResponse) {
 
@@ -84,34 +89,55 @@ cf : boolean;
     let errorJSON = error.error
     let errorMessage = ""
     Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
-    // console.log(errorMessage, errorJSON);
 
 
-  
     if(errorMessage=="true\n"){
 
-    this.modalConnectionService.getInterceptedSource().next(true);
 
-    
-      // this.modalConnectionService.backendDownObs.subscribe(value => this.m = value) 
-     
-      // this.backendStatusService.changeStatus(true);
 
-      // this.modalConnectionService.backendDownObs.next(true)
-//       this.modalConnectionService.backendDown=true;
-// this.modalConnectionService.backendDownObs.next(this.modalConnectionService.backendDown);
- 
-
+    this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
+    this.isOnline = false;
+    this.dismissToast = false;
 
     }else{
-      this.modalConnectionService.getInterceptedSource().next(false);
+    this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
     }
 
-    
 
-
+console.log(errorMessage);
 
     return throwError("Error " + errorMessage + "\n" + errorJSON);
+  }
+
+
+  // Creación de los mensajes cuando backend caído o no hay conexión
+  async presentToastWithOptions(header, message, color, icon) {
+    
+    // Elimina el mensaje anterior si lo hubiera
+    try {
+      this.toast.dismiss();
+    } catch (e) { }
+
+    this.toast = await this.toastController.create({
+      header: header,
+      message: message,
+      color: color,
+      icon: icon,
+      position: 'bottom',
+      cssClass: "my-custom-class"
+
+    });
+    await this.toast.present()
+
+    // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+    if (this.dismissToast == true) {
+      setTimeout(() => {
+        this.toast.dismiss();
+        this.toast
+        this.isOnline = true;
+      },
+        8000);
+    }
   }
 
 

@@ -29,7 +29,7 @@
     <!-- Tabla de días -->
     <ng-template #colors let-view="view" let-row="row" let-col="col">
 
-        <div id="divDays" [ngClass]="getCustomClass(view.dates[row*7+col].events)">
+        <div id="divDays" [ngClass]="printColorsInDaysWithEvents(view.dates[row*7+col].events)">
 
             {{view.dates[row*7+col].label}}
         </div>

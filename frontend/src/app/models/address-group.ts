@@ -5,4 +5,5 @@ export class AddressGroup {
     addressgroupName: String;
     addresses: Address;
     project: Project;
+  id: number;
 }

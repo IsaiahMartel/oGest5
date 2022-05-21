@@ -14,10 +14,12 @@ export class TabsPage implements OnInit {
   public urlSplitArray: string[] = [];
   public id: number;
   public projectName: String;
+  private projectId;
 
   constructor(
     private router: Router,
     public storage: Storage,
+  
 
     private projectIdService: ProjectIdService
   ) {
@@ -31,8 +33,15 @@ export class TabsPage implements OnInit {
 // Por si se recarga la página desde un proyecto
     if (this.projectIdService.projectId == null) {
       this.urlSplitArray = this.router.url.split("/");
-      this.projectIdService.changeProjectId(parseInt(this.urlSplitArray.slice(-1)[0]));
+      this.projectId = parseInt(this.urlSplitArray.slice(-1)[0]);
+      this.projectIdService.getInterceptedSource().next(this.projectId);
+      console.log(this.projectId);
+      
+    
     }
 
+    this.projectIdService.requestIntercepted.subscribe((projectId) => {this.projectId=projectId});
   }
+
+ 
 }

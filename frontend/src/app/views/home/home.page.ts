@@ -14,6 +14,9 @@ import { CalendarComponent } from 'ionic2-calendar';
 import { Router } from '@angular/router';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { AddressGroup } from 'src/app/models/address-group';
+import { CheckDataService } from 'src/app/services/check-data/check-data.service';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { of, combineLatestWith, pairs } from 'rxjs';
 
 
 @Component({
@@ -31,8 +34,8 @@ export class HomePage {
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
-  private isEverythingSaved = 0;
-
+ 
+  private  i = 0;
   private weekDaysQuerySelector = document.querySelector("small")
   colorPick: number = 0;
 
@@ -60,6 +63,7 @@ export class HomePage {
     public storage: Storage,
     public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
+    private checkDataService: CheckDataService,
 
   ) { }
 
@@ -85,6 +89,8 @@ export class HomePage {
 
   // Creación de eventos y aignación de todos los atributos a cada proyecto y shedule
   createEvents() {
+
+
     var events = [];
 
     this.colorPick = 0;
@@ -132,6 +138,7 @@ export class HomePage {
           titleShedule = shedule.sheduleTipe;
           sheduleHour = shedule.shedulehourRange;
 
+
           if (this.colorPick == 0) {
 
 
@@ -149,16 +156,18 @@ export class HomePage {
             }
 
           } else if (this.colorPick == 1) {
-            if (shedule.sheduleTipe == "CONCIERTO") { var colorEvent = "redConcert"; }
-            else if (shedule.sheduleTipe == "DIA LIBRE") { var colorEvent = "freeDay"; }
+            if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") { colorEvent = "redConcert"; }
+            else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
               colorEvent = "red";
             }
 
           }
           else if (this.colorPick == 2) {
-            if (shedule.sheduleTipe == "CONCIERTO") { var colorEvent = "greenConcert"; }
-            else if (shedule.sheduleTipe == "DIA LIBRE") { var colorEvent = "freeDay"; }
+            if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") { colorEvent = "greenConcert"; }
+            else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
               colorEvent = "green";
 
@@ -166,8 +175,10 @@ export class HomePage {
 
           }
           else if (this.colorPick == 3) {
-            if (shedule.sheduleTipe == "CONCIERTO") { var colorEvent = "yellowConcert"; }
-            else if (shedule.sheduleTipe == "DIA LIBRE") { var colorEvent = "freeDay"; }
+
+            if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") { colorEvent = "yellowConcert"; }
+            else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
               colorEvent = "yellow";
 
@@ -196,7 +207,7 @@ export class HomePage {
 
         }
 
-        if (this.colorPick == 3) {
+        if (this.colorPick == 4) {
           this.colorPick = 0;
         }
 
@@ -225,109 +236,59 @@ export class HomePage {
   // Pasa los datos desde el local storage de shedule y projects a un array
   loadInfo() {
 
-    this.storage.get("shedule").then(data => {
+    this.checkDataService.checkProjectsLocal();
+    this.checkDataService.checkSheduleLocal();
+    this.checkDataService.projectsObs.pipe(
+      combineLatestWith(this.checkDataService.sheduleObs)
 
-      if (data) {
-        this.sheduleArray = JSON.parse(data);
-
-        this.storage.get("projects").then(data => {
-
-          if (data) {
-            this.projectsArray = JSON.parse(data);
-            this.createEvents();
-          }
-
-          else {
-            // Si no tiene los datos, los va a buscar
-            this.getData();
-          }
-        })
-
-      }
-
-      else {
-        // Si no tiene los datos, los va a buscar
-        this.getData();
-      }
-    })
-  }
-
-
-  // Va a buscar los datos al backend
-  getData() {
-    this.projectsService.getProjects().subscribe((p: Array<Project>) => {
-
-      this.storage.set("projects", JSON.stringify(p));
-      this.projectsArray = p;
-
-
-
-
-      this.createEvents;
-
-    })
-
-    this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
-
-      this.storage.set("address", JSON.stringify(p));
-
-
-
-      this.createEvents;
-
-    })
-
-    this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
-
-      this.storage.set("playlist", JSON.stringify(p));
-      this.playlistArray = p;
-
-      this.createEvents;
-
-    })
-
-    this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
-
-      this.storage.set("shedule", JSON.stringify(p));
-      this.sheduleArray = p;
+    ).subscribe(([projectsArray, sheduleArray]) => {
+      this.projectsArray = Object.values(projectsArray);
+      this.sheduleArray = Object.values(sheduleArray);
 
       this.createEvents();
+
     })
+
   }
+
 
   // Navegación al proyecto seleccionado
   eventSelected = (event) => {
-    this.projectIdService.changeProjectId(event.projectId);
+    this.projectIdService.getInterceptedSource().next(event.projectId);
 
     this.router.navigateByUrl("/tabs/calendar/" + event.projectId);
 
   };
 
-// Pinta los colores en el calendario
-    getCustomClass(events) {
-      if (events.length > 0) {
+  // Pinta los colores en el calendario
+  printColorsInDaysWithEvents(events) {
+ 
+    if (events.length > 0) {
+  
+      for (let event of events) {
+       
+        
+        if (event.titleShedule) {
 
-        for (let event of events) {
-          if (event.titleShedule) {
-            if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE") {
 
-              return event.colorEvent;
+          // Pinta tan solo los días con estos valores, y no se tocan más ya que se pueden sobreescribir 
+          if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE" || event.titleShedule.substring(0, 7) == "FUNCION"
+            || event.titleShedule.substring(0, 7) == "FUNCIÓN") {
+          
+            
+            return event.colorEvent;
 
-            }
-          }
+          } 
         }
-        if (events.length >= 1) {
-
-          return events[1].colorEvent;
-        }
-
-        return events[0].colorEvent;
-
       }
-      return '';
-    }
 
-// Calcula la diiferencia entre días
+      // Pinta el color en el resto de días normales
+      return events[1].colorEvent;
+    }
+    return '';
+  }
+
+  // Calcula la diiferencia entre días
   dateDiffInDays(a, b) {
 
     const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());

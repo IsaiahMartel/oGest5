@@ -21,6 +21,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     IonicModule,
     HomePageRoutingModule,
     NgCalendarModule,
+    IonicModule.forRoot(),  
   ],
   declarations: [HomePage],
   providers: [ { provide: LOCALE_ID, useValue: 'es' } ],

@@ -44,35 +44,14 @@ export class WorksPage implements OnInit {
         if (playlist.project_id == this.projectId) {
           this.playlistArray.push(playlist);
 
+
           // Ordena el array por playlistOrder
           this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
 
         };
     })
   })
-
-    this.storage.get("playlist").then(data => {
-      if (data) {
-        var array = JSON.parse(data);
-        
-        array.filter((playlist) => {
-          if (playlist.project_id == this.projectId) {
-            this.playlistArray.push(playlist);
-
-            // Ordena el array por playlistOrder
-            this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
-
-          };
-        })
-
-
-      } 
-    })
   }
-
-
-
-
 
 }
 

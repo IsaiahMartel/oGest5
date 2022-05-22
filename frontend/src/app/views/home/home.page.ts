@@ -3,7 +3,7 @@ import { Shedule } from '../../models/shedule';
 import { SheduleService } from '../../services/shedule/shedule.service';
 import { Project } from '../../models/project';
 import { ProjectsService } from '../../services/projects/projects.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
@@ -17,6 +17,7 @@ import { AddressGroup } from 'src/app/models/address-group';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { of, combineLatestWith, pairs } from 'rxjs';
+
 
 
 @Component({
@@ -34,9 +35,10 @@ export class HomePage {
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
- 
-  private  i = 0;
-  private weekDaysQuerySelector = document.querySelector("small")
+private innerHTMLCalendar;
+
+  private loading;
+
   colorPick: number = 0;
 
   eventSource = [];
@@ -64,28 +66,111 @@ export class HomePage {
     public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
     private checkDataService: CheckDataService,
-
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit(): void {
     this.loadInfo();
   }
 
+  // async presentLoadingWithOptions() {
+  //   var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
+  //   this.loading = await this.loadingController.create({
+
+  //     spinner: "crescent",
+  //     cssClass: 'loading',
+  //     backdropDismiss: false,
+  //     // showBackdrop: false,
+
+  //   });
+
+
+  //   // console.log(calendar);
+
+
+
+
+  //   await this.loading.present();
+
+  // if(this.dismissLoading==true){
+
+  // }
+  // const { role, data } = await loading.onDidDismiss();
+  // console.log('Loading dismissed with role:', role);
+  // }
+
   // Para ir atrás en el calendario
   next() {
     this.myCal.slideNext();
+    // //  this.presentLoadingWithOptions();
+    // var calendar = document.getElementsByTagName('monthview') as HTMLCollectionOf<HTMLElement>;
+    var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
+    // // console.log(calendar);
+    // // this.innerHTMLCalendar  = calendar[0];
+    // var div = document.createElement("ion-spinner");
+    // div.style.width = "100px";
+    // div.style.height = "100px";
+    // div.style.background = "red";
+    // div.style.color = "white";
+    // div.innerHTML = "hola";
+
+//  calendar[0].appendChild(div);
+ calendar[0].style.visibility= "hidden";
+// calendar[0].innerHTML ='<ion-spinner name="crescent"></ion-spinner>'
+    // calendar[0].style.visibility = "hidden";
+
+
+    //  for (const tag of Array.from(calendar)) {
+    //   var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
+    //   tag.innerHTML = withoutDot;
+    //   tag.
+    // }
+
+    //  for (const tag of Array.from(weekDays)) {
+    //   var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
+    //   tag.innerHTML = withoutDot;
+    // }
+
+
+    var spinner = document.getElementById('div-spinner').style.visibility="visible";
   }
 
   // Para ir adelante en el calendario
   back() {
     this.myCal.slidePrev();
+    ////  this.presentLoadingWithOptions();
+    // var calendar = document.getElementsByTagName('monthview') as HTMLCollectionOf<HTMLElement>;
+    var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
+    // console.log(calendar);
+    calendar[0].style.visibility= "hidden";
+    document.getElementById('div-spinner').style.visibility="visible";
+    
   }
 
   // Cambia el nombre del mes al cambiarlo
   onViewTitleChanged(title) {
+    // var calendar = document.getElementsByTagName('monthview') as HTMLCollectionOf<HTMLElement>;
+    var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
+
+    document.getElementById('div-spinner').style.visibility="hidden";
+    calendar[0].style.visibility= "visible";
+    // console.log(calendar);
+    // calendar[0].innerHTML = ''
+    // calendar[0].style.visibility = "visible";
+
     this.viewTitle = title;
+    // console.log("hola");
+
+    // this.dismissLoading();
 
   }
+
+  async dismissLoading(): Promise<void> {
+    if (this.loading) {
+      this.loading.dismiss();
+    }
+  }
+
 
   // Creación de eventos y aignación de todos los atributos a cada proyecto y shedule
   createEvents() {
@@ -262,23 +347,23 @@ export class HomePage {
 
   // Pinta los colores en el calendario
   printColorsInDaysWithEvents(events) {
- 
+
     if (events.length > 0) {
-  
+
       for (let event of events) {
-       
-        
+
+
         if (event.titleShedule) {
 
 
           // Pinta tan solo los días con estos valores, y no se tocan más ya que se pueden sobreescribir 
           if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE" || event.titleShedule.substring(0, 7) == "FUNCION"
             || event.titleShedule.substring(0, 7) == "FUNCIÓN") {
-          
-            
+
+
             return event.colorEvent;
 
-          } 
+          }
         }
       }
 

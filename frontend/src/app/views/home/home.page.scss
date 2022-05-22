@@ -94,25 +94,25 @@ ion-content {
         background-color: #406D96 !important;
     }
     .redConcert {
-        background-color: #406D96 !important;
+        background-color: #224a70 !important;
     }
     .green {
         background-color: #A8D0DA !important;
     }
     .greenConcert {
-        background-color: #A8D0DA !important;
+        background-color: #679ca9 !important;
     }
     .blue {
         background-color: #D8E8E8 !important;
     }
     .blueConcert {
-        background-color: #D8E8E8 !important;
+        background-color: #8ebaba !important;
     }
     .freeDay {
-        background-color: #3ff861 !important;
+        background-color: #4ac0608e !important;
     }
-    .monthview-selected #div {
-        background-color: rgb(255, 7, 7) !important;
+    .monthview-selected #divDays {
+        background-color: rgba(255, 230, 7, 0.504) !important;
     }
 }
 
@@ -124,4 +124,14 @@ ion-content {
 .event-detail-container {
     flex-grow: 1;
     overflow-y: scroll;
+}
+
+#div-spinner {
+    top: 40%;
+    text-align: center;
+    left: 0;
+    right: 0;
+    position: absolute;
+    visibility: hidden;
+    color: blue;
 }

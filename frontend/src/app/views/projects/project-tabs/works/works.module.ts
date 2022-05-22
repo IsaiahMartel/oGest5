@@ -13,7 +13,8 @@ import { WorksPage } from './works.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    WorksPageRoutingModule
+    WorksPageRoutingModule,
+      IonicModule.forRoot(),  
   ],
   declarations: [WorksPage]
 })

@@ -1,5 +1,4 @@
 <ion-content has-header>
-<<<<<<< HEAD
     <div id="container" *ngFor="let p of projectArray">
 
         <ng-container *ngFor="let address of addressArray; index as i">
@@ -8,25 +7,10 @@
                 <ion-card-header>
                     <h5 class="name-text"> {{address.addressfirstName}} {{address.addresslastName}}</h5>
                     <h6 class="title-text">{{p.addressgroups[i].addressgroupName}}</h6>
-=======
-    <div id="container" *ngFor="let a of addressArray">
-
-        <ng-container *ngFor="let address of a.addresses; index as i">
-            <ion-card>
-                <ion-card-header>
-                    <h5 class="name-text"> {{address.addressfirstName}} {{address.addresslastName}}</h5>
-                    <h6 class="title-text">{{a.addressgroups[i].addressgroupName}}</h6>
->>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
                 </ion-card-header>
             </ion-card>
         </ng-container>
     </div>
 
-<<<<<<< HEAD
-    =======
-=======
-    <h1 class="ion-text-center" *ngIf="addressArray.length==0">
-        No hay miembros
-    </h1>
->>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
+
 </ion-content>

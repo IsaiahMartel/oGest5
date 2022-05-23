@@ -44,11 +44,8 @@ export class CalendarPage implements OnInit {
 
           // Ordena el array por fecha
           this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
-<<<<<<< HEAD
           console.log(shedule.sheduleNote!="");
           
-=======
->>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
         };
       })
 

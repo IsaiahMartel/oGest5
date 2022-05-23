@@ -18,26 +18,41 @@ import { ProjectIdService } from 'src/app/services/project-id/project-id.service
 export class WorksPage implements OnInit {
   public playlistArray: Array<Playlist> = [];
   public playlist: Playlist;
+<<<<<<< HEAD
   projectId: number;
+=======
+  projectId: number; 
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
 
   constructor(
     private playlistService: PlaylistsService,
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
+<<<<<<< HEAD
     public storage: Storage,
     private checkDataService: CheckDataService,
+=======
+    public storage: Storage, 
+    private checkDataService : CheckDataService,
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
     private projectIdService: ProjectIdService
   ) { }
 
   ngOnInit(): void {
     this.loadInfo();
   }
+<<<<<<< HEAD
 
   // Pasa los datos desde el local storage de playlist a un array
+=======
+  
+   // Pasa los datos desde el local storage de playlist a un array
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
   loadInfo() {
     this.projectId = this.projectIdService.projectId;
     this.checkDataService.checkPlaylistLocal();
     this.checkDataService.playlistObs.subscribe((playlist) => {
+<<<<<<< HEAD
 
       var array: Array<Playlist> = Object.values(playlist);
       array.filter((playlist) => {
@@ -70,6 +85,12 @@ export class WorksPage implements OnInit {
           
          
          
+=======
+     
+      var array: Array<Playlist> = Object.values(playlist);
+      array.filter((playlist) => {
+        if (playlist.project_id == this.projectId) {
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
           this.playlistArray.push(playlist);
 
 
@@ -77,8 +98,13 @@ export class WorksPage implements OnInit {
           this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
 
         };
+<<<<<<< HEAD
       })
     })
+=======
+    })
+  })
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
   }
 
 }

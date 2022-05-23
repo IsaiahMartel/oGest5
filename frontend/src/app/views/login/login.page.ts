@@ -4,7 +4,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { Storage } from '@ionic/storage';
+=======
+
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
 
 @Component({
   selector: 'app-login',
@@ -20,7 +24,11 @@ export class LoginPage {
     private alertController: AlertController,
     private authService: AuthService,
     private formBuilder: FormBuilder,
+<<<<<<< HEAD
     private router: Router, private storage: Storage
+=======
+    private router: Router
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
   ) { }
 
   // Crea las validaciones
@@ -45,6 +53,7 @@ export class LoginPage {
     this.authService.login(user).subscribe(() => {
 
 
+<<<<<<< HEAD
       this.storage.get('access_token').then(data => {
       
         this.router.navigateByUrl('/home');
@@ -52,6 +61,11 @@ export class LoginPage {
       });
      
   
+=======
+
+      this.router.navigateByUrl('');
+      this.loginForm.reset();
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
     }
     )
   }

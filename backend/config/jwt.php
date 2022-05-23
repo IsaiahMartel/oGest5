@@ -102,7 +102,11 @@ return [
     */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     'ttl' => env('JWT_TTL', null),
+=======
+    'ttl' => env('JWT_TTL', 60),
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
 =======
     'ttl' => env('JWT_TTL', 60),
 >>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
@@ -154,6 +158,10 @@ return [
     'required_claims' => [
         'iss',
         'iat',
+<<<<<<< HEAD
+=======
+        'exp',
+>>>>>>> 061e204417dd68f16f88b8abe0e307bdd76858e5
         'nbf',
         'sub',
         'jti',

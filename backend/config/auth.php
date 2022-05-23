@@ -103,7 +103,6 @@ return [
         'mobiles' => [
             'provider' => 'mobiles',
             'table' => 'password_resets',
-            'expire' => 60,
             'throttle' => 60,
         ],
     ],

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { AddressGroup } from 'src/app/models/address-group';
+import { Address } from 'src/app/models/address';
 import { Playlist } from 'src/app/models/playlist';
 import { Project } from 'src/app/models/project';
 import { Shedule } from 'src/app/models/shedule';
@@ -18,8 +18,8 @@ export class CheckDataService {
    projectsObs: Observable<Project> = this.projects.asObservable();
   private shedule: Subject<Shedule> = new Subject<Shedule>();
   sheduleObs: Observable<Shedule> = this.shedule.asObservable();
-  private address: Subject<AddressGroup> = new Subject<AddressGroup>();
-  addressObs: Observable<AddressGroup> = this.address.asObservable();
+  private address: Subject<Address> = new Subject<Address>();
+  addressObs: Observable<Address> = this.address.asObservable();
   private playlist: Subject<Playlist> = new Subject<Playlist>();
   playlistObs: Observable<Playlist> = this.playlist.asObservable();
   
@@ -109,7 +109,7 @@ checkProjectsLocal(){
   }
 
   getAddress(){
-    this.addressServivce.getAddresses().subscribe((p: Array<AddressGroup>) => {
+    this.addressServivce.getAddresses().subscribe((p: Array<Address>) => {
       this.storage.set("address", JSON.stringify(p));
       this.checkAddressLocal();
     })
@@ -130,7 +130,7 @@ checkProjectsLocal(){
     return this.shedule;
   }
 
-  public getAddressObs(): Subject<AddressGroup> {
+  public getAddressObs(): Subject<Address> {
     return this.address;
   }
 

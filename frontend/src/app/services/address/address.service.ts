@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { AddressGroup } from 'src/app/models/address-group';
+import { Address } from 'src/app/models/address';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AddressService {
 
   }
   getAddresses() {
-    return this.httpClient.get<AddressGroup[]>(this.endpoint);
+    return this.httpClient.get<Address[]>(this.endpoint);
   }
 
 }

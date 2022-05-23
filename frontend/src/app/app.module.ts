@@ -15,7 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
 import { BackendStatusService } from './services/backend-status/backend-status.service';
-
+import { NgCalendarModule  } from 'ionic2-calendar';
 
 
 @NgModule({
@@ -29,7 +29,8 @@ import { BackendStatusService } from './services/backend-status/backend-status.s
     AppRoutingModule, 
     HttpClientModule,
     SocialLoginModule,
-
+    NgCalendarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
 
   ],
   providers: [{

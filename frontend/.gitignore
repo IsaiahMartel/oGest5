@@ -26,6 +26,10 @@ npm-debug.log*
 /coverage
 /dist
 /node_modules
+/.angular/cache
+.angular/cache
+.angular
+/.angular
 /platforms
 /plugins
 /www

@@ -17,6 +17,7 @@ import { AddressGroup } from 'src/app/models/address-group';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { of, combineLatestWith, pairs } from 'rxjs';
+import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 
 
 
@@ -45,7 +46,8 @@ private innerHTMLCalendar;
   viewTitle: string;
 
   calendar = {
-    mode: 'month',
+    startingDayWeek: 1 as number,
+    mode: 'month' as CalendarMode,
     currentDate: new Date(),
     noEventsLabel: "No hay proyectos",
   };
@@ -73,63 +75,18 @@ private innerHTMLCalendar;
     this.loadInfo();
   }
 
-  // async presentLoadingWithOptions() {
-  //   var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
-  //   this.loading = await this.loadingController.create({
-
-  //     spinner: "crescent",
-  //     cssClass: 'loading',
-  //     backdropDismiss: false,
-  //     // showBackdrop: false,
-
-  //   });
-
-
-  //   // console.log(calendar);
-
-
-
-
-  //   await this.loading.present();
-
-  // if(this.dismissLoading==true){
-
-  // }
-  // const { role, data } = await loading.onDidDismiss();
-  // console.log('Loading dismissed with role:', role);
-  // }
+  
 
   // Para ir atrás en el calendario
   next() {
     this.myCal.slideNext();
-    // //  this.presentLoadingWithOptions();
-    // var calendar = document.getElementsByTagName('monthview') as HTMLCollectionOf<HTMLElement>;
+
     var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
-    // // console.log(calendar);
-    // // this.innerHTMLCalendar  = calendar[0];
-    // var div = document.createElement("ion-spinner");
-    // div.style.width = "100px";
-    // div.style.height = "100px";
-    // div.style.background = "red";
-    // div.style.color = "white";
-    // div.innerHTML = "hola";
+
 
 //  calendar[0].appendChild(div);
  calendar[0].style.visibility= "hidden";
-// calendar[0].innerHTML ='<ion-spinner name="crescent"></ion-spinner>'
-    // calendar[0].style.visibility = "hidden";
 
-
-    //  for (const tag of Array.from(calendar)) {
-    //   var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
-    //   tag.innerHTML = withoutDot;
-    //   tag.
-    // }
-
-    //  for (const tag of Array.from(weekDays)) {
-    //   var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
-    //   tag.innerHTML = withoutDot;
-    // }
 
 
     var spinner = document.getElementById('div-spinner').style.visibility="visible";

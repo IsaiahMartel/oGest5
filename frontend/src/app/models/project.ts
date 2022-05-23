@@ -1,3 +1,5 @@
+import { Address } from "./address";
+import { AddressGroup } from "./address-group";
 import { Event } from "./event";
 
 export class Project {
@@ -5,4 +7,6 @@ export class Project {
     projectDateIni: Date;
     projectDateEnd: Date;
     events: Event;
+    addresses : Address;
+    addressgroups: AddressGroup;
 }

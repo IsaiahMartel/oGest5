@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import { AddressGroup } from 'src/app/models/address-group';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
+import { Project } from 'src/app/models/project';
+import { Address } from 'src/app/models/address';
 
 @Component({
   selector: 'app-members',
@@ -12,7 +14,8 @@ import { ProjectIdService } from 'src/app/services/project-id/project-id.service
   styleUrls: ['./members.page.scss'],
 })
 export class MembersPage implements OnInit {
-  public addressArray: Array<AddressGroup> = [];
+  public projectArray: Array<Project> = [];
+  public addressArray: Array<Address> = [];
   projectId: number;
 
 
@@ -31,13 +34,25 @@ export class MembersPage implements OnInit {
     this.projectId = this.projectIdService.projectId;
   
       this.checkDataService.checkAddressLocal();
-      this.checkDataService.addressObs.subscribe((address) => {
+      this.checkDataService.addressObs.subscribe((project) => {
 
-        var array: Array<AddressGroup> = Object.values(address);
+        var array: Array<Project> = Object.values(project);
 
-        array.filter((address) => {
-          if (address.id == this.projectId) {
-            this.addressArray.push(address);
+        array.filter((project) => {
+          if (project.id == this.projectId) {
+            this.projectArray.push(project);
+
+            for(let p of this.projectArray){
+             
+for(let address in p.addresses){
+
+  
+  this.addressArray.push(p.addresses[address]);
+}
+
+            }
+     
+            
     
           };
         })

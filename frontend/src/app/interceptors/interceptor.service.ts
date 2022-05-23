@@ -99,6 +99,8 @@ cf : boolean;
     this.isOnline = false;
     this.dismissToast = false;
 
+    }else if(errorMessage=="Unauthenticated.\n"){
+
     }else{
     this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
     }
@@ -116,6 +118,8 @@ console.log(errorMessage);
     // Elimina el mensaje anterior si lo hubiera
     try {
       this.toast.dismiss();
+      console.log("por que no pasa");
+      
     } catch (e) { }
 
     this.toast = await this.toastController.create({
@@ -124,7 +128,11 @@ console.log(errorMessage);
       color: color,
       icon: icon,
       position: 'bottom',
-      cssClass: "my-custom-class"
+      cssClass: "my-custom-class",
+      buttons: [{
+        text: 'OK',
+        role: 'cancel',
+    }]
 
     });
     await this.toast.present()

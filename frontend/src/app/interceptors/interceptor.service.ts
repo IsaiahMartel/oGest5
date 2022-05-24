@@ -20,7 +20,7 @@ export class InterceptorService implements HttpInterceptor {
   private dismissToast: boolean;
   private toast;
   isOnline: boolean;
-
+createdOnlyOneToast =0;
 
   cf: boolean;
 
@@ -99,12 +99,14 @@ export class InterceptorService implements HttpInterceptor {
       this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
       this.isOnline = false;
       this.dismissToast = false;
-
+      this.createdOnlyOneToast++;
     } else if (errorMessage == "Unauthenticated.\n") {
 
     } else {
       this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
+      
       this.dismissToast = false;
+      this.createdOnlyOneToast++;
     }
 
 
@@ -123,7 +125,7 @@ export class InterceptorService implements HttpInterceptor {
       console.log("por que no pasa");
 
     } catch (e) { }
-    if (this.isOnline == false) {
+    if (this.createdOnlyOneToast <1) {
     this.toast = await this.toastController.create({
       header: header,
       message: message,
@@ -149,6 +151,7 @@ export class InterceptorService implements HttpInterceptor {
         this.toast.dismiss();
         this.toast
         this.isOnline = true;
+        this.createdOnlyOneToast=0;
       },
         8000);
     }

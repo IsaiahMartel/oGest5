@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Alert;
 use App\Models\Season;
+use App\Events\Hello ;
 
 // alertLEVEL
 //1 Crear Project
@@ -32,3 +33,13 @@ function addAlert ($user_id,$eventName,$alertLevel,$alertNote='',$alertModule=''
             'message'=>  'true'
     ]);
 }
+
+function sendMessage(Request $request){
+
+   // projects son todos los projectos que se han publicado tras pulsar el botón
+    $projects= $request->input('projects');
+
+    broadcast(new Hello( $projects));
+
+}
+

@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Season;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
-
-
+use App\Events\Hello ;
 class PublicationController extends Controller
 {
     public function index()
@@ -66,11 +65,16 @@ class PublicationController extends Controller
             ]);
         }
     }
+
+
+
     // funcion para pasar de LEVEL 1 a LEVEL 0-> para publicar
     public function publicate(Request $request)
     {
+
         if($request->ajax())
         {
+
             $timeline = '';
             $project_ids        = json_decode( $request->input('project_ids'));
             foreach ($project_ids as $key => $project_id) {
@@ -99,10 +103,22 @@ class PublicationController extends Controller
             return response()->json([
                     'message' => true,
                     'texto' => 'Se han publicado '.$registros.' proyectos',
-                    'texto2' => 'El proceso ha finalzado correctamente'
+                    'texto2' => 'El proceso ha finalzado correctamente',
+                    'proyectos' => $timeline
             ]);
+
         }
 
+    }
+
+
+    // para hacer la llamada al eventMobile
+    public function eventMovile(Request $request)
+    {
+        $proyects = $request->input('projects');
+        // aqui va la funcion que llama al evento (OJO, NO SE COMO LLAMARLA)
+
+        broadcast(new Hello("se han hecho cambios en "));
     }
 
     // funcion para Despublicar (Borra registro de LEVEL 0)

@@ -48,11 +48,11 @@ export class AppComponent implements AfterViewInit {
     this.clientOfflineAlert();
     this.doConnectionWebSocket();
     this.checkDataService.setTheme();
-  
+
   }
 
 
- 
+
 
   clientOfflineAlert() {
     this.modalConnectionService.appIsOnline$.subscribe(online => {
@@ -86,7 +86,9 @@ export class AppComponent implements AfterViewInit {
 
     // Muestra una alerta y actualiza los datos
     const channel = echo.channel('channel');
-    channel.listen('Alert', (data) => {
+    channel.listen('Hello', (data) => {
+      console.log(data);
+
       this.notification(data);
     });
 
@@ -99,12 +101,14 @@ export class AppComponent implements AfterViewInit {
       message: message,
       buttons: ['OK']
     });
+    console.log(message);
+
     await alert.present();
   }
 
   // Creación de los mensajes cuando backend caído o no hay conexión
   async presentToastWithOptions(header, message, color, icon) {
-    
+
     // Elimina el mensaje anterior si lo hubiera
     try {
       this.toast.dismiss();

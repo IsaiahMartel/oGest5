@@ -162,6 +162,7 @@ use App\Http\Controllers\Admin\MobileuserController;
         Route::post('getdatanoPublished', [PublicationController::class, 'getdatanoPublished']) ;
         Route::post('publicate', [PublicationController::class, 'publicate']) ;
         Route::post('desPublicate', [PublicationController::class, 'desPublicate']) ;
+        Route::post('eventMovile', [PublicationController::class, 'eventMovile']) ;
 
 
 

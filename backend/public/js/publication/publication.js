@@ -257,8 +257,24 @@ $(document).ready(function() {
                             title: data.texto,
                             text: data.text2,
                             footer: 'Archivo'
+                        });
+                        alert ('antes del event')
+                        // llamo a la funcion para generar evento en los móviles
+                        $.ajax({
+                            url: '/admin/publication/eventMovile',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data: {
+                                'projects': data.proyectos,
+                            },
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (data) {
+                                alert(data)
+                            }
                         })
-
+                        // fin de la llamada por ajax a la funcion enviar evento a los móviles
                     } else {
                         Swal.fire({
                             icon: 'error',

@@ -10,6 +10,7 @@
         "beyondcode/laravel-websockets": "^1.13",
         "bkwld/cloner": "^3.10",
         "fruitcake/laravel-cors": "^2.0",
+        "genealabs/laravel-caffeine": "^9.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jeroennoten/laravel-adminlte": "^3.7",
         "laravel/framework": "^8.65",
@@ -60,11 +61,13 @@
             "@php artisan key:generate --ansi"
         ]
     },
+
     "extra": {
         "laravel": {
             "dont-discover": []
         }
     },
+
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

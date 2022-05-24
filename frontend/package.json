@@ -20,7 +20,6 @@
         "@angular/platform-browser-dynamic": "^13.0.0",
         "@angular/router": "^13.0.0",
         "@angular/service-worker": "^13.0.0",
-
         "@awesome-cordova-plugins/document-viewer": "^5.40.0",
         "@awesome-cordova-plugins/file": "^5.40.0",
         "@awesome-cordova-plugins/file-transfer": "^5.40.0",
@@ -52,6 +51,7 @@
         "ionic2-calendar": "^0.6.9",
         "laravel-echo-ionic": "^1.0.2",
         "moment": "^2.29.3",
+        "ngx-color-picker": "^12.0.1",
         "rxjs": "^7.5.5",
         "tslib": "^2.2.0",
         "zone.js": "^0.11.5"
@@ -91,8 +91,6 @@
         "pusher-js": "^7.0.6",
         "ts-node": "~8.3.0",
         "typescript": "^4.4.2"
-
-
     },
     "description": "An Ionic project",
     "main": "karma.conf.js",

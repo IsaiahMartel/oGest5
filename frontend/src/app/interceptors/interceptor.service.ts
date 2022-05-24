@@ -21,12 +21,13 @@ export class InterceptorService implements HttpInterceptor {
   private toast;
   isOnline: boolean;
 
-cf : boolean;
 
-    backendStatusChange: Subject<boolean> = new Subject<boolean>();
+  cf: boolean;
+
+  backendStatusChange: Subject<boolean> = new Subject<boolean>();
   constructor(
-    private storage: Storage,   private modalConnectionService: ModalConnectionService,
-    private toastController : ToastController
+    private storage: Storage, private modalConnectionService: ModalConnectionService,
+    private toastController: ToastController
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -37,19 +38,19 @@ cf : boolean;
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.storage.ready().then(() => this.storage.get('access_token'))}`
 
-      
+
     });
 
 
     return from(this.storage.get(TOKEN_KEY))
       .pipe(
         switchMap(token => {
-      
+
 
           if (token) {
             req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
 
-            
+
           }
 
           if (!req.headers.has('Content-Type')) {
@@ -60,19 +61,19 @@ cf : boolean;
           return next.handle(req).pipe(
             map((event: HttpEvent<any>) => {
               if (event instanceof HttpResponse) {
-            
+
                 if (this.isOnline == false) {
                   this.dismissToast = true;
                   this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
-        
+
                 }
               }
-          
 
-        
+
+
               return event;
             }),
-           
+
             catchError(this.manageError.bind(this))
           );
         })
@@ -80,8 +81,8 @@ cf : boolean;
       );
   }
 
- 
- 
+
+
 
   manageError(error: HttpErrorResponse) {
 
@@ -91,22 +92,23 @@ cf : boolean;
     Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
 
 
-    if(errorMessage=="true\n"){
+    if (errorMessage == "true\n") {
 
 
 
-    this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
-    this.isOnline = false;
-    this.dismissToast = false;
+      this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
+      this.isOnline = false;
+      this.dismissToast = false;
 
-    }else if(errorMessage=="Unauthenticated.\n"){
+    } else if (errorMessage == "Unauthenticated.\n") {
 
-    }else{
-    this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
+    } else {
+      this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
+      this.dismissToast = false;
     }
 
 
-console.log(errorMessage);
+    console.log(errorMessage);
 
     return throwError("Error " + errorMessage + "\n" + errorJSON);
   }
@@ -114,14 +116,14 @@ console.log(errorMessage);
 
   // Creación de los mensajes cuando backend caído o no hay conexión
   async presentToastWithOptions(header, message, color, icon) {
-    
+
     // Elimina el mensaje anterior si lo hubiera
     try {
       this.toast.dismiss();
       console.log("por que no pasa");
-      
-    } catch (e) { }
 
+    } catch (e) { }
+    if (this.isOnline == false) {
     this.toast = await this.toastController.create({
       header: header,
       message: message,
@@ -132,13 +134,17 @@ console.log(errorMessage);
       buttons: [{
         text: 'OK',
         role: 'cancel',
-    }]
+      }]
 
     });
-    await this.toast.present()
-
+    console.log(this.dismissToast);
+    
+   
+      await this.toast.present()
+    }
     // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
     if (this.dismissToast == true) {
+
       setTimeout(() => {
         this.toast.dismiss();
         this.toast
@@ -146,7 +152,7 @@ console.log(errorMessage);
       },
         8000);
     }
+
+
   }
-
-
 }

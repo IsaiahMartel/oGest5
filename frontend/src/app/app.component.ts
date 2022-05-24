@@ -47,6 +47,7 @@ export class AppComponent implements AfterViewInit {
 // this.updateData();
     this.clientOfflineAlert();
     this.doConnectionWebSocket();
+    this.checkDataService.setTheme();
   
   }
 
@@ -128,6 +129,8 @@ export class AppComponent implements AfterViewInit {
         8000);
     }
   }
+
+
 }
 
 

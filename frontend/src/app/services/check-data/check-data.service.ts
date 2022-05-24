@@ -138,6 +138,42 @@ checkProjectsLocal(){
     return this.playlist;
   }
 
+  setTheme(){
+    this.storage.get("project1").then(data => {
+       
+
+        document.body.style.setProperty('--project1', data);
+
+    })
+
+    this.storage.get("project2").then(data => {
+        document.body.style.setProperty('--project2', data);
+    })
+
+    this.storage.get("project3").then(data => {
+      document.body.style.setProperty('--project3', data);
+  })
+  this.storage.get("project4").then(data => {
+    document.body.style.setProperty('--project4', data);
+})
+
+this.storage.get("importantProject1").then(data => {
+  document.body.style.setProperty('--importantProject1', data);
+})
+
+this.storage.get("importantProject2").then(data => {
+  document.body.style.setProperty('--importantProject2', data);
+})
+this.storage.get("importantProject3").then(data => {
+  document.body.style.setProperty('--importantProject3', data);
+})
+this.storage.get("importantProject4").then(data => {
+  document.body.style.setProperty('--importantProject4', data);
+})
+
+
+
+  }
 
   
 }

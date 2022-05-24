@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>configuration</ion-title>
-  </ion-toolbar>
+    <ion-toolbar id="navbar">
+        <ion-menu-button id="home-menu-container">
+            <ion-icon id="go-back-button" name="arrow-back-outline" routerLink="/home"></ion-icon>
+            <ion-icon id="header-icon" src="assets/configuration-icon.svg"></ion-icon>
+
+            <h2 id="header-text">Configuración</h2>
+        </ion-menu-button>
+    </ion-toolbar>
 </ion-header>
-
 <ion-content>
+    <!-- [cpPresetEmptyMessage]="Color no seleccionado" [cpPresetColorsClass] -->
 
+    <ion-grid class="ion-text-center">
+        <h1>Customización</h1>
+        <ion-row>
+
+            <ion-col>
+                <h1>Color 1</h1>
+                <input id="color-picker" [colorPicker]="color1" [cpWidth]="200" [cpHeight] [cpCancelButton]="true" [style.background]="color1" (colorPickerChange)="colorPickerChange1($event)" (colorPickerCancel)="colorPickerCancel1()" cpCancelButtonText="Predeterminado"
+                />
+            </ion-col>
+            <ion-col>
+                <h1>Color 2</h1>
+                <input id="color-picker" [colorPicker]="color2" [cpWidth]="200" [cpHeight] [cpCancelButton]="true" [style.background]="color2" (colorPickerChange)="colorPickerChange2($event)" (colorPickerCancel)="colorPickerCancel2()" cpCancelButtonText="Predeterminado"
+                />
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h1>Color 3</h1>
+                <input id="color-picker" [(colorPicker)]="color3" [cpWidth]="200" [cpHeight] [cpCancelButton]="true" [style.background]="color3" (colorPickerChange)="colorPickerChange3($event)" (colorPickerCancel)="colorPickerCancel3()" cpCancelButtonText="Predeterminado"
+                />
+            </ion-col>
+            <ion-col>
+                <h1>Color 4</h1>
+                <input id="color-picker" [(colorPicker)]="color4" [cpWidth]="200" [cpHeight] [cpCancelButton]="true" [style.background]="color4" (colorPickerChange)="colorPickerChange4($event)" (colorPickerCancel)="colorPickerCancel4()" cpCancelButtonText="Predeterminado"
+                />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

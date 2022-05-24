@@ -85,28 +85,36 @@ ion-content {
         background-color: transparent !important;
     }
     .yellow {
-        background-color: #7a8ebb !important;
+        background-color: var(--project1) !important;
+        // background-color: #7a8ebb !important;
     }
     .yellowConcert {
-        background-color: #667cad !important;
+        background-color: var(--importantProject1) !important;
+        // background-color: #667cad !important;
     }
     .red {
-        background-color: #406D96 !important;
+        background-color: var(--project2) !important;
+        // background-color: #406D96 !important;
     }
     .redConcert {
-        background-color: #224a70 !important;
+        // background-color: #224a70 !important;
+        background-color: var(--importantProject2) !important;
     }
     .green {
-        background-color: #A8D0DA !important;
+        background-color: var(--project3) !important;
+        // background-color: #A8D0DA !important;
     }
     .greenConcert {
-        background-color: #679ca9 !important;
+        // background-color: #679ca9 !important;
+        background-color: var(--importantProject3) !important;
     }
     .blue {
-        background-color: #D8E8E8 !important;
+        background-color: var(--project4) !important;
+        // background-color: #D8E8E8 !important;
     }
     .blueConcert {
-        background-color: #8ebaba !important;
+        // background-color: #8ebaba !important;
+        background-color: var(--importantProject4) !important;
     }
     .freeDay {
         background-color: #4ac0608e !important;

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ConfigurationPageRoutingModule } from './configuration-routing.module';
 
 import { ConfigurationPage } from './configuration.page';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConfigurationPageRoutingModule
+    ConfigurationPageRoutingModule,
+    ColorPickerModule
   ],
   declarations: [ConfigurationPage]
 })

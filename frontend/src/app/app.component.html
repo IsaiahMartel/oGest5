@@ -1,4 +1,23 @@
 <ion-app>
+    <ion-menu-toggle>
+
+        <ion-menu menuId="custom" side="start" menuId="custom" contentId="main" class="my-custom-menu">
+
+            <ion-content>
+                <ion-list>
+                    <ion-item class="ion-no-padding" id="login-item" lines="none" routerLink="/configuration">
+                        <ion-icon id="configuration-icon" src="assets/configuration-icon.svg"></ion-icon>
+                        <h2 id="configuration-text">Configuración</h2>
+                    </ion-item>
+
+
+                </ion-list>
+
+            </ion-content>
+
+
+        </ion-menu>
+    </ion-menu-toggle>
 
     <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

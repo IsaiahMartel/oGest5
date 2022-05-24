@@ -1,0 +1,17 @@
+#color-picker {
+    width: 150px;
+    height: 150px;
+}
+
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+#row {
+    text-align: center;
+}

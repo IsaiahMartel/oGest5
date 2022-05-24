@@ -16,7 +16,7 @@ import { environment } from '../environments/environment';
 import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
 import { BackendStatusService } from './services/backend-status/backend-status.service';
 import { NgCalendarModule  } from 'ionic2-calendar';
-
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +30,9 @@ import { NgCalendarModule  } from 'ionic2-calendar';
     HttpClientModule,
     SocialLoginModule,
     NgCalendarModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ColorPickerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production},
+    )
 
   ],
   providers: [{

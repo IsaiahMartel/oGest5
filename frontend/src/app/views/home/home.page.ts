@@ -1,9 +1,9 @@
-import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, LOCALE_ID, Renderer2, ViewChild } from '@angular/core';
 import { Shedule } from '../../models/shedule';
 import { SheduleService } from '../../services/shedule/shedule.service';
 import { Project } from '../../models/project';
 import { ProjectsService } from '../../services/projects/projects.service';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { ActionSheetController, AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
@@ -27,7 +27,7 @@ import { CalendarMode, Step } from 'ionic2-calendar/calendar';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage {
+export class HomePage implements AfterViewInit {
 
   public shedule: Shedule;
   public projects_id: number[] = [];
@@ -39,6 +39,7 @@ export class HomePage {
 private innerHTMLCalendar;
 
   private loading;
+  private loadedViewTitleForTheFirstTime : number =0;
 
   colorPick: number = 0;
 
@@ -68,12 +69,40 @@ private innerHTMLCalendar;
     public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
     private checkDataService: CheckDataService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    public actionSheetController : ActionSheetController,
+    private renderer: Renderer2
+
   ) { }
 
   ngOnInit(): void {
     this.loadInfo();
+
+    
   }
+
+  ngAfterViewInit(): void {
+    var time : number = 2000;
+      this.renderer.listen( document.getElementsByClassName("event-detail-container")[0], 'mouseDown', (e) => {
+        setTimeout(() => {
+          
+        },
+          time);
+        this.presentActionSheet();
+    
+   });
+
+   this.renderer.listen( document.getElementsByClassName("event-detail-container")[0], 'mouseUp', (e) => {
+    this.presentActionSheet();
+
+});
+
+  }
+
+  // ngOnDestroy() {
+  //   this.listenFunc();
+  // }
+
 
   
 
@@ -107,6 +136,7 @@ private innerHTMLCalendar;
   // Cambia el nombre del mes al cambiarlo
   onViewTitleChanged(title) {
     // var calendar = document.getElementsByTagName('monthview') as HTMLCollectionOf<HTMLElement>;
+    if(this.loadedViewTitleForTheFirstTime>=2){
     var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
 
     document.getElementById('div-spinner').style.visibility="hidden";
@@ -114,6 +144,8 @@ private innerHTMLCalendar;
     // console.log(calendar);
     // calendar[0].innerHTML = ''
     // calendar[0].style.visibility = "visible";
+  }
+  this.loadedViewTitleForTheFirstTime++;
 
     this.viewTitle = title;
     // console.log("hola");
@@ -338,6 +370,37 @@ private innerHTMLCalendar;
 
 
     return (Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24)) + 1);
+  }
+
+  async presentActionSheet() {
+    console.log(this.actionSheetController);
+
+    
+    
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Documento',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Descargar',
+        role: 'destructive',
+        icon: 'download',
+        id: 'delete-button',
+        data: {
+          type: 'delete'
+        }
+      }, {
+        text: 'Enviar por correo',
+        icon: 'share',
+        data: 10,
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, ]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role and data', role, data);
   }
 
 }

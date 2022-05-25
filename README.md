@@ -16,7 +16,7 @@ Start the local development server
 
     ionic serve -l
     
-    ### Laravel-backend
+### Laravel-backend
 
 Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
 

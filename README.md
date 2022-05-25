@@ -54,6 +54,10 @@ Start the local development server
 
     php artisan serve
     
+WebSockets
+
+    php artisan websockets:serve
+    
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 
     php artisan migrate

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Subscription } from 'rxjs';
 
 import { Project } from 'src/app/models/project';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
@@ -21,7 +22,7 @@ export class TabsPage implements OnInit {
   public projectName: String;
 
   public projectId;
-
+ subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -49,7 +50,7 @@ export class TabsPage implements OnInit {
 
       this.checkDataService.checkProjectsLocal();
     
-      this.checkDataService.projectsObs.subscribe((projects) => {
+      this.subscription = this.checkDataService.projectsObs.subscribe((projects) => {
 
         var array: Array<Project> = Object.values(projects);
         array.filter((project) => {
@@ -72,6 +73,10 @@ export class TabsPage implements OnInit {
     this.projectIdService.requestIntercepted.subscribe((projectId) => {this.projectId=projectId});
   }
 
- 
+  ionViewDidLeave() {
+
+    this.subscription.unsubscribe();
+  }
+
 
 }

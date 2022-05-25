@@ -118,7 +118,7 @@ class PublicationController extends Controller
         $proyects = $request->input('projects');
         // aqui va la funcion que llama al evento (OJO, NO SE COMO LLAMARLA)
 
-        broadcast(new Hello("se han hecho cambios en "));
+        broadcast(new Hello("Se han hecho cambios en " . $proyects));
     }
 
     // funcion para Despublicar (Borra registro de LEVEL 0)

@@ -7,6 +7,7 @@ import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { Storage } from '@ionic/storage';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class WorksPage implements OnInit {
   public playlistArray: Array<Playlist> = [];
   public playlist: Playlist;
   projectId: number;
+  subscription = new Subscription();
 
   constructor(
     private playlistService: PlaylistsService,
@@ -37,7 +39,7 @@ export class WorksPage implements OnInit {
   loadInfo() {
     this.projectId = this.projectIdService.projectId;
     this.checkDataService.checkPlaylistLocal();
-    this.checkDataService.playlistObs.subscribe((playlist) => {
+    this.subscription.add(this.checkDataService.playlistObs.subscribe((playlist) => {
 
       var array: Array<Playlist> = Object.values(playlist);
       array.filter((playlist) => {
@@ -78,7 +80,12 @@ export class WorksPage implements OnInit {
 
         };
       })
-    })
+    }))
+  }
+
+  ionViewDidLeave() {
+
+    this.subscription.unsubscribe();
   }
 
 }

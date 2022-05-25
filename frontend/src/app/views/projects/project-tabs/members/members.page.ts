@@ -7,6 +7,7 @@ import { CheckDataService } from 'src/app/services/check-data/check-data.service
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { Project } from 'src/app/models/project';
 import { Address } from 'src/app/models/address';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-members',
@@ -17,7 +18,7 @@ export class MembersPage implements OnInit {
   public projectArray: Array<Project> = [];
   public addressArray: Array<Address> = [];
   projectId: number;
-
+subscription = new Subscription();
 
   constructor(
     public storage: Storage, private checkDataService: CheckDataService,
@@ -34,7 +35,7 @@ export class MembersPage implements OnInit {
     this.projectId = this.projectIdService.projectId;
   
       this.checkDataService.checkAddressLocal();
-      this.checkDataService.addressObs.subscribe((project) => {
+      this.subscription = this.checkDataService.addressObs.subscribe((project) => {
 
         var array: Array<Project> = Object.values(project);
 
@@ -60,4 +61,10 @@ for(let address in p.addresses){
   
       })
   }
+
+  ionViewDidLeave() {
+
+    this.subscription.unsubscribe();
+  }
+
 }

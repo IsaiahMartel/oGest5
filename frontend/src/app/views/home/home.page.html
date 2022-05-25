@@ -1,12 +1,8 @@
 <ion-header class="ion-no-border" id="navbar">
+    <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
+    <h2 id="navbar-text">Calendario</h2>
+    <hr id="separation-title">
 
-    <ion-toolbar id="navbar">
-        <ion-menu-button id="home-menu-container">
-            <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
-            <h2 id="navbar-text">Calendario</h2>
-            <hr id="separation-title">
-        </ion-menu-button>
-    </ion-toolbar>
 </ion-header>
 
 <ion-content class='has-header has-subheader'>
@@ -30,6 +26,8 @@
             </ion-button>
         </ion-col>
     </ion-row>
+
+    <!-- Rueda de cargando cuando se cambia de mes -->
     <div id="div-spinner">
         <ion-spinner color="tertiary" name="lines"></ion-spinner>
     </div>
@@ -38,7 +36,6 @@
     <ng-template #colors let-view="view" let-row="row" let-col="col">
 
         <div id="divDays" [ngClass]="printColorsInDaysWithEvents(view.dates[row*7+col].events)">
-
             {{view.dates[row*7+col].label}}
         </div>
     </ng-template>

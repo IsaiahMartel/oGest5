@@ -4,6 +4,9 @@ import { Perplaylists } from "./perplaylists";
 import { Works } from "./works";
 
 export class Playlist {
+  filter(arg0: (e: any) => boolean) {
+    throw new Error('Method not implemented.');
+  }
     workName: string;
     workDuration: string;
     playlistString: string;

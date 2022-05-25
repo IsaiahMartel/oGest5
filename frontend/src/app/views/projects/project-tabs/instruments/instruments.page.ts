@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-instruments',
@@ -17,7 +18,7 @@ import { ProjectIdService } from 'src/app/services/project-id/project-id.service
 export class InstrumentsPage implements OnInit {
   public playlistArray: Array<Playlist> = [];
   public playlist: Playlist;
-  projectId : number;
+  projectId: number;
 
   // Booleans para los botones de abrir y cerrar
   public showPercussion = false;
@@ -32,13 +33,14 @@ export class InstrumentsPage implements OnInit {
   perArray = [];
   keyArray = [];
   voiArray = [];
+  subscription = new Subscription();
 
   constructor(
     private playlistService: PlaylistsService,
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
     public storage: Storage, private checkDataService: CheckDataService,
-    private projectIdService :ProjectIdService
+    private projectIdService: ProjectIdService
   ) { }
 
   ngOnInit(): void {
@@ -50,11 +52,11 @@ export class InstrumentsPage implements OnInit {
 
     this.projectId = this.projectIdService.projectId;
     this.checkDataService.checkPlaylistLocal();
-    this.checkDataService.playlistObs.subscribe((playlist) => {
+    this.subscription.add(this.checkDataService.playlistObs.subscribe((playlist) => {
 
 
       var array: Array<Playlist> = Object.values(playlist);
-     
+
 
       array.filter((playlist) => {
 
@@ -73,43 +75,65 @@ export class InstrumentsPage implements OnInit {
       })
 
       //  Comprueba si hay instrumentos en cada categoría, los mete en un array de su categoría y descarta los duplicados
-      for (let playlist of this.playlistArray) {
-        for (let perplaylist in playlist.perplaylists) {
-          if (playlist.perplaylists[perplaylist].instrumentName != null || playlist.perplaylists[perplaylist].instrumentName2 != null) {
-            this.noPercussion = false;
-            if (!this.perArray.includes(playlist.perplaylists[perplaylist].instrumentName) || !this.perArray.includes(playlist.perplaylists[perplaylist].instrumentName2)) {
-              this.perArray.push(playlist.perplaylists[perplaylist]);
+      this.playlistArray.filter((instruments) => {
+        // console.log(e);
+
+        for (let index in instruments.perplaylists) {
+
+          if (instruments.perplaylists[index].instrumentName != null || playlist.perplaylists[index].instrumentName2 != null) {
+
+            this.noPercussion = false;;
+            if (!this.perArray.some(instrument => instrument.instrumentName == instruments.perplaylists[index].instrumentName)) {
+              this.perArray.push(instruments.perplaylists[index]);
+
+
             }
           }
         }
 
-        for (let keyplaylist in playlist.keyplaylists) {
-          if (playlist.keyplaylists[keyplaylist].instrumentName != null || playlist.keyplaylists[keyplaylist].instrumentName2 != null) {
-            this.noKeyboard = false;
-            if (!this.perArray.includes(playlist.keyplaylists[keyplaylist].instrumentName) || !this.perArray.includes(playlist.keyplaylists[keyplaylist].instrumentName2)) {
-              this.keyArray.push(playlist.keyplaylists[keyplaylist]);
+        for (let index in instruments.keyplaylists) {
+
+          if (instruments.keyplaylists[index].instrumentName != null || playlist.keyplaylists[index].instrumentName2 != null) {
+
+            this.noKeyboard = false;;
+            if (!this.keyArray.some(instrument => instrument.instrumentName == instruments.keyplaylists[index].instrumentName)) {
+              this.keyArray.push(instruments.keyplaylists[index]);
+
+
             }
           }
         }
 
-        for (let voiplaylist in playlist.voiplaylists) {
-          if (playlist.voiplaylists[voiplaylist].instrumentName != null || playlist.voiplaylists[voiplaylist].instrumentName2 != null) {
-            this.noVoice = false;
-            if (!this.voiArray.includes(playlist.voiplaylists[voiplaylist].instrumentName) || !this.voiArray.includes(playlist.voiplaylists[voiplaylist].instrumentName2)) {
-              this.voiArray.push(playlist.voiplaylists[voiplaylist]);
+        for (let index in instruments.voiplaylists) {
+
+          if (instruments.voiplaylists[index].instrumentName != null || playlist.voiplaylists[index].instrumentName2 != null) {
+
+            this.noVoice = false;;
+            if (!this.keyArray.some(instrument => instrument.instrumentName == instruments.voiplaylists[index].instrumentName)) {
+              this.voiArray.push(instruments.voiplaylists[index]);
+
+
             }
           }
         }
-      }
+
+      })
 
 
-    })
+    }))
 
-
-
-    // Va a buscar los datos al backend
-
+   
 
   }
+
+
+
+
+
+  ionViewDidLeave() {
+
+    this.subscription.unsubscribe();
+  }
+
 }
 

@@ -16,6 +16,8 @@ export class ConfigurationPage implements OnInit {
   public color2: string = (getComputedStyle(document.body).getPropertyValue('--project2'));
   public color3: string = (getComputedStyle(document.body).getPropertyValue('--project3'));
   public color4: string = (getComputedStyle(document.body).getPropertyValue('--project4'));
+  public color5: string = (getComputedStyle(document.body).getPropertyValue('--freeDay'));
+
   importantProject1 = getComputedStyle(document.body).getPropertyValue('--importantProject1');
   importantProject2 = getComputedStyle(document.body).getPropertyValue('--importantProject2');
   importantProject3 = getComputedStyle(document.body).getPropertyValue('--importantProject3');
@@ -37,8 +39,8 @@ export class ConfigurationPage implements OnInit {
 
     document.body.style.setProperty('--importantProject1', this.adjust(this.color1.trim(), -50))
 
-    //  this.color1 = (getComputedStyle(document.body).getPropertyValue('--project1'));
-
+     this.color1 = (getComputedStyle(document.body).getPropertyValue('--project1'));
+     this.importantProject1 = (getComputedStyle(document.body).getPropertyValue('--importantProject1'));
 
 
 
@@ -53,7 +55,7 @@ export class ConfigurationPage implements OnInit {
     this.color2 = (getComputedStyle(document.body).getPropertyValue('--project2'));
     document.body.style.setProperty('--importantProject2', this.adjust(this.color2.trim(), -50))
 
-
+    this.importantProject2 = (getComputedStyle(document.body).getPropertyValue('--importantProject2'));
 
     this.storage.set("project2", this.color2);
     this.storage.set("importantProject2", this.importantProject2);
@@ -69,7 +71,7 @@ export class ConfigurationPage implements OnInit {
 
     document.body.style.setProperty('--importantProject3', this.adjust(this.color3.trim(), -50))
 
-
+    this.importantProject3 = (getComputedStyle(document.body).getPropertyValue('--importantProject3'));
 
     this.storage.set("project3", this.color3);
     this.storage.set("importantProject3", this.importantProject3);
@@ -81,11 +83,23 @@ export class ConfigurationPage implements OnInit {
     this.color4 = (getComputedStyle(document.body).getPropertyValue('--project4'));
 
     document.body.style.setProperty('--importantProject4', this.adjust(this.color4.trim(), -50))
-
+    this.importantProject4 = (getComputedStyle(document.body).getPropertyValue('--importantProject4'));
 
 
     this.storage.set("project4", this.color4);
     this.storage.set("importantProject4", this.importantProject4);
+
+  }
+
+  colorPickerChange5(event) {
+    document.body.style.setProperty('--freeDay', event);
+    this.color5 = (getComputedStyle(document.body).getPropertyValue('--freeDay'));
+
+   
+
+
+    this.storage.set("freeDay", this.color5);
+    
 
   }
 
@@ -126,6 +140,16 @@ export class ConfigurationPage implements OnInit {
     this.importantProject4 = getComputedStyle(document.body).getPropertyValue('--importantDefaultProject4')
     this.storage.set("importantProject4", this.importantProject4);
     document.body.style.setProperty('--importantProject4', this.importantProject4);
+
+  }
+
+  colorPickerCancel5() {
+  
+    this.color5 = (getComputedStyle(document.body).getPropertyValue('--freeDayDefault'));
+    document.body.style.setProperty('--freeDay', this.color5);
+    this.storage.set("freeDay", this.color5);
+
+   
 
   }
 

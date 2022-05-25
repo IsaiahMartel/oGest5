@@ -87,7 +87,7 @@ export class AppComponent implements AfterViewInit {
     // Muestra una alerta y actualiza los datos
     const channel = echo.channel('channel');
     channel.listen('Hello', (data) => {
-      console.log(data);
+    
 
       this.notification(data);
     });
@@ -101,7 +101,7 @@ export class AppComponent implements AfterViewInit {
       message: message,
       buttons: ['OK']
     });
-    console.log(message);
+  
 
     await alert.present();
   }

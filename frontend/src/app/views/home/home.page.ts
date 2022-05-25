@@ -5,7 +5,6 @@ import { Project } from '../../models/project';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { ActionSheetController, AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { Playlist } from 'src/app/models/playlist';
 import { Address } from 'src/app/models/address';
@@ -13,11 +12,9 @@ import { AddressService } from 'src/app/services/address/address.service';
 import { CalendarComponent } from 'ionic2-calendar';
 import { Router } from '@angular/router';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
-import { AddressGroup } from 'src/app/models/address-group';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
-import { of, combineLatestWith, pairs } from 'rxjs';
-import { CalendarMode, Step } from 'ionic2-calendar/calendar';
+import { combineLatestWith, Subscription } from 'rxjs';
+import { CalendarMode, } from 'ionic2-calendar/calendar';
 
 
 
@@ -27,7 +24,7 @@ import { CalendarMode, Step } from 'ionic2-calendar/calendar';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage implements AfterViewInit {
+export class HomePage {
 
   public shedule: Shedule;
   public projects_id: number[] = [];
@@ -36,16 +33,14 @@ export class HomePage implements AfterViewInit {
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
-private innerHTMLCalendar;
-
   private loading;
-  private loadedViewTitleForTheFirstTime : number =0;
+  private loadedViewTitleForTheFirstTime: number = 0;
 
   colorPick: number = 0;
 
   eventSource = [];
   viewTitle: string;
-
+  time;
   calendar = {
     startingDayWeek: 1 as number,
     mode: 'month' as CalendarMode,
@@ -54,7 +49,13 @@ private innerHTMLCalendar;
   };
 
   selectedDate: Date;
+  subscription = new Subscription();
 
+
+  mouseDownWholePageListener;
+  mouseUpWholePageListener;
+  calendarElement;
+  spinner;
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
 
@@ -70,7 +71,7 @@ private innerHTMLCalendar;
     @Inject(LOCALE_ID) private locale: string,
     private checkDataService: CheckDataService,
     private loadingController: LoadingController,
-    public actionSheetController : ActionSheetController,
+    public actionSheetController: ActionSheetController,
     private renderer: Renderer2
 
   ) { }
@@ -78,99 +79,73 @@ private innerHTMLCalendar;
   ngOnInit(): void {
     this.loadInfo();
 
-    
-  }
-
-  ngAfterViewInit(): void {
-    var time : number = 2000;
-      this.renderer.listen( document.getElementsByClassName("event-detail-container")[0], 'mouseDown', (e) => {
-        setTimeout(() => {
-          
-        },
-          time);
-        this.presentActionSheet();
-    
-   });
-
-   this.renderer.listen( document.getElementsByClassName("event-detail-container")[0], 'mouseUp', (e) => {
-    this.presentActionSheet();
-
-});
 
   }
 
-  // ngOnDestroy() {
-  //   this.listenFunc();
-  // }
+  // Instanciamos los elementos que vamos a usar una vez cargada la página
+  ionViewDidEnter() {
+    this.onMouseDownWholePage = this.onMouseDownWholePage.bind(this);
+    this.onMouseUpWholePage = this.onMouseUpWholePage.bind(this);
+     window.addEventListener('mousedown', this.onMouseDownWholePage);
+   window.addEventListener('mouseup', this.onMouseUpWholePage);
+    this.calendarElement = document.getElementsByClassName('swiper-wrapper')[0];
+    this.spinner = document.getElementById('div-spinner');
+  }
 
 
-  
+  //Si se mantiene el click lo suficiente abre un sheet
+  onMouseDownWholePage() {
 
-  // Para ir atrás en el calendario
+    
+    this.time = setTimeout(() => {
+      this.presentActionSheet();
+      this.time = null;
+    },
+      600);
+  }
+
+  //Si se suelta antes de tiempo no se hace nada
+  onMouseUpWholePage() {    
+    if (this.time) {
+      clearTimeout(this.time);
+      this.time = null;
+    }
+  }
+
+  // Para ir hacia adelante en el calendario
   next() {
     this.myCal.slideNext();
-
-    var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
-
-
-//  calendar[0].appendChild(div);
- calendar[0].style.visibility= "hidden";
-
-
-
-    var spinner = document.getElementById('div-spinner').style.visibility="visible";
+    this.calendarElement.style.visibility = "hidden";
+    this.spinner.style.visibility = "visible"
   }
 
-  // Para ir adelante en el calendario
+  // Para ir hacia atrás en el calendario
   back() {
     this.myCal.slidePrev();
-    ////  this.presentLoadingWithOptions();
-    // var calendar = document.getElementsByTagName('monthview') as HTMLCollectionOf<HTMLElement>;
-    var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
-    // console.log(calendar);
-    calendar[0].style.visibility= "hidden";
-    document.getElementById('div-spinner').style.visibility="visible";
-    
+    this.calendarElement.style.visibility = "hidden";
+    this.spinner.style.visibility = "visible"
   }
 
   // Cambia el nombre del mes al cambiarlo
   onViewTitleChanged(title) {
-    // var calendar = document.getElementsByTagName('monthview') as HTMLCollectionOf<HTMLElement>;
-    if(this.loadedViewTitleForTheFirstTime>=2){
-    var calendar = document.getElementsByClassName('swiper-wrapper') as HTMLCollectionOf<HTMLElement>;
-
-    document.getElementById('div-spinner').style.visibility="hidden";
-    calendar[0].style.visibility= "visible";
-    // console.log(calendar);
-    // calendar[0].innerHTML = ''
-    // calendar[0].style.visibility = "visible";
-  }
-  this.loadedViewTitleForTheFirstTime++;
-
-    this.viewTitle = title;
-    // console.log("hola");
-
-    // this.dismissLoading();
-
-  }
-
-  async dismissLoading(): Promise<void> {
-    if (this.loading) {
-      this.loading.dismiss();
+    // onViewTitleChanged se ejecuta antes de que se hayan cargado los elementos de la página
+    if (this.calendarElement) {
+      this.spinner.style.visibility = "hidden";
+      this.calendarElement.style.visibility = "visible";
     }
+    this.viewTitle = title;
   }
-
 
   // Creación de eventos y aignación de todos los atributos a cada proyecto y shedule
   createEvents() {
-
 
     var events = [];
 
     this.colorPick = 0;
 
+    // Ordena los array por fechas
     this.projectsArray.sort((a, b) => new Date(a.projectDateIni).getTime() - new Date(b.projectDateEnd).getTime());
-    this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
+    // this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
     for (let project of this.projectsArray) {
       var startDateProject = new Date(project.projectDateIni);
 
@@ -187,9 +162,7 @@ private innerHTMLCalendar;
 
 
       for (let i = 0; i < diffTime; i++) {
-
         var dayByDay = new Date(startDateProject.getTime() + day * i);
-
 
         events.push({
           title: project.events.eventName,
@@ -216,7 +189,8 @@ private innerHTMLCalendar;
           if (this.colorPick == 0) {
 
 
-            if (shedule.sheduleTipe == "CONCIERTO") {
+            if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
               colorEvent = "blueConcert";
 
             }
@@ -230,8 +204,13 @@ private innerHTMLCalendar;
             }
 
           } else if (this.colorPick == 1) {
+
+
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
-              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") { colorEvent = "redConcert"; }
+              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
+              colorEvent = "redConcert";
+
+            }
             else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
               colorEvent = "red";
@@ -240,7 +219,9 @@ private innerHTMLCalendar;
           }
           else if (this.colorPick == 2) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
-              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") { colorEvent = "greenConcert"; }
+              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
+              colorEvent = "greenConcert";
+            }
             else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
               colorEvent = "green";
@@ -251,7 +232,9 @@ private innerHTMLCalendar;
           else if (this.colorPick == 3) {
 
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
-              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") { colorEvent = "yellowConcert"; }
+              || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
+              colorEvent = "yellowConcert";
+            }
             else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
               colorEvent = "yellow";
@@ -312,7 +295,7 @@ private innerHTMLCalendar;
 
     this.checkDataService.checkProjectsLocal();
     this.checkDataService.checkSheduleLocal();
-    this.checkDataService.projectsObs.pipe(
+    this.subscription = this.checkDataService.projectsObs.pipe(
       combineLatestWith(this.checkDataService.sheduleObs)
 
     ).subscribe(([projectsArray, sheduleArray]) => {
@@ -350,6 +333,7 @@ private innerHTMLCalendar;
             || event.titleShedule.substring(0, 7) == "FUNCIÓN") {
 
 
+
             return event.colorEvent;
 
           }
@@ -375,33 +359,37 @@ private innerHTMLCalendar;
   async presentActionSheet() {
     console.log(this.actionSheetController);
 
-    
-    
+
+
     const actionSheet = await this.actionSheetController.create({
-      header: 'Documento',
+      header: 'Opciones',
       cssClass: 'my-custom-class',
       buttons: [{
-        text: 'Descargar',
+        text: 'Cambiar colores',
         role: 'destructive',
-        icon: 'download',
-        id: 'delete-button',
-        data: {
-          type: 'delete'
-        }
-      }, {
-        text: 'Enviar por correo',
-        icon: 'share',
-        data: 10,
+        icon: 'color-palette-outline',
         handler: () => {
-          console.log('Share clicked');
+          this.router.navigateByUrl("/configuration");
         }
-      }, ]
+      },]
     });
     await actionSheet.present();
 
     const { role, data } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role and data', role, data);
   }
+
+
+  ionViewDidLeave() {
+
+    this.subscription.unsubscribe();
+    window.removeEventListener('mousedown', this.onMouseDownWholePage);
+    window.removeEventListener('mouseup', this.onMouseUpWholePage);
+   
+    
+  }
+
+
 
 }
 

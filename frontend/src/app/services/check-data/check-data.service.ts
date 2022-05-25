@@ -83,6 +83,8 @@ checkProjectsLocal(){
 
           if (data) {
             this.getPlaylistObs().next(JSON.parse(data))
+
+
      
           }
           else {
@@ -135,6 +137,7 @@ checkProjectsLocal(){
   }
 
   public getPlaylistObs(): Subject<Playlist> {
+    (this.playlist.subscribe((playlist) => {console.log(playlist)}));
     return this.playlist;
   }
 
@@ -169,6 +172,9 @@ this.storage.get("importantProject3").then(data => {
 })
 this.storage.get("importantProject4").then(data => {
   document.body.style.setProperty('--importantProject4', data);
+})
+this.storage.get("freeDay").then(data => {
+  document.body.style.setProperty('--freeDay', data);
 })
 
 

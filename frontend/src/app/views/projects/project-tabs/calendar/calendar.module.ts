@@ -9,8 +9,10 @@ import { CalendarPageRoutingModule } from './calendar-routing.module';
 import { CalendarPage } from './calendar.page';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localePy from '@angular/common/locales/es-PY';
 
-
+registerLocaleData(localePy, 'es');
 @NgModule({
   imports: [
     CommonModule,

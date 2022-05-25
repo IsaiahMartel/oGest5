@@ -12,10 +12,10 @@ use App\Http\Controllers\AddressController ;
 use App\Http\Controllers\ProducController ;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\MobileController;
-use App\Http\Controllers\PrintController ;
 use App\Http\Controllers\AlertController ;
 use App\Http\Controllers\ZoneController ;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\PrintController ;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ route::group(['prefix' => 'mobile', 'middleware' => ['auth:api',]], function () 
   Route::post('/broadcast', function(Request $request){
     broadcast(new Message($request));
   }) ;
-
+  Route::post('printprojectMultiple', [PrintController::class, 'printprojectMultiple'])->name('printprojectMultiple');
 });
 
 Route::group([  

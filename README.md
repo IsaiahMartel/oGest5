@@ -22,13 +22,9 @@ Please check the official laravel installation guide for server requirements bef
 
 Alternative installation is possible without local dependencies relying on [Docker](#docker). 
 
-Clone the repository
-
-    git clone https://github.com/pablopuch/OFGC.git
-
 Switch to the repo folder
 
-    cd OFGC/backend/
+    cd OrquestaFilarmonicaGC/backend/
 
 Install all the dependencies using composer
 
@@ -57,16 +53,6 @@ Run the database migrations (**Set the database connection in .env before migrat
 Start the local development server
 
     php artisan serve
-
-You can now access the server at http://localhost:8000
-
-**TL;DR command list**
-
-    git clone https://github.com/pablopuch/OFGC.git
-    cd OFGC/backend/
-    composer install
-    cp .env.example .env
-    php artisan key:generate
     
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 

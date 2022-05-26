@@ -13,6 +13,7 @@ import { AddressGroup } from 'src/app/models/address-group';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 import { CheckDataService } from './services/check-data/check-data.service';
+import { SwPush, SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -25,10 +26,11 @@ export class AppComponent implements AfterViewInit {
   isOnline: boolean;
   htmlToAdd;
   divConnectionAlert;
+  public readonly VAPID_PUBLIC_KEY = "BHxdNGlVv0_7xxnqU8ybPb5OS_X-9cc2l5nnOaZSMXjrjUQFDNNQsP6mriwv8_m82_ypRvC9O8jfiDdq8nO1oeY";
 
   private dismissToast: boolean;
   private toast;
-
+  private fixUpdateTwice = 0;
   constructor(
     private modalConnectionService: ModalConnectionService,
     private alertController: AlertController,
@@ -39,19 +41,36 @@ export class AppComponent implements AfterViewInit {
     private storage: Storage,
     private toastController: ToastController,
     private checkDataService: CheckDataService,
+    private swPush: SwPush,
+    private swUpdate: SwUpdate
 
-  ) { }
-
-
-  ngAfterViewInit(): void {
-// this.updateData();
-    this.clientOfflineAlert();
-    this.doConnectionWebSocket();
-    this.checkDataService.setTheme();
-
+  ) {
+    this.subscribeToNotifications();
+ 
   }
 
 
+  ngAfterViewInit(): void {
+    // this.updateData();
+    this.clientOfflineAlert();
+    // this.doConnectionWebSocket();
+    this.checkDataService.setTheme();
+
+    this.updateApp();
+
+  }
+
+  subscribeToNotifications(): any {
+    this.swPush.requestSubscription({
+      serverPublicKey: this.VAPID_PUBLIC_KEY
+    }).then(sub => {
+      const token = JSON.stringify(sub);
+
+      //Se debe guardar este token en la base de datos
+      console.log(token + sub);
+
+    })
+  }
 
 
   clientOfflineAlert() {
@@ -87,10 +106,11 @@ export class AppComponent implements AfterViewInit {
     // Muestra una alerta y actualiza los datos
     const channel = echo.channel('channel');
     channel.listen('Hello', (data) => {
-    
+
 
       this.notification(data);
     });
+
 
   }
 
@@ -101,7 +121,7 @@ export class AppComponent implements AfterViewInit {
       message: message,
       buttons: ['OK']
     });
-  
+
 
     await alert.present();
   }
@@ -134,8 +154,46 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
+  showConfirm(version) {
+    this.alertController.create({
+      header: 'Nueva versión disponible',
+      subHeader: 'version ' + version,
+      message: '¿Quieres actualizar?',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.swUpdate.activateUpdate().then(() => { window.location.reload() });
+          }
+        },
+        {
+          text: 'No',
 
+        },
+
+
+      ]
+    }).then(res => {
+      res.present();
+    });
+  }
+
+  updateApp() {
+    //Por algun motivo se ejecuta dos veces cuando hay una actualizacion, quizas porque recargo la pagina
+    this.swUpdate.versionUpdates.subscribe((event) => {
+      this.fixUpdateTwice++;
+  
+      if (this.fixUpdateTwice > 1) {
+        this.showConfirm("x.x");
+      }}
+      )
+  }
 }
+
+
+
+
+
 
 
 

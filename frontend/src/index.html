@@ -16,14 +16,29 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-    <script src="https://js.pusher.com/7.0.3/pusher.min.js"></script>
-    <script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <!-- <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('e82e6a3b1bd2b9e7c394', {
+            cluster: 'eu'
+        });
+
+        var channel = pusher.subscribe('cache-my-channel');
+        channel.bind('my-event', function(data) {
+            alert(JSON.stringify(data));
+        });
+    </script> -->
+    <!-- <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
+            navigator.serviceWorker.register('./service-worker.js')
                 .then(() => console.log('service worker installed'))
                 .catch(err => console.log('Error', err));
         }
-    </script>
+    </script> -->
+
+
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#1976d2">
 </head>
@@ -32,5 +47,12 @@
     <app-root></app-root>
     <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
+
+
+
+
+
+
+
 
 </html>

@@ -40,6 +40,11 @@ class Hello implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('channel');
+        return ['cache-my-channel'];
+    }
+  
+    public function broadcastAs()
+    {
+        return 'my-event';
     }
 }

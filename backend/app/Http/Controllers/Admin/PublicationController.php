@@ -8,6 +8,7 @@ use App\Models\Season;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use App\Events\Hello ;
+use App\Events\MyEvent ;
 class PublicationController extends Controller
 {
     public function index()
@@ -117,7 +118,7 @@ class PublicationController extends Controller
     {
         $proyects = $request->input('projects');
         // aqui va la funcion que llama al evento (OJO, NO SE COMO LLAMARLA)
-
+        // broadcast(new MyEvent('hello world'));
         broadcast(new Hello("Se han hecho cambios en " . $proyects));
     }
 

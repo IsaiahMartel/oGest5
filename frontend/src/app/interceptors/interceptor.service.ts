@@ -120,11 +120,7 @@ createdOnlyOneToast =0;
   async presentToastWithOptions(header, message, color, icon) {
 
     // Elimina el mensaje anterior si lo hubiera
-    try {
-      this.toast.dismiss();
-      console.log("por que no pasa");
 
-    } catch (e) { }
     if (this.createdOnlyOneToast <1) {
     this.toast = await this.toastController.create({
       header: header,
@@ -139,7 +135,7 @@ createdOnlyOneToast =0;
       }]
 
     });
-    console.log(this.dismissToast);
+   
     
    
       await this.toast.present()

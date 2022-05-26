@@ -23,6 +23,7 @@ class Mobile extends Authenticatable implements JWTSubject
         'mobileName',
         'mobileEmail',
         'password',
+
     ];
 
     /**
@@ -35,6 +36,7 @@ class Mobile extends Authenticatable implements JWTSubject
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+ 
     ];
 
     /**

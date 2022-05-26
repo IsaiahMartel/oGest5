@@ -46,6 +46,7 @@ route::group(['prefix' => 'mobile', 'middleware' => ['auth:api',]], function () 
   Route::get('getShedule', [MobileController::class, 'getShedules']) ;
   Route::get('getAddress', [MobileController::class, 'getAddresses']) ;
   Route::get('checkBackendStatus', [MobileController::class, 'checkBackendIsUp']);
+  
   Route::post('/broadcast', function(Request $request){
     broadcast(new Message($request));
   }) ;
@@ -65,8 +66,8 @@ Route::group([
   Route::post('me', [App\Http\Controllers\AuthController::class, 'me']);
   Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
 });
-
-
+  //Mover a mobile una vez termine pruebas
+Route::post('notification', [MobileController::class, 'saveTokenNotification']);
 
 
 

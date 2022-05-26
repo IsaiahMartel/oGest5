@@ -40,7 +40,7 @@ export class LoginPage {
       id: null,
       mobileEmail: form.value.email,
       password: form.value.password,
-
+notification: null,
     };
     this.authService.login(user).subscribe(() => {
 

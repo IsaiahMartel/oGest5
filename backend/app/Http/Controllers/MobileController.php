@@ -11,6 +11,7 @@ use App\Models\Address;
 use App\Models\Playlist;
 use App\Models\Shedule;
 use App\Models\Composer;
+use App\Models\PushNotificationMobile;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -52,6 +53,20 @@ class MobileController extends Controller
     public function checkBackendIsUp()
     {
             return;
+    }
+
+
+    public function saveTokenNotification(Request $request)
+    {
+        $notification = new PushNotificationMobile();
+        $notification-> endpoint = $request->  endpoint;
+        $notification-> expirationTime = $request->  expirationTime;
+       
+        $notification-> auth = $request->  auth;
+        $notification-> p256dh = $request-> p256dh;
+        $notification->save();
+
+        return $notification;
     }
 
 

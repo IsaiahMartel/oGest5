@@ -14,6 +14,7 @@ import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 import { CheckDataService } from './services/check-data/check-data.service';
 import { SwPush, SwUpdate } from '@angular/service-worker';
+import { PushNotificationService } from './services/push-notification/push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent implements AfterViewInit {
   isOnline: boolean;
   htmlToAdd;
   divConnectionAlert;
-  public readonly VAPID_PUBLIC_KEY = "BHxdNGlVv0_7xxnqU8ybPb5OS_X-9cc2l5nnOaZSMXjrjUQFDNNQsP6mriwv8_m82_ypRvC9O8jfiDdq8nO1oeY";
+  public readonly publicKey = "BNtlRoM6L41dhMkImC1dKZTHs2sgojq4or-0tlfhPO4wrroV637H1YdWmom4lpT2s2ML5w2tvz6--unPr5fP_z0";
 
   private dismissToast: boolean;
   private toast;
@@ -42,55 +43,51 @@ export class AppComponent implements AfterViewInit {
     private toastController: ToastController,
     private checkDataService: CheckDataService,
     private swPush: SwPush,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    private pushNotificationService :  PushNotificationService
 
   ) {
     this.subscribeToNotifications();
- 
   }
 
-
   ngAfterViewInit(): void {
-    // this.updateData();
     this.clientOfflineAlert();
     // this.doConnectionWebSocket();
     this.checkDataService.setTheme();
-
     this.updateApp();
-
   }
 
   subscribeToNotifications(): any {
     this.swPush.requestSubscription({
-      serverPublicKey: this.VAPID_PUBLIC_KEY
+      serverPublicKey: this.publicKey
     }).then(sub => {
-      const token = JSON.stringify(sub);
-
-      //Se debe guardar este token en la base de datos
-      console.log(token + sub);
-
+      console.log(JSON.stringify(sub));
+      this.pushNotificationService.postNotificationToken(JSON.parse(JSON.stringify(sub))).subscribe();
+    ;
     })
-  }
+    
+    // {
+    //   const token =  JSON.parse(JSON.stringify(sub) );
+    //   //Se debe guardar este token en la base de datos
+    //   this.pushNotificationService.postNotificationToken(token);
+    //   console.log(token + sub);
 
+    // })
+  }
 
   clientOfflineAlert() {
     this.modalConnectionService.appIsOnline$.subscribe(online => {
-
       if (!online) {
         this.presentToastWithOptions("¡Atención!", "No tienes conexión", "warning", "warning-outline");
         this.isOnline = false;
         this.dismissToast = false;
-
       } else {
-
         if (this.isOnline == false) {
           this.dismissToast = true;
           this.presentToastWithOptions("¡Hurra!", "Vuelves a tener conexion", "success", "checkmark-outline");
-
         }
       }
     })
-
   }
 
   doConnectionWebSocket() {
@@ -107,11 +104,9 @@ export class AppComponent implements AfterViewInit {
     const channel = echo.channel('channel');
     channel.listen('Hello', (data) => {
 
-
       this.notification(data);
+      this.getData();
     });
-
-
   }
 
   async notification(message: string) {
@@ -122,13 +117,11 @@ export class AppComponent implements AfterViewInit {
       buttons: ['OK']
     });
 
-
     await alert.present();
   }
 
   // Creación de los mensajes cuando backend caído o no hay conexión
   async presentToastWithOptions(header, message, color, icon) {
-
     // Elimina el mensaje anterior si lo hubiera
     try {
       this.toast.dismiss();
@@ -140,7 +133,6 @@ export class AppComponent implements AfterViewInit {
       color: color,
       icon: icon,
       position: 'bottom',
-
     });
     await this.toast.present()
 
@@ -166,12 +158,6 @@ export class AppComponent implements AfterViewInit {
             this.swUpdate.activateUpdate().then(() => { window.location.reload() });
           }
         },
-        {
-          text: 'No',
-
-        },
-
-
       ]
     }).then(res => {
       res.present();
@@ -187,6 +173,10 @@ export class AppComponent implements AfterViewInit {
         this.showConfirm("x.x");
       }}
       )
+  }
+
+  getData(){
+    // Usar para actualizar, ver si es capaz de ir por los datos concretos
   }
 }
 

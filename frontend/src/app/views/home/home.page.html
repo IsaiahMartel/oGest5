@@ -2,11 +2,9 @@
     <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
     <h2 id="navbar-text">Calendario</h2>
     <hr id="separation-title">
-
 </ion-header>
 
 <ion-content class='has-header has-subheader'>
-
     <ion-row>
         <!-- Atrás en el calendario -->
         <ion-col size="2">
@@ -73,5 +71,4 @@
     <calendar [monthviewDisplayEventTemplate]="colors" [monthviewEventDetailTemplate]="sheduleAndProject" [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]='calendar.mode' [currentDate]="calendar.currentDate" (onTitleChanged)="onViewTitleChanged($event)"
         [startingDayWeek]='calendar.startingDayWeek' (onTitleChanged)="onViewTitleChanged($event) ">
     </calendar>
-
 </ion-content>

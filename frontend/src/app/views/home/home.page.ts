@@ -40,7 +40,7 @@ export class HomePage {
 
   eventSource = [];
   viewTitle: string;
-  time;
+  
   calendar = {
     startingDayWeek: 1 as number,
     mode: 'month' as CalendarMode,
@@ -51,7 +51,7 @@ export class HomePage {
   selectedDate: Date;
   subscription = new Subscription();
 
-
+  time;
   mouseDownWholePageListener;
   mouseUpWholePageListener;
   calendarElement;
@@ -86,8 +86,8 @@ export class HomePage {
   ionViewDidEnter() {
     this.onMouseDownWholePage = this.onMouseDownWholePage.bind(this);
     this.onMouseUpWholePage = this.onMouseUpWholePage.bind(this);
-     window.addEventListener('mousedown', this.onMouseDownWholePage);
-   window.addEventListener('mouseup', this.onMouseUpWholePage);
+    window.addEventListener('touchstart', this.onMouseDownWholePage);
+    window.addEventListener('touchend', this.onMouseUpWholePage);
     this.calendarElement = document.getElementsByClassName('swiper-wrapper')[0];
     this.spinner = document.getElementById('div-spinner');
   }
@@ -383,8 +383,8 @@ export class HomePage {
   ionViewDidLeave() {
 
     this.subscription.unsubscribe();
-    window.removeEventListener('mousedown', this.onMouseDownWholePage);
-    window.removeEventListener('mouseup', this.onMouseUpWholePage);
+    window.removeEventListener('touchstart', this.onMouseDownWholePage);
+    window.removeEventListener('touchend', this.onMouseUpWholePage);
    
     
   }

@@ -4,14 +4,19 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
-    "target": "ES6",
+    "target":   "ES6",
     "downlevelIteration": true,
     "lib": [
         "DOM",
         "DOM.Iterable",
+        // "webworker",
         "ES6",
-        "es2017"
+        // "scripthost",
+        "es2017",
+      
+    
     ]
+
   },
   "files": [
     "src/main.ts",

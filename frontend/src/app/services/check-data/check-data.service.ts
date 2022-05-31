@@ -10,6 +10,8 @@ import { ProjectsService } from '../projects/projects.service';
 import { SheduleService } from '../shedule/shedule.service';
 import { Storage } from '@ionic/storage';
 
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +29,8 @@ export class CheckDataService {
     private sheduleService: SheduleService,
     private playlistService: PlaylistsService,
     private addressServivce: AddressService,
-    private storage: Storage,) { }
+    private storage: Storage,
+    protected http: HttpClient) { this.getProjectStatus();}
 
 checkProjectsLocal(){
 
@@ -181,5 +184,8 @@ this.storage.get("freeDay").then(data => {
 
   }
 
+ getProjectStatus(){
+  return this.http.get('http://localhost:8000/api/mobile/getProjects', { observe: 'response' });
+ };
   
 }

@@ -19,6 +19,70 @@
 
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <!-- <script>
+        if ('serviceWorker' in navigator) {
+
+            // ensure service worker is ready
+            navigator.serviceWorker.ready.then(function(reg) {
+                reg.pushManager.getSubscription().then(function(subscription) {
+                        subscription.unsubscribe().then(function(successful) {
+                            // You've successfully unsubscribed
+                        }).catch(function(e) {
+                            // Unsubscribing failed
+                        })
+                    })
+                    // PING to service worker, later we will use this ping to identifies our client.
+                navigator.serviceWorker.controller.postMessage("ping");
+
+                // listening for messages from service worker
+                navigator.serviceWorker.addEventListener('message', function(event) {
+                    var messageFromS = JSON.stringify(event.data);
+                    var messageFrom = JSON.parse(messageFromS)
+                    console.log(messageFrom.data);
+                    console.log(messageFrom.data.body);
+                    console.log(messageFrom.data.title);
+
+
+
+
+
+
+
+
+                    event.waitUntil(reg.showNotification(messageFrom.data.title, {
+                        body: messageFrom.data.body,
+                        icon: messageFrom.data.icon,
+                        actions: messageFrom.data.actions
+                    }))
+
+
+                    // event.waitUntil(navigator.serviceWorker.registration.showNotification(messageFromSW.title, {
+                    //     body: messageFromSW.body,
+                    //     icon: messageFromSW.icon,
+                    //     actions: messageFromSW.actions
+                    // }));
+
+                });
+
+
+                // navigator.serviceWorker.addEventListener('push', function(e) {
+
+
+                //     if (e.data) {
+                //         var msg = e.data.json();
+                //         console.log(msg)
+                //         e.waitUntil(navigator.serviceWorker.registration.showNotification(msg.title, {
+                //             body: msg.body,
+                //             icon: msg.icon,
+                //             actions: msg.actions
+                //         }));
+                //     }
+                // });
+            })
+
+
+        }
+    </script> -->
+    <!-- <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
@@ -39,9 +103,26 @@
         }
     </script> -->
 
-
+    <script>
+        navigator.serviceWorker.ready.then((swRegistration) => swRegistration.sync.register('post-data'))
+    </script>
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#1976d2">
+    <script>
+        // let es = new EventSource('http://localhost:8000/api/stream');
+
+
+        // es.addEventListener('message', event => {
+        //     let data = JSON.parse(event.data);
+        //     console.log(data);
+        // }, false);
+        // es.addEventListener('error', event => {
+        //     if (event.readyState == EventSource.CLOSED) {
+        //         console.log('Event was closed');
+        //         console.log(EventSource);
+        //     }
+        // }, false);
+    </script>
 </head>
 
 <body>

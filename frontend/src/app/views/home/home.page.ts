@@ -40,7 +40,7 @@ export class HomePage {
 
   eventSource = [];
   viewTitle: string;
-  
+
   calendar = {
     startingDayWeek: 1 as number,
     mode: 'month' as CalendarMode,
@@ -96,7 +96,7 @@ export class HomePage {
   //Si se mantiene el click lo suficiente abre un sheet
   onMouseDownWholePage() {
 
-    
+
     this.time = setTimeout(() => {
       this.presentActionSheet();
       this.time = null;
@@ -105,7 +105,7 @@ export class HomePage {
   }
 
   //Si se suelta antes de tiempo no se hace nada
-  onMouseUpWholePage() {    
+  onMouseUpWholePage() {
     if (this.time) {
       clearTimeout(this.time);
       this.time = null;
@@ -365,13 +365,18 @@ export class HomePage {
       header: 'Opciones',
       cssClass: 'my-custom-class',
       buttons: [{
-        text: 'Cambiar colores',
-        role: 'destructive',
+        text: 'Colores',
         icon: 'color-palette-outline',
         handler: () => {
           this.router.navigateByUrl("/configuration");
-        }
-      },]
+        }},
+        {
+        text: 'Notificaciones',
+        icon: 'notifications-outline',
+        handler: () => {
+          this.router.navigateByUrl("/notifications-log");
+        }}
+      ]
     });
     await actionSheet.present();
 
@@ -385,8 +390,8 @@ export class HomePage {
     this.subscription.unsubscribe();
     window.removeEventListener('touchstart', this.onMouseDownWholePage);
     window.removeEventListener('touchend', this.onMouseUpWholePage);
-   
-    
+
+
   }
 
 

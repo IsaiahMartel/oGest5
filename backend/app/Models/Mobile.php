@@ -26,6 +26,7 @@ class Mobile extends Authenticatable implements JWTSubject
         'mobileName',
         'mobileEmail',
         'password',
+        'notification',
 
     ];
 

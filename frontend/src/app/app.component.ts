@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit {
 
   private dismissToast: boolean;
   private toast;
-
+  private notificationNotGranted;
 
   constructor(
     private modalConnectionService: ModalConnectionService,
@@ -51,9 +51,9 @@ export class AppComponent implements AfterViewInit {
   ngOnInit() {
     this.checkForNewData();
     this.swPush.messages.subscribe(() => {
- 
+
       this.checkForNewData();
- 
+
     })
 
     this.updateApp();
@@ -70,16 +70,23 @@ export class AppComponent implements AfterViewInit {
   subscribeToNotifications(): any {
     this.swPush.subscription.subscribe(subscription => {
       if (subscription == null) {
-        this.notification("Debes aceptar las notificaciones para usar esta app")
-        this.dismissToast = false;
-        this.presentToastWithOptions("¡Atención!", "No puedes usar la app porque no has activado las notificaciones", "warning", "warning-outline");
+        this.notification("¡Atención!", 'Si ves un botón que pone "¿Deseas permitir notificaciones? Si no, tendrás que activarlo en la configuración de la aplicación"');
+        // this.dismissToast = false;
+        // this.presentToastWithOptions("¡Atención!", "No puedes usar la app porque no has activado las notificaciones", "warning", "warning-outline");
 
-        this.isOnline = false;
+        // this.isOnline = false;
       } else {
-        if (this.isOnline == false) {
+        if (this.notificationNotGranted != null) {
+          this.notificationNotGranted.dismiss();
           this.dismissToast = true;
           this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
+
+
         }
+
+
+
+
       }
     }
     );
@@ -115,15 +122,45 @@ export class AppComponent implements AfterViewInit {
     })
   }
 
-  async notification(message: string) {
+  async notification(header: string, message: string) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Se han realizado cambios',
+      header: header,
       message: message,
       buttons: ['OK']
     });
 
     await alert.present();
+  }
+
+
+  async permissionNotificationNotGrantedAlert(header: string, message: string) {
+    this.notificationNotGranted = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: header,
+      subHeader: "Debes aceptar las notificaciones para usar esta app",
+      message: message,
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Android',
+
+          cssClass: 'secondary',
+          id: 'android-button',
+          handler: (blah) => {
+            console.log('Manual de android');
+          }
+        }, {
+          text: 'iOS',
+          cssClass: 'secondary',
+          id: 'ios-button',
+          handler: () => {
+            console.log('Manual de ios');
+          }
+        }]
+    });
+
+    await this.notificationNotGranted.present();
   }
 
   // Creación de los mensajes cuando backend caído o no hay conexión
@@ -152,11 +189,11 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
-  showConfirm(version) {
+  showConfirm() {
     this.alertController.create({
       header: 'Nueva versión disponible',
-      subHeader: 'version ' + version,
-      message: '¿Quieres actualizar?',
+
+      message: 'Se requiere una actualización',
       buttons: [
         {
           text: 'OK',
@@ -177,13 +214,13 @@ export class AppComponent implements AfterViewInit {
       fixUpdateTwice++;
 
       if (fixUpdateTwice > 1) {
-        this.showConfirm("x.x");
+        this.showConfirm();
       }
     }
     )
   }
 
- 
+
 
   checkForNewData() {
     db.collection('notifications').get().then(tasks => {
@@ -200,7 +237,7 @@ export class AppComponent implements AfterViewInit {
         }
       }
       if (haveToUpdate == true) {
-        this.notification(projects);
+        this.notification("Se han realizado cambios", projects);
         this.checkDataService.getProjects();
         this.checkDataService.getShedule();
         this.checkDataService.getAddress();

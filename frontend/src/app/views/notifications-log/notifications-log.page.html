@@ -9,12 +9,21 @@
 
 </ion-header>
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let notification of notificationArray">
-            <ion-label>
-                <p> {{notification.date}}</p>
 
-                <h3>{{notification.body}}</h3>
+    <ion-item id="notifications-toggle-slot">
+        <ion-label>
+            <h1 id="notifications-toggle-text">Notificaciones</h1>
+        </ion-label>
+        <ion-toggle slot="end" checked [(ngModel)]="isToggled" (ionChange)="onChange()"></ion-toggle>
+    </ion-item>
+    <hr id="separation-title">
+
+    <ion-list>
+        <ion-item *ngFor=" let notification of notificationArray ">
+            <ion-label>
+                <h3> {{notification.date}}</h3>
+
+                <h2>{{notification.body}}</h2>
             </ion-label>
 
         </ion-item>

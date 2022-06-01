@@ -77,14 +77,14 @@ export class InterceptorService implements HttpInterceptor {
 
     } 
 
-    // La alerta se hace demasiado grande si el error es muy largo como para no poder ver el botón de OK
-    // else {
+
+    else {
 
       
-      // this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
-      // this.dismissToast = false;
-      // this.createdOnlyOneToast++;
-    // }
+      this.presentToastWithOptions("¡Oops!", "Ha habido un problema, es posible que la aplicación no funcione correctamente", "danger", "information-circle");
+      this.dismissToast = false;
+      this.createdOnlyOneToast++;
+    }
     console.log(errorMessage);
     return throwError("Error " + errorMessage + "\n" + errorJSON);
   }

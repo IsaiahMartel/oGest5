@@ -73,14 +73,15 @@ class MobileController extends Controller
         
         
       
-        $user = \App\Models\Mobile::find(1);
+        $user = \App\Models\Mobile::all();
         $user->updatePushSubscription( $endpoint, $key, $token);
         return response()->json(['success' => true],200);
     }
 
     public function push(Request $request){
         $proyects = $request->input('projects');
-        Notification::send(Mobile::all(),new PushDemo($proyects) );
+        Notification::send(Mobile::where('notification', true)->get(),new PushDemo($proyects) );
+        Notification::send(Mobile::where('notification', false)->get(),new PushDemo($proyects) );
         return "hola";
     }
 
@@ -90,7 +91,14 @@ class MobileController extends Controller
         return "hola";
     }
 
- 
+    public function notificationUser(Request $request){
+
+        $mobile = Mobile::findOrFail($request->id);
+        $mobile -> notification= $request->notificationType;
+       $mobile->save();
+        return $mobile;
+    }
+
    
 
 

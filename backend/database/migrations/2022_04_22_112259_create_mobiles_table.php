@@ -19,6 +19,7 @@ class CreateMobilesTable extends Migration
             $table->string('mobileEmail')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('notification');
             $table->rememberToken();
             $table->timestamps();
         });

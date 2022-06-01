@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Localbase from 'localbase';
+import { UserService } from 'src/app/services/user/user.service';
 let db = new Localbase('db');
 
 @Component({
@@ -8,9 +9,9 @@ let db = new Localbase('db');
   styleUrls: ['./notifications-log.page.scss'],
 })
 export class NotificationsLogPage implements OnInit {
-
+  public isToggled: boolean = true;
   notificationArray = [];
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
 
@@ -20,9 +21,20 @@ export class NotificationsLogPage implements OnInit {
 
   loadInfo() {
     db.collection('notifications').get().then(tasks => {
-this.notificationArray=tasks;
-    
+      this.notificationArray = tasks;
+
     })
-}
+  }
+
+  onChange() {
+// if(this.isToggled){
+// this.userService.
+
+// }
+
+
+
+  }
+
 }
 

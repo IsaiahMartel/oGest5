@@ -357,7 +357,7 @@ export class HomePage {
   }
 
   async presentActionSheet() {
-    console.log(this.actionSheetController);
+
 
 
 

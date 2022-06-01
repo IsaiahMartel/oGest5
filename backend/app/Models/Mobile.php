@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use NotificationChannels\WebPush\HasPushSubscriptions;
+use Laravel\Sanctum\HasApiTokens;
 
 
 class Mobile extends Authenticatable implements JWTSubject
 {
     use HasFactory;
     use Notifiable;
-
+    use HasPushSubscriptions;
       /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +28,7 @@ class Mobile extends Authenticatable implements JWTSubject
         'password',
 
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -69,4 +73,6 @@ class Mobile extends Authenticatable implements JWTSubject
     {
         return [];
     }
+  
+    
 }

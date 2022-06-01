@@ -75,11 +75,16 @@ export class InterceptorService implements HttpInterceptor {
       this.createdOnlyOneToast++;
     } else if (errorMessage == "Unauthenticated.\n") {
 
-    } else {
-      this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
-      this.dismissToast = false;
-      this.createdOnlyOneToast++;
-    }
+    } 
+
+    // La alerta se hace demasiado grande si el error es muy largo como para no poder ver el botón de OK
+    // else {
+
+      
+      // this.presentToastWithOptions("¡Oops!", errorMessage, "danger", "information-circle");
+      // this.dismissToast = false;
+      // this.createdOnlyOneToast++;
+    // }
     console.log(errorMessage);
     return throwError("Error " + errorMessage + "\n" + errorJSON);
   }

@@ -15,8 +15,12 @@ class PushNotificationMobile extends Model
       'expirationTime',
     
       'p256dh',
-      'auth',
+      'token',
    
 
     ];
+
+  //   protected $casts = [
+  //     'token' => 'array'
+  // ];
 }

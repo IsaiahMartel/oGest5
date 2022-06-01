@@ -17,8 +17,10 @@ import { ModalConnectionService } from './services/modal-connection/modal-connec
 import { BackendStatusService } from './services/backend-status/backend-status.service';
 import { NgCalendarModule  } from 'ionic2-calendar';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { serviceWorkerConfig } from 'src/service-worker-config';
-console.log(serviceWorkerConfig.serviceWorkerUrl+".ts");
+
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,6 +34,7 @@ console.log(serviceWorkerConfig.serviceWorkerUrl+".ts");
     SocialLoginModule,
     NgCalendarModule,
     ColorPickerModule,
+   
     ServiceWorkerModule.register('sw-master.js', { enabled: true}),
 
     

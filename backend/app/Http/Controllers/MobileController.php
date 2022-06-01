@@ -13,6 +13,15 @@ use App\Models\Shedule;
 use App\Models\Composer;
 use App\Models\PushNotificationMobile;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Models\Mobile;
+
+use App\Notifications\PushDemo;
+use App\Notifications\EmptyNotification;
+
+use Notification;
+use App\Models\PushSubscriptions;
+
 
 
 class MobileController extends Controller
@@ -58,16 +67,31 @@ class MobileController extends Controller
 
     public function saveTokenNotification(Request $request)
     {
-        $notification = new PushNotificationMobile();
-        $notification-> endpoint = $request->  endpoint;
-        $notification-> expirationTime = $request->  expirationTime;
-       
-        $notification-> auth = $request->  auth;
-        $notification-> p256dh = $request-> p256dh;
-        $notification->save();
-
-        return $notification;
+        $endpoint = $request->endpoint;
+        $token = $request->keys['auth'];
+        $key = $request->keys['p256dh'];
+        
+        
+      
+        $user = \App\Models\Mobile::find(1);
+        $user->updatePushSubscription( $endpoint, $key, $token);
+        return response()->json(['success' => true],200);
     }
+
+    public function push(Request $request){
+        $proyects = $request->input('projects');
+        Notification::send(Mobile::all(),new PushDemo($proyects) );
+        return "hola";
+    }
+
+    public function pushEmpty(Request $request){
+        
+        Notification::send(Mobile::all(),new EmptyNotification($proyects) );
+        return "hola";
+    }
+
+ 
+   
 
 
 }

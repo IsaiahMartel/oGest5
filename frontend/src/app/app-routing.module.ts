@@ -27,7 +27,11 @@ pathMatch: "full"
   {
     path: 'configuration',
     loadChildren: () => import('./views/configuration/configuration.module').then( m => m.ConfigurationPageModule)
+  },  {
+    path: 'notifications-log',
+    loadChildren: () => import('./views/notifications-log/notifications-log.module').then( m => m.NotificationsLogPageModule)
   },
+
 
 
 

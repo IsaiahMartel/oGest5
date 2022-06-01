@@ -19,6 +19,7 @@ class PushNotificationsMobileTable extends Migration
             $table->string('expirationTime')->nullable();
             $table->string('auth');
             $table->string('p256dh');
+            // $table->json('token');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class PushNotificationsMobileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobiles');
+        Schema::dropIfExists('push_notification_mobiles');
     }
 }

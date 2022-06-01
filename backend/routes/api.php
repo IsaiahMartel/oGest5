@@ -16,7 +16,7 @@ use App\Http\Controllers\AlertController ;
 use App\Http\Controllers\ZoneController ;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\PrintController ;
-
+use App\Http\Controllers\PushController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -65,9 +65,13 @@ Route::group([
   Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
   Route::post('me', [App\Http\Controllers\AuthController::class, 'me']);
   Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
+
 });
-  //Mover a mobile una vez termine pruebas
+
+
+
+  //Se en publication.js por lo que no puedo meterlo en la autenticación del móvil
+Route::get('push',[MobileController::class, 'push'])->name('push');
 Route::post('notification', [MobileController::class, 'saveTokenNotification']);
 
-
-
+Route::get('pushEmpty',[MobileController::class, 'pushEmpty']);

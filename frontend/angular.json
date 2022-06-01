@@ -43,8 +43,8 @@
                         "optimization": false,
                         "namedChunks": true,
                         "serviceWorker": true,
-                        "ngswConfigPath": "ngsw-config.json",
-                        "webWorkerTsConfig": "tsconfig.worker.json"
+                        "ngswConfigPath": "ngsw-config.json"
+
                     },
                     "configurations": {
                         "production": {
@@ -113,8 +113,7 @@
                             "src/manifest.webmanifest",
                             "src/sw-custom.js",
                             "src/sw-master.js"
-                        ],
-                        "webWorkerTsConfig": "tsconfig.worker.json"
+                        ]
                     },
                     "configurations": {
                         "ci": {

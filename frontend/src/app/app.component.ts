@@ -1,23 +1,20 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Echo } from 'laravel-echo-ionic';
-import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
-import { AlertController } from '@ionic/angular';
-import { ProjectsService } from './services/projects/projects.service';
-import { PlaylistsService } from './services/playlists/playlists.service';
-import { SheduleService } from './services/shedule/shedule.service';
-import { AddressService } from './services/address/address.service';
-import { Shedule } from './models/shedule';
-import { Project } from './models/project';
-import { Playlist } from 'src/app/models/playlist';
-import { AddressGroup } from 'src/app/models/address-group';
-import { Storage } from '@ionic/storage';
-import { ToastController } from '@ionic/angular';
-import { CheckDataService } from './services/check-data/check-data.service';
 import { SwPush, SwUpdate } from '@angular/service-worker';
-import { PushNotificationService } from './services/push-notification/push-notification.service';
-import { interval, startWith, Subscription, switchMap } from 'rxjs';
+import { AlertController, ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import Localbase from 'localbase';
+import { Subscription } from 'rxjs';
+import { AddressService } from './services/address/address.service';
+import { CheckDataService } from './services/check-data/check-data.service';
 import { IndexedDBService } from './services/indexed-db/indexed-db.service';
-declare var EventSourcePolyfill: any;
+import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
+import { PlaylistsService } from './services/playlists/playlists.service';
+import { ProjectsService } from './services/projects/projects.service';
+import { PushNotificationService } from './services/push-notification/push-notification.service';
+import { SheduleService } from './services/shedule/shedule.service';
+
+let db = new Localbase('db');
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -29,212 +26,191 @@ export class AppComponent implements AfterViewInit {
   isOnline: boolean;
   htmlToAdd;
   divConnectionAlert;
+
   public readonly publicKey = "BA15WyNaTv36X9A86QEjVWjiq5xfiC6nrpIxedhLV9lt4c0WZrko06ir6hJpFej6aazbCVzwgTWVVqoZWVLO5ps";
 
   private dismissToast: boolean;
   private toast;
-  private fixUpdateTwice = 0;
 
-  timeInterval: Subscription;
-  title = 'Polling in angular';
-  status: any;
 
   constructor(
     private modalConnectionService: ModalConnectionService,
     private alertController: AlertController,
-    private projectsService: ProjectsService,
-    private sheduleService: SheduleService,
-    private playlistService: PlaylistsService,
-    private addressServivce: AddressService,
-    private storage: Storage,
     private toastController: ToastController,
     private checkDataService: CheckDataService,
     private swPush: SwPush,
     private swUpdate: SwUpdate,
     private pushNotificationService: PushNotificationService,
-    private indexDBService : IndexedDBService
+
 
   ) {
     this.subscribeToNotifications();
 
   }
 
-
-
   ngOnInit() {
-// this.indexDBService.addUser(obj.name).then(this.backgroundSync).catch(console.log);
-// )
-
-//     let stream = new EventSource('http://localhost:8000/api/stream');
-// console.log(stream);
-
-
-//     stream.addEventListener('ping', event =>{
-//     console.log(event)
-  
-//         // JSON.parse(event.data).forEach(message => {
-         
-//         // }))
-//   })
-
-  //   stream.addEventListener('message', message => {
-  //    console.log(message);
-  //    console.log("hola");
-     
-     
-  // });
-    // let stream = new EventSource('http://localhost:8000/api/stream', { withCredentials: true });
-
-
-    // stream.addEventListener('ping', event =>
-    
-    //   JSON.parse(event.data).forEach(message =>{
-    //     console.log(message);
-    //   }))
-  
-
+    this.checkForNewData();
+    this.swPush.messages.subscribe(() => {
  
+      this.checkForNewData();
+ 
+    })
 
-}
-
-ngAfterViewInit(): void {
-  this.clientOfflineAlert();
-  // this.doConnectionWebSocket();
-  this.checkDataService.setTheme();
-  this.updateApp();
-  this.swPush.messages.subscribe(message => console.log(message));
+    this.updateApp();
+  }
 
 
 
-}
+  ngAfterViewInit(): void {
+    this.clientOfflineAlert();
+    this.checkDataService.setTheme();
 
-subscribeToNotifications(): any {
-  this.swPush.requestSubscription({
-    serverPublicKey: this.publicKey
-  }).then(sub => {
-    console.log(JSON.stringify(sub));
-    this.pushNotificationService.postNotificationToken(JSON.stringify(sub)).subscribe();
-    ;
-  })
+  }
 
-  // {
-  //   const token =  JSON.parse(JSON.stringify(sub) );
-  //   //Se debe guardar este token en la base de datos
-  //   this.pushNotificationService.postNotificationToken(token);
-  //   console.log(token + sub);
+  subscribeToNotifications(): any {
+    this.swPush.subscription.subscribe(subscription => {
+      if (subscription == null) {
+        this.notification("Debes aceptar las notificaciones para usar esta app")
+        this.dismissToast = false;
+        this.presentToastWithOptions("¡Atención!", "No puedes usar la app porque no has activado las notificaciones", "warning", "warning-outline");
 
-  // })
-}
-
-clientOfflineAlert() {
-  this.modalConnectionService.appIsOnline$.subscribe(online => {
-    if (!online) {
-      this.presentToastWithOptions("¡Atención!", "No tienes conexión", "warning", "warning-outline");
-      this.isOnline = false;
-      this.dismissToast = false;
-    } else {
-      if (this.isOnline == false) {
-        this.dismissToast = true;
-        this.presentToastWithOptions("¡Hurra!", "Vuelves a tener conexion", "success", "checkmark-outline");
+        this.isOnline = false;
+      } else {
+        if (this.isOnline == false) {
+          this.dismissToast = true;
+          this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
+        }
       }
     }
-  })
-}
+    );
 
-doConnectionWebSocket() {
-  const echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'local',
-    wsHost: 'localhost',
-    wsPort: 6001,
-    forceTLS: false,
-    disableStats: true
-  });
 
-  // Muestra una alerta y actualiza los datos
-  const channel = echo.channel('channel');
-  channel.listen('Hello', (data) => {
+    this.swPush.requestSubscription({
+      serverPublicKey: this.publicKey
+    }).then(sub => {
+      console.log(JSON.stringify(sub));
+      this.pushNotificationService.postNotificationToken(JSON.stringify(sub)).subscribe();
+      ;
+    })
 
-    this.notification(data);
-    this.getData();
-  });
-}
+
+
+
+
+
+  }
+
+  clientOfflineAlert() {
+    this.modalConnectionService.appIsOnline$.subscribe(online => {
+      if (!online) {
+        this.presentToastWithOptions("¡Atención!", "No tienes conexión", "warning", "warning-outline");
+        this.isOnline = false;
+        this.dismissToast = false;
+      } else {
+        if (this.isOnline == false) {
+          this.dismissToast = true;
+          this.presentToastWithOptions("¡Hurra!", "Vuelves a tener conexion", "success", "checkmark-outline");
+        }
+      }
+    })
+  }
 
   async notification(message: string) {
-  const alert = await this.alertController.create({
-    cssClass: 'my-custom-class',
-    header: 'Se han realizado cambios',
-    message: message,
-    buttons: ['OK']
-  });
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Se han realizado cambios',
+      message: message,
+      buttons: ['OK']
+    });
 
-  await alert.present();
-}
+    await alert.present();
+  }
 
   // Creación de los mensajes cuando backend caído o no hay conexión
   async presentToastWithOptions(header, message, color, icon) {
-  // Elimina el mensaje anterior si lo hubiera
-  try {
-    this.toast.dismiss();
-  } catch (e) { }
-
-  this.toast = await this.toastController.create({
-    header: header,
-    message: message,
-    color: color,
-    icon: icon,
-    position: 'bottom',
-  });
-  await this.toast.present()
-
-  // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
-  if (this.dismissToast == true) {
-    setTimeout(() => {
+    // Elimina el mensaje anterior si lo hubiera
+    try {
       this.toast.dismiss();
-      this.isOnline = true;
-    },
-      8000);
-  }
-}
+    } catch (e) { }
 
-showConfirm(version) {
-  this.alertController.create({
-    header: 'Nueva versión disponible',
-    subHeader: 'version ' + version,
-    message: '¿Quieres actualizar?',
-    buttons: [
-      {
-        text: 'OK',
-        handler: () => {
-          this.swUpdate.activateUpdate().then(() => { window.location.reload() });
-        }
+    this.toast = await this.toastController.create({
+      header: header,
+      message: message,
+      color: color,
+      icon: icon,
+      position: 'bottom',
+    });
+    await this.toast.present()
+
+    // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+    if (this.dismissToast == true) {
+      setTimeout(() => {
+        this.toast.dismiss();
+        this.isOnline = true;
       },
-    ]
-  }).then(res => {
-    res.present();
-  });
-}
-
-updateApp() {
-  //Por algun motivo se ejecuta dos veces cuando hay una actualizacion, quizas porque recargo la pagina
-  this.swUpdate.versionUpdates.subscribe((event) => {
-    this.fixUpdateTwice++;
-
-    if (this.fixUpdateTwice > 1) {
-      this.showConfirm("x.x");
+        8000);
     }
   }
-  )
-}
 
-getData(){
-  // Usar para actualizar, ver si es capaz de ir por los datos concretos
-}
+  showConfirm(version) {
+    this.alertController.create({
+      header: 'Nueva versión disponible',
+      subHeader: 'version ' + version,
+      message: '¿Quieres actualizar?',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.swUpdate.activateUpdate().then(() => { window.location.reload() });
+          }
+        },
+      ]
+    }).then(res => {
+      res.present();
+    });
+  }
 
-  // postSync(){
+  updateApp() {
+    //Por algun motivo se ejecuta dos veces cuando hay una actualizacion, quizas porque recargo la pagina
+    var fixUpdateTwice = 0;
+    this.swUpdate.versionUpdates.subscribe((event) => {
+      fixUpdateTwice++;
 
-  // }
+      if (fixUpdateTwice > 1) {
+        this.showConfirm("x.x");
+      }
+    }
+    )
+  }
 
+ 
+
+  checkForNewData() {
+    db.collection('notifications').get().then(tasks => {
+      var haveToUpdate = false;
+      var projects = "";
+      for (let task of tasks) {
+        if (task.showed == false) {
+          haveToUpdate = true;
+          projects = projects + " " + task.body
+
+          db.collection('notifications').doc({ date: task.date }).update({
+            showed: true
+          })
+        }
+      }
+      if (haveToUpdate == true) {
+        this.notification(projects);
+        this.checkDataService.getProjects();
+        this.checkDataService.getShedule();
+        this.checkDataService.getAddress();
+        this.checkDataService.getPlaylist();
+      }
+    })
+  }
+
+
+  // Lo puedo utilizar cuando se hagha un suscribe y no haya conexion, para esperar a que la haya
   // backgroundSync(){
   //   navigator.serviceWorker.ready.then((swRegistration)=> swRegistration.sync.register('post-data'))
   // }

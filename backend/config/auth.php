@@ -44,7 +44,7 @@ return [
         'api' => [
             'driver' => 'jwt',
             'provider' => 'mobiles',
-         
+         'model'=> App\Mobile::class,
         ],
     ],
 

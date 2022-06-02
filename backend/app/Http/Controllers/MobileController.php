@@ -80,8 +80,8 @@ class MobileController extends Controller
 
     public function push(Request $request){
         $proyects = $request->input('projects');
-        Notification::send(Mobile::where('notification', true)->get(),new PushDemo($proyects) );
-        Notification::send(Mobile::where('notification', false)->get(),new PushDemo($proyects) );
+        Notification::send(Mobile::where('notification', true)->get(),new PushDemo($proyects, "normal") );
+        Notification::send(Mobile::where('notification', false)->get(),new PushDemo($proyects, "silent") );
         return "hola";
     }
 

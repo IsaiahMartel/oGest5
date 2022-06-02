@@ -13,16 +13,17 @@ class PushDemo extends Notification
 
     use Queueable;
     private $proyects;
+    private $target;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct( $request)
+    public function __construct( $request,  $request1)
     {
 
         $this->proyects = $request;
-     
+        $this->target = $request1;
     }
 
     /**
@@ -52,7 +53,7 @@ class PushDemo extends Notification
             ->icon('img/logooGest4.png')
         
             ->data(['fecha' => Carbon::now()])
-   ->tag("normal");
+   ->tag(  $this->target);
     }
 
     /**

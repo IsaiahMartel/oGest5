@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 })
 export class AuthService {
   username:string;
+id:number;
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8000/api/auth';
   authSubject  =  new  BehaviorSubject(false);
 
@@ -20,6 +21,7 @@ export class AuthService {
   login(user: User): Observable<AuthResponse> {
 
     this.username=user.mobileEmail;
+    this.id=user.id;
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
       tap(async (res: AuthResponse) => {
 

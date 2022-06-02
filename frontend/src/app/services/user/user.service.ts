@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   endpoint:  string  =  'http://localhost:8000/api/auth';
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient,
+    private authService: AuthService) { }
 
-  postUser(typeNotification) {
+  postUser(typeNotification,) {
 
     let bodyEncoded = new URLSearchParams();
 //     console.log(token);
@@ -31,14 +33,14 @@ export class UserService {
 //   bodyEncoded.append("auth", token.keys.auth.toString());
 
 
-//     bodyEncoded.append("endpoint", token.endpoint.toString());
+    bodyEncoded.append("id", this.authService.id.toString());
   
   
-//     bodyEncoded.append("p256dh", token.keys.p256dh.toString());
+    bodyEncoded.append("typeNotification", typeNotification.toString());
   
 
     const body = bodyEncoded.toString();
-    return this.httpClient.post<User>(this.endpoint, typeNotification);
+    return this.httpClient.post<User>(this.endpoint, body);
   }
 
 }

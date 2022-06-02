@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SwPush, SwUpdate } from '@angular/service-worker';
-import { AlertController, ToastController } from '@ionic/angular';
+import { ActionSheetButton, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import Localbase from 'localbase';
 import { Subscription } from 'rxjs';
@@ -27,6 +28,12 @@ export class AppComponent implements AfterViewInit {
   htmlToAdd;
   divConnectionAlert;
 
+  time;
+  mouseDownWholePageListener;
+  mouseUpWholePageListener;
+  calendarElement;
+  spinner;
+
   public readonly publicKey = "BA15WyNaTv36X9A86QEjVWjiq5xfiC6nrpIxedhLV9lt4c0WZrko06ir6hJpFej6aazbCVzwgTWVVqoZWVLO5ps";
 
   private dismissToast: boolean;
@@ -41,6 +48,8 @@ export class AppComponent implements AfterViewInit {
     private swPush: SwPush,
     private swUpdate: SwUpdate,
     private pushNotificationService: PushNotificationService,
+    private actionSheetController: ActionSheetController,
+    private router:Router,
 
 
   ) {
@@ -64,7 +73,65 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.clientOfflineAlert();
     this.checkDataService.setTheme();
+    window.addEventListener('touchstart', this.onMouseDownWholePage);
+    window.addEventListener('touchend', this.onMouseUpWholePage);
 
+  }
+
+
+  onMouseDownWholePage() {
+
+
+    this.time = setTimeout(() => {
+      this.presentActionSheet();
+      this.time = null;
+    },
+      600);
+  }
+
+  async presentActionSheet() {
+
+
+
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Colores',
+        icon: 'color-palette-outline',
+        handler: () => {
+          this.router.navigateByUrl("/configuration");
+        }},
+        {
+        text: 'Notificaciones',
+        icon: 'notifications-outline',
+        handler: () => {
+          this.router.navigateByUrl("/notifications-log");
+        }}
+      ]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role and data', role, data);
+  }
+
+  ionViewDidLeave() {
+
+  
+    window.removeEventListener('touchstart', this.onMouseDownWholePage);
+    window.removeEventListener('touchend', this.onMouseUpWholePage);
+
+
+  }
+
+  //Si se suelta antes de tiempo no se hace nada
+  onMouseUpWholePage() {
+    if (this.time) {
+      clearTimeout(this.time);
+      this.time = null;
+    }
   }
 
   subscribeToNotifications(): any {

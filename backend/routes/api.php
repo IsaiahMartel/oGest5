@@ -74,4 +74,4 @@ Route::group([
 Route::get('push',[MobileController::class, 'push'])->name('push');
 Route::post('notification', [MobileController::class, 'saveTokenNotification']);
 
-Route::get('pushEmpty',[MobileController::class, 'pushEmpty']);
+Route::put('notificationUser/{id}',[MobileController::class, 'notificationUser']);

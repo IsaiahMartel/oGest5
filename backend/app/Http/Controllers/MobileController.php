@@ -73,28 +73,31 @@ class MobileController extends Controller
         
         
       
-        $user = \App\Models\Mobile::all();
+        $users = Mobile::all();
+      foreach($users as $user) { }
+{
         $user->updatePushSubscription( $endpoint, $key, $token);
         return response()->json(['success' => true],200);
+}
+        
     }
 
     public function push(Request $request){
         $proyects = $request->input('projects');
         Notification::send(Mobile::where('notification', true)->get(),new PushDemo($proyects, "normal") );
+    
         Notification::send(Mobile::where('notification', false)->get(),new PushDemo($proyects, "silent") );
         return "hola";
     }
 
-    public function pushEmpty(Request $request){
-        
-        Notification::send(Mobile::all(),new EmptyNotification($proyects) );
-        return "hola";
-    }
+  
 
     public function notificationUser(Request $request){
 
         $mobile = Mobile::findOrFail($request->id);
-        $mobile -> notification= $request->notificationType;
+        error_log("pasa");
+        error_log($request);
+        $mobile -> notification= $request->notification;
        $mobile->save();
         return $mobile;
     }

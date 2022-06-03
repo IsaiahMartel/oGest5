@@ -7,4 +7,5 @@ export interface AuthResponse {
         isAdmin: boolean;
     },
     access_token: string
+    user_id: number;
 }

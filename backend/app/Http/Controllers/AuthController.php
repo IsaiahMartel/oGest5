@@ -30,11 +30,18 @@ class AuthController extends Controller
     {
         $credentials = request(['mobileEmail', 'password']);
 
-        if (! $token = auth()->guard('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if ( $token = auth()->guard('api')->attempt($credentials)) {
+   
+            $mobile=Mobile::where('mobileEmail', $credentials['mobileEmail'])->get();
+            $user_id= Mobile::select('id')->get()[0]["id"];
+         
+error_log( Mobile::select('id')->get()[0]["id"] );
+ 
+            return $this->respondWithToken($token, $user_id);
+            
         }
-
-        return $this->respondWithToken($token);
+        return response()->json(['error' => 'Unauthorized'], 401);
+       
     }
 
     /**
@@ -76,11 +83,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $user_id)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
+            'user_id' => $user_id
         
         ]);
     }

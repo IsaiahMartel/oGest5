@@ -28,3 +28,11 @@ ion-card {
 .border {
     border: 1px solid black;
 }
+
+#no-instruments-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 70vh;
+}

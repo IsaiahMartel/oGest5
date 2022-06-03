@@ -9,95 +9,76 @@ import { PlaylistsService } from '../playlists/playlists.service';
 import { ProjectsService } from '../projects/projects.service';
 import { SheduleService } from '../shedule/shedule.service';
 import { Storage } from '@ionic/storage';
-
-import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CheckDataService {
   private projects: Subject<Project> = new Subject<Project>();
-   projectsObs: Observable<Project> = this.projects.asObservable();
+  projectsObs: Observable<Project> = this.projects.asObservable();
   private shedule: Subject<Shedule> = new Subject<Shedule>();
   sheduleObs: Observable<Shedule> = this.shedule.asObservable();
   private address: Subject<Address> = new Subject<Address>();
   addressObs: Observable<Address> = this.address.asObservable();
   private playlist: Subject<Playlist> = new Subject<Playlist>();
   playlistObs: Observable<Playlist> = this.playlist.asObservable();
-  
-  constructor( private projectsService: ProjectsService,
+
+  constructor(private projectsService: ProjectsService,
     private sheduleService: SheduleService,
     private playlistService: PlaylistsService,
     private addressServivce: AddressService,
     private storage: Storage,
-    protected http: HttpClient) { this.getProjectStatus();}
+    protected http: HttpClient) {  }
 
-checkProjectsLocal(){
 
-  
-        this.storage.get("projects").then(data => {
-       
-          if (data) {
-            
-            this.getProjectsObs().next(JSON.parse(data));
-          }
-
-          else {
-            // Si no tiene los datos, los va a buscar
-        
-            this.getProjects();
-          }
-        })
+  checkProjectsLocal() {
+    this.storage.get("projects").then(data => {
+      if (data) {
+        this.getProjectsObs().next(JSON.parse(data));
       }
-
-      checkSheduleLocal(){
- 
-
-        this.storage.get("shedule").then(data => {
-
-          if (data) {
-            this.getSheduleObs().next(JSON.parse(data));
-          }
-
-          else {
-            // Si no tiene los datos, los va a buscar
-            this.getShedule();
-          }
-        })
+      else {
+        // Si no tiene los datos, los va a buscar al backend
+        this.getProjects();
       }
+    })
+  }
 
-      checkAddressLocal(){
-        this.storage.get("address").then(data => {
-          if (data) {
-            this.getAddressObs().next(JSON.parse(data))
-          
-            
-          }
-
-          else {
-            // Si no tiene los datos, los va a buscar
-            this.getAddress();
-          }
-        })
+  checkSheduleLocal() {
+    this.storage.get("shedule").then(data => {
+      if (data) {
+        this.getSheduleObs().next(JSON.parse(data));
       }
-
-      checkPlaylistLocal(){
-        this.storage.get("playlist").then(data => {
-
-          if (data) {
-            this.getPlaylistObs().next(JSON.parse(data))
-
-
-     
-          }
-          else {
-            // Si no tiene los datos, los va a buscar
-            this.getPlaylist();
-          }
-        })
+      else {
+        // Si no tiene los datos, los va a buscar al backend
+        this.getShedule();
       }
+    })
+  }
 
+  checkAddressLocal() {
+    this.storage.get("address").then(data => {
+      if (data) {
+        this.getAddressObs().next(JSON.parse(data))
+      }
+      else {
+        // Si no tiene los datos, los va a buscar al backend
+        this.getAddress();
+      }
+    })
+  }
 
+  checkPlaylistLocal() {
+    this.storage.get("playlist").then(data => {
+      if (data) {
+        this.getPlaylistObs().next(JSON.parse(data))
+      }
+      else {
+        // Si no tiene los datos, los va a buscar al backend
+        this.getPlaylist();
+      }
+    })
+  }
 
   getProjects() {
     this.projectsService.getProjects().subscribe((p: Array<Project>) => {
@@ -106,27 +87,29 @@ checkProjectsLocal(){
     })
   }
 
-  getShedule(){
+  getShedule() {
     this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
       this.storage.set("shedule", JSON.stringify(p));
       this.checkSheduleLocal();
     })
   }
 
-  getAddress(){
+  getAddress() {
     this.addressServivce.getAddresses().subscribe((p: Array<Address>) => {
       this.storage.set("address", JSON.stringify(p));
       this.checkAddressLocal();
     })
   }
 
-  getPlaylist(){
+  getPlaylist() {
     this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
       this.storage.set("playlist", JSON.stringify(p));
       this.checkPlaylistLocal();
     })
   }
 
+
+  // Observables para subscribir dentro de las views
   public getProjectsObs(): Subject<Project> {
     return this.projects;
   }
@@ -140,52 +123,41 @@ checkProjectsLocal(){
   }
 
   public getPlaylistObs(): Subject<Playlist> {
-    (this.playlist.subscribe((playlist) => {console.log(playlist)}));
     return this.playlist;
   }
 
-  setTheme(){
+  setTheme() {
     this.storage.get("project1").then(data => {
-       
-
-        document.body.style.setProperty('--project1', data);
-
+      document.body.style.setProperty('--project1', data);
     })
 
     this.storage.get("project2").then(data => {
-        document.body.style.setProperty('--project2', data);
+      document.body.style.setProperty('--project2', data);
     })
 
     this.storage.get("project3").then(data => {
       document.body.style.setProperty('--project3', data);
-  })
-  this.storage.get("project4").then(data => {
-    document.body.style.setProperty('--project4', data);
-})
+    })
+    this.storage.get("project4").then(data => {
+      document.body.style.setProperty('--project4', data);
+    })
 
-this.storage.get("importantProject1").then(data => {
-  document.body.style.setProperty('--importantProject1', data);
-})
+    this.storage.get("importantProject1").then(data => {
+      document.body.style.setProperty('--importantProject1', data);
+    })
 
-this.storage.get("importantProject2").then(data => {
-  document.body.style.setProperty('--importantProject2', data);
-})
-this.storage.get("importantProject3").then(data => {
-  document.body.style.setProperty('--importantProject3', data);
-})
-this.storage.get("importantProject4").then(data => {
-  document.body.style.setProperty('--importantProject4', data);
-})
-this.storage.get("freeDay").then(data => {
-  document.body.style.setProperty('--freeDay', data);
-})
-
-
-
+    this.storage.get("importantProject2").then(data => {
+      document.body.style.setProperty('--importantProject2', data);
+    })
+    this.storage.get("importantProject3").then(data => {
+      document.body.style.setProperty('--importantProject3', data);
+    })
+    this.storage.get("importantProject4").then(data => {
+      document.body.style.setProperty('--importantProject4', data);
+    })
+    this.storage.get("freeDay").then(data => {
+      document.body.style.setProperty('--freeDay', data);
+    })
   }
 
- getProjectStatus(){
-  return this.http.get('http://localhost:8000/api/mobile/getProjects', { observe: 'response' });
- };
-  
 }

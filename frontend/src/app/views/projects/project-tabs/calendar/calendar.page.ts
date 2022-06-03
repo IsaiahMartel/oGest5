@@ -17,11 +17,9 @@ export class CalendarPage implements OnInit {
   public sheduleArray: Array<Shedule> = [];
   public shedule: Shedule;
   projectId: number;
-subscription = new Subscription();
+  subscription = new Subscription();
 
   constructor(
-    private sheduleService: SheduleService,
-    private activatedRoute: ActivatedRoute,
     public storage: Storage,
     @Inject(LOCALE_ID) private locale: string,
     private checkDataService: CheckDataService,
@@ -47,7 +45,7 @@ subscription = new Subscription();
 
           // Ordena el array por fecha
           this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
-          
+
         };
       })
 
@@ -55,7 +53,6 @@ subscription = new Subscription();
   }
 
   ionViewDidLeave() {
-
     this.subscription.unsubscribe();
   }
 

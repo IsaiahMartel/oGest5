@@ -44,7 +44,6 @@ export class InstrumentsPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.loadInfo();
   }
 
@@ -53,21 +52,10 @@ export class InstrumentsPage implements OnInit {
     this.projectId = this.projectIdService.projectId;
     this.checkDataService.checkPlaylistLocal();
     this.subscription.add(this.checkDataService.playlistObs.subscribe((playlist) => {
-
-
       var array: Array<Playlist> = Object.values(playlist);
-
-
       array.filter((playlist) => {
-
-
-
-
         if (playlist.project_id == this.projectId) {
-
           if (playlist.perplaylists != null || playlist.voiplaylists != null || playlist.keyplaylists != null) {
-
-
             this.playlistArray.push(playlist);
 
           }
@@ -76,64 +64,38 @@ export class InstrumentsPage implements OnInit {
 
       //  Comprueba si hay instrumentos en cada categoría, los mete en un array de su categoría y descarta los duplicados
       this.playlistArray.filter((instruments) => {
-        // console.log(e);
-
         for (let index in instruments.perplaylists) {
-
           if (instruments.perplaylists[index].instrumentName != null || playlist.perplaylists[index].instrumentName2 != null) {
-
             this.noPercussion = false;;
             if (!this.perArray.some(instrument => instrument.instrumentName == instruments.perplaylists[index].instrumentName)) {
               this.perArray.push(instruments.perplaylists[index]);
-
-
             }
           }
         }
 
         for (let index in instruments.keyplaylists) {
-
           if (instruments.keyplaylists[index].instrumentName != null || playlist.keyplaylists[index].instrumentName2 != null) {
-
             this.noKeyboard = false;;
             if (!this.keyArray.some(instrument => instrument.instrumentName == instruments.keyplaylists[index].instrumentName)) {
               this.keyArray.push(instruments.keyplaylists[index]);
-
-
             }
           }
         }
 
         for (let index in instruments.voiplaylists) {
-
           if (instruments.voiplaylists[index].instrumentName != null || playlist.voiplaylists[index].instrumentName2 != null) {
-
             this.noVoice = false;;
             if (!this.keyArray.some(instrument => instrument.instrumentName == instruments.voiplaylists[index].instrumentName)) {
               this.voiArray.push(instruments.voiplaylists[index]);
-
-
             }
           }
         }
-
       })
-
-
     }))
-
-   
-
   }
-
-
-
-
 
   ionViewDidLeave() {
-
     this.subscription.unsubscribe();
   }
-
 }
 

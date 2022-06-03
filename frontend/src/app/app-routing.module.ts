@@ -25,11 +25,20 @@ pathMatch: "full"
     loadChildren: () => import('./views/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'configuration',
-    loadChildren: () => import('./views/configuration/configuration.module').then( m => m.ConfigurationPageModule)
-  },  {
-    path: 'notifications-log',
-    loadChildren: () => import('./views/notifications-log/notifications-log.module').then( m => m.NotificationsLogPageModule)
+    path: 'themes',
+    loadChildren: () => import('./views/themes/themes.module').then( m => m.ThemesPageModule)
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./views/notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
+    path: 'android-notification-tutorial',
+    loadChildren: () => import('./views/tutorials/android-notification-tutorial/android-notification-tutorial.module').then( m => m.AndroidNotificationTutorialPageModule)
+  },
+  {
+    path: 'pc-notification-tutorial',
+    loadChildren: () => import('./views/tutorials/pc-notification-tutorial/pc-notification-tutorial.module').then( m => m.PcNotificationTutorialPageModule)
   },
 
 

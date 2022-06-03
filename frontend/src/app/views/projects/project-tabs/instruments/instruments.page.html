@@ -69,9 +69,12 @@
     </div>
 
     <!-- Mensaje si no hay instrumentos -->
-    <h1 class="ion-text-center " *ngIf="playlistArray.length==0">
-        No hay instrumentos extras
-    </h1>
+    <div id="no-instruments-text">
+        <h1 class="ion-text-center" *ngIf="noPercussion==true && noVoice==true && noKeyboard==true">
+            No hay instrumentos extras
+        </h1>
+    </div>
+
 
 
 </ion-content>

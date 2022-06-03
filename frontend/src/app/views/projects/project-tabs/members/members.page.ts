@@ -18,7 +18,7 @@ export class MembersPage implements OnInit {
   public projectArray: Array<Project> = [];
   public addressArray: Array<Address> = [];
   projectId: number;
-subscription = new Subscription();
+  subscription = new Subscription();
 
   constructor(
     public storage: Storage, private checkDataService: CheckDataService,
@@ -33,33 +33,23 @@ subscription = new Subscription();
   // Pasa los datos desde el local storage de address a un array
   loadInfo() {
     this.projectId = this.projectIdService.projectId;
-  
-      this.checkDataService.checkAddressLocal();
-      this.subscription = this.checkDataService.addressObs.subscribe((project) => {
 
-        var array: Array<Project> = Object.values(project);
+    this.checkDataService.checkAddressLocal();
+    this.subscription = this.checkDataService.addressObs.subscribe((project) => {
 
-        array.filter((project) => {
-          if (project.id == this.projectId) {
-            this.projectArray.push(project);
+      var array: Array<Project> = Object.values(project);
+      array.filter((project) => {
+        if (project.id == this.projectId) {
+          this.projectArray.push(project);
 
-            for(let p of this.projectArray){
-             
-for(let address in p.addresses){
-
-  
-  this.addressArray.push(p.addresses[address]);
-}
-
+          for (let p of this.projectArray) {
+            for (let address in p.addresses) {
+              this.addressArray.push(p.addresses[address]);
             }
-     
-            
-    
-          };
-        })
-  
-  
+          }
+        };
       })
+    })
   }
 
   ionViewDidLeave() {

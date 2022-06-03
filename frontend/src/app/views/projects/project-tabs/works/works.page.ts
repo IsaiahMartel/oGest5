@@ -43,51 +43,37 @@ export class WorksPage implements OnInit {
 
       var array: Array<Playlist> = Object.values(playlist);
       array.filter((playlist) => {
+
+        // Todos estos if's se encargan de convertir campos con solo espacios en blanco en nulos (para que pasen por el filtro del html)
         if (playlist.project_id == this.projectId) {
           if (playlist.fluteExp != null && playlist.fluteExp != "") {
-            if(playlist.fluteExp.trim().length==0){
-              playlist.fluteExp=null;
+            if (playlist.fluteExp.trim().length == 0) {
+              playlist.fluteExp = null;
             };
           }
+          if (playlist.oboeExp != null && playlist.oboeExp != "") { if (playlist.oboeExp.trim().length == 0) { playlist.oboeExp = null } }
+          if (playlist.clarinetExp != null && playlist.clarinetExp != "") { if (playlist.clarinetExp.trim().length == 0) { playlist.clarinetExp = null } }
+          if (playlist.bassoonExp != null && playlist.bassoonExp != "") { if (playlist.bassoonExp.trim().length == 0) { playlist.bassoonExp = null } }
+          if (playlist.hornExp != null && playlist.hornExp != "") { if (playlist.hornExp.trim().length == 0) { playlist.hornExp = null } }
+          if (playlist.trumpetExp != null && playlist.trumpetExp != "") { if (playlist.trumpetExp.trim().length == 0) { playlist.trumpetExp = null } }
+          if (playlist.tromboneExp != null && playlist.tromboneExp != "") { if (playlist.tromboneExp.trim().length == 0) { playlist.tromboneExp = null } }
+          if (playlist.tubaExp != null && playlist.tubaExp != "") { if (playlist.tubaExp.trim().length == 0) { playlist.tubaExp = null } }
+          if (playlist.harpExp != null && playlist.harpExp != "0") { if (playlist.harpExp.trim().length == 0) { playlist.harpExp = null } }
+          if (playlist.keyboardExp != null && playlist.keyboardExp != "0") { if (playlist.keyboardExp.trim().length == 0) { playlist.keyboardExp = null } }
+          if (playlist.extraExp != null && playlist.extraExp != "0") { if (playlist.extraExp.trim().length == 0) { playlist.extraExp = null } }
 
-          if (playlist.oboeExp != null && playlist.oboeExp != "") {if(playlist.oboeExp.trim().length==0){playlist.oboeExp=null} }
-
-          if (playlist.clarinetExp != null && playlist.clarinetExp != "") { if(playlist.clarinetExp.trim().length==0){playlist.clarinetExp=null}}
-         
-          if ( playlist.bassoonExp != null && playlist.bassoonExp != "") {if(playlist.bassoonExp.trim().length==0){playlist.bassoonExp=null} }
-          
-          if (   playlist.hornExp != null && playlist.hornExp != "" ) { if(playlist.hornExp.trim().length==0){playlist.hornExp=null}}
-          if ( playlist.trumpetExp != null && playlist.trumpetExp != "") { if(playlist.trumpetExp.trim().length==0){playlist.trumpetExp=null}}
-          if (playlist.tromboneExp != null && playlist.tromboneExp != "") {if(playlist.tromboneExp.trim().length==0){playlist.tromboneExp=null} }
-          if ( playlist.tubaExp != null && playlist.tubaExp != "") {if(playlist.tubaExp.trim().length==0){playlist.tubaExp=null} }
-          if (playlist.harpExp != null && playlist.harpExp != "0") {if(playlist.harpExp.trim().length==0){playlist.harpExp=null} }
-          if ( playlist.keyboardExp != null && playlist.keyboardExp != "0") { if(playlist.keyboardExp.trim().length==0){playlist.keyboardExp=null}}
-
-          if ( playlist.extraExp != null && playlist.extraExp != "0") { if(playlist.extraExp.trim().length==0){playlist.extraExp=null}}
-      
-
-         
-          
-         
-          
-         
-         
           this.playlistArray.push(playlist);
-
 
           // Ordena el array por playlistOrder
           this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
-
         };
       })
     }))
   }
 
   ionViewDidLeave() {
-
     this.subscription.unsubscribe();
   }
-
 }
 
 

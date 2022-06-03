@@ -22,29 +22,7 @@ export class PushNotificationService {
   postNotificationToken(tokenMobile) {
 
     let bodyEncoded = new URLSearchParams();
-//     console.log(token);
-    
-//     console.log(token.endpoint.toString() + " token endpoint");
-// console.log(token.expirationTime);
-// console.log(token.keys.auth + " key auth");
 
-
-
-
-
-    
-// if(token.expirationTime!=null){
-//   bodyEncoded.append("expirationTime", token.expirationTime.toString());
-// }
-
-
-//   bodyEncoded.append("auth", token.keys.auth.toString());
-
-
-//     bodyEncoded.append("endpoint", token.endpoint.toString());
-  
-  
-//     bodyEncoded.append("p256dh", token.keys.p256dh.toString());
   
 
     const body = bodyEncoded.toString();

@@ -1,20 +1,20 @@
-import { AfterViewInit, Component, Inject, LOCALE_ID, Renderer2, ViewChild } from '@angular/core';
-import { Shedule } from '../../models/shedule';
-import { SheduleService } from '../../services/shedule/shedule.service';
-import { Project } from '../../models/project';
-import { ProjectsService } from '../../services/projects/projects.service';
+import { Component, Inject, LOCALE_ID, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActionSheetController, AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
-import { Playlist } from 'src/app/models/playlist';
-import { Address } from 'src/app/models/address';
-import { AddressService } from 'src/app/services/address/address.service';
 import { CalendarComponent } from 'ionic2-calendar';
-import { Router } from '@angular/router';
-import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
-import { CheckDataService } from 'src/app/services/check-data/check-data.service';
+import { CalendarMode } from 'ionic2-calendar/calendar';
 import { combineLatestWith, Subscription } from 'rxjs';
-import { CalendarMode, } from 'ionic2-calendar/calendar';
+import { Address } from 'src/app/models/address';
+import { Playlist } from 'src/app/models/playlist';
+import { AddressService } from 'src/app/services/address/address.service';
+import { CheckDataService } from 'src/app/services/check-data/check-data.service';
+import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
+import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
+import { Project } from '../../models/project';
+import { Shedule } from '../../models/shedule';
+import { ProjectsService } from '../../services/projects/projects.service';
+import { SheduleService } from '../../services/shedule/shedule.service';
 
 
 
@@ -25,7 +25,6 @@ import { CalendarMode, } from 'ionic2-calendar/calendar';
 })
 
 export class HomePage {
-
   public shedule: Shedule;
   public projects_id: number[] = [];
   public project: Project;
@@ -33,24 +32,23 @@ export class HomePage {
   public projectsArray: Project[] = [];
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
-  private loading;
-  private loadedViewTitleForTheFirstTime: number = 0;
 
-  colorPick: number = 0;
 
-  eventSource = [];
-  viewTitle: string;
-
+  monthText: string;
+  selectedDate: Date;
   calendar = {
     startingDayWeek: 1 as number,
     mode: 'month' as CalendarMode,
     currentDate: new Date(),
     noEventsLabel: "No hay proyectos",
   };
+  eventSource = [];
 
-  selectedDate: Date;
+  // Para poder destruir las subscriptions y que no generen memory leak
   subscription = new Subscription();
 
+
+  // Para que salga una rueda de loading cuando aún no está listo el calendario
   time;
   mouseDownWholePageListener;
   mouseUpWholePageListener;
@@ -60,27 +58,15 @@ export class HomePage {
 
 
   constructor(
-    private projectsService: ProjectsService,
-    private sheduleService: SheduleService,
-    private playlistService: PlaylistsService,
-    private addressServivce: AddressService,
     private router: Router,
-    private alertController: AlertController,
     public storage: Storage,
     public projectIdService: ProjectIdService,
     @Inject(LOCALE_ID) private locale: string,
     private checkDataService: CheckDataService,
-    private loadingController: LoadingController,
     public actionSheetController: ActionSheetController,
-    private renderer: Renderer2
+
 
   ) { }
-
-  ngOnInit(): void {
-    this.loadInfo();
-
-
-  }
 
   // Instanciamos los elementos que vamos a usar una vez cargada la página
   ionViewDidEnter() {
@@ -92,11 +78,29 @@ export class HomePage {
     this.spinner = document.getElementById('div-spinner');
   }
 
+  ngOnInit(): void {
+    this.loadInfo();
+  }
+
+  // Pasa los datos desde el local storage de shedule y projects a un array
+  loadInfo() {
+    this.checkDataService.checkProjectsLocal();
+    this.checkDataService.checkSheduleLocal();
+    this.subscription = this.checkDataService.projectsObs.pipe(
+      combineLatestWith(this.checkDataService.sheduleObs)
+
+    ).subscribe(([projectsArray, sheduleArray]) => {
+      this.projectsArray = Object.values(projectsArray);
+      this.sheduleArray = Object.values(sheduleArray);
+
+      this.createEvents();
+
+    })
+
+  }
 
   //Si se mantiene el click lo suficiente abre un sheet
   onMouseDownWholePage() {
-
-
     this.time = setTimeout(() => {
       this.presentActionSheet();
       this.time = null;
@@ -127,13 +131,14 @@ export class HomePage {
   }
 
   // Cambia el nombre del mes al cambiarlo
-  onViewTitleChanged(title) {
+  onViewTitleChanged(month) {
     // onViewTitleChanged se ejecuta antes de que se hayan cargado los elementos de la página
+    //por lo que tenemos que comprobar si existe el elemento calendario
     if (this.calendarElement) {
       this.spinner.style.visibility = "hidden";
       this.calendarElement.style.visibility = "visible";
     }
-    this.viewTitle = title;
+    this.monthText = month;
   }
 
   // Creación de eventos y aignación de todos los atributos a cada proyecto y shedule
@@ -141,14 +146,13 @@ export class HomePage {
 
     var events = [];
 
-    this.colorPick = 0;
+    var colorPick = 0;
 
     // Ordena los array por fechas
     this.projectsArray.sort((a, b) => new Date(a.projectDateIni).getTime() - new Date(b.projectDateEnd).getTime());
     // this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
     for (let project of this.projectsArray) {
       var startDateProject = new Date(project.projectDateIni);
-
       var endDateProject = new Date(project.projectDateEnd);
       var diffTime = this.dateDiffInDays(startDateProject, endDateProject);
       var day = 60 * 60 * 24 * 1000;
@@ -160,7 +164,6 @@ export class HomePage {
       var roomAcronym = "";
       var sheduleNote = "";
 
-
       for (let i = 0; i < diffTime; i++) {
         var dayByDay = new Date(startDateProject.getTime() + day * i);
 
@@ -169,30 +172,20 @@ export class HomePage {
           startTime: dayByDay,
           endTime: dayByDay,
           projectId: project.id,
-
         });
-
-
-
-
       }
 
       this.sheduleArray.filter((shedule) => {
-
         if (shedule.project_id == project.id) {
           startDateShedule = new Date(shedule.sheduleDate);
           endDateShedule = new Date(shedule.sheduleDate);
           titleShedule = shedule.sheduleTipe;
           sheduleHour = shedule.shedulehourRange;
 
-
-          if (this.colorPick == 0) {
-
-
+          if (colorPick == 0) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
               colorEvent = "blueConcert";
-
             }
             else if (shedule.sheduleTipe == "DIA LIBRE") {
               colorEvent = "freeDay";
@@ -200,24 +193,18 @@ export class HomePage {
             }
             else {
               colorEvent = "blue";
-
             }
-
-          } else if (this.colorPick == 1) {
-
-
+          } else if (colorPick == 1) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
               colorEvent = "redConcert";
-
             }
             else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
               colorEvent = "red";
             }
-
           }
-          else if (this.colorPick == 2) {
+          else if (colorPick == 2) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
               colorEvent = "greenConcert";
@@ -227,10 +214,8 @@ export class HomePage {
               colorEvent = "green";
 
             }
-
           }
-          else if (this.colorPick == 3) {
-
+          else if (colorPick == 3) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
               colorEvent = "yellowConcert";
@@ -243,7 +228,7 @@ export class HomePage {
 
           }
 
-
+          // Comprueba si existe shedule.rooms y/o shedule.sheduleNote para añadirlos
           if (shedule.rooms) {
             roomAcronym = shedule.rooms.roomAcronym;
           }
@@ -261,17 +246,14 @@ export class HomePage {
             colorEvent: colorEvent,
             projectId: project.id,
           });
-
         }
 
-        if (this.colorPick == 4) {
-          this.colorPick = 0;
+        // Reseteamos el color al primero (hay 4)
+        if (colorPick == 4) {
+          colorPick = 0;
         }
-
       })
-      this.colorPick++;
-
-
+      colorPick++;
     }
 
     this.eventSource = events;
@@ -280,32 +262,12 @@ export class HomePage {
     this.weekDaysToUpperCaseAndRemoveDots();
   }
 
-
   weekDaysToUpperCaseAndRemoveDots() {
     var weekDays = document.getElementsByTagName("small");
     for (const tag of Array.from(weekDays)) {
       var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
       tag.innerHTML = withoutDot;
     }
-  }
-
-
-  // Pasa los datos desde el local storage de shedule y projects a un array
-  loadInfo() {
-
-    this.checkDataService.checkProjectsLocal();
-    this.checkDataService.checkSheduleLocal();
-    this.subscription = this.checkDataService.projectsObs.pipe(
-      combineLatestWith(this.checkDataService.sheduleObs)
-
-    ).subscribe(([projectsArray, sheduleArray]) => {
-      this.projectsArray = Object.values(projectsArray);
-      this.sheduleArray = Object.values(sheduleArray);
-
-      this.createEvents();
-
-    })
-
   }
 
 
@@ -319,23 +281,14 @@ export class HomePage {
 
   // Pinta los colores en el calendario
   printColorsInDaysWithEvents(events) {
-
     if (events.length > 0) {
-
       for (let event of events) {
-
-
         if (event.titleShedule) {
-
 
           // Pinta tan solo los días con estos valores, y no se tocan más ya que se pueden sobreescribir 
           if (event.titleShedule == "CONCIERTO" || event.titleShedule == "DIA LIBRE" || event.titleShedule.substring(0, 7) == "FUNCION"
             || event.titleShedule.substring(0, 7) == "FUNCIÓN") {
-
-
-
             return event.colorEvent;
-
           }
         }
       }
@@ -348,34 +301,33 @@ export class HomePage {
 
   // Calcula la diiferencia entre días
   dateDiffInDays(a, b) {
-
     const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
     const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
 
     return (Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24)) + 1);
   }
 
+
+  // Menú oculto para notificaciones y cambio de themes
   async presentActionSheet() {
-
-
-
-
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones',
       cssClass: 'my-custom-class',
-      buttons: [{
+      buttons: [
+        {
+          text: 'Notificaciones',
+          icon: 'notifications-outline',
+          handler: () => {
+            this.router.navigateByUrl("/notifications-log");
+          }
+        },
+        {
         text: 'Colores',
         icon: 'color-palette-outline',
         handler: () => {
           this.router.navigateByUrl("/configuration");
-        }},
-        {
-        text: 'Notificaciones',
-        icon: 'notifications-outline',
-        handler: () => {
-          this.router.navigateByUrl("/notifications-log");
-        }}
+        }
+      },
       ]
     });
     await actionSheet.present();
@@ -384,9 +336,8 @@ export class HomePage {
     console.log('onDidDismiss resolved with role and data', role, data);
   }
 
-
+  // Destruye subscripciones y eventListeners para evitar memory leak
   ionViewDidLeave() {
-
     this.subscription.unsubscribe();
     window.removeEventListener('touchstart', this.onMouseDownWholePage);
     window.removeEventListener('touchend', this.onMouseUpWholePage);

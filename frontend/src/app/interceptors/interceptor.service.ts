@@ -75,6 +75,10 @@ export class InterceptorService implements HttpInterceptor {
       this.createdOnlyOneToast++;
     } else if (errorMessage == "Unauthenticated.\n") {
 
+    }   else if (errorMessage == "Unauthorized\n") {
+      this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
+      console.log("eyy");
+      
     } 
 
 

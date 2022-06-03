@@ -19,11 +19,14 @@ class PushDemo extends Notification
      *
      * @return void
      */
-    public function __construct( $request,  $request1)
+    public function __construct( $request, $request1 )
     {
 
         $this->proyects = $request;
-        $this->target = $request1;
+                $this->target = $request1;
+        error_log(   $this->proyects );
+
+        error_log(   $this->target );
     }
 
     /**

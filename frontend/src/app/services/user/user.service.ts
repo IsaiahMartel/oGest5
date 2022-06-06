@@ -15,28 +15,7 @@ export class UserService {
   putUser(notification) {
 
     let bodyEncoded = new URLSearchParams();
-    //     console.log(token);
-
-    //     console.log(token.endpoint.toString() + " token endpoint");
-    // console.log(token.expirationTime);
-    // console.log(token.keys.auth + " key auth");
-
-
-
-
-
-
-    // if(token.expirationTime!=null){
-    //   bodyEncoded.append("expirationTime", token.expirationTime.toString());
-    // }
-
-
-    //   bodyEncoded.append("auth", token.keys.auth.toString());
-
     this.storage.get("user_id").then(data => {
-
-
-
       let body = new URLSearchParams();
       body.set('notification', notification);
 
@@ -45,10 +24,7 @@ export class UserService {
       };
 
 
-      return this.httpClient.put<User>(this.endpoint + "/" + data, body.toString(), options).subscribe(response => {
-      console.log(response);
-      
-      });
+      return this.httpClient.put<User>(this.endpoint + "/" + data, body.toString(), options).subscribe();
     })
 
   }

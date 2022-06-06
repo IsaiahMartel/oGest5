@@ -12,7 +12,7 @@
 
     <ion-item id="notifications-toggle-slot">
         <ion-label>
-            <h1 id="notifications-toggle-text">Notificaciones</h1>
+            <h2 id="notifications-toggle-text">Notificaciones</h2>
         </ion-label>
         <ion-toggle slot="end" checked [(ngModel)]="isToggled" (ionChange)="onChange()"></ion-toggle>
     </ion-item>
@@ -21,9 +21,9 @@
     <ion-list>
         <ion-item *ngFor=" let notification of notificationArray ">
             <ion-label>
-                <h3> {{notification.date | date: ' EEEE, dd/MM/yyyy HH:mm:ss '}}</h3>
+                <h2> {{notification.date | date: ' EEEE, dd/MM/yyyy HH:mm:ss '}}</h2>
 
-                <h2>{{notification.body}}</h2>
+                <h1>{{notification.body}}</h1>
             </ion-label>
 
         </ion-item>

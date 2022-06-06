@@ -5,8 +5,6 @@ import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { catchError, map } from 'rxjs/operators';
-import { ModalConnectionService } from '../services/modal-connection/modal-connection.service';
-import { BackendStatusService } from '../services/backend-status/backend-status.service';
 import { ToastController } from '@ionic/angular';
 
 const TOKEN_KEY = 'access_token';
@@ -14,8 +12,11 @@ const TOKEN_KEY = 'access_token';
 @Injectable({
   providedIn: 'root'
 })
+
+
+// El interceptor se usa para pasar el header de autenticación y captar errores cada vez que hay un http request
 export class InterceptorService implements HttpInterceptor {
-  public ModalconnectionService: ModalConnectionService;
+  
   private dismissToast: boolean;
   private toast;
   isOnline: boolean;
@@ -25,7 +26,7 @@ export class InterceptorService implements HttpInterceptor {
 
   backendStatusChange: Subject<boolean> = new Subject<boolean>();
   constructor(
-    private storage: Storage, private modalConnectionService: ModalConnectionService,
+    private storage: Storage,
     private toastController: ToastController
   ) { }
 
@@ -68,6 +69,7 @@ export class InterceptorService implements HttpInterceptor {
     let errorMessage = ""
     Object.values(errorJSON).forEach(element => errorMessage += element + "\n");
 
+    // Muestro los errores en una alerta por la parte inferior
     if (errorMessage == "true\n") {
       this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
       this.isOnline = false;
@@ -77,19 +79,15 @@ export class InterceptorService implements HttpInterceptor {
 
     }   else if (errorMessage == "Unauthorized\n") {
       this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
-      console.log("eyy");
-      
     } 
 
 
     else {
-
-      
       this.presentToastWithOptions("¡Oops!", "Ha habido un problema, es posible que la aplicación no funcione correctamente", "danger", "information-circle");
       this.dismissToast = false;
       this.createdOnlyOneToast++;
     }
-    console.log(errorMessage);
+
     return throwError("Error " + errorMessage + "\n" + errorJSON);
   }
 

@@ -35,7 +35,7 @@ export class TabsPage implements OnInit {
     this.urlSplitArray = this.router.url.split("/");
     this.projectId = parseInt(this.urlSplitArray.slice(-1)[0]);
     this.projectIdService.getInterceptedSource().next(this.projectId);
-    console.log(this.projectId);
+
     this.checkDataService.checkProjectsLocal();
 
     this.subscription = this.checkDataService.projectsObs.subscribe((projects) => {

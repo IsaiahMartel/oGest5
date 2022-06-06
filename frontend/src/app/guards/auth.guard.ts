@@ -6,16 +6,17 @@ import { Storage } from '@ionic/storage';
 @Injectable({
   providedIn: 'root'
 })
+
+
+// El guard sirven para redireccionar al login si no estás logeado
 export class AuthGuard implements CanLoad {
   constructor(private storage: Storage,
     private router: Router,) {
-
   }
+
   async canLoad() {
     const token = this.storage.get('access_token').then(data => {
       if (data) {
-       
-        
         return true;
       }
       else {
@@ -23,18 +24,11 @@ export class AuthGuard implements CanLoad {
       }
     });
 
-
-
-
-
     if (await token == true) {
       return true;
     } else {
-
       this.router.navigateByUrl("/login"
       )
-
-   
       return false;
     }
   }

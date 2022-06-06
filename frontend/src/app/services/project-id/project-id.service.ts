@@ -6,6 +6,8 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 
+
+// Este servicio se usa dentro de los tabs para saber el id
 export class ProjectIdService {
   projectId: number;
   projectName: "";
@@ -16,7 +18,6 @@ export class ProjectIdService {
 
 
   changeProjectId() {
-
     this.requestIntercepted.subscribe((projectId) => {
       this.projectId = projectId
       this.storage.get("projects").then(data => {
@@ -26,11 +27,9 @@ export class ProjectIdService {
           array.filter((project) => {
             if (project.id == this.projectId) {
               this.projectName = project.events.eventName;
-      
             };
           })
         }
-
       })
     });
   }

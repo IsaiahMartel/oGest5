@@ -21,8 +21,11 @@
             <ion-item id="password-fields">
                 <ion-row>
                     <ion-icon id="icon" name="bag-outline"></ion-icon>
-                    <ion-input name="password" type="password" placeholder="Contraseña" formControlName="password" required></ion-input>
+                    <ion-input name="password" [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" formControlName="password" required></ion-input>
+                    <!-- Enseña la contraseña -->
+                    <ion-icon id="icon-littler" name="eye" (click)="togglePassword()"></ion-icon>
                 </ion-row>
+
                 <span slot="error" *ngIf="loginForm.controls['password'].errors?.required && loginForm.controls['password']?.touched">Rellene
                     la contraseña</span>
                 <span slot="error" *ngIf="loginForm.controls['password'].errors?.minlength && loginForm.controls['password'].touched">La

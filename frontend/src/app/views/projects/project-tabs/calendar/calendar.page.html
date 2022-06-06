@@ -1,5 +1,4 @@
 <ion-content has-header>
-
     <!-- Eventos importantes (conciertos, funciones...)-->
     <div id="container" *ngFor="let shedule of sheduleArray">
         <ion-card style="border-bottom:10px solid blue !important" *ngIf='shedule.sheduleTipe=="CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"

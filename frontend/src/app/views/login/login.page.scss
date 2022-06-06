@@ -2,7 +2,6 @@ ion-content {
     --offset-bottom: auto !important;
     --overflow: hidden;
     overflow: auto;
-
     &::-webkit-scrollbar {
         display: none;
     }
@@ -21,6 +20,13 @@ ion-thumbnail {
     font-size: 40px;
     margin-top: 10px;
     padding-top: 30px;
+}
+
+#icon-littler {
+    font-size: 30px;
+    margin-left: 53px;
+    margin-top: 50px;
+    color: grey;
 }
 
 ion-input {

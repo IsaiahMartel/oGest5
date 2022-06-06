@@ -1,19 +1,16 @@
-let i = 0;
+// Para que lleguen las notificaciones push
 self.addEventListener('push', function(event) {
     if (!(self.Notification && self.Notification.permission === 'granted')) {
         return;
     }
 
     var data = {};
-
-
     if (event.data) {
         data = event.data.json();
     }
-    console.log(data.tag);
 
+    // Para saber si la notficación es silenciosa
     if (data.tag == "silent") {
-        console.log("tag = silent " + data.tag)
         event.waitUntil(
             db.collection('notifications').add({
                 date: data.data.fecha,
@@ -21,16 +18,12 @@ self.addEventListener('push', function(event) {
                 body: data.body,
                 icon: data.icon,
                 actions: data.actions,
-                showed: false
+                shown: false
             }))
     } else {
         var title = data.title;
         var message = data.body;
 
-        console.log(data);
-
-        // self.clickTarget = data.clickTarget;
-
         event.waitUntil(
             db.collection('notifications').add({
                 date: data.data.fecha,
@@ -38,7 +31,7 @@ self.addEventListener('push', function(event) {
                 body: data.body,
                 icon: data.icon,
                 actions: data.actions,
-                showed: false
+                shown: false
             }),
 
 
@@ -52,17 +45,10 @@ self.addEventListener('push', function(event) {
 
 });
 
-
-
-//Esto para probar a abrir la app cuando clicas
+//Para abrir la app cuando clicas
 self.addEventListener('notificationclick', function(event) {
-    console.log('On notification click: ', event.notification.tag);
-    // Android doesn't close the notification when you click on it
-    // See: http://crbug.com/463146
     event.notification.close();
 
-    // This looks to see if the current is already open and
-    // focuses if it is
     event.waitUntil(
         clients.matchAll({
             type: "window"
@@ -80,14 +66,7 @@ self.addEventListener('notificationclick', function(event) {
     );
 });
 
-
-
-
-// Otherwise, we need to ask the user for permission
-
-
-
-
+// Para no perder una subscripción
 // self.addEventListener('sync', (event) => {
 //     if (event.target === 'post-data') {
 //         event.waitUntil(addData());

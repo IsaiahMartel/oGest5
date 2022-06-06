@@ -18,19 +18,7 @@ export class PlaylistsService {
   getPlaylists() {
     return this.httpClient.get<Playlist[]>(this.endpoint);
   }
-  // getPlaylistByProjectId(projectId) {
-  //   return this.httpClient.get<Playlist[]>(this.endpoint + "/" + projectId).pipe(
-  //     tap(_ => console.log("PlaylistProject retrieved")),
-  //     catchError(this.handleError<Playlist[]>("Get playlist project", []))
-  //   );
-  // }
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     console.error(error);
-  //     console.log(`${operation} failed: ${error.message}`);
-  //     return of(result as T);
-  //   };
-  // }
+
 }
 
 

@@ -9,4 +9,6 @@ export class Project {
     events: Event;
     addresses : Address;
     addressgroups: AddressGroup;
+    addressfirstName: string;
+    addresslastName: string;
 }

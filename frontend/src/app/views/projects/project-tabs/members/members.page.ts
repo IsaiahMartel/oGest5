@@ -34,16 +34,20 @@ export class MembersPage implements OnInit {
   loadInfo() {
     this.projectId = this.projectIdService.projectId;
 
+
     this.checkDataService.checkAddressLocal();
     this.subscription = this.checkDataService.addressObs.subscribe((project) => {
 
       var array: Array<Project> = Object.values(project);
       array.filter((project) => {
+        
         if (project.id == this.projectId) {
           this.projectArray.push(project);
 
           for (let p of this.projectArray) {
+     
             for (let address in p.addresses) {
+              
               this.addressArray.push(p.addresses[address]);
             }
           }

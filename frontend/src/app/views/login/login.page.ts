@@ -15,7 +15,7 @@ import { Storage } from '@ionic/storage';
 
 export class LoginPage {
   loginForm: FormGroup;
-
+showPassword = false;
   constructor(
     private alertController: AlertController,
     private authService: AuthService,
@@ -54,6 +54,11 @@ notification: null,
   
     }
     )
+  }
+
+  // Para el botón de enseñar la contraseña
+  togglePassword(){
+this.showPassword=!this.showPassword;
   }
 
   

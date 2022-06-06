@@ -14,22 +14,19 @@ export class NotificationsPage implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-
     this.loadInfo();
   }
 
-
+// Almaceno las notificaciones en un array para el historial de notificaciones
   loadInfo() {
     db.collection('notifications').get().then(tasks => {
       this.notificationArray = tasks;
-
     })
   }
 
+  // Para silenciar las notificaciones
   onChange() {
 if(this.isToggled){
-
-  
 this.userService.putUser(1);
 
 }else if(!this.isToggled){

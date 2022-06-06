@@ -259,7 +259,7 @@ $(document).ready(function() {
                             footer: 'Archivo'
                         });
 
-                        // llamo a la funcion para generar evento en los móviles
+                        // llamo a la funcion para generar una notificación en los móviles
                         $.ajax({
                                 url: '/api/push',
                                 headers: {

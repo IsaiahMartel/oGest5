@@ -24,9 +24,7 @@ class PushDemo extends Notification
 
         $this->proyects = $request;
                 $this->target = $request1;
-        error_log(   $this->proyects );
-
-        error_log(   $this->target );
+       
     }
 
     /**

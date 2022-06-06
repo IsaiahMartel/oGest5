@@ -74,6 +74,9 @@ export class HomePage {
     this.onMouseUpWholePage = this.onMouseUpWholePage.bind(this);
     window.addEventListener('touchstart', this.onMouseDownWholePage);
     window.addEventListener('touchend', this.onMouseUpWholePage);
+
+    window.addEventListener('mousedown', this.onMouseDownWholePage);
+    window.addEventListener('mouseup', this.onMouseUpWholePage);
     this.calendarElement = document.getElementsByClassName('swiper-wrapper')[0];
     this.spinner = document.getElementById('div-spinner');
   }
@@ -88,15 +91,12 @@ export class HomePage {
     this.checkDataService.checkSheduleLocal();
     this.subscription = this.checkDataService.projectsObs.pipe(
       combineLatestWith(this.checkDataService.sheduleObs)
-
     ).subscribe(([projectsArray, sheduleArray]) => {
       this.projectsArray = Object.values(projectsArray);
       this.sheduleArray = Object.values(sheduleArray);
 
       this.createEvents();
-
     })
-
   }
 
   //Si se mantiene el click lo suficiente abre un sheet
@@ -308,7 +308,7 @@ export class HomePage {
   }
 
 
-  // Menú oculto para notificaciones y cambio de themes
+  // Mmenú oculto para notificaciones y cambio de themes
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones',
@@ -318,22 +318,19 @@ export class HomePage {
           text: 'Notificaciones',
           icon: 'notifications-outline',
           handler: () => {
-            this.router.navigateByUrl("/notifications-log");
+            this.router.navigateByUrl("/notifications");
           }
         },
         {
         text: 'Colores',
         icon: 'color-palette-outline',
         handler: () => {
-          this.router.navigateByUrl("/configuration");
+          this.router.navigateByUrl("/themes");
         }
       },
       ]
     });
     await actionSheet.present();
-
-    const { role, data } = await actionSheet.onDidDismiss();
-    console.log('onDidDismiss resolved with role and data', role, data);
   }
 
   // Destruye subscripciones y eventListeners para evitar memory leak
@@ -341,8 +338,8 @@ export class HomePage {
     this.subscription.unsubscribe();
     window.removeEventListener('touchstart', this.onMouseDownWholePage);
     window.removeEventListener('touchend', this.onMouseUpWholePage);
-
-
+    window.removeEventListener('mousedown', this.onMouseDownWholePage);
+    window.removeEventListener('mouseup', this.onMouseDownWholePage);
   }
 
 

@@ -26,11 +26,13 @@ pathMatch: "full"
   },
   {
     path: 'themes',
-    loadChildren: () => import('./views/themes/themes.module').then( m => m.ThemesPageModule)
+    loadChildren: () => import('./views/themes/themes.module').then( m => m.ThemesPageModule),
+    canLoad: [AuthGuard]
   },
   {
     path: 'notifications',
-    loadChildren: () => import('./views/notifications/notifications.module').then( m => m.NotificationsPageModule)
+    loadChildren: () => import('./views/notifications/notifications.module').then( m => m.NotificationsPageModule),
+    canLoad: [AuthGuard]
   },
   {
     path: 'android-notification-tutorial',

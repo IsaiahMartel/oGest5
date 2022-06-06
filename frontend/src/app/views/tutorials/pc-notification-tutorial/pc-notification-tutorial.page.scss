@@ -1,0 +1,51 @@
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+#navbar {
+    height: 76px;
+    text-align: center;
+}
+
+#separation-title {
+    background-color: #006aab;
+    width: 350px;
+}
+
+#navbar-icon {
+    font-size: 50px;
+    position: absolute;
+    vertical-align: middle;
+    margin-top: 7px;
+    right: 25px;
+}
+
+#navbar-text {
+    font-size: 30px;
+    color: #464040;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+#menu-icon {
+    vertical-align: middle;
+    font-size: 50px;
+    color: #464040;
+    position: absolute;
+    left: 0;
+}
+
+ion-img {
+    width: auto !important;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+h4 {
+    text-align: center;
+}

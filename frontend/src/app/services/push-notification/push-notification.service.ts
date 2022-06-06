@@ -20,15 +20,7 @@ export class PushNotificationService {
 
 
   postNotificationToken(tokenMobile) {
-
-    let bodyEncoded = new URLSearchParams();
-
-  
-
-    const body = bodyEncoded.toString();
     return this.httpClient.post<PushNotification>(this.endpoint, tokenMobile, this.httpOptions);
   }
-
-
 
 }

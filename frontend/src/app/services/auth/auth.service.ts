@@ -27,9 +27,6 @@ export class AuthService {
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
       tap(async (res: AuthResponse) => {
      
-      console.log(res.user_id);
-      console.log(JSON.stringify(res.user_id));
-      console.log(JSON.parse(JSON.stringify(res.user_id)));
       
       
       

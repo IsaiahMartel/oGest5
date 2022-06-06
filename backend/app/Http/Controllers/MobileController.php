@@ -59,6 +59,8 @@ class MobileController extends Controller
                 return $address;
         }
     
+
+
     public function checkBackendIsUp()
     {
             return;
@@ -83,7 +85,7 @@ class MobileController extends Controller
     }
 
     public function push(Request $request){
-        $proyects = $request->input('projects');
+        $projects = $request->input('projects');
         Notification::send(Mobile::where('notification', true)->get(),new PushDemo($proyects, "normal") );
     
         Notification::send(Mobile::where('notification', false)->get(),new PushDemo($proyects, "silent") );
@@ -95,8 +97,7 @@ class MobileController extends Controller
     public function notificationUser(Request $request){
 
         $mobile = Mobile::findOrFail($request->id);
-        error_log("pasa");
-        error_log($request);
+      
         $mobile -> notification= $request->notification;
        $mobile->save();
         return $mobile;

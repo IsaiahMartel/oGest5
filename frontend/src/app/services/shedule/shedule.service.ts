@@ -18,17 +18,5 @@ export class SheduleService {
   getShedules() {
     return this.httpClient.get<Shedule[]>(this.endpoint);
   }
-  // getSheduleByProjectId(projectId) {
-  //   return this.httpClient.get<Shedule[]>(this.endpoint + "/" + projectId).pipe(
-  //     tap(_ => console.log("SheduleProject retrieved")),
-  //     catchError(this.handleError<Shedule[]>("Get Shedule project", []))
-  //   );
-  // }
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     console.error(error);
-  //     console.log(`${operation} failed: ${error.message}`);
-  //     return of(result as T);
-  //   };
-  // }
+
 }

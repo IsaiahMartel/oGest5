@@ -3,10 +3,10 @@ import { AfterViewInit, Component } from '@angular/core';
 // Servicio para ir a por datos al backend y guardar los datos en el caché
 import { CheckDataService } from './services/check-data/check-data.service';
 // Alertas para notificar al usuario (visualmente)
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 
 // Servicio para comprobar si hay conexión
-import { ModalConnectionService } from './services/modal-connection/modal-connection.service';
+import { CheckOnlineStatus } from './services/checkOnlineStatus/check-online-status.service';
 
 // Para las notificaciones push y actualizaciones
 import { PushNotificationService } from './services/push-notification/push-notification.service';
@@ -14,6 +14,9 @@ import { SwPush, SwUpdate } from '@angular/service-worker';
 // Indexdb que lo usamos para guardar en caché las notificaciones
 import Localbase from 'localbase';
 let db = new Localbase('db');
+
+import { PcNotificationTutorialPage } from './views/tutorials/pc-notification-tutorial/pc-notification-tutorial.page';
+import { AndroidNotificationTutorialPage } from './views/tutorials/android-notification-tutorial/android-notification-tutorial.page';
 
 @Component({
   selector: 'app-root',
@@ -33,13 +36,14 @@ export class AppComponent implements AfterViewInit {
   private toast;
 
   constructor(
-    private modalConnectionService: ModalConnectionService,
+    private CheckOnlineStatus: CheckOnlineStatus,
     private alertController: AlertController,
     private toastController: ToastController,
     private checkDataService: CheckDataService,
     private swPush: SwPush,
     private swUpdate: SwUpdate,
     private pushNotificationService: PushNotificationService,
+    private modalController: ModalController
   ) {
 
 
@@ -72,7 +76,7 @@ export class AppComponent implements AfterViewInit {
 
 
   clientOfflineAlert() {
-    this.modalConnectionService.appIsOnline$.subscribe(online => {
+    this.CheckOnlineStatus.appIsOnline$.subscribe(online => {
       if (!online) {
         this.presentToastWithOptions("¡Atención!", "No tienes conexión", "warning", "warning-outline");
         this.isOnline = false;
@@ -97,14 +101,14 @@ export class AppComponent implements AfterViewInit {
             cssClass: 'secondary',
             id: 'android-button',
             handler: () => {
-              console.log('Manual de android');
+            this.presentModal(AndroidNotificationTutorialPage)
             }
           }, {
             text: 'PC',
             cssClass: 'secondary',
             id: 'pc-button',
             handler: () => {
-              console.log('Manual de ordenador');
+            this.presentModal(PcNotificationTutorialPage)
             }
           }]);
 
@@ -115,7 +119,6 @@ export class AppComponent implements AfterViewInit {
           this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
         }
 
-      
       }
     }
     
@@ -135,12 +138,12 @@ export class AppComponent implements AfterViewInit {
       var haveToUpdate = false;
       var projects = "";
       for (let task of tasks) {
-        if (task.showed == false) {
+        if (task.shown == false) {
           haveToUpdate = true;
           projects = projects + " " + task.body
 
           db.collection('notifications').doc({ date: task.date }).update({
-            showed: true
+            shown: true
           })
         }
       }
@@ -203,6 +206,15 @@ export class AppComponent implements AfterViewInit {
       },
         8000);
     }
+  }
+
+
+  async presentModal(component) {
+    const modal = await this.modalController.create({
+      component: component,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
   }
 
 

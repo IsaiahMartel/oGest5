@@ -19,6 +19,7 @@ export class CalendarPage implements OnInit {
   projectId: number;
   subscription = new Subscription();
 
+
   constructor(
     public storage: Storage,
     @Inject(LOCALE_ID) private locale: string,
@@ -26,6 +27,12 @@ export class CalendarPage implements OnInit {
     private projectIdService: ProjectIdService
 
   ) { }
+
+    // Instanciamos los elementos que vamos a usar una vez cargada la página
+    ionViewDidEnter() {
+
+  
+    }
 
 
   ngOnInit(): void {
@@ -42,7 +49,7 @@ export class CalendarPage implements OnInit {
       array.filter((shedule) => {
         if (shedule.project_id == this.projectId) {
           this.sheduleArray.push(shedule);
-
+ 
           // Ordena el array por fecha
           this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
 

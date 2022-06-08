@@ -5,7 +5,6 @@ ion-content {
     &::-webkit-scrollbar {
         display: none;
     }
-    border-width: 0px 1px 1px 1px;
 }
 
 ion-header {
@@ -14,7 +13,10 @@ ion-header {
 
 ion-card {
     border-radius: 0px;
-    background-color: #ffffff;
+    border: 1px solid #006aab;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 #separation-title {
@@ -43,4 +45,12 @@ ion-card {
 
 #otrosInst {
     color: #05a400
+}
+
+#no-works-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 70vh;
 }

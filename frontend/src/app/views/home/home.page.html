@@ -1,24 +1,26 @@
 <ion-header class="ion-no-border" id="navbar">
     <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
-    <h2 id="navbar-text">Calendario</h2>
+    <h2 id="navbar-text">oGest5Mobile</h2>
     <hr id="separation-title">
 </ion-header>
 
+<!-- Package usado para el calendario: https://github.com/twinssbc/Ionic2-Calendar -->
+<!-- Tutorial: https://youtu.be/_hVdPEmbwA0-->
 <ion-content class='has-header has-subheader'>
-    <ion-row>
+    <ion-row class="ion-no-padding">
         <!-- Atrás en el calendario -->
-        <ion-col size="2">
+        <ion-col id="slides" size="2">
             <ion-button fill="clear" (click)="back()">
                 <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-col>
 
-        <ion-col size="8" class="ion-text-center">
-            <h2>{{ monthText }}</h2>
+        <ion-col id="slides" class="ion-text-center" size="8">
+            <h2 id="month-text">{{ monthText }}</h2>
         </ion-col>
 
         <!-- Adelante en el calendario -->
-        <ion-col size="2">
+        <ion-col id="slides" size="2">
             <ion-button fill="clear" (click)="next()">
                 <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
             </ion-button>
@@ -44,7 +46,9 @@
             <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
 
 
-                <span *ngIf="event.projectId" class="event-detail">{{event.title}}</span>
+                <div *ngIf="event.projectId" class="event-detail wrap">
+                    {{event.title}}
+                </div>
                 <ng-container *ngIf="event.titleShedule">
                     <ion-card>
                         <ion-card-header>
@@ -69,6 +73,6 @@
 
     <!-- Implementación del calendario -->
     <calendar [monthviewDisplayEventTemplate]="colors" [monthviewEventDetailTemplate]="sheduleAndProject" [noEventsLabel]="calendar.noEventsLabel " [eventSource]="eventSource" [calendarMode]='calendar.mode' [currentDate]="calendar.currentDate" (onTitleChanged)="onViewTitleChanged($event)"
-        [startingDayWeek]='calendar.startingDayWeek' (onTitleChanged)="onViewTitleChanged($event) ">
+        (onTitleChanged)="onViewTitleChanged($event)" [startingDayMonth]="calendar.startingDayMonth">
     </calendar>
 </ion-content>

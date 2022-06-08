@@ -1,146 +1,185 @@
-ion-content {
-    --offset-bottom: auto!important;
-    --overflow: hidden;
-    overflow: auto;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-
-#navbar {
-    height: 76px;
-    text-align: center;
-}
-
-#separation-title {
-    background-color: #006aab;
-    width: 350px;
-}
-
-#navbar-icon {
-    font-size: 50px;
-    position: absolute;
-    vertical-align: middle;
-    margin-top: 7px;
-    right: 25px;
-}
-
-#navbar-text {
-    font-size: 30px;
-    color: #464040;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700;
-}
-
-#menu-icon {
-    vertical-align: middle;
-    font-size: 50px;
-    color: #464040;
-    position: absolute;
-    left: 0;
-}
-
-#home-menu-container {
-    height: 60px;
-}
-
-// Para acceder a ShadowRoot (encapsulamiento)
- :host ::ng-deep {
-    .monthview-container {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-    .monthview-eventdetail-timecolumn {
-        display: none;
-    }
-    .event-detail {
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .no-events-label {
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .monthview-datetable td {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-        padding-top: 2px !important;
-        padding-bottom: 2px !important;
-        border-right: none !important;
-        border-left: none !important;
-        background-color: transparent !important;
-    }
-    .monthview-datetable {
-        font-size: 20px;
-        font-weight: 250;
-        color: black !important;
-    }
-    .monthview-datetable td.monthview-primary-with-event {
-        font-weight: 300;
-        color: black !important;
-    }
-    .monthview-datetable .text-muted {
-        background-color: transparent !important;
-    }
-    .yellow {
-        background-color: var(--project1) !important;
-        // background-color: #7a8ebb !important;
-    }
-    .yellowConcert {
-        background-color: var(--importantProject1) !important;
-        // background-color: #667cad !important;
-    }
-    .red {
-        background-color: var(--project2) !important;
-        // background-color: #406D96 !important;
-    }
-    .redConcert {
-        // background-color: #224a70 !important;
-        background-color: var(--importantProject2) !important;
-    }
-    .green {
-        background-color: var(--project3) !important;
-        // background-color: #A8D0DA !important;
-    }
-    .greenConcert {
-        // background-color: #679ca9 !important;
-        background-color: var(--importantProject3) !important;
-    }
-    .blue {
-        background-color: var(--project4) !important;
-        // background-color: #D8E8E8 !important;
-    }
-    .blueConcert {
-        // background-color: #8ebaba !important;
-        background-color: var(--importantProject4) !important;
-    }
-    .freeDay {
-        background-color: var(--freeDay) !important;
-    }
-    .monthview-selected #divDays {
-        background-color: rgba(255, 230, 7, 0.504) !important;
-        color: black !important;
-    }
-}
-
-#divDays {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.event-detail-container {
-    flex-grow: 1;
-    overflow-y: scroll;
-}
-
-#div-spinner {
-    top: 40%;
-    text-align: center;
-    left: 0;
-    right: 0;
-    position: absolute;
-    visibility: hidden;
-    color: blue;
-}
+            ion-content {
+                --offset-bottom: auto!important;
+                --overflow: hidden;
+                overflow: auto;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+            
+            #navbar {
+                height: 76px;
+                text-align: center;
+            }
+            
+            #separation-title {
+                background-color: #006aab;
+                width: 350px;
+            }
+            
+            #navbar-icon {
+                font-size: 35px;
+                position: absolute;
+                vertical-align: middle;
+                margin-top: 7px;
+                right: 25px;
+            }
+            
+            #navbar-text {
+                font-size: 30px;
+                color: #464040;
+                font-family: 'Outfit', sans-serif;
+                font-weight: 700;
+            }
+            
+            #menu-icon {
+                vertical-align: middle;
+                font-size: 50px;
+                color: #464040;
+                position: absolute;
+                left: 0;
+            }
+            
+            #home-menu-container {
+                height: 60px;
+            }
+            
+            // Para acceder a ShadowRoot (encapsulamiento)
+             :host ::ng-deep {
+                .monthview-container {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                }
+                .monthview-eventdetail-timecolumn {
+                    display: none;
+                }
+                .event-detail {
+                    font-size: 20px;
+                    font-weight: bold;
+                    border-bottom: 1px black solid;
+                    display: inline-block;
+                }
+                .no-events-label {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                .monthview-datetable td {
+                    padding-left: 0px !important;
+                    padding-right: 0px !important;
+                    padding-top: 2px !important;
+                    padding-bottom: 2px !important;
+                    border: none !important;
+                    border: none !important;
+                    background-color: transparent !important;
+                }
+                .monthview-datetable {
+                    font-size: 20px;
+                    font-weight: 250;
+                    color: black !important;
+                    // border-top: 1px black solid !important;
+                }
+                .monthview-datetable thead {
+                    font-size: 20px;
+                    font-weight: 250;
+                    color: black !important;
+                }
+                .monthview-datetable tbody {
+                    font-size: 20px;
+                    font-weight: 250;
+                    color: black !important;
+                }
+                .monthview-datetable td.monthview-primary-with-event {
+                    font-weight: 300;
+                    color: black !important;
+                }
+                .monthview-datetable .text-muted {
+                    background-color: transparent !important;
+                }
+                .yellow {
+                    background-color: var(--project1) !important;
+                    // background-color: #7a8ebb !important;
+                }
+                .yellowConcert {
+                    background-color: var(--importantProject1) !important;
+                    // background-color: #667cad !important;
+                }
+                .red {
+                    background-color: var(--project2) !important;
+                    // background-color: #406D96 !important;
+                }
+                .redConcert {
+                    // background-color: #224a70 !important;
+                    background-color: var(--importantProject2) !important;
+                }
+                .green {
+                    background-color: var(--project3) !important;
+                    // background-color: #A8D0DA !important;
+                }
+                .greenConcert {
+                    // background-color: #679ca9 !important;
+                    background-color: var(--importantProject3) !important;
+                }
+                .blue {
+                    background-color: var(--project4) !important;
+                    // background-color: #D8E8E8 !important;
+                }
+                .blueConcert {
+                    // background-color: #8ebaba !important;
+                    background-color: var(--importantProject4) !important;
+                }
+                .freeDay {
+                    background-color: var(--freeDay) !important;
+                }
+                .monthview-selected #divDays {
+                    background-color: rgba(255, 230, 7, 0.504) !important;
+                    color: black !important;
+                }
+                .event-detail-container {
+                    flex-grow: 1;
+                    overflow-y: scroll;
+                }
+            }
+            
+            #divDays {
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+            
+            .event-detail-container {
+                flex-grow: 1;
+                overflow-y: scroll;
+            }
+            
+            #div-spinner {
+                top: 40%;
+                text-align: center;
+                left: 0;
+                right: 0;
+                position: absolute;
+                visibility: hidden;
+                color: blue;
+            }
+            
+            .margin-top-x {
+                margin-top: 8px;
+            }
+            
+            #month-text {
+                margin: 7px
+            }
+            
+            .wrap {
+                white-space: pre-wrap;
+                /* CSS3 */
+                white-space: -moz-pre-wrap;
+                /* Firefox */
+                white-space: -pre-wrap;
+                /* Opera <7 */
+                white-space: -o-pre-wrap;
+                /* Opera 7 */
+                word-wrap: break-word;
+                /* IE */
+                word-break: break-all;
+            }

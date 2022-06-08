@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage';
 })
 
 
-// El guard sirven para redireccionar al login si no estás logeado
+// El guard sirven para redireccionar al login si no estás logeado (https://youtu.be/gZ5TNr6aTio)
 export class AuthGuard implements CanLoad {
   constructor(private storage: Storage,
     private router: Router,) {

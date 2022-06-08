@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from '../auth/auth.service';
 import { Storage } from '@ionic/storage';
+import Localbase from 'localbase';
+let db = new Localbase('db');
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  endpoint: string = 'http://localhost:8000/api/notificationUser';
+  endpoint: string = 'http://81.47.172.149:8300/api/notificationUser';
   constructor(private httpClient: HttpClient,
     private authService: AuthService, private storage: Storage) { }
 

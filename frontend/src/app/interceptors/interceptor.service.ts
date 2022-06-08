@@ -15,13 +15,14 @@ const TOKEN_KEY = 'access_token';
 
 
 // El interceptor se usa para pasar el header de autenticación y captar errores cada vez que hay un http request
+// (https://youtu.be/deK_HcoPRGw ver desde el 04 hasta el 05)
 export class InterceptorService implements HttpInterceptor {
-  
+
   private dismissToast: boolean;
   private toast;
   isOnline: boolean;
-  createdOnlyOneToast = 0;
-
+  createdOnlyOneToast: boolean = true;
+  errorSolved: boolean;
   cf: boolean;
 
   backendStatusChange: Subject<boolean> = new Subject<boolean>();
@@ -50,11 +51,17 @@ export class InterceptorService implements HttpInterceptor {
           return next.handle(req).pipe(
             map((event: HttpEvent<any>) => {
               if (event instanceof HttpResponse) {
-                if (this.isOnline == false) {
-                  this.dismissToast = true;
+                if (this.errorSolved == false) {
+
+                  
+                  this.errorSolved = true;
                   this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
+
                 }
+               
+                
               }
+              console.log("hola");
               return event;
             }),
             catchError(this.manageError.bind(this))
@@ -72,20 +79,21 @@ export class InterceptorService implements HttpInterceptor {
     // Muestro los errores en una alerta por la parte inferior
     if (errorMessage == "true\n") {
       this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
-      this.isOnline = false;
-      this.dismissToast = false;
-      this.createdOnlyOneToast++;
+      this.errorSolved = false;
+
+
     } else if (errorMessage == "Unauthenticated.\n") {
 
-    }   else if (errorMessage == "Unauthorized\n") {
+    } else if (errorMessage == "Unauthorized\n") {
       this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
-    } 
+
+    }
 
 
     else {
       this.presentToastWithOptions("¡Oops!", "Ha habido un problema, es posible que la aplicación no funcione correctamente", "danger", "information-circle");
-      this.dismissToast = false;
-      this.createdOnlyOneToast++;
+
+
     }
 
     return throwError("Error " + errorMessage + "\n" + errorJSON);
@@ -93,8 +101,16 @@ export class InterceptorService implements HttpInterceptor {
 
   // Creación de los mensajes cuando backend caído o no hay conexión
   async presentToastWithOptions(header, message, color, icon) {
+
+    // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+    if (this.errorSolved == true) {
+      this.toast.dismiss();
+      this.createdOnlyOneToast =true;
+
+    }
+
     // Elimina el mensaje anterior si lo hubiera
-    if (this.createdOnlyOneToast < 1) {
+    if (this.createdOnlyOneToast == true) {
       this.toast = await this.toastController.create({
         header: header,
         message: message,
@@ -107,18 +123,28 @@ export class InterceptorService implements HttpInterceptor {
           role: 'cancel',
         }]
       });
+      this.createdOnlyOneToast = false;
       await this.toast.present()
+
+
     }
 
-    // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
-    if (this.dismissToast == true) {
-      setTimeout(() => {
-        this.toast.dismiss();
-        this.toast
-        this.isOnline = true;
-        this.createdOnlyOneToast = 0;
-      },
-        8000);
+   await this.toast.onDidDismiss().then(()=>{this.createdOnlyOneToast = true;;
+    });
+    
+ 
+
+    if (this.errorSolved == true) {
+    setTimeout(() => {
+      this.toast.dismiss();
+
+    },
+      8000);
     }
+
+
+
   }
+
+
 }

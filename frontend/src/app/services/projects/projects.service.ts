@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-
 import { Project } from 'src/app/models/project';
 import { Storage } from '@ionic/storage';
 
@@ -13,7 +10,7 @@ import { Storage } from '@ionic/storage';
 
 export class ProjectsService {
 
-  endpoint: string = "http://localhost:8000/api/mobile/getProjects";
+  endpoint: string = "http://81.47.172.149:8300/api/mobile/getProjects";
 
   constructor(
     private httpClient: HttpClient,

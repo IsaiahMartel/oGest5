@@ -11,6 +11,9 @@ import { SheduleService } from '../shedule/shedule.service';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 
+import Localbase from 'localbase';
+let db = new Localbase('db');
+// db.collection('notifications').get().then(tasks => {
 @Injectable({
   providedIn: 'root'
 })
@@ -29,13 +32,13 @@ export class CheckDataService {
     private playlistService: PlaylistsService,
     private addressServivce: AddressService,
     private storage: Storage,
-    protected http: HttpClient) {  }
+    protected http: HttpClient) { }
 
 
   checkProjectsLocal() {
-    this.storage.get("projects").then(data => {
-      if (data) {
-        this.getProjectsObs().next(JSON.parse(data));
+    db.collection('projects').get().then(data => {
+      if (Object.keys(data).length > 0) {
+        this.getProjectsObs().next(data);
       }
       else {
         // Si no tiene los datos, los va a buscar al backend
@@ -45,9 +48,9 @@ export class CheckDataService {
   }
 
   checkSheduleLocal() {
-    this.storage.get("shedule").then(data => {
-      if (data) {
-        this.getSheduleObs().next(JSON.parse(data));
+    db.collection('shedule').get().then(data => {
+      if (Object.keys(data).length > 0) {
+        this.getSheduleObs().next(data);
       }
       else {
         // Si no tiene los datos, los va a buscar al backend
@@ -57,9 +60,9 @@ export class CheckDataService {
   }
 
   checkAddressLocal() {
-    this.storage.get("address").then(data => {
-      if (data) {
-        this.getAddressObs().next(JSON.parse(data))
+    db.collection('address').get().then(data => {
+      if (Object.keys(data).length > 0) {
+        this.getAddressObs().next(data);
       }
       else {
         // Si no tiene los datos, los va a buscar al backend
@@ -69,9 +72,9 @@ export class CheckDataService {
   }
 
   checkPlaylistLocal() {
-    this.storage.get("playlist").then(data => {
-      if (data) {
-        this.getPlaylistObs().next(JSON.parse(data))
+    db.collection('playlist').get().then(data => {
+      if (Object.keys(data).length > 0) {
+        this.getPlaylistObs().next(data);
       }
       else {
         // Si no tiene los datos, los va a buscar al backend
@@ -82,29 +85,44 @@ export class CheckDataService {
 
   getProjects() {
     this.projectsService.getProjects().subscribe((p: Array<Project>) => {
-      this.storage.set("projects", JSON.stringify(p));
-      this.checkProjectsLocal();
+      db.collection('projects')
+      
+      .set(Object.values(p)).then(response => {
+        this.checkProjectsLocal();
+      })
     })
   }
 
   getShedule() {
     this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
-      this.storage.set("shedule", JSON.stringify(p));
-      this.checkSheduleLocal();
+ 
+      db.collection('shedule')
+      
+      .set(Object.values(p)).then(response => {
+        this.checkSheduleLocal();
+      })
+ 
     })
   }
 
   getAddress() {
     this.addressServivce.getAddresses().subscribe((p: Array<Address>) => {
-      this.storage.set("address", JSON.stringify(p));
-      this.checkAddressLocal();
+
+      db.collection('address')
+      
+      .set(Object.values(p)).then(response => {
+        this.checkAddressLocal();
+      })
     })
   }
 
   getPlaylist() {
     this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
-      this.storage.set("playlist", JSON.stringify(p));
-      this.checkPlaylistLocal();
+      db.collection('playlist')
+      
+      .set(Object.values(p)).then(response => {
+        this.checkPlaylistLocal();
+      })
     })
   }
 

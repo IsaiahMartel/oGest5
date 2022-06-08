@@ -18,6 +18,11 @@ export class TabsPage implements OnInit {
   public projectName: String;
   public projectId;
   subscription = new Subscription();
+  subscription2 = new Subscription();
+calendarButton; 
+membersButton;
+worksButton;
+instrumentsButton;
 
   constructor(
     private router: Router,
@@ -46,10 +51,69 @@ export class TabsPage implements OnInit {
         }
       })
     })
-    this.projectIdService.requestIntercepted.subscribe((projectId) => { this.projectId = projectId });
+
+    this.projectName = this.projectIdService.projectName;
+
   }
+
+  ngAfterViewInit(): void {
+    this.calendarButton = document.getElementById("calendar-button");
+    this.membersButton = document.getElementById("members-button");
+    this.worksButton = document.getElementById("works-button");
+    this.instrumentsButton = document.getElementById("instruments-button");
+    this.calendarButton
+    .classList.add("tab-selected")
+  }
+
 
   ionViewDidLeave() {
     this.subscription.unsubscribe();
+   
   }
+
+selected(element){
+if(element==1){
+  this.calendarButton
+ .classList.add("tab-selected")
+ this.membersButton
+ .classList.remove("tab-selected")
+ this.worksButton
+ .classList.remove("tab-selected")
+ this.instrumentsButton
+ .classList.remove("tab-selected")
+}else if(element==2){
+  this.membersButton
+ .classList.add("tab-selected")
+ this.worksButton
+ .classList.remove("tab-selected")
+ this.instrumentsButton
+ .classList.remove("tab-selected")
+ this.calendarButton
+ .classList.remove("tab-selected")
+
+}else if(element==3){
+  this.worksButton
+ .classList.add("tab-selected")
+ this.instrumentsButton
+ .classList.remove("tab-selected")
+ this.calendarButton
+ .classList.remove("tab-selected")
+ this.membersButton
+ .classList.remove("tab-selected")
+
+}else if(element==4){
+  console.log("pasa");
+  console.log( this.instrumentsButton);
+  
+  this.instrumentsButton
+ .classList.add("tab-selected")
+ this.calendarButton
+ .classList.remove("tab-selected")
+ this.membersButton
+ .classList.remove("tab-selected")
+ this.worksButton
+ .classList.remove("tab-selected")
+}
+  
+}
 }

@@ -10,10 +10,7 @@ ion-content {
 
 ion-card {
     background-color: #ffffff;
-    margin-right: 5px;
-    margin-left: 5px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    border: 1px solid #006aab;
 }
 
 ion-card-header {
@@ -40,6 +37,10 @@ ion-card-header {
     float: left;
 }
 
-// .card-separation {
-//     background-color: #006aab;
-// }
+#no-members-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 70vh;
+}

@@ -101,14 +101,14 @@ export class AppComponent implements AfterViewInit {
             cssClass: 'secondary',
             id: 'android-button',
             handler: () => {
-            this.presentModal(AndroidNotificationTutorialPage)
+              this.presentModal(AndroidNotificationTutorialPage)
             }
           }, {
             text: 'PC',
             cssClass: 'secondary',
             id: 'pc-button',
             handler: () => {
-            this.presentModal(PcNotificationTutorialPage)
+              this.presentModal(PcNotificationTutorialPage)
             }
           }]);
 
@@ -121,16 +121,16 @@ export class AppComponent implements AfterViewInit {
 
       }
     }
-    
+
     );
 
-      // Guardamos la subscripción de la notificación en la base de datos
-      this.swPush.requestSubscription({
-        serverPublicKey: this.vapidNotificationPublicKey
-      }).then(sub => {
-        this.pushNotificationService.postNotificationToken(JSON.stringify(sub)).subscribe();
-        ;
-      })
+    // Guardamos la subscripción de la notificación en la base de datos
+    this.swPush.requestSubscription({
+      serverPublicKey: this.vapidNotificationPublicKey
+    }).then(sub => {
+      this.pushNotificationService.postNotificationToken(JSON.stringify(sub)).subscribe();
+      ;
+    })
   }
 
   checkForNewData() {
@@ -217,65 +217,6 @@ export class AppComponent implements AfterViewInit {
     return await modal.present();
   }
 
-
-  // async permissionNotificationNotGrantedAlert(header: string, message: string) {
-
-  //   this.notificationNotGranted = await this.alertController.create({
-  //     cssClass: 'my-custom-class',
-  //     header: header,
-  //     subHeader: "Debes aceptar las notificaciones para usar esta app",
-  //     message: message,
-  //     backdropDismiss: false,
-  //     buttons: [
-  //       {
-  //         text: 'Android',
-
-  //         cssClass: 'secondary',
-  //         id: 'android-button',
-  //         handler: () => {
-  //           console.log('Manual de android');
-  //         }
-  //       }, {
-  //         text: 'PC',
-  //         cssClass: 'secondary',
-  //         id: 'pc-button',
-  //         handler: () => {
-  //           console.log('Manual de ordenador');
-  //         }
-  //       }]
-  //   });
-
-  //   await this.notificationNotGranted.present();
-  // }
-
-
-
-  // showConfirm() {
-  //   this.alertController.create({
-  //     header: 'Nueva versión disponible',
-
-  //     message: 'Se requiere una actualización',
-  //     buttons: [
-  //       {
-  //         text: 'OK',
-  //         handler: () => {
-  //           this.swUpdate.activateUpdate().then(() => { window.location.reload() });
-  //         }
-  //       },
-  //     ]
-  //   }).then(res => {
-  //     res.present();
-  //   });
-  // }
-
-  // Creación de los mensajes inferiores cuando backend caído o no hay conexión
-  
-
-
-  // Lo puedo utilizar cuando se hagha un suscribe y no haya conexion, para esperar a que la haya
-  // backgroundSync(){
-  //   navigator.serviceWorker.ready.then((swRegistration)=> swRegistration.sync.register('post-data'))
-  // }
 }
 
 

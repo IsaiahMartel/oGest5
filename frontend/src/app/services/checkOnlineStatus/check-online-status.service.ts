@@ -9,12 +9,12 @@ import { ProjectsService } from '../projects/projects.service';
   providedIn: 'root'
 })
 export class CheckOnlineStatus {
-public string = "xd";
   public appIsOnline$: Observable<boolean>;
   private requestInterceptedSource: Subject<boolean> = new Subject<boolean>();
   requestIntercepted: Observable<boolean> = this.requestInterceptedSource.asObservable();
 // backendDownObs: Subject<boolean> = new Subject<boolean>();
-  endpoint: string = "http://localhost:8000/api/mobile/checkBackendStatus";
+  // endpoint: string = "http://localhost:8000/api/mobile/checkBackendStatus";
+  endpoint: string = "http://81.47.172.149:8300/api/mobile/getAddress";
 
   constructor(private httpClient: HttpClient, private projectsService: ProjectsService,) { 
 

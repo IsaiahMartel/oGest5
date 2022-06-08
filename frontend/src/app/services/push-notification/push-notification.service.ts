@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user';
 })
 export class PushNotificationService {
   //Mover a mobile una vez termine pruebas
-  endpoint: string = "http://localhost:8000/api/notification";
+  endpoint: string = "http://81.47.172.149:8300/api/notification";
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

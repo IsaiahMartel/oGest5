@@ -65,22 +65,3 @@ self.addEventListener('notificationclick', function(event) {
         })
     );
 });
-
-// Para no perder una subscripción
-// self.addEventListener('sync', (event) => {
-//     if (event.target === 'post-data') {
-//         event.waitUntil(addData());
-//     }
-// });
-
-// function addData() {
-//     // indexdb
-
-//     fetch("http://localhost:8000/api/mobile/getProjects"), {
-//         method: 'POST',
-//         headers: {
-
-//         },
-//         body: JSON.stringify(),
-//     }).then(() => PromiseRejectionEvent.resolve()).catch(() => Promise.reject)
-// }

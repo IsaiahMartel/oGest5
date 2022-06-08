@@ -37,10 +37,11 @@ export class HomePage {
   monthText: string;
   selectedDate: Date;
   calendar = {
-    startingDayWeek: 1 as number,
+
     mode: 'month' as CalendarMode,
     currentDate: new Date(),
     noEventsLabel: "No hay proyectos",
+    startingDayMonth: 1 as number,
   };
   eventSource = [];
 
@@ -83,6 +84,7 @@ export class HomePage {
 
   ngOnInit(): void {
     this.loadInfo();
+    
   }
 
   // Pasa los datos desde el local storage de shedule y projects a un array
@@ -92,6 +94,8 @@ export class HomePage {
     this.subscription = this.checkDataService.projectsObs.pipe(
       combineLatestWith(this.checkDataService.sheduleObs)
     ).subscribe(([projectsArray, sheduleArray]) => {
+      console.log(projectsArray);
+
       this.projectsArray = Object.values(projectsArray);
       this.sheduleArray = Object.values(sheduleArray);
 
@@ -257,17 +261,6 @@ export class HomePage {
     }
 
     this.eventSource = events;
-
-    // Una vez se ha cargado el calendario se puede
-    this.weekDaysToUpperCaseAndRemoveDots();
-  }
-
-  weekDaysToUpperCaseAndRemoveDots() {
-    var weekDays = document.getElementsByTagName("small");
-    for (const tag of Array.from(weekDays)) {
-      var withoutDot = tag.innerHTML.substring(0, 1).toUpperCase();
-      tag.innerHTML = withoutDot;
-    }
   }
 
 

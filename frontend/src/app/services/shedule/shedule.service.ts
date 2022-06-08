@@ -9,7 +9,7 @@ import { Shedule } from 'src/app/models/shedule';
   providedIn: 'root'
 })
 export class SheduleService {
-  endpoint: string = "http://localhost:8000/api/mobile/getShedule";
+  endpoint: string = "http://81.47.172.149:8300/api/mobile/getShedule";
 
   constructor(private httpClient: HttpClient,
   ) {

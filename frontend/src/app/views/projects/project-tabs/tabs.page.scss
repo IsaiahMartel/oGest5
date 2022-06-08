@@ -19,27 +19,15 @@
             left: 0;
         }
         
-        #header-icon {
-            display: inline-block;
-            vertical-align: middle;
-            font-size: 55px;
-            color: #464040;
-            margin-bottom: 2px;
-        }
-        
         #navbar-text {
             text-align: center;
             vertical-align: middle;
-            font-size: 18px;
-            color: #464040;
-            font-weight: 700;
+            font-size: 25px;
+            font-weight: 550;
         }
         
         ion-tab-bar {
-            height: 70px;
-        }
-        
-        ion-tab-bar {
+            height: 85px;
             border-width: 2px 0px 0px 0px;
             border-color: #006aab;
             border-style: solid;
@@ -50,8 +38,8 @@
         }
         
         .tabs-icons {
-            font-size: 4em;
-            color: #006aab;
+            font-size: 2.5em;
+            // color: #006aab;
         }
         
         hr {

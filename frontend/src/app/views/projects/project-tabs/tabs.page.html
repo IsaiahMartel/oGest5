@@ -11,19 +11,21 @@
 <ion-content>
     <ion-tabs>
         <ion-tab-bar slot="bottom">
-            <ion-tab-button tab="calendar/{{projectId}}">
-                <ion-icon class="tabs-icons" name="calendar"></ion-icon>
+            <ion-tab-button id="calendar-button" tab="calendar/{{projectId}}" (click)="selected(1)">
+
+                <ion-icon class="tabs-icons" name="calendar-outline"></ion-icon>
+
             </ion-tab-button>
 
-            <ion-tab-button tab="members/{{projectId}}">
-                <ion-icon class="tabs-icons" name="people"></ion-icon>
+            <ion-tab-button id="members-button" tab="members/{{projectId}}" (click)="selected(2)">
+                <ion-icon class="tabs-icons" name="people-outline"></ion-icon>
             </ion-tab-button>
 
-            <ion-tab-button tab="works/{{projectId}}">
+            <ion-tab-button id="works-button" tab="works/{{projectId}}" (click)="selected(3)">
                 <ion-icon class="tabs-icons" name="musical-notes-outline"></ion-icon>
             </ion-tab-button>
 
-            <ion-tab-button tab="instruments/{{projectId}}">
+            <ion-tab-button id="instruments-button" tab="instruments/{{projectId}}" (click)="selected(4)">
                 <ion-icon class="tabs-icons" name="triangle-outline"></ion-icon>
             </ion-tab-button>
         </ion-tab-bar>

@@ -9,10 +9,11 @@ ion-content {
 
 ion-card {
     border-radius: 0px;
+    border: 1px solid #006aab;
 }
 
 ion-card-title {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 #separation-title {
@@ -21,4 +22,8 @@ ion-card-title {
 
 h2 {
     font-size: 20px;
+}
+
+ion-card {
+    color: black
 }

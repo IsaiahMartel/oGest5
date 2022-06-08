@@ -3,13 +3,20 @@
 
         <ng-container *ngFor="let address of addressArray; index as i">
 
-            <ion-card>
-                <ion-card-header>
-                    <h5 class="name-text"> {{address.addressfirstName}} {{address.addresslastName}}</h5>
-                    <h6 class="title-text">{{p.addressgroups[i].addressgroupName}}</h6>
-                </ion-card-header>
+            <ion-card class="ion-padding">
+
+                <h5 class="name-text"> {{address.addressfirstName}} {{address.addresslastName}}</h5>
+                <h6 class="title-text">{{p.addressgroups[i].addressgroupName}}</h6>
+
             </ion-card>
         </ng-container>
+    </div>
+
+    <!-- Mensaje si no hay miembros -->
+    <div id="no-members-text">
+        <h1 class="ion-text-center" *ngIf="addressArray.length==0">
+            No hay miembros especiales
+        </h1>
     </div>
 
 

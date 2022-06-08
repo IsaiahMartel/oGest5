@@ -27,7 +27,7 @@ export class ThemesPage implements OnInit {
 
   ngOnInit() {
 
-
+    console.log(this.importantProject2);
 
   }
 
@@ -37,12 +37,12 @@ export class ThemesPage implements OnInit {
 
     document.body.style.setProperty('--project1', event);
 
-    document.body.style.setProperty('--importantProject1', this.adjust(this.color1.trim(), -50))
+    document.body.style.setProperty('--importantProject1', this.adjust(this.color1.trim(), -30))
 
      this.color1 = (getComputedStyle(document.body).getPropertyValue('--project1'));
      this.importantProject1 = (getComputedStyle(document.body).getPropertyValue('--importantProject1'));
 
-
+     console.log(this.importantProject1);
 
     this.storage.set("project1", this.color1);
     this.storage.set("importantProject1", this.importantProject1);
@@ -52,15 +52,16 @@ export class ThemesPage implements OnInit {
 
   colorPickerChange2(event) {
     document.body.style.setProperty('--project2', event);
-    this.color2 = (getComputedStyle(document.body).getPropertyValue('--project2'));
-    document.body.style.setProperty('--importantProject2', this.adjust(this.color2.trim(), -50))
 
-    this.importantProject2 = (getComputedStyle(document.body).getPropertyValue('--importantProject2'));
+    document.body.style.setProperty('--importantProject2', this.adjust(this.color2.trim(), -30))
+
+     this.color2 = (getComputedStyle(document.body).getPropertyValue('--project2'));
+     this.importantProject2 = (getComputedStyle(document.body).getPropertyValue('--importantProject2'));
+
+     console.log(this.importantProject2);
 
     this.storage.set("project2", this.color2);
     this.storage.set("importantProject2", this.importantProject2);
-
-
 
 
   }
@@ -69,10 +70,11 @@ export class ThemesPage implements OnInit {
     document.body.style.setProperty('--project3', event);
     this.color3 = (getComputedStyle(document.body).getPropertyValue('--project3'));
 
-    document.body.style.setProperty('--importantProject3', this.adjust(this.color3.trim(), -50))
+    document.body.style.setProperty('--importantProject3', this.adjust(this.color3.trim(), -30))
+
 
     this.importantProject3 = (getComputedStyle(document.body).getPropertyValue('--importantProject3'));
-
+    console.log(this.importantProject3);
     this.storage.set("project3", this.color3);
     this.storage.set("importantProject3", this.importantProject3);
 
@@ -82,9 +84,9 @@ export class ThemesPage implements OnInit {
     document.body.style.setProperty('--project4', event);
     this.color4 = (getComputedStyle(document.body).getPropertyValue('--project4'));
 
-    document.body.style.setProperty('--importantProject4', this.adjust(this.color4.trim(), -50))
+    document.body.style.setProperty('--importantProject4', this.adjust(this.color4.trim(), -30))
     this.importantProject4 = (getComputedStyle(document.body).getPropertyValue('--importantProject4'));
-
+    console.log(this.importantProject4);
 
     this.storage.set("project4", this.color4);
     this.storage.set("importantProject4", this.importantProject4);

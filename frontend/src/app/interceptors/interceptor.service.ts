@@ -61,7 +61,7 @@ export class InterceptorService implements HttpInterceptor {
                
                 
               }
-              console.log("hola");
+   
               return event;
             }),
             catchError(this.manageError.bind(this))

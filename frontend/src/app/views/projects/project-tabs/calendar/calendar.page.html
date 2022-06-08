@@ -1,7 +1,7 @@
 <ion-content has-header>
     <!-- Eventos importantes (conciertos, funciones...)-->
     <div id="container" *ngFor="let shedule of sheduleArray">
-        <ion-card style="border-bottom:10px solid blue !important" *ngIf='shedule.sheduleTipe=="CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
+        <ion-card style="border-bottom:10px solid #006aab !important" *ngIf='shedule.sheduleTipe=="CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
         || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN" ;else freeDay'>
             <ion-card-header>
                 <ion-card-title> {{shedule.sheduleDate | date: ' EEEE, dd/MM/yyyy '}} </ion-card-title>
@@ -21,7 +21,7 @@
 
         <!-- Días libres)-->
         <ng-template #freeDay>
-            <ion-card style="border-bottom:10px solid green !important" *ngIf='shedule.sheduleTipe=="DIA LIBRE";else normalDay'>
+            <ion-card style="border-bottom:10px solid grey !important" *ngIf='shedule.sheduleTipe=="DIA LIBRE";else normalDay'>
                 <ion-card-header>
                     <ion-card-title> {{shedule.sheduleDate | date: ' EEEE, dd/MM/yyyy '}} </ion-card-title>
                 </ion-card-header>
@@ -50,7 +50,7 @@
 
                 <ion-card-content>
                     <ion-row>
-                        <h2 class="ion-padding-end"><b>Hora: </b>{{shedule.sheduleTipe}} </h2>
+                        <h2 *ngIf="shedule.sheduleTipe!=' '" class="ion-padding-end"><b>Hora: </b>{{shedule.sheduleTipe}} </h2>
                         <h2 *ngIf="shedule.shedulehourRange!=' '"> {{shedule.shedulehourRange}} </h2>
                     </ion-row>
                     <h2 *ngIf="shedule.rooms">

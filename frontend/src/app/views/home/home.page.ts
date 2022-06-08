@@ -80,6 +80,10 @@ export class HomePage {
     window.addEventListener('mouseup', this.onMouseUpWholePage);
     this.calendarElement = document.getElementsByClassName('swiper-wrapper')[0];
     this.spinner = document.getElementById('div-spinner');
+
+
+
+// eventDetail.innerHTML = eventDetail.innerHTML.replace(/,/g, ',<br/>')
   }
 
   ngOnInit(): void {
@@ -189,44 +193,46 @@ export class HomePage {
           if (colorPick == 0) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
-              colorEvent = "blueConcert";
+              colorEvent = "firstProjectImportant";
             }
             else if (shedule.sheduleTipe == "DIA LIBRE") {
               colorEvent = "freeDay";
 
             }
             else {
-              colorEvent = "blue";
+              colorEvent = "firstProject";
             }
           } else if (colorPick == 1) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
-              colorEvent = "redConcert";
+              colorEvent = "secondProjectImportant";
             }
             else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
-              colorEvent = "red";
+              colorEvent = "secondProject";
             }
           }
           else if (colorPick == 2) {
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
-              colorEvent = "greenConcert";
+              colorEvent = "thirdProjectImportant";
             }
             else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
-              colorEvent = "green";
+              colorEvent = "thirdProject";
 
             }
           }
           else if (colorPick == 3) {
+            console.log("aaaa");
+            
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
-              colorEvent = "yellowConcert";
+              colorEvent = "fourthProjectImportant";
             }
             else if (shedule.sheduleTipe == "DIA LIBRE") { colorEvent = "freeDay"; }
             else {
-              colorEvent = "yellow";
+              colorEvent = "fourthProject";
 
             }
 
@@ -261,6 +267,8 @@ export class HomePage {
     }
 
     this.eventSource = events;
+
+
   }
 
 

@@ -1,6 +1,16 @@
 <ion-header class="ion-no-border" id="navbar">
-    <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
-    <h2 id="navbar-text">oGest5Mobile</h2>
+
+    <ion-toolbar>
+        <ion-title>
+            <div class="hcs">
+                <ion-icon id="navbar-icon" src="assets\favicon_Blanco.svg"></ion-icon>
+                <span id="navbar-text">oGest5Mobile</span>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+
+
+
     <hr id="separation-title">
 </ion-header>
 
@@ -29,7 +39,7 @@
 
     <!-- Rueda de cargando cuando se cambia de mes -->
     <div id="div-spinner">
-        <ion-spinner color="tertiary" name="lines"></ion-spinner>
+        <ion-spinner name="crescent"></ion-spinner>
     </div>
 
     <!-- Tabla de días -->
@@ -46,12 +56,36 @@
             <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
 
 
-                <div *ngIf="event.projectId" class="event-detail wrap">
-                    {{event.title}}
+                <div *ngIf="event.title" class="event-detail wrap">
+                    <h1 id="event-detail-text">{{event.title}}</h1>
+                    <hr id="separation-title">
                 </div>
+
                 <ng-container *ngIf="event.titleShedule">
                     <ion-card>
                         <ion-card-header>
+                            <ion-card-title>
+
+
+
+                                <h2 *ngIf="event.roomAcronym!=''">
+                                    <b>Sala: </b>{{event.roomAcronym}}</h2>
+
+                                <ion-row>
+                                    <h2 *ngIf="event.titleShedule!=' '" class="ion-padding-end"><b>Hora: </b>{{event.titleShedule}} </h2>
+                                    <h2 *ngIf="event.sheduleHour!=' '"> {{event.sheduleHour}} </h2>
+                                </ion-row>
+                            </ion-card-title>
+                        </ion-card-header>
+
+                        <ion-card-content>
+
+
+                            <h2 *ngIf="event.sheduleNote!=''"><b>Notas: </b>{{event.sheduleNote}} </h2>
+                        </ion-card-content>
+
+
+                        <!-- <ion-card-header>
                             <h3 class="ion-float-right" *ngIf="event.roomAcronym!=''">{{event.roomAcronym}}</h3>
                             <ion-card-title>{{event.titleShedule}} </ion-card-title>
 
@@ -61,7 +95,7 @@
                             <h2 *ngIf="event.sheduleNote!=''"><b>Notas: </b>{{event.sheduleNote}} </h2>
                             <hr id="separation-title">
                             <h2 class="ion-float-right" *ngIf="event.sheduleHour!=''"> {{event.sheduleHour}} </h2>
-                        </ion-card-content>
+                        </ion-card-content> -->
                     </ion-card>
                 </ng-container>
             </ion-item>

@@ -9,7 +9,7 @@
             <ion-item id="email-fields">
                 <ion-row>
                     <ion-icon id="icon" name="person-outline"></ion-icon>
-                    <ion-input name="email" type="email" placeholder="your@email.com" formControlName="email" required></ion-input>
+                    <ion-input name="email" type="email" placeholder="tu@email.com" formControlName="email" required></ion-input>
                 </ion-row>
                 <span slot="error" *ngIf="loginForm.controls['email'].errors?.required && loginForm.controls['email']?.touched">Rellene
                     el email</span>
@@ -23,7 +23,8 @@
                     <ion-icon id="icon" name="bag-outline"></ion-icon>
                     <ion-input name="password" [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" formControlName="password" required></ion-input>
                     <!-- Enseña la contraseña -->
-                    <ion-icon id="icon-littler" name="eye" (click)="togglePassword()"></ion-icon>
+                    <ion-icon [hidden]="showPassword" id="icon-littler" name="eye-outline" (click)="togglePassword()"></ion-icon>
+                    <ion-icon [hidden]="!showPassword" id="icon-littler" name="eye-off-outline" (click)="togglePassword()"></ion-icon>
                 </ion-row>
 
                 <span slot="error" *ngIf="loginForm.controls['password'].errors?.required && loginForm.controls['password']?.touched">Rellene

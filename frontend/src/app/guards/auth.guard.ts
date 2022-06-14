@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, QueryParamsHandling, Route, Router, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanLoad, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
 @Injectable({

@@ -9,8 +9,8 @@ import { Storage } from '@ionic/storage';
 })
 
 export class ProjectsService {
-
-  endpoint: string = "http://81.47.172.149:8300/api/mobile/getProjects";
+  // endpoint: string = "http://localhost:8000/api/mobile/getProjects";
+  endpoint: string = "https://ogest5.duckdns.org:8430/api/mobile/getProjects";
 
   constructor(
     private httpClient: HttpClient,

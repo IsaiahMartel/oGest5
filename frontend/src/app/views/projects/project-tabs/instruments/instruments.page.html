@@ -1,7 +1,7 @@
 <ion-content has-header>
 
     <!-- Percusión -->
-    <div *ngIf="noPercussion==false" class="ion-text-center border ion-margin-top">
+    <div *ngIf="perArray.length!=0" class="ion-text-center border ion-margin-top dropdown">
         <h2 (click)="showPercussion = false">PERCUSIÓN</h2>
 
         <!-- Botón para abrir -->
@@ -11,7 +11,7 @@
     </div>
     <!-- Contenido -->
     <div id="container" *ngFor="let perplaylist of perArray">
-        <ion-card *ngIf="showPercussion==true ">
+        <ion-card *ngIf="showPercussion==true">
             <ion-card-header>
                 <h2>{{perplaylist.instrumentName}}</h2>
                 <h2>{{perplaylist.instrumentName2}}</h2>
@@ -20,15 +20,15 @@
     </div>
     <!-- Botón para cerrar -->
     <div id="dropdown-button" (click)="showPercussion=false">
-        <ion-icon *ngIf="showPercussion==true " name="caret-up-outline"></ion-icon>
+        <ion-icon *ngIf="showPercussion==true" name="caret-up-outline"></ion-icon>
     </div>
 
     <!-- Teclado -->
-    <div *ngIf="noKeyboard==false" class="ion-text-center border ion-margin-top">
+    <div *ngIf="keyArray.length!=0" class="ion-text-center border ion-margin-top dropdown">
         <h2 (click)="showKeyboard=false">TECLADO</h2>
 
         <div id="dropdown-button" (click)="showKeyboard=true">
-            <ion-icon *ngIf="showKeyboard==false " name="caret-down-outline"></ion-icon>
+            <ion-icon *ngIf="showKeyboard==false" name="caret-down-outline"></ion-icon>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
     </div>
 
     <!-- Voces -->
-    <div *ngIf="noVoice==false" class="ion-text-center border ion-margin-top">
+    <div *ngIf="voiArray.length!=0" class="ion-text-center border ion-margin-top dropdown">
         <h2 (click)="showVoice=false">VOCES</h2>
         <div id="dropdown-button" (click)="showVoice=true">
             <ion-icon *ngIf="showVoice==false " name="caret-down-outline"></ion-icon>
@@ -54,7 +54,7 @@
     </div>
     <div id="container" *ngFor="let voiplaylist of voiArray">
 
-        <ion-card *ngIf="showVoice==true ">
+        <ion-card *ngIf="showVoice==true">
             <ion-card-header>
                 <h2>{{voiplaylist.instrumentName}}
                 </h2>
@@ -69,12 +69,14 @@
     </div>
 
     <!-- Mensaje si no hay instrumentos -->
-    <div id="no-instruments-text">
-        <h1 class="ion-text-center" *ngIf="noPercussion==true && noVoice==true && noKeyboard==true">
+    <div id="no-instruments-text" *ngIf="perArray.length==0  && keyArray.length==0 && voiArray.length==0  ">
+        <h1 class="ion-text-center">
             No hay instrumentos extras
         </h1>
     </div>
-
+    <div id="div-spinner">
+        <ion-spinner color="primary" name="crescent"></ion-spinner>
+    </div>
 
 
 </ion-content>

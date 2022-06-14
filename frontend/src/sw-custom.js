@@ -8,7 +8,7 @@ self.addEventListener('push', function(event) {
     if (event.data) {
         data = event.data.json();
     }
-
+    console.log(data.badge);
     // Para saber si la notficación es silenciosa
     if (data.tag == "silent") {
         event.waitUntil(
@@ -16,8 +16,6 @@ self.addEventListener('push', function(event) {
                 date: data.data.fecha,
                 title: data.title,
                 body: data.body,
-                icon: data.icon,
-                actions: data.actions,
                 shown: false
             }))
     } else {
@@ -29,8 +27,6 @@ self.addEventListener('push', function(event) {
                 date: data.data.fecha,
                 title: data.title,
                 body: data.body,
-                icon: data.icon,
-                actions: data.actions,
                 shown: false
             }),
 
@@ -38,6 +34,7 @@ self.addEventListener('push', function(event) {
             self.registration.showNotification(title, {
                 body: message,
                 icon: data.icon,
+                badge: data.badge,
                 actions: data.actions
             }))
     }

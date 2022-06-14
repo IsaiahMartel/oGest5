@@ -12,14 +12,14 @@ import { Storage } from '@ionic/storage';
 })
 export class AuthService {
   username:string;
-
-  AUTH_SERVER_ADDRESS:  string  =  'http://81.47.172.149:8300/api/auth';
+  // endpoint: string = "http://localhost:8000/api/auth";
+  endpoint:  string  =  'https://ogest5.duckdns.org:8430/api/auth';
   authSubject  =  new  BehaviorSubject(false);
 
   constructor(private  httpClient:  HttpClient, private storage: Storage) { }
 
   login(user: User): Observable<AuthResponse> {
-    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
+    return this.httpClient.post(`${this.endpoint}/login`, user).pipe(
       tap(async (res: AuthResponse) => {
      
 

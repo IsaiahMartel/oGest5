@@ -11,6 +11,7 @@ ion-content {
 ion-card {
     background-color: #ffffff;
     border: 1px solid #006aab;
+    border-radius: 0!important;
 }
 
 ion-card-header {
@@ -32,15 +33,24 @@ ion-card-header {
     font-weight: bold;
 }
 
-.member-icon {
-    font-size: 2.8em;
-    float: left;
-}
-
 #no-members-text {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     min-height: 70vh;
+}
+
+#div-spinner {
+    top: 40%;
+    transform: scale(3);
+    text-align: center;
+    left: 0;
+    right: 0;
+    position: fixed;
+    visibility: var(--visibilitySpinner);
+}
+
+ion-content {
+    visibility: var(--visibilityBodyTabs);
 }

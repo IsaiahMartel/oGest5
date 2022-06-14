@@ -38,17 +38,6 @@ pathMatch: "full"
     path: 'android-notification-tutorial',
     loadChildren: () => import('./views/tutorials/android-notification-tutorial/android-notification-tutorial.module').then( m => m.AndroidNotificationTutorialPageModule)
   },
-  {
-    path: 'pc-notification-tutorial',
-    loadChildren: () => import('./views/tutorials/pc-notification-tutorial/pc-notification-tutorial.module').then( m => m.PcNotificationTutorialPageModule)
-  },
-
-
-
-
-
-
-
 ];
 
 @NgModule({

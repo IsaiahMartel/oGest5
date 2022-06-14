@@ -16,14 +16,24 @@ ion-card-title {
     font-size: 20px;
 }
 
-#separation-title {
-    background-color: #006aab;
-}
-
 h2 {
     font-size: 20px;
 }
 
 ion-card {
     color: black
+}
+
+#div-spinner {
+    top: 40%;
+    transform: scale(3);
+    text-align: center;
+    left: 0;
+    right: 0;
+    position: fixed;
+    visibility: var(--visibilitySpinner);
+}
+
+ion-content {
+    visibility: var(--visibilityBodyTabs);
 }

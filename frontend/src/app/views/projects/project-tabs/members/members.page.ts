@@ -8,6 +8,7 @@ import { ProjectIdService } from 'src/app/services/project-id/project-id.service
 import { Project } from 'src/app/models/project';
 import { Address } from 'src/app/models/address';
 import { Subscription } from 'rxjs';
+import { projectMembersArray, addressArray } from '../tabs.page';
 
 @Component({
   selector: 'app-members',
@@ -28,7 +29,10 @@ export class MembersPage implements OnInit {
 
 
   ngOnInit(): void {
-    this.loadInfo();
+this.projectArray=projectMembersArray;
+this.addressArray=addressArray;
+
+    // this.loadInfo();
   }
   // Pasa los datos desde el local storage de address a un array
   loadInfo() {

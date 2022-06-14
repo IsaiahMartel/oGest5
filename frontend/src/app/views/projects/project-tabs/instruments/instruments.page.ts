@@ -9,6 +9,10 @@ import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { Subscription } from 'rxjs';
+import { keyArray } from '../tabs.page';
+import { voiArray } from '../tabs.page';
+import { perArray } from '../tabs.page';
+
 
 @Component({
   selector: 'app-instruments',
@@ -44,7 +48,45 @@ export class InstrumentsPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadInfo();
+    // this.loadInfo();
+
+//     this.perArray= perArray;
+//     this.keyArray = keyArray;
+//     this.voiArray= voiArray;
+//     console.log(this.perArray.length);
+    
+// if(this.perArray.length>0){
+//   this.noPercussion=false
+// }
+
+// if(this.keyArray.length>0){
+//   this.noKeyboard=false
+// }
+// if(this.voiArray.length>0){
+//   this.noVoice=false
+// }
+// console.log(this.noPercussion);
+
+//     console.log(this.perArray);
+    
+  }
+
+  ionViewDidEnter(){
+    this.perArray= perArray;
+    this.keyArray = keyArray;
+    this.voiArray= voiArray;
+    console.log(this.perArray.length);
+    
+if(this.perArray.length>0){
+  this.noPercussion=false
+}
+
+if(this.keyArray.length>0){
+  this.noKeyboard=false
+}
+if(this.voiArray.length>0){
+  this.noVoice=false
+}
   }
 
   loadInfo() {
@@ -69,6 +111,9 @@ export class InstrumentsPage implements OnInit {
             this.noPercussion = false;;
             if (!this.perArray.some(instrument => instrument.instrumentName == instruments.perplaylists[index].instrumentName)) {
               this.perArray.push(instruments.perplaylists[index]);
+              perArray.push(instruments.perplaylists[index]);
+              console.log(this.perArray);
+              
             }
           }
         }
@@ -78,6 +123,9 @@ export class InstrumentsPage implements OnInit {
             this.noKeyboard = false;;
             if (!this.keyArray.some(instrument => instrument.instrumentName == instruments.keyplaylists[index].instrumentName)) {
               this.keyArray.push(instruments.keyplaylists[index]);
+              keyArray.push(instruments.keyplaylists[index]);
+              console.log(this.keyArray);
+              
             }
           }
         }
@@ -87,6 +135,9 @@ export class InstrumentsPage implements OnInit {
             this.noVoice = false;;
             if (!this.keyArray.some(instrument => instrument.instrumentName == instruments.voiplaylists[index].instrumentName)) {
               this.voiArray.push(instruments.voiplaylists[index]);
+              voiArray.push(instruments.voiplaylists[index]);
+              console.log(this.voiArray);
+              
             }
           }
         }

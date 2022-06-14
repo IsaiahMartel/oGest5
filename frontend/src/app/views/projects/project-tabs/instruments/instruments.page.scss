@@ -14,19 +14,19 @@ ion-card {
     text-align: center;
 }
 
-#separation-title {
-    background-color: #006aab;
+.dropdown {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 #dropdown-button {
-    // border-top: 1px solid rgb(201, 200, 200);
     text-align: center;
     font-size: 2em;
     background-color: #b7d6f3;
 }
 
 .border {
-    border-top: 1px solid #015bec;
+    border: 1px solid #015bec;
     border-bottom: 1px solid #015bec;
 }
 
@@ -36,4 +36,18 @@ ion-card {
     align-items: center;
     text-align: center;
     min-height: 70vh;
+}
+
+#div-spinner {
+    top: 40%;
+    transform: scale(3);
+    text-align: center;
+    left: 0;
+    right: 0;
+    position: fixed;
+    visibility: var(--visibilitySpinner);
+}
+
+ion-content {
+    visibility: var(--visibilityBodyTabs);
 }

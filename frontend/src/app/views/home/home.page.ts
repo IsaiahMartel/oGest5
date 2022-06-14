@@ -1,6 +1,7 @@
 import { Component, Inject, LOCALE_ID, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActionSheetController, AlertController, LoadingController } from '@ionic/angular';
+import { SwPush } from '@angular/service-worker';
+import { ActionSheetController, AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { CalendarComponent } from 'ionic2-calendar';
 import { CalendarMode } from 'ionic2-calendar/calendar';
@@ -11,6 +12,7 @@ import { AddressService } from 'src/app/services/address/address.service';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
+import { PushNotificationService } from 'src/app/services/push-notification/push-notification.service';
 import { Project } from '../../models/project';
 import { Shedule } from '../../models/shedule';
 import { ProjectsService } from '../../services/projects/projects.service';
@@ -33,6 +35,13 @@ export class HomePage {
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
 
+  // Key para las notificaciones
+  public readonly vapidNotificationPublicKey = "BA15WyNaTv36X9A86QEjVWjiq5xfiC6nrpIxedhLV9lt4c0WZrko06ir6hJpFej6aazbCVzwgTWVVqoZWVLO5ps";
+  private ionAlert;
+  // Alertas que salen en la parte inferior de la pantalla
+  private fadeToast: boolean;
+  private toast;
+  isOnline: boolean;
 
   monthText: string;
   selectedDate: Date;
@@ -47,6 +56,7 @@ export class HomePage {
 
   // Para poder destruir las subscriptions y que no generen memory leak
   subscription = new Subscription();
+  subscription1 = new Subscription();
 
 
   // Para que salga una rueda de loading cuando aún no está listo el calendario
@@ -65,6 +75,10 @@ export class HomePage {
     @Inject(LOCALE_ID) private locale: string,
     private checkDataService: CheckDataService,
     public actionSheetController: ActionSheetController,
+    private swPush: SwPush, private pushNotificationService: PushNotificationService,
+    private toastController: ToastController,
+    private alertController: AlertController
+
 
 
   ) { }
@@ -83,12 +97,13 @@ export class HomePage {
 
 
 
-// eventDetail.innerHTML = eventDetail.innerHTML.replace(/,/g, ',<br/>')
+    // eventDetail.innerHTML = eventDetail.innerHTML.replace(/,/g, ',<br/>')
   }
 
   ngOnInit(): void {
     this.loadInfo();
-    
+    this.subscribeToNotifications();
+
   }
 
   // Pasa los datos desde el local storage de shedule y projects a un array
@@ -98,7 +113,7 @@ export class HomePage {
     this.subscription = this.checkDataService.projectsObs.pipe(
       combineLatestWith(this.checkDataService.sheduleObs)
     ).subscribe(([projectsArray, sheduleArray]) => {
-      console.log(projectsArray);
+
 
       this.projectsArray = Object.values(projectsArray);
       this.sheduleArray = Object.values(sheduleArray);
@@ -113,7 +128,7 @@ export class HomePage {
       this.presentActionSheet();
       this.time = null;
     },
-      600);
+      1000);
   }
 
   //Si se suelta antes de tiempo no se hace nada
@@ -224,8 +239,7 @@ export class HomePage {
             }
           }
           else if (colorPick == 3) {
-            console.log("aaaa");
-            
+
             if (shedule.sheduleTipe == "CONCIERTO" || shedule.sheduleTipe.substring(0, 7) == "FUNCION"
               || shedule.sheduleTipe.substring(0, 7) == "FUNCIÓN") {
               colorEvent = "fourthProjectImportant";
@@ -323,12 +337,12 @@ export class HomePage {
           }
         },
         {
-        text: 'Colores',
-        icon: 'color-palette-outline',
-        handler: () => {
-          this.router.navigateByUrl("/themes");
-        }
-      },
+          text: 'Colores',
+          icon: 'color-palette-outline',
+          handler: () => {
+            this.router.navigateByUrl("/themes");
+          }
+        },
       ]
     });
     await actionSheet.present();
@@ -337,6 +351,7 @@ export class HomePage {
   // Destruye subscripciones y eventListeners para evitar memory leak
   ionViewDidLeave() {
     this.subscription.unsubscribe();
+    this.subscription1.unsubscribe();
     window.removeEventListener('touchstart', this.onMouseDownWholePage);
     window.removeEventListener('touchend', this.onMouseUpWholePage);
     window.removeEventListener('mousedown', this.onMouseDownWholePage);
@@ -344,7 +359,102 @@ export class HomePage {
   }
 
 
+  subscribeToNotifications(): any {
 
+
+    // Comprobación de si las notificaciones están activadas
+   this.subscription1 = this.swPush.subscription.subscribe(subscription => {
+      var fixPushTwice = 0;
+
+      console.log(subscription);
+      if (fixPushTwice > 0) {
+        if (subscription == null) {
+          this.alert("¡Atención!", "Debes aceptar las notificaciones para usar esta app", 'Haz click en "Permitir" en la ventana de notficaciones', [
+            {
+              text: 'Android',
+
+              cssClass: 'secondary',
+              id: 'android-button',
+              handler: () => {
+                this.router.navigateByUrl("/android-notification-tutorial")
+              }
+            },], null, false
+          );
+
+        } else {
+
+
+          if (this.ionAlert != null) {
+            this.ionAlert.dismiss();
+            this.fadeToast = true;
+            this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
+          }
+        }
+      }
+
+
+    }
+
+    );
+
+    // Guardamos la subscripción de la notificación en la base de datos
+    this.swPush.requestSubscription({
+      serverPublicKey: this.vapidNotificationPublicKey
+    }).then(sub => {
+      this.pushNotificationService.postNotificationToken(JSON.stringify(sub)).subscribe();
+      ;
+    })
+  }
+
+
+
+  async presentToastWithOptions(header, message, color, icon) {
+    // Elimina el mensaje anterior si lo hubiera
+    try {
+      this.toast.dismiss();
+    } catch (e) { }
+
+    this.toast = await this.toastController.create({
+      header: header,
+      message: message,
+      color: color,
+      icon: icon,
+      position: 'bottom',
+    });
+    await this.toast.present()
+
+    // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+    if (this.fadeToast == true) {
+      setTimeout(() => {
+        this.toast.dismiss();
+        this.isOnline = true;
+      },
+        8000);
+    }
+  }
+
+  async alert(header: string, subHeader: string, message: string, buttons, onDidDismiss?, backdropDismiss?) {
+    if (backdropDismiss != null) {
+      this.ionAlert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: header,
+        subHeader: subHeader,
+        message: message,
+        buttons: buttons,
+        backdropDismiss: backdropDismiss,
+      });
+    } else {
+      this.ionAlert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: header,
+        subHeader: subHeader,
+        message: message,
+        buttons: buttons,
+
+      });
+    }
+
+
+  }
 }
-
 

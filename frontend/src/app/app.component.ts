@@ -1,22 +1,22 @@
 import { AfterViewInit, Component } from '@angular/core';
-
-// Servicio para ir a por datos al backend y guardar los datos en el caché
-import { CheckDataService } from './services/check-data/check-data.service';
+import { Router } from '@angular/router';
+import { SwPush, SwUpdate } from '@angular/service-worker';
 // Alertas para notificar al usuario (visualmente)
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
-
-// Servicio para comprobar si hay conexión
-import { CheckOnlineStatus } from './services/checkOnlineStatus/check-online-status.service';
-
-// Para las notificaciones push y actualizaciones
-import { PushNotificationService } from './services/push-notification/push-notification.service';
-import { SwPush, SwUpdate } from '@angular/service-worker';
 // Indexdb que lo usamos para guardar en caché las notificaciones
 import Localbase from 'localbase';
+// Servicio para ir a por datos al backend y guardar los datos en el caché
+import { CheckDataService } from './services/check-data/check-data.service';
+// Servicio para comprobar si hay conexión
+import { CheckOnlineStatus } from './services/checkOnlineStatus/check-online-status.service';
+// Para las notificaciones push y actualizaciones
+import { PushNotificationService } from './services/push-notification/push-notification.service';
+
+
+
 let db = new Localbase('db');
 
-import { PcNotificationTutorialPage } from './views/tutorials/pc-notification-tutorial/pc-notification-tutorial.page';
-import { AndroidNotificationTutorialPage } from './views/tutorials/android-notification-tutorial/android-notification-tutorial.page';
+
 
 @Component({
   selector: 'app-root',
@@ -26,7 +26,7 @@ import { AndroidNotificationTutorialPage } from './views/tutorials/android-notif
 
 export class AppComponent implements AfterViewInit {
   isOnline: boolean;
-  private notificationNotGranted;
+  private ionAlert;
 
   // Key para las notificaciones
   public readonly vapidNotificationPublicKey = "BA15WyNaTv36X9A86QEjVWjiq5xfiC6nrpIxedhLV9lt4c0WZrko06ir6hJpFej6aazbCVzwgTWVVqoZWVLO5ps";
@@ -43,7 +43,8 @@ export class AppComponent implements AfterViewInit {
     private swPush: SwPush,
     private swUpdate: SwUpdate,
     private pushNotificationService: PushNotificationService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router: Router,
   ) {
 
 
@@ -51,7 +52,7 @@ export class AppComponent implements AfterViewInit {
 
   ngOnInit() {
     this.clientOfflineAlert();
-    this.subscribeToNotifications();
+    // this.subscribeToNotifications();
 
 
     // Comprueban que lleguen las notificaciones cuando se está dentro de la aplicación
@@ -90,48 +91,7 @@ export class AppComponent implements AfterViewInit {
     })
   }
 
-  subscribeToNotifications(): any {
-    // Comprobación de si las notificaciones están activadas
-    this.swPush.subscription.subscribe(subscription => {
-      if (subscription == null) {
-        this.alert("¡Atención!", "Debes aceptar las notificaciones para usar esta app", 'Haz click en "Permitir" en la ventana de notficaciones', [
-          {
-            text: 'Android',
 
-            cssClass: 'secondary',
-            id: 'android-button',
-            handler: () => {
-              this.presentModal(AndroidNotificationTutorialPage)
-            }
-          }, {
-            text: 'PC',
-            cssClass: 'secondary',
-            id: 'pc-button',
-            handler: () => {
-              this.presentModal(PcNotificationTutorialPage)
-            }
-          }]);
-
-      } else {
-        if (this.notificationNotGranted != null) {
-          this.notificationNotGranted.dismiss();
-          this.fadeToast = true;
-          this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
-        }
-
-      }
-    }
-
-    );
-
-    // Guardamos la subscripción de la notificación en la base de datos
-    this.swPush.requestSubscription({
-      serverPublicKey: this.vapidNotificationPublicKey
-    }).then(sub => {
-      this.pushNotificationService.postNotificationToken(JSON.stringify(sub)).subscribe();
-      ;
-    })
-  }
 
   checkForNewData() {
     db.collection('notifications').get().then(tasks => {
@@ -165,22 +125,41 @@ export class AppComponent implements AfterViewInit {
       fixUpdateTwice++;
 
       if (fixUpdateTwice > 1) {
-        this.alert("Nueva versión disponible", "", "Se requiere una actualización", ['OK']);
+        this.alert("Nueva versión disponible", "", "Se requiere una actualización", [{text: 'OK',  handler: () => {
+          location.reload();
+        }}],  location.reload());
       }
     }
     )
   }
 
-  async alert(header: string, subHeader: string, message: string, buttons) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: header,
-      subHeader: subHeader,
-      message: message,
-      buttons: buttons
-    });
+  async alert(header: string, subHeader: string, message: string, buttons, onDidDismiss?, backdropDismiss?) {
+    if(backdropDismiss!=null){
+      this.ionAlert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: header,
+        subHeader: subHeader,
+        message: message,
+        buttons: buttons,
+        backdropDismiss: backdropDismiss,
+      });
+    }else{
+      this.ionAlert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: header,
+        subHeader: subHeader,
+        message: message,
+        buttons: buttons,
+      
+      });
+    }
 
-    await alert.present();
+
+    await this.ionAlert.present();
+if(onDidDismiss!=null){
+    await this.toast.onDidDismiss().then(()=>{onDidDismiss
+    });
+  }
   }
 
   async presentToastWithOptions(header, message, color, icon) {
@@ -216,6 +195,10 @@ export class AppComponent implements AfterViewInit {
     });
     return await modal.present();
   }
+
+
+
+  
 
 }
 

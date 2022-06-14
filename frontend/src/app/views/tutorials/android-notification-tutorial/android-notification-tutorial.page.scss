@@ -8,13 +8,15 @@ ion-content {
 }
 
 #navbar {
-    height: 76px;
     text-align: center;
 }
 
-#separation-title {
-    background-color: #006aab;
-    width: 350px;
+#go-back-button {
+    vertical-align: middle;
+    font-size: 40px;
+    color: #464040;
+    position: absolute;
+    left: 0;
 }
 
 #navbar-icon {
@@ -26,18 +28,17 @@ ion-content {
 }
 
 #navbar-text {
-    font-size: 30px;
+    font-size: 25px;
     color: #464040;
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
 }
 
-#menu-icon {
-    vertical-align: middle;
-    font-size: 50px;
-    color: #464040;
-    position: absolute;
-    left: 0;
+#separation {
+    background-color: #006aab;
+    width: 375px;
+    padding-bottom: 0 !important;
+    margin-bottom: 0!important;
 }
 
 ion-img {
@@ -47,6 +48,15 @@ ion-img {
     margin-bottom: 5px;
 }
 
+#notification-popup-img {
+    height: auto !important;
+}
+
 h4 {
     text-align: center;
+}
+
+ion-header {
+    padding-bottom: 0;
+    margin-bottom: 0;
 }

@@ -8,10 +8,7 @@
             </div>
         </ion-title>
     </ion-toolbar>
-
-
-
-    <hr id="separation-title">
+    <hr id="separation">
 </ion-header>
 
 <!-- Package usado para el calendario: https://github.com/twinssbc/Ionic2-Calendar -->
@@ -56,9 +53,9 @@
             <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
 
 
-                <div *ngIf="event.title" class="event-detail wrap">
-                    <h1 id="event-detail-text">{{event.title}}</h1>
-                    <hr id="separation-title">
+                <div *ngIf="event.title" class="event-detail wrap ion-text-center">
+                    <h1 id="event-detail-text" class="ion-text-center">{{event.title}}</h1>
+                    <hr id="separation">
                 </div>
 
                 <ng-container *ngIf="event.titleShedule">
@@ -68,12 +65,12 @@
 
 
 
-                                <h2 *ngIf="event.roomAcronym!=''">
-                                    <b>Sala: </b>{{event.roomAcronym}}</h2>
+                                <h5 *ngIf="event.roomAcronym!=''">
+                                    <b>Sala: </b>{{event.roomAcronym}}</h5>
 
                                 <ion-row>
-                                    <h2 *ngIf="event.titleShedule!=' '" class="ion-padding-end"><b>Hora: </b>{{event.titleShedule}} </h2>
-                                    <h2 *ngIf="event.sheduleHour!=' '"> {{event.sheduleHour}} </h2>
+                                    <h5 *ngIf="event.titleShedule!=' '" class="ion-padding-end"><b>Hora: </b>{{event.titleShedule}} </h5>
+                                    <h5 *ngIf="event.sheduleHour!=' '"> {{event.sheduleHour}} </h5>
                                 </ion-row>
                             </ion-card-title>
                         </ion-card-header>
@@ -81,7 +78,7 @@
                         <ion-card-content>
 
 
-                            <h2 *ngIf="event.sheduleNote!=''"><b>Notas: </b>{{event.sheduleNote}} </h2>
+                            <h6 *ngIf="event.sheduleNote!=''"><b>Notas: </b>{{event.sheduleNote}} </h6>
                         </ion-card-content>
 
 

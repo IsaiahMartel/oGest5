@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 
 import Localbase from 'localbase';
 let db = new Localbase('db');
+db.config.debug = false
 
 @Injectable({
   providedIn: 'root'
@@ -16,35 +17,21 @@ export class ProjectIdService {
   projectName: "";
   private requestInterceptedSource: Subject<number> = new Subject<number>();
   requestIntercepted: Observable<number> = this.requestInterceptedSource.asObservable();
+  private requestedProjectNameInterceptedSource: Subject<string> = new Subject<string>();
+  requestedProjectNameIntercepted: Observable<string> = this.requestedProjectNameInterceptedSource.asObservable();
+
+  constructor(public storage: Storage,) {  }
 
 
-  constructor(public storage: Storage,) { this.changeProjectId() }
 
-
-  changeProjectId() {
-
-    this.requestIntercepted.subscribe((projectId) => {
-      this.projectId=projectId;
-
-      db.collection('projects').get().then(data => {
-        if (data) {
-          // var array = JSON.parse(data);
-
-
-          data.filter((project) => {
-            if (project.id == this.projectId) {
-              this.projectName = project.events.eventName;
-       
-
-            };
-          })
-        }
-      })
-    });
-  }
 
   public getInterceptedSource(): Subject<number> {
     return this.requestInterceptedSource;
   }
+
+  public getRequestedProjectNameInterceptedSource(): Subject<string> {
+    return this.requestedProjectNameInterceptedSource;
+  }
+
 
 }

@@ -3,7 +3,7 @@
         <ion-buttons slot="start" routerLink="/">
             <ion-icon id="go-back-button" name="chevron-back-outline"></ion-icon>
         </ion-buttons>
-        <h2 id="navbar-text">Customización</h2>
+        <h2 id="navbar-text">Colores</h2>
     </ion-toolbar>
     <hr id="separation-title">
 
@@ -16,26 +16,27 @@
 
             <ion-col>
                 <h1>Proyecto 1</h1>
-                <input id="color-picker" [colorPicker]="color1" [cpHeight] [cpCancelButton]="true" [style.background]="color1" (colorPickerChange)="colorPickerChange1($event)" (colorPickerCancel)="colorPickerCancel1()" cpCancelButtonText="Predeterminado" />
+                <input id="color-picker" [colorPicker]="firstColor" [cpHeight] [cpCancelButton]="true" [style.background]="firstColor" (colorPickerChange)="firstColorPicker($event)" (colorPickerCancel)="colorPickerCancel1()" cpCancelButtonText="Predeterminado" />
             </ion-col>
             <ion-col>
                 <h1>Proyecto 2</h1>
-                <input id="color-picker" [colorPicker]="color2" [cpHeight] [cpCancelButton]="true" [style.background]="color2" (colorPickerChange)="colorPickerChange2($event)" (colorPickerCancel)="colorPickerCancel2()" cpCancelButtonText="Predeterminado" />
+                <input id="color-picker" [colorPicker]="secondColor" [cpHeight] [cpCancelButton]="true" [style.background]="secondColor" (colorPickerChange)="secondColorPicker($event)" (colorPickerCancel)="colorPickerCancel2()" cpCancelButtonText="Predeterminado" />
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
                 <h1>Proyecto 3</h1>
-                <input id="color-picker" [(colorPicker)]="color3" [cpHeight] [cpCancelButton]="true" [style.background]="color3" (colorPickerChange)="colorPickerChange3($event)" (colorPickerCancel)="colorPickerCancel3()" cpCancelButtonText="Predeterminado" />
+                <input id="color-picker" [(colorPicker)]="thirdColor" [cpHeight] [cpCancelButton]="true" [style.background]="thirdColor" (colorPickerChange)="thirdColorPicker($event)" (colorPickerCancel)="colorPickerCancel3()" cpCancelButtonText="Predeterminado" />
             </ion-col>
             <ion-col>
                 <h1>Proyecto 4</h1>
-                <input id="color-picker" [(colorPicker)]="color4" [cpHeight] [cpCancelButton]="true" [style.background]="color4" (colorPickerChange)="colorPickerChange4($event)" (colorPickerCancel)="colorPickerCancel4()" cpCancelButtonText="Predeterminado" />
+                <input id="color-picker" [(colorPicker)]="fourthColor" [cpHeight] [cpCancelButton]="true" [style.background]="fourthColor" (colorPickerChange)="fourthColorPicker($event)" (colorPickerCancel)="colorPickerCancel4()" cpCancelButtonText="Predeterminado" />
             </ion-col>
         </ion-row>
         <ion-col>
             <h1>Día libre</h1>
-            <input id="color-picker" [(colorPicker)]="color5" [cpHeight] [cpCancelButton]="true" [style.background]="color5" (colorPickerChange)="colorPickerChange5($event)" (colorPickerCancel)="colorPickerCancel5()" cpCancelButtonText="Predeterminado" />
+            <input id="color-picker" [(colorPicker)]="freeDayColor" [cpHeight] [cpCancelButton]="true" [style.background]="freeDayColor" (colorPickerChange)="colorPickerChange5($event)" (colorPickerCancel)="colorPickerCancel5()" cpCancelButtonText="Predeterminado"
+            />
         </ion-col>
     </ion-grid>
 </ion-content>

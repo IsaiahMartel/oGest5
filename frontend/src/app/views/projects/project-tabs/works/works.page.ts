@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { Subscription } from 'rxjs';
+import { playlistArray, } from '../tabs.page';
 
 
 @Component({
@@ -32,7 +33,9 @@ export class WorksPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadInfo();
+
+    this.playlistArray=playlistArray;
+    // this.loadInfo();
   }
 
   // Pasa los datos desde el local storage de playlist a un array
@@ -41,8 +44,9 @@ export class WorksPage implements OnInit {
     this.checkDataService.checkPlaylistLocal();
     this.subscription.add(this.checkDataService.playlistObs.subscribe((playlist) => {
 
-      var array: Array<Playlist> = Object.values(playlist);
-      array.filter((playlist) => {
+
+      this.playlistArray.filter((playlist) => {
+console.log(playlist);
 
         // Todos estos if's se encargan de convertir campos con solo espacios en blanco en nulos (para que pasen por el filtro del html)
         if (playlist.project_id == this.projectId) {
@@ -62,10 +66,6 @@ export class WorksPage implements OnInit {
           if (playlist.keyboardExp != null && playlist.keyboardExp != "0") { if (playlist.keyboardExp.trim().length == 0) { playlist.keyboardExp = null } }
           if (playlist.extraExp != null && playlist.extraExp != "0") { if (playlist.extraExp.trim().length == 0) { playlist.extraExp = null } }
 
-          this.playlistArray.push(playlist);
-
-          // Ordena el array por playlistOrder
-          this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
         };
       })
     }))

@@ -72,23 +72,30 @@
     // --projectDefault2: #406D96;
     // --projectDefault3: #A8D0DA;
     // --projectDefault4: #D8E8E8;
-    --projectDefault1: #5a75ac;
-    --projectDefault2: #748db4;
-    --projectDefault3: #a2c1e3;
-    --projectDefault4: #9dc5f1;
-    --project1: #5a75ac;
-    --project2: #748db4;
-    --project3: #a2c1e3;
-    --project4: #9dc5f1;
-    --importantDefaultProject1: #495e8f;
-    --importantDefaultProject2: #2c4c68;
-    --importanDefaulttProject4: #83b6b6;
-    --importantProject1: #5a75ac;
-    --importantProject2: #748db4;
-    --importantProject3: #a2c1e3;
-    --importantProject4: #9dc5f1;
+    // --firstProject: #506ea8;
+    // --secondProject: #748db4;
+    // --thirdProject: #a2c1e3;
+    // --fourthProject: #9dc5f1;
+    --firstProjectDefault: #5973ab;
+    --secondProjectDefault: #7b8eb9;
+    --thirdProjectDefault: #8db0d8;
+    --fourthProjectDefault: #b4c1d9;
+    --firstProject: #5973ab;
+    --secondProject: #7b8eb9;
+    --thirdProject: #8d9ab6;
+    --fourthProject: #b4c1d9;
+    --firstProjectImportant: #34466d;
+    --secondProjectImportant: #4b5877;
+    --thirdProjectImportant: #626b7f;
+    --fourthProjectImportant: #7e8797;
+    --firstProjectImportantDefault: #34466d;
+    --secondProjectImportantDefault: #4b5877;
+    --thirdProjectImportantDefault: #626b7f;
+    --fourthProjectImportantDefault: #7e8797;
     --freeDay: #e0e5e9;
     --freeDayDefault: #e0e5e9;
+    --visibilitySpinner: visible;
+    --visibilityBodyTabs: hidden;
 }
 
 // @media (prefers-color-scheme: darks) {

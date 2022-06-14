@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -15,12 +15,15 @@ import { Storage } from '@ionic/storage';
 
 export class LoginPage {
   loginForm: FormGroup;
-showPassword = false;
+  showPassword = false;
+  private subscription;
+  toast;
   constructor(
     private alertController: AlertController,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router, private storage: Storage
+    private router: Router, private storage: Storage,
+    private toastController: ToastController
   ) { }
 
   // Crea las validaciones
@@ -40,28 +43,65 @@ showPassword = false;
       id: null,
       mobileEmail: form.value.email,
       password: form.value.password,
-notification: null,
+      notification: null,
     };
-    this.authService.login(user).subscribe(() => {
+    this.subscription = this.authService.login(user).subscribe(() => {
 
 
       this.storage.get('access_token').then(data => {
-      
+
         this.router.navigateByUrl('/home');
         this.loginForm.reset();
       });
-     
-  
+      if (this.toast != null) {
+        this.toast.dismiss();
+      }
+
+    }, err => {
+      this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
     }
     )
   }
 
   // Para el botón de enseñar la contraseña
-  togglePassword(){
-this.showPassword=!this.showPassword;
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
-  
+  ionViewDidLeave() {
+    this.subscription.unsubscribe();
+  }
+
+  async presentToastWithOptions(header, message, color, icon) {
+
+    // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
+
+
+    // Elimina el mensaje anterior si lo hubiera
+
+    this.toast = await this.toastController.create({
+      header: header,
+      message: message,
+      color: color,
+      icon: icon,
+      position: 'bottom',
+      cssClass: "my-custom-class",
+      buttons: [{
+        text: 'OK',
+        role: 'cancel',
+      }]
+    });
+
+    await this.toast.present()
+
+
+  }
+
+
+
+
+
+
 
 }
 

@@ -54,3 +54,17 @@ ion-card {
     text-align: center;
     min-height: 70vh;
 }
+
+#div-spinner {
+    top: 40%;
+    transform: scale(3);
+    text-align: center;
+    left: 0;
+    right: 0;
+    position: fixed;
+    visibility: var(--visibilitySpinner);
+}
+
+ion-content {
+    visibility: var(--visibilityBodyTabs);
+}

@@ -7,8 +7,8 @@ import { Address } from 'src/app/models/address';
 })
 export class AddressService {
 
-    endpoint: string = "http://81.47.172.149:8300/api/mobile/getAddress";
-
+    endpoint: string = "https://ogest5.duckdns.org:8430/api/mobile/getAddress";
+    // endpoint: string = "http://localhost:8000/api/mobile/getAddress";
   constructor(private httpClient: HttpClient,
   ) {
 

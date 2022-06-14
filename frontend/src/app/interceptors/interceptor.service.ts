@@ -1,11 +1,10 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
-import { from, Observable, Subject, throwError } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { Injectable } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { from, Observable, Subject, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { catchError, map } from 'rxjs/operators';
-import { ToastController } from '@ionic/angular';
 
 const TOKEN_KEY = 'access_token';
 
@@ -18,12 +17,11 @@ const TOKEN_KEY = 'access_token';
 // (https://youtu.be/deK_HcoPRGw ver desde el 04 hasta el 05)
 export class InterceptorService implements HttpInterceptor {
 
-  private dismissToast: boolean;
   private toast;
   isOnline: boolean;
   createdOnlyOneToast: boolean = true;
   errorSolved: boolean;
-  cf: boolean;
+ 
 
   backendStatusChange: Subject<boolean> = new Subject<boolean>();
   constructor(
@@ -129,7 +127,7 @@ export class InterceptorService implements HttpInterceptor {
 
     }
 
-   await this.toast.onDidDismiss().then(()=>{this.createdOnlyOneToast = true;;
+   await this.toast.onDidDismiss().then(()=>{this.createdOnlyOneToast = true;
     });
     
  

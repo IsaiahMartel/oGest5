@@ -12,144 +12,147 @@ import { CheckDataService } from 'src/app/services/check-data/check-data.service
 
 export class ThemesPage implements OnInit {
 
-  public color1: string = (getComputedStyle(document.body).getPropertyValue('--project1'));
-  public color2: string = (getComputedStyle(document.body).getPropertyValue('--project2'));
-  public color3: string = (getComputedStyle(document.body).getPropertyValue('--project3'));
-  public color4: string = (getComputedStyle(document.body).getPropertyValue('--project4'));
-  public color5: string = (getComputedStyle(document.body).getPropertyValue('--freeDay'));
+  public firstColor: string = (getComputedStyle(document.body).getPropertyValue('--firstProject'));
+  public secondColor: string = (getComputedStyle(document.body).getPropertyValue('--secondProject'));
+  public thirdColor: string = (getComputedStyle(document.body).getPropertyValue('--thirdProject'));
+  public fourthColor: string = (getComputedStyle(document.body).getPropertyValue('--fourthProject'));
+  public freeDayColor: string = (getComputedStyle(document.body).getPropertyValue('--freeDay'));
 
-  importantProject1 = getComputedStyle(document.body).getPropertyValue('--importantProject1');
-  importantProject2 = getComputedStyle(document.body).getPropertyValue('--importantProject2');
-  importantProject3 = getComputedStyle(document.body).getPropertyValue('--importantProject3');
-  importantProject4 = getComputedStyle(document.body).getPropertyValue('--importantProject4');
+  firstImportantColor = getComputedStyle(document.body).getPropertyValue('--firstProjectImportant');
+  secondImportantColor = getComputedStyle(document.body).getPropertyValue('--secondProjectImportant');
+  thirdImportantColor = getComputedStyle(document.body).getPropertyValue('--thirdProjectImportant');
+  fourthImportantColor = getComputedStyle(document.body).getPropertyValue('--fourthProjectImportant');
 
   constructor(private storage: Storage, private checkDataService: CheckDataService) { }
 
   ngOnInit() {
 
-    console.log(this.importantProject2);
+ 
 
   }
 
 
-  colorPickerChange1(event) {
+  firstColorPicker(event) {
 
 
-    document.body.style.setProperty('--project1', event);
+    document.body.style.setProperty('--firstProject', event);
 
-    document.body.style.setProperty('--importantProject1', this.adjust(this.color1.trim(), -30))
+    document.body.style.setProperty('--firstProjectImportant', this.adjust(this.firstColor.trim(), -30))
 
-     this.color1 = (getComputedStyle(document.body).getPropertyValue('--project1'));
-     this.importantProject1 = (getComputedStyle(document.body).getPropertyValue('--importantProject1'));
+     this.firstColor = (getComputedStyle(document.body).getPropertyValue('--firstProject'));
+     this.firstImportantColor = (getComputedStyle(document.body).getPropertyValue('--firstProjectImportant'));
 
-     console.log(this.importantProject1);
+     console.log(this.firstImportantColor);
 
-    this.storage.set("project1", this.color1);
-    this.storage.set("importantProject1", this.importantProject1);
-
+    this.storage.set("firstProject", this.firstColor);
+    this.storage.set("firstProjectImportant", this.firstImportantColor);
+    console.log(this.firstImportantColor);
   }
 
 
-  colorPickerChange2(event) {
-    document.body.style.setProperty('--project2', event);
+  secondColorPicker(event) {
+    document.body.style.setProperty('--secondProject', event);
 
-    document.body.style.setProperty('--importantProject2', this.adjust(this.color2.trim(), -30))
+    document.body.style.setProperty('--secondProjectImportant', this.adjust(this.secondColor.trim(), -30))
 
-     this.color2 = (getComputedStyle(document.body).getPropertyValue('--project2'));
-     this.importantProject2 = (getComputedStyle(document.body).getPropertyValue('--importantProject2'));
+     this.secondColor = (getComputedStyle(document.body).getPropertyValue('--secondProject'));
+     this.secondImportantColor = (getComputedStyle(document.body).getPropertyValue('--secondProjectImportant'));
 
-     console.log(this.importantProject2);
+     console.log(this.secondImportantColor);
 
-    this.storage.set("project2", this.color2);
-    this.storage.set("importantProject2", this.importantProject2);
+    this.storage.set("secondProject", this.secondColor);
+    this.storage.set("secondProjectImportant", this.secondImportantColor);
 
+    console.log(this.secondImportantColor);
+  }
+
+  thirdColorPicker(event) {
+    document.body.style.setProperty('--thirdProject', event);
+    this.thirdColor = (getComputedStyle(document.body).getPropertyValue('--thirdProject'));
+
+    document.body.style.setProperty('--thirdProjectImportant', this.adjust(this.thirdColor.trim(), -30))
+
+
+    this.thirdImportantColor = (getComputedStyle(document.body).getPropertyValue('--thirdProjectImportant'));
+    console.log(this.thirdImportantColor);
+
+    console.log(this.thirdImportantColor);
+    
+    this.storage.set("thirdProject", this.thirdColor);
+    this.storage.set("thirdProjectImportant", this.thirdImportantColor);
 
   }
 
-  colorPickerChange3(event) {
-    document.body.style.setProperty('--project3', event);
-    this.color3 = (getComputedStyle(document.body).getPropertyValue('--project3'));
+  fourthColorPicker(event) {
+    document.body.style.setProperty('--fourthProject', event);
+    this.fourthColor = (getComputedStyle(document.body).getPropertyValue('--fourthProject'));
 
-    document.body.style.setProperty('--importantProject3', this.adjust(this.color3.trim(), -30))
+    document.body.style.setProperty('--fourthProjectImportant', this.adjust(this.fourthColor.trim(), -30))
+    this.fourthImportantColor = (getComputedStyle(document.body).getPropertyValue('--thirdProjectImportant'));
+    console.log(this.fourthImportantColor);
 
-
-    this.importantProject3 = (getComputedStyle(document.body).getPropertyValue('--importantProject3'));
-    console.log(this.importantProject3);
-    this.storage.set("project3", this.color3);
-    this.storage.set("importantProject3", this.importantProject3);
-
-  }
-
-  colorPickerChange4(event) {
-    document.body.style.setProperty('--project4', event);
-    this.color4 = (getComputedStyle(document.body).getPropertyValue('--project4'));
-
-    document.body.style.setProperty('--importantProject4', this.adjust(this.color4.trim(), -30))
-    this.importantProject4 = (getComputedStyle(document.body).getPropertyValue('--importantProject4'));
-    console.log(this.importantProject4);
-
-    this.storage.set("project4", this.color4);
-    this.storage.set("importantProject4", this.importantProject4);
-
+    this.storage.set("fourthProject", this.fourthColor);
+    this.storage.set("fourthProjectImportant", this.fourthImportantColor);
+    console.log(this.fourthImportantColor);
   }
 
   colorPickerChange5(event) {
     document.body.style.setProperty('--freeDay', event);
-    this.color5 = (getComputedStyle(document.body).getPropertyValue('--freeDay'));
+    this.freeDayColor = (getComputedStyle(document.body).getPropertyValue('--freeDay'));
 
    
 
 
-    this.storage.set("freeDay", this.color5);
+    this.storage.set("freeDay", this.freeDayColor);
     
 
   }
 
   colorPickerCancel1() {
-    this.color1 = (getComputedStyle(document.body).getPropertyValue('--projectDefault1'));
-    document.body.style.setProperty('--project1', this.color1);
-    this.storage.set("project1", this.color1);
-  this.importantProject1 = getComputedStyle(document.body).getPropertyValue('--importantDefaultProject1')
-    this.storage.set("importantProject1", this.importantProject1);
-    document.body.style.setProperty('--importantProject1', this.importantProject1);
+    this.firstColor = (getComputedStyle(document.body).getPropertyValue('--firstProjectDefault'));
+    document.body.style.setProperty('--firstProject', this.firstColor);
+    this.storage.set("firstProject", this.firstColor);
+  this.firstImportantColor = getComputedStyle(document.body).getPropertyValue('--firstProjectImportantDefault')
+    this.storage.set("firstProjectImportant", this.firstImportantColor);
+    document.body.style.setProperty('--firstProjectImportant', this.firstImportantColor);
 
   }
   colorPickerCancel2() {
 
-    this.color2 = (getComputedStyle(document.body).getPropertyValue('--projectDefault2'));
-    document.body.style.setProperty('--project2', this.color2);
-    this.storage.set("project2", this.color2);
-     this.importantProject2 = getComputedStyle(document.body).getPropertyValue('--importantProjectDefault2')
+    this.secondColor = (getComputedStyle(document.body).getPropertyValue('--secondProjectDefault'));
+    document.body.style.setProperty('--secondProject', this.secondColor);
+    this.storage.set("secondProject", this.secondColor);
+     this.secondImportantColor = getComputedStyle(document.body).getPropertyValue('--secondProjectImportantDefault')
 
-    document.body.style.setProperty('--importantProject2', this.importantProject2);
-    this.storage.set("importantProject2", this.importantProject2);
+    document.body.style.setProperty('--secondProjectImportant', this.secondImportantColor);
+    this.storage.set("secondProjectImportant", this.secondImportantColor);
   }
 
   colorPickerCancel3() {
 
-    this.color3 = (getComputedStyle(document.body).getPropertyValue('--projectDefault3'));
-    document.body.style.setProperty('--project3', this.color3);
-    this.storage.set("project3", this.color3);
-    this.importantProject3 = getComputedStyle(document.body).getPropertyValue('--importantDefaultProject3')
-    this.storage.set("importantProject3", this.importantProject3);
-    document.body.style.setProperty('--importantProject3', this.importantProject3);
+    this.thirdColor = (getComputedStyle(document.body).getPropertyValue('--thirdProjectDefault'));
+    document.body.style.setProperty('--thirdProject', this.thirdColor);
+    this.storage.set("thirdProject", this.thirdColor);
+    this.thirdImportantColor = getComputedStyle(document.body).getPropertyValue('--thirdProjectImportantDefault')
+    this.storage.set("thirdProject", this.thirdColor);
+    document.body.style.setProperty('--thirdProjectImportant', this.thirdImportantColor);
   }
 
   colorPickerCancel4() {
-    this.color4 = (getComputedStyle(document.body).getPropertyValue('--projectDefault4'));
-    document.body.style.setProperty('--project4', this.color4);
-    this.storage.set("project4", this.color4);
-    this.importantProject4 = getComputedStyle(document.body).getPropertyValue('--importantDefaultProject4')
-    this.storage.set("importantProject4", this.importantProject4);
-    document.body.style.setProperty('--importantProject4', this.importantProject4);
+    this.fourthColor = (getComputedStyle(document.body).getPropertyValue('--fourthProjectDefault'));
+    document.body.style.setProperty('--fourthProject', this.fourthColor);
+    this.storage.set("fourthProject", this.fourthColor);
+    this.fourthImportantColor = getComputedStyle(document.body).getPropertyValue('--fourthProjectImportantDefault')
+    this.storage.set("fourthProject", this.fourthColor);
+    document.body.style.setProperty('--fourthProjectImportant', this.fourthImportantColor);
 
   }
 
   colorPickerCancel5() {
   
-    this.color5 = (getComputedStyle(document.body).getPropertyValue('--freeDayDefault'));
-    document.body.style.setProperty('--freeDay', this.color5);
-    this.storage.set("freeDay", this.color5);
+    this.freeDayColor = (getComputedStyle(document.body).getPropertyValue('--freeDayDefault'));
+    document.body.style.setProperty('--freeDay', this.freeDayColor);
+    this.storage.set("freeDay", this.freeDayColor);
 
    
 

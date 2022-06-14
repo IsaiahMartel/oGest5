@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 
 import Localbase from 'localbase';
 let db = new Localbase('db');
+db.config.debug = false
 // db.collection('notifications').get().then(tasks => {
 @Injectable({
   providedIn: 'root'
@@ -145,33 +146,33 @@ export class CheckDataService {
   }
 
   setTheme() {
-    this.storage.get("project1").then(data => {
-      document.body.style.setProperty('--project1', data);
+    this.storage.get("firstProject").then(data => {
+      document.body.style.setProperty('--firstProject', data);
     })
 
-    this.storage.get("project2").then(data => {
-      document.body.style.setProperty('--project2', data);
+    this.storage.get("secondProject").then(data => {
+      document.body.style.setProperty('--secondProject', data);
     })
 
-    this.storage.get("project3").then(data => {
-      document.body.style.setProperty('--project3', data);
+    this.storage.get("thirdProject").then(data => {
+      document.body.style.setProperty('--thirdProject', data);
     })
-    this.storage.get("project4").then(data => {
-      document.body.style.setProperty('--project4', data);
-    })
-
-    this.storage.get("importantProject1").then(data => {
-      document.body.style.setProperty('--importantProject1', data);
+    this.storage.get("fourthProject").then(data => {
+      document.body.style.setProperty('--fourthProject', data);
     })
 
-    this.storage.get("importantProject2").then(data => {
-      document.body.style.setProperty('--importantProject2', data);
+    this.storage.get("firstProjectImportant").then(data => {
+      document.body.style.setProperty('--firstProjectImportant', data);
     })
-    this.storage.get("importantProject3").then(data => {
-      document.body.style.setProperty('--importantProject3', data);
+
+    this.storage.get("secondProjectImportant").then(data => {
+      document.body.style.setProperty('--secondProjectImportant', data);
     })
-    this.storage.get("importantProject4").then(data => {
-      document.body.style.setProperty('--importantProject4', data);
+    this.storage.get("thirdProjectImportant").then(data => {
+      document.body.style.setProperty('--thirdProjectImportant', data);
+    })
+    this.storage.get("fourthProjectImportant").then(data => {
+      document.body.style.setProperty('--fourthProjectImportant', data);
     })
     this.storage.get("freeDay").then(data => {
       document.body.style.setProperty('--freeDay', data);

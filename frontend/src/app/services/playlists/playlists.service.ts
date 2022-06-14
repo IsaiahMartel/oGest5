@@ -9,7 +9,8 @@ import { Playlist } from 'src/app/models/playlist';
   providedIn: 'root'
 })
 export class PlaylistsService {
-  endpoint: string = "http://81.47.172.149:8300/api/mobile/getPlaylist";
+  // endpoint: string = "http://localhost:8000/api/mobile/getPlaylist";
+  endpoint: string = "https://ogest5.duckdns.org:8430/api/mobile/getPlaylist";
 
   constructor(private httpClient: HttpClient,
   ) {

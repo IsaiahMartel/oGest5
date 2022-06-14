@@ -13,8 +13,8 @@ export class CheckOnlineStatus {
   private requestInterceptedSource: Subject<boolean> = new Subject<boolean>();
   requestIntercepted: Observable<boolean> = this.requestInterceptedSource.asObservable();
 // backendDownObs: Subject<boolean> = new Subject<boolean>();
-  // endpoint: string = "http://localhost:8000/api/mobile/checkBackendStatus";
-  endpoint: string = "http://81.47.172.149:8300/api/mobile/getAddress";
+  // endpoint: string = "http://localhost:8000/api/checkBackendStatus";
+    endpoint: string = "https://ogest5.duckdns.org:8430/api/mobile/checkBackendStatus";
 
   constructor(private httpClient: HttpClient, private projectsService: ProjectsService,) { 
 
@@ -37,7 +37,7 @@ export class CheckOnlineStatus {
   }
 
   backendStatus(){
-
+    this.httpClient.get(this.endpoint).subscribe()
     var that=this;
     // return this.httpClient.get(this.endpoint);
   setInterval(function(){

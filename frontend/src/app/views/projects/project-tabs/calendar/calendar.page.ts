@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
 import { Subscription } from 'rxjs';
+import {sheduleArray} from '../tabs.page';
 
 @Component({
   selector: 'app-calendar',
@@ -31,12 +32,15 @@ export class CalendarPage implements OnInit {
     // Instanciamos los elementos que vamos a usar una vez cargada la página
     ionViewDidEnter() {
 
+
   
     }
 
 
   ngOnInit(): void {
-    this.loadInfo();
+    // this.loadInfo();
+    console.log(sheduleArray);
+    this.sheduleArray=sheduleArray;
   }
 
   loadInfo() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Localbase from 'localbase';
-import { UserService } from 'src/app/services/user/user.service';
+import { PushNotificationService } from '../../services/push-notification/push-notification.service'
 let db = new Localbase('db');
 
 @Component({
@@ -11,13 +11,41 @@ let db = new Localbase('db');
 export class NotificationsPage implements OnInit {
   public isToggled: boolean = true;
   notificationArray = [];
-  constructor(private userService: UserService) { }
+  notificationStatus ;
+  private subscription;
+  private subscription1;
+  private subscription2;
+  private subscription3;
+  constructor(private pushNotificationService: PushNotificationService) { }
 
   ngOnInit() {
     this.loadInfo();
   }
 
-// Almaceno las notificaciones en un array para el historial de notificaciones
+  async ngAfterViewInit(): Promise<void> {
+
+   this.subscription= (await this.pushNotificationService.getNotificationStatus()).subscribe((observable) => {
+
+
+     this.subscription1= observable.subscribe((notificationStatus) => {
+
+        if (notificationStatus == 1) {
+          this.notificationStatus = true;
+        } else if (notificationStatus == 0) {
+          this.notificationStatus = false;
+   
+          
+        }
+
+      })
+
+    })
+
+
+
+  }
+
+  // Almaceno las notificaciones en un array para el historial de notificaciones
   loadInfo() {
     db.collection('notifications').get().then(tasks => {
       this.notificationArray = tasks;
@@ -25,16 +53,26 @@ export class NotificationsPage implements OnInit {
   }
 
   // Para silenciar las notificaciones
-  onChange() {
-if(this.isToggled){
-this.userService.putUser(1);
+ async onChange() {
+    if (this.isToggled) {
+   this.subscription2=   (await this.pushNotificationService.silenceNotification(1)).subscribe((silencio)=>{
+        console.log(silencio);
+        
+      });
 
-}else if(!this.isToggled){
-  this.userService.putUser(0);
-}
+    } else if (!this.isToggled) {
+    this.subscription3=  this.pushNotificationService.silenceNotification(0);
+    }
 
 
 
+  }
+
+  ionViewDidLeave() {
+    this.subscription.unsubscribe();
+    this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
   }
 
 }

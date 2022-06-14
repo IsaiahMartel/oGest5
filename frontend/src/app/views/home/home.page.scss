@@ -12,9 +12,10 @@
                     text-align: center;
                 }
                 
-                #separation-title {
+                #separation {
                     background-color: #006aab;
                     width: 350px;
+                    height: 2px;
                 }
                 
                 #navbar-icon {
@@ -35,10 +36,6 @@
                     color: #464040;
                     position: absolute;
                     left: 0;
-                }
-                
-                #home-menu-container {
-                    height: 60px;
                 }
                 
                 // Para acceder a ShadowRoot (encapsulamiento)
@@ -64,9 +61,6 @@
                         font-weight: 250;
                         color: black !important;
                     }
-                    .monthview-datetable thead {
-                        // color: black !important;
-                    }
                     .monthview-datetable tbody {
                         font-size: 20px;
                         font-weight: 250;
@@ -75,39 +69,30 @@
                     .monthview-datetable td.monthview-primary-with-event {
                         font-weight: 250;
                         color: black !important;
-                        // font-size: 24px;
                     }
                     .firstProject {
-                        background-color: var(--project1) !important;
-                        // background-color: #7a8ebb !important;
+                        background-color: var(--firstProject) !important;
                     }
                     .firstProjectImportant {
-                        background-color: var(--importantProject1) !important;
-                        // background-color: #667cad !important;
+                        background-color: var(--firstProjectImportant) !important;
                     }
                     .secondProject {
-                        background-color: var(--project2) !important;
-                        // background-color: #406D96 !important;
+                        background-color: var(--secondProject) !important;
                     }
                     .secondProjectImportant {
-                        // background-color: #224a70 !important;
-                        background-color: var(--importantProject2) !important;
+                        background-color: var(--secondProjectImportant) !important;
                     }
                     .thirdProject {
-                        background-color: var(--project3) !important;
-                        // background-color: #A8D0DA !important;
+                        background-color: var(--thirdProject) !important;
                     }
                     .thirdProjectImportant {
-                        // background-color: #679ca9 !important;
-                        background-color: var(--importantProject3) !important;
+                        background-color: var(--thirdProjectImportant) !important;
                     }
                     .fourthProject {
-                        background-color: var(--project4) !important;
-                        // background-color: #D8E8E8 !important;
+                        background-color: var(--fourthProject) !important;
                     }
                     .fourthProjectImportant {
-                        // background-color: #8ebaba !important;
-                        background-color: var(--importantProject4) !important;
+                        background-color: var(--fourthProjectImportant) !important;
                     }
                     .freeDay {
                         background-color: var(--freeDay) !important;
@@ -118,20 +103,19 @@
                     }
                     .event-detail-container {
                         align-items: center !important;
+                        margin-top: 0 !important;
+                        padding-top: 0 !important;
                     }
-                    .input-wrapper {
-                        display: block !important;
-                    }
+                    // .input-wrapper {
+                    //     display: block !important;
+                    // }
                     .event-detail {
                         text-align: center !important;
                         left: 0 !important;
-                        // right: 10px !important;
-                        // position: absolute;
-                        // border-bottom: 2px solid #014670;
                     }
                     #event-detail-text {
                         font-weight: 700 !important;
-                        font-size: 1.5em!important;
+                        font-size: 1.3em!important;
                     }
                 }
                 
@@ -149,10 +133,6 @@
                     position: fixed;
                     visibility: hidden;
                     color: #006aab;
-                }
-                
-                .margin-top-x {
-                    margin-top: 8px;
                 }
                 
                 #month-text {
@@ -177,7 +157,3 @@
                     border-left: 3px solid #006aab;
                     box-shadow: none !important;
                 }
-                
-                // #event-title {
-                //     border-bottom: 1px solid black;
-                // }

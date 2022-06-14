@@ -19,9 +19,6 @@ ion-content {
     }
 }
 
-// #navbar {
-//     border-bottom: 2px solid #006aab;
-// }
 #separation-title {
     background-color: #006aab;
     width: 350px;
@@ -35,25 +32,16 @@ ion-content {
     left: 0;
 }
 
-#header-icon {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 55px;
-    color: #464040;
-    margin-bottom: 2px;
-}
-
 #navbar-text {
     text-align: center;
     vertical-align: middle;
-    font-size: 20px;
+    font-size: 30px;
     color: #464040;
     font-weight: 700;
 }
 
 #notifications-toggle-slot {
     height: 50px;
-    // position: fixed;
 }
 
 #notifications-toggle-text {

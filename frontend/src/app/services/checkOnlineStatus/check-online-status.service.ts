@@ -14,7 +14,7 @@ export class CheckOnlineStatus {
   requestIntercepted: Observable<boolean> = this.requestInterceptedSource.asObservable();
 // backendDownObs: Subject<boolean> = new Subject<boolean>();
   // endpoint: string = "http://localhost:8000/api/checkBackendStatus";
-    endpoint: string = "https://ogest5.duckdns.org:8430/api/mobile/checkBackendStatus";
+    endpoint: string = "https://ogest5.duckdns.org:8430/api/checkBackendStatus";
 
   constructor(private httpClient: HttpClient, private projectsService: ProjectsService,) { 
 

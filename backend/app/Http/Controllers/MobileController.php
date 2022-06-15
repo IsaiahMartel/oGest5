@@ -61,13 +61,13 @@ class MobileController extends Controller
     
 
 
-    public function checkBackendIsUp()
+    public function checkBackendStatus()
     {
             return;
     }
 
 
-    public function saveTokenNotification(Request $request)
+    public function saveTokenNotificationFrontend(Request $request)
     {
         $endpoint = $request->endpoint;
         $token = $request->keys['auth'];
@@ -84,7 +84,7 @@ class MobileController extends Controller
         
     }
 
-    public function push(Request $request){
+    public function pushNotification(Request $request){
         $projects = $request->input('projects');
         Notification::send(Mobile::where('notification', true)->get(),new PushDemo($proyects, "normal") );
     
@@ -94,13 +94,20 @@ class MobileController extends Controller
 
   
 
-    public function notificationUser(Request $request){
+    public function getNotificationMode(Request $request){
 
         $mobile = Mobile::findOrFail($request->id);
       
         $mobile -> notification= $request->notification;
        $mobile->save();
         return $mobile;
+    }
+
+    public function updateNotificationMode(Request $request)
+    {
+        $user = Mobile::where('id', '=' ,$request->id)->get();
+        $notification = Mobile::select('notification')->get()[0]["notification"];
+        return $notification;
     }
 
    

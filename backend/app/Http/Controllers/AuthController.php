@@ -32,10 +32,9 @@ class AuthController extends Controller
 
         if ( $token = auth()->guard('api')->attempt($credentials)) {
    
+            //Se pasa la id del usuario que se usará en el frontend
             $mobile=Mobile::where('mobileEmail', $credentials['mobileEmail'])->get();
             $user_id= Mobile::select('id')->get()[0]["id"];
-         
-error_log( Mobile::select('id')->get()[0]["id"] );
  
             return $this->respondWithToken($token, $user_id);
             

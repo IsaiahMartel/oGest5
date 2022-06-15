@@ -38,14 +38,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 route::group(['prefix' => 'mobile', 'middleware' => ['auth:api',]], function () { // esta ruta es /mobile/xxx
 
   Route::get('getProjects', [MobileController::class, 'getProjects']) ;
-  // Route::get('getPlaylist/{id}', [MobileController::class, 'getPlaylistByProjectId']) ;
-  // Route::get('getShedule/{id}', [MobileController::class, 'getSheduleByProjectId']) ;
-  // Route::get('getAddress/{id}', [MobileController::class, 'getAddressProjectByProjectId']) ;
+
 
   Route::get('getPlaylist', [MobileController::class, 'getPlaylists']) ;
   Route::get('getShedule', [MobileController::class, 'getShedules']) ;
   Route::get('getAddress', [MobileController::class, 'getAddresses']) ;
-  Route::get('checkBackendStatus', [MobileController::class, 'checkBackendIsUp']);
+
   
   Route::post('/broadcast', function(Request $request){
     broadcast(new Message($request));
@@ -71,7 +69,9 @@ Route::group([
 
 
   //Se en publication.js por lo que no puedo meterlo en la autenticación del móvil
-Route::get('push',[MobileController::class, 'push'])->name('push');
-Route::post('notification', [MobileController::class, 'saveTokenNotification']);
+Route::get('pushNotification',[MobileController::class, 'push'])->name('pushNotification');
+Route::post('saveTokenNotification', [MobileController::class, 'saveTokenNotificationFrontend']);
+Route::get('notificationMode', [MobileController::class, 'getNotificationMode']);
+Route::put('notificationMode/{id}',[MobileController::class, 'updateNotificationMode']);
 
-Route::put('notificationUser/{id}',[MobileController::class, 'notificationUser']);
+Route::get('checkBackendStatus', [MobileController::class, 'checkBackendStatus']);

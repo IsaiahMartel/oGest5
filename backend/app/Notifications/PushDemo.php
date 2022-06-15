@@ -51,7 +51,7 @@ class PushDemo extends Notification
         return (new WebPushMessage)
             ->title('Se ha actualizado un proyecto')
             ->body($this->proyects)
-            ->icon('img/logooGest4.png')
+            ->icon('assets/icons/icon-512x512.png')
         
             ->data(['fecha' => Carbon::now()])
    ->tag(  $this->target);

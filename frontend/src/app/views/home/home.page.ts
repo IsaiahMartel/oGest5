@@ -364,6 +364,8 @@ export class HomePage {
   subscribeToNotifications(): any {
     // Comprobación de si las notificaciones están activadas
     this.subscription1 = this.swPush.subscription.subscribe(subscription => {
+
+      
       if (subscription == null) {
         this.alert("¡Atención!", "Debes aceptar las notificaciones para usar esta app", 'Haz click en "Permitir" en la ventana de notficaciones', [
           {

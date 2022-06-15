@@ -150,10 +150,12 @@ export class TabsPage {
       var array: Array<Project> = Object.values(project);
       array.filter((project) => {
 
+
         if (project.id == this.projectId) {
 
           this.projectMembersArray.push(project);
           projectMembersArray.push(project)
+
 
           for (let p of this.projectMembersArray) {
 
@@ -181,6 +183,8 @@ export class TabsPage {
       document.body.style.setProperty('--visibilitySpinner', "visible");
       this.keyArray = [];
       this.voiArray = []; this.perArray = [];
+      this.playlistArray=[]
+      playlistArray.length=0;
       keyArray.length = 0;
       voiArray.length = 0;
       perArray.length = 0;
@@ -188,7 +192,7 @@ export class TabsPage {
       var array: Array<Playlist> = Object.values(playlist);
       array.filter((playlist) => {
 
- 
+     
         
         
         if (playlist.project_id == this.projectId) {
@@ -213,6 +217,7 @@ export class TabsPage {
 
         this.playlistArray.push(playlist);
         playlistArray.push(playlist);
+   
 
         // Ordena el array por playlistOrder
         this.playlistArray.sort((a, b) => a.playlistOrder - b.playlistOrder);
@@ -267,7 +272,9 @@ export class TabsPage {
           }
         })
       }
+ 
     })
+
     document.body.style.setProperty('--visibilityBodyTabs', "visible");
     document.body.style.setProperty('--visibilitySpinner', "hidden");
 

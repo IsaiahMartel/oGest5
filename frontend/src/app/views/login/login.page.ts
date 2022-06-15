@@ -52,10 +52,11 @@ export class LoginPage {
 
         this.router.navigateByUrl('/home');
         this.loginForm.reset();
+        if (this.toast != null) {
+          this.toast.dismiss();
+        }
       });
-      if (this.toast != null) {
-        this.toast.dismiss();
-      }
+  
 
     }, err => {
 

@@ -41,12 +41,9 @@ export class ThemesPage implements OnInit {
 
      this.firstColor = (getComputedStyle(document.body).getPropertyValue('--firstProject'));
      this.firstImportantColor = (getComputedStyle(document.body).getPropertyValue('--firstProjectImportant'));
-
-     console.log(this.firstImportantColor);
-
     this.storage.set("firstProject", this.firstColor);
     this.storage.set("firstProjectImportant", this.firstImportantColor);
-    console.log(this.firstImportantColor);
+ 
   }
 
 
@@ -58,12 +55,10 @@ export class ThemesPage implements OnInit {
      this.secondColor = (getComputedStyle(document.body).getPropertyValue('--secondProject'));
      this.secondImportantColor = (getComputedStyle(document.body).getPropertyValue('--secondProjectImportant'));
 
-     console.log(this.secondImportantColor);
 
     this.storage.set("secondProject", this.secondColor);
     this.storage.set("secondProjectImportant", this.secondImportantColor);
 
-    console.log(this.secondImportantColor);
   }
 
   thirdColorPicker(event) {
@@ -74,9 +69,7 @@ export class ThemesPage implements OnInit {
 
 
     this.thirdImportantColor = (getComputedStyle(document.body).getPropertyValue('--thirdProjectImportant'));
-    console.log(this.thirdImportantColor);
 
-    console.log(this.thirdImportantColor);
     
     this.storage.set("thirdProject", this.thirdColor);
     this.storage.set("thirdProjectImportant", this.thirdImportantColor);
@@ -89,11 +82,9 @@ export class ThemesPage implements OnInit {
 
     document.body.style.setProperty('--fourthProjectImportant', this.adjust(this.fourthColor.trim(), -30))
     this.fourthImportantColor = (getComputedStyle(document.body).getPropertyValue('--thirdProjectImportant'));
-    console.log(this.fourthImportantColor);
 
     this.storage.set("fourthProject", this.fourthColor);
-    this.storage.set("fourthProjectImportant", this.fourthImportantColor);
-    console.log(this.fourthImportantColor);
+
   }
 
   colorPickerChange5(event) {

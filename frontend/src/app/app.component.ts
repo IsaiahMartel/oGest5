@@ -127,39 +127,27 @@ export class AppComponent implements AfterViewInit {
       if (fixUpdateTwice > 1) {
         this.alert("Nueva versión disponible", "", "Se requiere una actualización", [{text: 'OK',  handler: () => {
           location.reload();
-        }}],  location.reload());
+        }}],);
       }
     }
     )
   }
 
-  async alert(header: string, subHeader: string, message: string, buttons, onDidDismiss?, backdropDismiss?) {
-    if(backdropDismiss!=null){
+  async alert(header: string, subHeader: string, message: string, buttons,) {
+  
       this.ionAlert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: header,
         subHeader: subHeader,
         message: message,
         buttons: buttons,
-        backdropDismiss: backdropDismiss,
+       backdropDismiss: false
       });
-    }else{
-      this.ionAlert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: header,
-        subHeader: subHeader,
-        message: message,
-        buttons: buttons,
-      
-      });
-    }
+    
 
 
     await this.ionAlert.present();
-if(onDidDismiss!=null){
-    await this.toast.onDidDismiss().then(()=>{onDidDismiss
-    });
-  }
+
   }
 
   async presentToastWithOptions(header, message, color, icon) {

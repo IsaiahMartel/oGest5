@@ -22,9 +22,6 @@ export class ProjectIdService {
 
   constructor(public storage: Storage,) {  }
 
-
-
-
   public getInterceptedSource(): Subject<number> {
     return this.requestInterceptedSource;
   }

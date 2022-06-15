@@ -8,7 +8,7 @@ self.addEventListener('push', function(event) {
     if (event.data) {
         data = event.data.json();
     }
-    console.log(data.badge);
+
     // Para saber si la notficación es silenciosa
     if (data.tag == "silent") {
         event.waitUntil(

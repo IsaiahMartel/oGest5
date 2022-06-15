@@ -7,10 +7,10 @@
         <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
 
             <ion-item id="email-fields">
-                <ion-row>
-                    <ion-icon id="icon" name="person-outline"></ion-icon>
-                    <ion-input name="email" type="email" placeholder="tu@email.com" formControlName="email" required></ion-input>
-                </ion-row>
+
+                <ion-icon id="icon" name="person" slot="start" color=""></ion-icon>
+                <ion-input name="email" type="email" placeholder="tu@email.com" formControlName="email" required></ion-input>
+
                 <span slot="error" *ngIf="loginForm.controls['email'].errors?.required && loginForm.controls['email']?.touched">Rellene
                     el email</span>
                 <span slot="error" *ngIf="loginForm.controls['email'].errors?.pattern && loginForm.controls['email']?.touched">El
@@ -19,13 +19,14 @@
             </ion-item>
 
             <ion-item id="password-fields">
-                <ion-row>
-                    <ion-icon id="icon" name="bag-outline"></ion-icon>
-                    <ion-input name="password" [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" formControlName="password" required></ion-input>
-                    <!-- Enseña la contraseña -->
-                    <ion-icon [hidden]="showPassword" id="icon-littler" name="eye-outline" (click)="togglePassword()"></ion-icon>
-                    <ion-icon [hidden]="!showPassword" id="icon-littler" name="eye-off-outline" (click)="togglePassword()"></ion-icon>
-                </ion-row>
+
+                <!-- <ion-icon id="icon" name="bag-outline"></ion-icon> -->
+                <ion-input name="password" [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" formControlName="password" required></ion-input>
+                <!-- Enseña la contraseña -->
+                <ion-icon [hidden]="showPassword" id="icon-littler" name="eye-outline" (click)="togglePassword()" slot="end" color="dark"></ion-icon>
+                <ion-icon [hidden]="!showPassword" id="icon-littler" name="eye-off-outline" (click)="togglePassword()" color="dark"></ion-icon>
+                <!-- <ion-icon name="eye" slot="end"></ion-icon> -->
+                <ion-icon id="icon" slot="start" name="bag" color=""></ion-icon>
 
                 <span slot="error" *ngIf="loginForm.controls['password'].errors?.required && loginForm.controls['password']?.touched">Rellene
                     la contraseña</span>

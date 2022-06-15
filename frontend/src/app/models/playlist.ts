@@ -36,7 +36,7 @@ tuba: number;
 tubaExp: string;
 timpani: number;
 
-percusion: number;
+percussion: number;
 harp: number;
 harpExp: string;
 keyboard: number;

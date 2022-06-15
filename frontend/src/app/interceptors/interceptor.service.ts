@@ -50,14 +50,9 @@ export class InterceptorService implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
               if (event instanceof HttpResponse) {
                 if (this.errorSolved == false) {
-
-                  
                   this.errorSolved = true;
                   this.presentToastWithOptions("¡Solucionado!", "Conexión resuelta", "success", "checkmark-outline");
-
-                }
-               
-                
+                }           
               }
    
               return event;
@@ -78,20 +73,15 @@ export class InterceptorService implements HttpInterceptor {
     if (errorMessage == "true\n") {
       this.presentToastWithOptions("¡Oops!", "Server caído", "danger", "information-circle");
       this.errorSolved = false;
-
-
     } else if (errorMessage == "Unauthenticated.\n") {
 
     } else if (errorMessage == "Unauthorized\n") {
-      this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
+      
 
     }
 
-
     else {
       this.presentToastWithOptions("¡Oops!", "Ha habido un problema, es posible que la aplicación no funcione correctamente", "danger", "information-circle");
-
-
     }
 
     return throwError("Error " + errorMessage + "\n" + errorJSON);
@@ -123,8 +113,6 @@ export class InterceptorService implements HttpInterceptor {
       });
       this.createdOnlyOneToast = false;
       await this.toast.present()
-
-
     }
 
    await this.toast.onDidDismiss().then(()=>{this.createdOnlyOneToast = true;
@@ -139,8 +127,6 @@ export class InterceptorService implements HttpInterceptor {
     },
       8000);
     }
-
-
 
   }
 

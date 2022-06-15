@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 import Localbase from 'localbase';
 let db = new Localbase('db');
 db.config.debug = false
-// db.collection('notifications').get().then(tasks => {
+
 @Injectable({
   providedIn: 'root'
 })

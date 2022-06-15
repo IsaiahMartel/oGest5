@@ -257,7 +257,9 @@ export class HomePage {
             roomAcronym = shedule.rooms.roomAcronym;
           }
           if (shedule.sheduleNote) {
+
             sheduleNote = shedule.sheduleNote;
+            sheduleNote = shedule.sheduleNote.replace(/<\/?[^>]+(>|$)/g, "");
           }
 
           events.push({
@@ -360,39 +362,28 @@ export class HomePage {
 
 
   subscribeToNotifications(): any {
-
-
     // Comprobación de si las notificaciones están activadas
-   this.subscription1 = this.swPush.subscription.subscribe(subscription => {
-      var fixPushTwice = 0;
+    this.subscription1 = this.swPush.subscription.subscribe(subscription => {
+      if (subscription == null) {
+        this.alert("¡Atención!", "Debes aceptar las notificaciones para usar esta app", 'Haz click en "Permitir" en la ventana de notficaciones', [
+          {
+            text: 'Tutorial',
 
-      console.log(subscription);
-      if (fixPushTwice > 0) {
-        if (subscription == null) {
-          this.alert("¡Atención!", "Debes aceptar las notificaciones para usar esta app", 'Haz click en "Permitir" en la ventana de notficaciones', [
-            {
-              text: 'Android',
+            cssClass: 'secondary',
+            id: 'android-button',
+            handler: () => {
+              this.router.navigateByUrl("/android-notification-tutorial")
+            }
+          },], 
+        );
 
-              cssClass: 'secondary',
-              id: 'android-button',
-              handler: () => {
-                this.router.navigateByUrl("/android-notification-tutorial")
-              }
-            },], null, false
-          );
-
-        } else {
-
-
-          if (this.ionAlert != null) {
-            this.ionAlert.dismiss();
-            this.fadeToast = true;
-            this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
-          }
+      } else {
+        if (this.ionAlert != null) {
+          this.ionAlert.dismiss();
+          this.fadeToast = true;
+          this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
         }
       }
-
-
     }
 
     );
@@ -405,8 +396,6 @@ export class HomePage {
       ;
     })
   }
-
-
 
   async presentToastWithOptions(header, message, color, icon) {
     // Elimina el mensaje anterior si lo hubiera
@@ -433,28 +422,17 @@ export class HomePage {
     }
   }
 
-  async alert(header: string, subHeader: string, message: string, buttons, onDidDismiss?, backdropDismiss?) {
-    if (backdropDismiss != null) {
+  async alert(header: string, subHeader: string, message: string, buttons, ) {
       this.ionAlert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: header,
         subHeader: subHeader,
         message: message,
         buttons: buttons,
-        backdropDismiss: backdropDismiss,
+        backdropDismiss: false,
       });
-    } else {
-      this.ionAlert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: header,
-        subHeader: subHeader,
-        message: message,
-        buttons: buttons,
 
-      });
-    }
-
-
+      await this.ionAlert.present();
   }
 }
 

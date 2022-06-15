@@ -58,7 +58,13 @@ export class LoginPage {
       }
 
     }, err => {
-      this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
+
+      if (err.includes("Unauthorized")) {
+        this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
+      }
+
+      else { this.presentToastWithOptions("Problema con el inicio de sesión", "", "danger", "information-circle")}
+
     }
     )
   }
@@ -76,9 +82,7 @@ export class LoginPage {
 
     // El mensaje se mantiene unos segundos cuando vuelve a haber conexión
 
-
     // Elimina el mensaje anterior si lo hubiera
-
     this.toast = await this.toastController.create({
       header: header,
       message: message,
@@ -86,22 +90,18 @@ export class LoginPage {
       icon: icon,
       position: 'bottom',
       cssClass: "my-custom-class",
-      buttons: [{
-        text: 'OK',
-        role: 'cancel',
-      }]
+
     });
 
     await this.toast.present()
 
+    setTimeout(() => {
+      this.toast.dismiss();
+ 
+    },
+      9000);
 
   }
-
-
-
-
-
-
 
 }
 

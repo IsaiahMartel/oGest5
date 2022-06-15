@@ -5,8 +5,9 @@
 
             <ion-card-header>
                 <ion-card-subtitle *ngIf="playlist.works">{{playlist.works.composers.composerLastname}} {{playlist.works.composers.composerFirstname}}</ion-card-subtitle>
-                <ion-card-title>{{playlist.workName}}</ion-card-title>
-                <hr id="separation-title">
+                <ion-card-title *ngIf="playlist.workName!='PAUSA'">{{playlist.workName}}</ion-card-title>
+                <h1 *ngIf="playlist.workName=='PAUSA'" class="ion-text-center">{{playlist.workName}}</h1>
+                <hr *ngIf="playlist.workName!='PAUSA'" id="separation-title">
 
             </ion-card-header>
 
@@ -16,30 +17,39 @@
                     <ion-row>
                         <span id="madera">
                             <h3 *ngIf='playlist.flute!=null' id="orchestration-text"><b>{{playlist.flute}}</b></h3>
-                            <h3 *ngIf='playlist.fluteExp!=null &&  playlist.fluteExp!=""' id="orchestration-text">[{{playlist.flute}}]</h3>
+                            <h3 *ngIf='playlist.fluteExp!=null &&  playlist.fluteExp!=""' id="orchestration-text">[{{playlist.fluteExp}}]</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.fluteExp==null || playlist.fluteExp=="")' id="orchestration-text">,</h3>
                             <h3 *ngIf='playlist.oboe!=null' id="orchestration-text"><b>{{playlist.oboe}}</b></h3>
                             <h3 *ngIf='playlist.oboeExp!=null && playlist.oboeExp!=""' id="orchestration-text">[{{playlist.oboeExp}}]</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.oboeExp==null||playlist.oboeExp=="")' id="orchestration-text">,</h3>
                             <h3 *ngIf='playlist.clarinet!=null' id="orchestration-text"><b>{{playlist.clarinet}}</b></h3>
                             <h3 *ngIf='playlist.clarinetExp!=null && playlist.clarinetExp!=""' id="orchestration-text">[{{playlist.clarinetExp}}]</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.clarinetExp==null || playlist.clarinetExp=="")' id="orchestration-text">,</h3>
                             <h3 *ngIf='playlist.bassoon!=null' id="orchestration-text"><b>{{playlist.bassoon}}</b></h3>
                             <h3 *ngIf='playlist.bassoonExp!=null && playlist.bassoonExp!=""' id="orchestration-text">[{{playlist.bassoonExp}}]</h3>
-                            <h3  *ngIf='playlist.workName!="PAUSA"' id="orchestration-text">--</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.bassoonExp==null || playlist.bassoonExp=="")' id="orchestration-text">,</h3>
+                  
                         </span>
+                        <h3 *ngIf='playlist.workName!="PAUSA"' id="orchestration-text">--</h3>
                         <span id="metales">
                             <h3 *ngIf='playlist.horn!=null' id="orchestration-text"><b>{{playlist.horn}}</b></h3>
                             <h3 *ngIf='playlist.hornExp!=null  && playlist.hornExp!=""' id="orchestration-text">[{{playlist.hornExp}}]</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.hornExp==null  || playlist.hornExp=="")' id="orchestration-text">,</h3>
                             <h3 *ngIf='playlist.trumpet!=null' id="orchestration-text"><b>{{playlist.trumpet}}</b></h3>
                             <h3 *ngIf='playlist.trumpetExp!=null  && playlist.trumpetExp!=""' id="orchestration-text">[{{playlist.trumpetExp}}]</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.trumpetExp==null  || playlist.trumpetExp=="")' id="orchestration-text">,</h3>
                             <h3 *ngIf='playlist.trombone!=null' id="orchestration-text"><b>{{playlist.trombone}}</b></h3>
                             <h3 *ngIf='playlist.tromboneExp!=null && playlist.tromboneExp!=""' id="orchestration-text">[{{playlist.tromboneExp}}]</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.tromboneExp==null || playlist.tromboneExp=="")' id="orchestration-text">,</h3>
                             <h3 *ngIf='playlist.tuba!=null' id="orchestration-text"><b>{{playlist.tuba}}</b></h3>
                             <h3 *ngIf='playlist.tubaExp!=null && playlist.tubaExp!=""' id="orchestration-text">[{{playlist.tubaExp}}]</h3>
+                            <h3 *ngIf='playlist.workName!="PAUSA" && (playlist.tubaExp==null || playlist.tubaExp=="")' id="orchestration-text">,</h3>
                         </span>
                         <span id="otrosInst">
                             <h3 *ngIf='playlist.timpani==1' id="orchestration-text"><b>-tmp</b></h3>
                             <h3 *ngIf='playlist.timpani!=1  && playlist.timpani!=0 && playlist.timpani!=null && playlist.timpani!=undefined' id="orchestration-text"><b>-{{playlist.timpani}}tmp</b></h3>
-                            <h3 *ngIf='playlist.percusion!=null && playlist.percusion!=0' id="orchestration-text"><b>{{playlist.percusion}}</b></h3>
-                            <h3 *ngIf='playlist.harp!=null && playlist.harp!=0' id="orchestration-text"><b>-{{playlist.harp}}</b></h3>
+                            <h3 *ngIf='playlist.percussion!=null && playlist.percussion!=0' id="orchestration-text"><b>{{playlist.percussion}}</b></h3>
+                            <h3 *ngIf='playlist.harp!=null && playlist.harp!=0' id="orchestration-text"><b>-{{playlist.harp}}hp</b></h3>
                             <h3 *ngIf='playlist.harpExp!=null && playlist.harpExp!="0"' id="orchestration-text">[{{playlist.harpExp}}]</h3>
                             <h3 *ngIf='playlist.keyboard!=null && playlist.keyboard!=0' id="orchestration-text"><b>-{{playlist.keyboard}}</b></h3>
                             <h3 *ngIf='playlist.keyboardExp!=null && playlist.keyboardExp!="0"' id="orchestration-text">[{{playlist.keyboardExp}}]</h3>

@@ -30,41 +30,13 @@ export class CalendarPage implements OnInit {
   ) { }
 
     // Instanciamos los elementos que vamos a usar una vez cargada la página
-    ionViewDidEnter() {
 
-
-  
-    }
 
 
   ngOnInit(): void {
-    // this.loadInfo();
-    console.log(sheduleArray);
+ 
     this.sheduleArray=sheduleArray;
   }
 
-  loadInfo() {
-    this.projectId = this.projectIdService.projectId;
-    // Pasa los datos desde el local storage de shedule a un array
-    this.checkDataService.checkSheduleLocal();
-    this.subscription = this.checkDataService.sheduleObs.subscribe((shedule) => {
-      var array = Object.values(shedule);
-
-      array.filter((shedule) => {
-        if (shedule.project_id == this.projectId) {
-          this.sheduleArray.push(shedule);
- 
-          // Ordena el array por fecha
-          this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
-
-        };
-      })
-
-    })
-  }
-
-  ionViewDidLeave() {
-    this.subscription.unsubscribe();
-  }
-
+  
 }

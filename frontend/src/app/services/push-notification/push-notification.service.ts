@@ -20,8 +20,17 @@ export class PushNotificationService {
   }
   constructor(private httpClient: HttpClient, private storage: Storage) { }
 
-  postNotificationToken(tokenMobile) {
-    return this.httpClient.post<PushNotification>(this.endpoint + "saveTokenNotification", tokenMobile, this.httpOptions);
+  postNotificationToken(tokenMobile, user) {
+
+    var obj= {}
+var tokenMobileParse = JSON.parse(JSON.stringify(tokenMobile));
+obj['endpoint'] = tokenMobileParse.endpoint;
+obj['keys'] =tokenMobileParse.keys;
+obj['userEmail'] = user;
+
+
+
+    return this.httpClient.post<PushNotification>(this.endpoint + "saveTokenNotification", JSON.stringify(obj), this.httpOptions);
   }
 
   async silenceNotification(notification) {

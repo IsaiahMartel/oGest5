@@ -61,6 +61,9 @@ export class LoginPage {
     }, err => {
 
       if (err.includes("Unauthorized")) {
+        if(this.toast!=null){
+        this.toast.dismiss();
+      }
         this.presentToastWithOptions("Usuario no válido", "Revisa que el email y la contraseña sean correctos", "danger", "information-circle");
       }
 

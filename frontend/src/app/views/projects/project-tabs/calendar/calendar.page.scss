@@ -25,13 +25,13 @@ ion-card {
 }
 
 #div-spinner {
-    top: 40%;
+    top: 42%;
     transform: scale(3);
     text-align: center;
     left: 0;
     right: 0;
     position: fixed;
-    visibility: var(--visibilitySpinner);
+    visibility: var(--visibilitySpinnerTabs);
 }
 
 ion-content {

@@ -21,9 +21,9 @@
     <ion-list>
         <ion-item *ngFor="let notification of notificationArray">
             <ion-label>
-                <h2> {{notification.date | date: ' EEEE, dd/MM/yyyy HH:mm:ss '}}</h2>
+                <h2> {{notification.data.fecha | date: ' EEEE, dd/MM/yyyy HH:mm:ss '}}</h2>
 
-                <h2 class="ion-text-wrap">{{notification.body}}</h2>
+                <h2 class="ion-text-wrap">{{notification.titile}} {{notification.body}}</h2>
             </ion-label>
 
         </ion-item>

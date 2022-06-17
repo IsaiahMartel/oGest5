@@ -32,7 +32,8 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.storage.ready().then(() => this.storage.get('access_token'))}`
+      'Authorization': `Bearer ${this.storage.ready().then(() => this.storage.get('access_token'))}`,
+      'Retry-After': '3600',
     });
 
     return from(this.storage.get(TOKEN_KEY))

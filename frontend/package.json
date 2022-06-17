@@ -1,5 +1,5 @@
 {
-    "name": "OFGC",
+    "name": "oGest5Mobile",
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "https://ionicframework.com/",
@@ -27,6 +27,7 @@
         "@ionic/storage": "^2.3.1",
         "angularx-social-login": "^4.0.1",
         "hammerjs": "^2.0.8",
+        "idb": "^7.0.1",
         "ionic2-calendar": "^0.6.9",
         "localbase": "^0.7.5",
         "ngx-color-picker": "^12.0.1",

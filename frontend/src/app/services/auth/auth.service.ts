@@ -21,8 +21,9 @@ export class AuthService {
   login(user: User): Observable<AuthResponse> {
     return this.httpClient.post(`${this.endpoint}/login`, user).pipe(
       tap(async (res: AuthResponse) => {
-     
 
+     
+        this.storage.set("mobileEmail", (res.mobileEmail));
         this.storage.set("user_id", JSON.stringify(res.user_id));
 
         if (res.access_token) {

@@ -157,3 +157,35 @@
                     border-left: 3px solid #006aab;
                     box-shadow: none !important;
                 }
+                
+                ion-content {
+                    visibility: var(--visibilityBodyHome);
+                }
+                
+                #div-spinner-SW {
+                    visibility: var(--visibilitySpinnerHome);
+                    top: 40%;
+                    text-align: center;
+                    left: 0;
+                    right: 0;
+                    position: fixed;
+                    transform: scale(4);
+                }
+                
+                #loading-text {
+                    visibility: var(--visibilitySpinnerHome);
+                    top: 30%;
+                    text-align: center;
+                    left: 0;
+                    right: 0;
+                    position: fixed;
+                }
+                
+                #explanation-loading-text {
+                    visibility: var(--visibilitySpinnerHome);
+                    top: 50%;
+                    text-align: center;
+                    left: 0;
+                    right: 0;
+                    position: fixed;
+                }

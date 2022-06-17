@@ -37,20 +37,24 @@ export class CheckDataService {
 
 
   checkProjectsLocal() {
-    db.collection('projects').get().then(data => {
-      if (Object.keys(data).length > 0) {
+   this.storage.get('projects').then(data => {
+
+        
+      if (data!=null) {
         this.getProjectsObs().next(data);
       }
       else {
         // Si no tiene los datos, los va a buscar al backend
+      
+        
         this.getProjects();
       }
     })
   }
 
   checkSheduleLocal() {
-    db.collection('shedule').get().then(data => {
-      if (Object.keys(data).length > 0) {
+    this.storage.get('shedule').then(data => {
+      if (data!=null) {
         this.getSheduleObs().next(data);
       }
       else {
@@ -61,8 +65,8 @@ export class CheckDataService {
   }
 
   checkAddressLocal() {
-    db.collection('address').get().then(data => {
-      if (Object.keys(data).length > 0) {
+    this.storage.get('address').then(data => {
+      if (data!=null) {
         this.getAddressObs().next(data);
       }
       else {
@@ -73,8 +77,8 @@ export class CheckDataService {
   }
 
   checkPlaylistLocal() {
-    db.collection('playlist').get().then(data => {
-      if (Object.keys(data).length > 0) {
+   this.storage.get('playlist').then(data => {
+    if (data!=null) {
         this.getPlaylistObs().next(data);
       }
       else {
@@ -86,9 +90,10 @@ export class CheckDataService {
 
   getProjects() {
     this.projectsService.getProjects().subscribe((p: Array<Project>) => {
-      db.collection('projects')
+
       
-      .set(Object.values(p)).then(response => {
+      this.storage.set('projects', p).then(response => {
+    
         this.checkProjectsLocal();
       })
     })
@@ -97,9 +102,8 @@ export class CheckDataService {
   getShedule() {
     this.sheduleService.getShedules().subscribe((p: Array<Shedule>) => {
  
-      db.collection('shedule')
-      
-      .set(Object.values(p)).then(response => {
+      this.storage.set('shedule', p).then(response => {
+     
         this.checkSheduleLocal();
       })
  
@@ -109,9 +113,9 @@ export class CheckDataService {
   getAddress() {
     this.addressServivce.getAddresses().subscribe((p: Array<Address>) => {
 
-      db.collection('address')
+     this.storage.set('address',p)
       
-      .set(Object.values(p)).then(response => {
+    .then(response => {
         this.checkAddressLocal();
       })
     })
@@ -119,9 +123,8 @@ export class CheckDataService {
 
   getPlaylist() {
     this.playlistService.getPlaylists().subscribe((p: Array<Playlist>) => {
-      db.collection('playlist')
-      
-      .set(Object.values(p)).then(response => {
+      this.storage.set('playlist',p)
+     .then(response => {
         this.checkPlaylistLocal();
       })
     })

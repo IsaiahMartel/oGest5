@@ -6,6 +6,7 @@ export interface AuthResponse {
         username: string;
         isAdmin: boolean;
     },
-    access_token: string
+    access_token: string;
     user_id: number;
+    mobileEmail: string;
 }

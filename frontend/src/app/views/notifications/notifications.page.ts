@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import Localbase from 'localbase';
+import { IndexDBService } from 'src/app/services/indexDB/index-db.service';
 import { PushNotificationService } from '../../services/push-notification/push-notification.service'
-let db = new Localbase('db');
+
 
 @Component({
   selector: 'app-notifications',
@@ -17,7 +17,7 @@ export class NotificationsPage implements OnInit {
   private subscription1;
   private subscription2;
   private subscription3;
-  constructor(private pushNotificationService: PushNotificationService) { }
+  constructor(private pushNotificationService: PushNotificationService, private indexDBService : IndexDBService) { }
 
   ngOnInit() {
     this.loadInfo();
@@ -39,9 +39,15 @@ export class NotificationsPage implements OnInit {
 
   // Almaceno las notificaciones en un array para el historial de notificaciones
   loadInfo() {
-    db.collection('notifications').get().then(tasks => {
-      this.notificationArray = tasks;
-    })
+
+    this.indexDBService.keys().then((tasks: object) => {
+      this.notificationArray = Object.values(tasks);
+
+    }
+    )
+
+  
+
   }
 
   // Para silenciar las notificaciones

@@ -1,57 +1,63 @@
-ion-content {
-    --offset-bottom: auto !important;
-    --overflow: hidden;
-    overflow: auto;
-    &::-webkit-scrollbar {
-        display: none;
+    ion-content {
+        --offset-bottom: auto !important;
+        --overflow: hidden;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
-}
-
-ion-thumbnail {
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
-    width: 200px;
-    height: 191px;
-}
-
-#icon {
-    font-size: 40px;
-    margin-top: 10px;
-    padding-top: 34px;
-}
-
-#icon-littler {
-    font-size: 30px;
-    margin-left: 53px;
-    margin-top: 50px;
-    color: grey;
-}
-
-ion-input {
-    font-size: 25px;
-    margin-top: 40px;
-    width: 100%;
-}
-
-#forgot-password-text {
-    color: black;
-    display: block;
-    text-align: center;
-    margin-top: 40px;
-}
-
-#login-button {
-    width: 90%;
-    height: 70px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 40px;
-    display: block;
-    font-family: 'Outfit', sans-serif;
-    background-color: #006aab;
-    color: white;
-    margin-top: 60px;
-    border-radius: 10px;
-}
+    
+    #div-logo {
+        margin-top: 80px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0;
+        width: auto;
+        // height: 191px;
+    }
+    
+    img {
+        width: 360px;
+        text-align: center;
+        align-items: center;
+    }
+    
+    #icon {
+        font-size: 40px;
+        margin-top: 10px;
+        padding-top: 34px;
+    }
+    
+    #icon-littler {
+        font-size: 30px;
+        margin-left: 53px;
+        margin-top: 50px;
+        color: grey;
+    }
+    
+    ion-input {
+        font-size: 25px;
+        margin-top: 40px;
+        width: 100%;
+    }
+    
+    #forgot-password-text {
+        color: black;
+        display: block;
+        text-align: center;
+        margin-top: 40px;
+    }
+    
+    #login-button {
+        width: 90%;
+        height: 70px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 40px;
+        display: block;
+        font-family: 'Outfit', sans-serif;
+        background-color: #006aab;
+        color: white;
+        margin-top: 60px;
+        border-radius: 10px;
+    }

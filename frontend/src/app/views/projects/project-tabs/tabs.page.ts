@@ -112,7 +112,7 @@ export class TabsPage {
 
 
 
-      document.body.style.setProperty('--visibilitySpinner', "visible");
+      document.body.style.setProperty('--visibilitySpinnerTabs', "visible");
       var array = Object.values(shedule);
       sheduleArray.length = 0;
       this.sheduleArray = [];
@@ -133,7 +133,7 @@ export class TabsPage {
         }
       })
       document.body.style.setProperty('--visibilityBodyTabs', "visible");
-      document.body.style.setProperty('--visibilitySpinner', "hidden");
+      document.body.style.setProperty('--visibilitySpinnerTabs', "hidden");
 
     }))
   }
@@ -141,7 +141,7 @@ export class TabsPage {
   loadMembers() {
     this.checkDataService.checkAddressLocal();
     this.subscription6 = this.checkDataService.addressObs.subscribe((project) => {
-      document.body.style.setProperty('--visibilitySpinner', "visible");
+      document.body.style.setProperty('--visibilitySpinnerTabs', "visible");
       this.addressArray = [];
       addressArray.length = 0;
       projectMembersArray.length = 0;
@@ -169,7 +169,7 @@ export class TabsPage {
         };
       })
       document.body.style.setProperty('--visibilityBodyTabs', "visible");
-      document.body.style.setProperty('--visibilitySpinner', "hidden");
+      document.body.style.setProperty('--visibilitySpinnerTabs', "hidden");
 
     })
   }
@@ -180,7 +180,7 @@ export class TabsPage {
 
     this.checkDataService.checkPlaylistLocal();
     this.subscription5 = this.checkDataService.playlistObs.subscribe((playlist) => {
-      document.body.style.setProperty('--visibilitySpinner', "visible");
+      document.body.style.setProperty('--visibilitySpinnerTabs', "visible");
       this.keyArray = [];
       this.voiArray = []; this.perArray = [];
       this.playlistArray=[]
@@ -276,7 +276,7 @@ export class TabsPage {
     })
 
     document.body.style.setProperty('--visibilityBodyTabs', "visible");
-    document.body.style.setProperty('--visibilitySpinner', "hidden");
+    document.body.style.setProperty('--visibilitySpinnerTabs', "hidden");
 
   })
 }
@@ -391,7 +391,7 @@ ionViewDidLeave() {
   this.subscription5.unsubscribe();
   this.subscription6.unsubscribe();
   this.subscription7.unsubscribe();
-  document.body.style.setProperty('--visibilitySpinner', "visible");
+  document.body.style.setProperty('--visibilitySpinnerTabs', "visible");
   document.body.style.setProperty('--visibilityBodyTabs', "hidden");
 
 }

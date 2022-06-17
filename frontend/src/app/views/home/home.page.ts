@@ -9,6 +9,7 @@ import { combineLatestWith, Subscription } from 'rxjs';
 import { Address } from 'src/app/models/address';
 import { Playlist } from 'src/app/models/playlist';
 import { AddressService } from 'src/app/services/address/address.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CheckDataService } from 'src/app/services/check-data/check-data.service';
 import { PlaylistsService } from 'src/app/services/playlists/playlists.service';
 import { ProjectIdService } from 'src/app/services/project-id/project-id.service';
@@ -35,8 +36,7 @@ export class HomePage {
   public playlistArray: Array<Playlist> = [];
   public addressArray: Array<Address> = [];
 
-  // Key para las notificaciones
-  public readonly vapidNotificationPublicKey = "BA15WyNaTv36X9A86QEjVWjiq5xfiC6nrpIxedhLV9lt4c0WZrko06ir6hJpFej6aazbCVzwgTWVVqoZWVLO5ps";
+
   private ionAlert;
   // Alertas que salen en la parte inferior de la pantalla
   private fadeToast: boolean;
@@ -57,7 +57,7 @@ export class HomePage {
   // Para poder destruir las subscriptions y que no generen memory leak
   subscription = new Subscription();
   subscription1 = new Subscription();
-
+  public readonly vapidNotificationPublicKey = "BA15WyNaTv36X9A86QEjVWjiq5xfiC6nrpIxedhLV9lt4c0WZrko06ir6hJpFej6aazbCVzwgTWVVqoZWVLO5ps";
 
   // Para que salga una rueda de loading cuando aún no está listo el calendario
   time;
@@ -77,7 +77,8 @@ export class HomePage {
     public actionSheetController: ActionSheetController,
     private swPush: SwPush, private pushNotificationService: PushNotificationService,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private authService: AuthService,
 
 
 
@@ -101,15 +102,69 @@ export class HomePage {
   }
 
   ngOnInit(): void {
-    this.loadInfo();
-    this.subscribeToNotifications();
+    navigator.serviceWorker.ready.then(() => {
+      document.body.style.setProperty('--visibilityBody', "visible");
+      document.body.style.setProperty('--visibilitySpinner', "hidden");
+      this.subscribeToNotifications();
+      this.loadInfo();
+    })
+
 
   }
+
+  subscribeToNotifications(): any {
+
+    // Comprobación de si las notificaciones están activadas
+    this.swPush.subscription.subscribe(subscription => {
+
+      if (subscription == null) {
+        this.alert("¡Atención!", "Debes aceptar las notificaciones para usar esta app", 'Haz click en "Permitir" en la ventana de notficaciones', [
+          {
+            text: 'Tutorial',
+
+            cssClass: 'secondary',
+            id: 'android-button',
+            handler: () => {
+              this.router.navigateByUrl("/android-notification-tutorial")
+            }
+          },],
+        );
+
+      } 
+
+     
+
+      
+
+
+    }
+
+
+
+    );
+
+
+    this.storage.get("mobileEmail").then(email => {
+      // Guardamos la subscripción de la notificación en la base de datos
+      this.swPush.requestSubscription({
+        serverPublicKey: this.vapidNotificationPublicKey
+      }).then(sub => {
+        this.pushNotificationService.postNotificationToken(sub,email).subscribe();
+        ;
+      })
+    })
+  }
+
+
+
+
 
   // Pasa los datos desde el local storage de shedule y projects a un array
   loadInfo() {
     this.checkDataService.checkProjectsLocal();
     this.checkDataService.checkSheduleLocal();
+
+
     this.subscription = this.checkDataService.projectsObs.pipe(
       combineLatestWith(this.checkDataService.sheduleObs)
     ).subscribe(([projectsArray, sheduleArray]) => {
@@ -173,7 +228,7 @@ export class HomePage {
 
     // Ordena los array por fechas
     this.projectsArray.sort((a, b) => new Date(a.projectDateIni).getTime() - new Date(b.projectDateEnd).getTime());
-    // this.sheduleArray.sort((a, b) => new Date(a.sheduleDate).getTime() - new Date(b.sheduleDate).getTime());
+
     for (let project of this.projectsArray) {
       var startDateProject = new Date(project.projectDateIni);
       var endDateProject = new Date(project.projectDateEnd);
@@ -358,46 +413,12 @@ export class HomePage {
     window.removeEventListener('touchend', this.onMouseUpWholePage);
     window.removeEventListener('mousedown', this.onMouseDownWholePage);
     window.removeEventListener('mouseup', this.onMouseDownWholePage);
+    document.body.style.setProperty('--visibilityBody', "visible");
+    document.body.style.setProperty('--visibilitySpinner', "hidden");
+    console.log("ionviewdidleave home");
+
   }
 
-
-  subscribeToNotifications(): any {
-    // Comprobación de si las notificaciones están activadas
-    this.subscription1 = this.swPush.subscription.subscribe(subscription => {
-
-      
-      if (subscription == null) {
-        this.alert("¡Atención!", "Debes aceptar las notificaciones para usar esta app", 'Haz click en "Permitir" en la ventana de notficaciones', [
-          {
-            text: 'Tutorial',
-
-            cssClass: 'secondary',
-            id: 'android-button',
-            handler: () => {
-              this.router.navigateByUrl("/android-notification-tutorial")
-            }
-          },], 
-        );
-
-      } else {
-        if (this.ionAlert != null) {
-          this.ionAlert.dismiss();
-          this.fadeToast = true;
-          this.presentToastWithOptions("¡Hurra!", "Ya tienes las notificaciones activadas, disfruta de la app", "success", "checkmark-outline");
-        }
-      }
-    }
-
-    );
-
-    // Guardamos la subscripción de la notificación en la base de datos
-    this.swPush.requestSubscription({
-      serverPublicKey: this.vapidNotificationPublicKey
-    }).then(sub => {
-      this.pushNotificationService.postNotificationToken(JSON.stringify(sub)).subscribe();
-      ;
-    })
-  }
 
   async presentToastWithOptions(header, message, color, icon) {
     // Elimina el mensaje anterior si lo hubiera
@@ -424,17 +445,17 @@ export class HomePage {
     }
   }
 
-  async alert(header: string, subHeader: string, message: string, buttons, ) {
-      this.ionAlert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: header,
-        subHeader: subHeader,
-        message: message,
-        buttons: buttons,
-        backdropDismiss: false,
-      });
+  async alert(header: string, subHeader: string, message: string, buttons,) {
+    this.ionAlert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: header,
+      subHeader: subHeader,
+      message: message,
+      buttons: buttons,
+      backdropDismiss: false,
+    });
 
-      await this.ionAlert.present();
+    await this.ionAlert.present();
   }
 }
 

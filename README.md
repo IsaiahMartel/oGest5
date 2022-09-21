@@ -3,7 +3,7 @@
 # Internship project for the Orquesta Filarmónica de Gran Canaria.
 
 
-<img src="[https://github.com/favicon.ico](https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg)" width="50%">
+<img src="[https://i.imgur.com/ZWnhY9T.png](https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg)" width=50% height=50%>
 ![1](https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg)
 ![2](https://user-images.githubusercontent.com/91074551/191601724-f026ba9e-5c12-4877-a355-f6d73b9d7480.jpeg)
 

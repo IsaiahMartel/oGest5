@@ -1,69 +1,21 @@
-<p align="center"><a href="https://ofgrancanaria.com/es/" target="_blank"><img src="https://ofgrancanaria.com/wp-content/uploads/2020/03/Group.png" width="400"></a></p>
 
-# OrquestaFilarmonicaGC
     
-### IONIC-frontend
+#Internship project for the Orquesta Filarmónica de Gran Canaria.
 
-Switch to the repo folder
+![1](https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg)
+![2](https://user-images.githubusercontent.com/91074551/191601724-f026ba9e-5c12-4877-a355-f6d73b9d7480.jpeg)
 
-    cd OrquestaFilarmonicaGC/fronted/
+![3](https://user-images.githubusercontent.com/91074551/191601729-d8319ae6-2604-4878-bb96-0e75b09d7d4d.jpeg)
+![4](https://user-images.githubusercontent.com/91074551/191601731-17350193-6c91-418e-9402-cb2e9397974d.jpeg)
 
-Install all the dependencies using npm
+![5](https://user-images.githubusercontent.com/91074551/191601734-18f1c9b6-f381-422b-ab1c-ad4f642f2d02.jpeg)
+![6](https://user-images.githubusercontent.com/91074551/191601736-1843e89d-aa38-4d3d-8e66-1e2fd3d0f921.jpeg)
 
-    npm install
+![7](https://user-images.githubusercontent.com/91074551/191601737-0071d317-0dfb-493e-893e-caacfc37d74b.jpeg)
+![8](https://user-images.githubusercontent.com/91074551/191601740-20459e80-eb9e-4f54-a917-55d83deb6227.jpeg)
 
-Start the local development server
+![9](https://user-images.githubusercontent.com/91074551/191601742-a0dda479-0c3a-43de-931b-4ac1a49ffc57.jpeg)
+![10](https://user-images.githubusercontent.com/91074551/191601744-6f5e2bd6-d4fb-4f4b-912f-c72797b6eecb.jpeg)
 
-    ionic serve -l
-    
-### Laravel-backend
-
-Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
-
-Alternative installation is possible without local dependencies relying on [Docker](#docker). 
-
-Switch to the repo folder
-
-    cd OrquestaFilarmonicaGC/backend/
-
-Install all the dependencies using composer
-
-    composer install
-
-Copy the example env file and make the required configuration changes in the .env file
-
-    cp .env.example .env
-
-Generate a new application key
-
-    php artisan key:generate
-
-Generate a new application key
-
-    php artisan jwt:secret
-    
-Clear cache
-
-    php artisan config:clear
-    
-Run the database migrations (**Set the database connection in .env before migrating**)
-
-    php artisan migrate
-
-Start the local development server
-
-    php artisan serve
-    
-WebSockets
-
-    php artisan websockets:serve
-    
-**Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
-
-    php artisan migrate
-    php artisan serve
-
-***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
-
-    php artisan migrate:refresh
-    
+![11](https://user-images.githubusercontent.com/91074551/191601745-016f2cd8-4320-4447-b740-8cfe26d5677f.jpeg)
+![12](https://user-images.githubusercontent.com/91074551/191601747-e6b10a04-e05d-45aa-8dda-828ac6db0e38.jpeg)

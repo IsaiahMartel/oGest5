@@ -3,8 +3,8 @@
 # Internship project for the Orquesta Filarmónica de Gran Canaria.
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg" width=40% height=40%>
-<img src="https://user-images.githubusercontent.com/91074551/191601724-f026ba9e-5c12-4877-a355-f6d73b9d7480.jpeg" width=40% height=40%>
+<img src="https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg" width=30% height=30%>
+<img src="https://user-images.githubusercontent.com/91074551/191601724-f026ba9e-5c12-4877-a355-f6d73b9d7480.jpeg" width=30% height=30%>
 </p>
 
 <p float="left">

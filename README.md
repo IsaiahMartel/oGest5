@@ -5,11 +5,12 @@
 <p float="left">
 <img src="https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg" width=30% height=30%>
 <img src="https://user-images.githubusercontent.com/91074551/191601724-f026ba9e-5c12-4877-a355-f6d73b9d7480.jpeg" width=30% height=30%>
+<img src="https://user-images.githubusercontent.com/91074551/191601729-d8319ae6-2604-4878-bb96-0e75b09d7d4d.jpeg" width=30% height=30%>
 </p>
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/91074551/191601729-d8319ae6-2604-4878-bb96-0e75b09d7d4d.jpeg" width=40% height=40%>
-<img src="https://user-images.githubusercontent.com/91074551/191601731-17350193-6c91-418e-9402-cb2e9397974d.jpeg" width=40% height=40%>
+
+<img src="https://user-images.githubusercontent.com/91074551/191601731-17350193-6c91-418e-9402-cb2e9397974d.jpeg" width=30% height=30%>
 </p>
 
 <p float="left">

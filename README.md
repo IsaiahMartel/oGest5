@@ -1,6 +1,6 @@
 
     
-# Internship project for the Orquesta Filarmónica of Gran Canaria
+## Internship project for the Orquesta Filarmónica of Gran Canaria
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/91074551/191601719-ca851624-2adc-414b-a9af-f8f2a20794e0.jpeg" width=30% height=30%>
